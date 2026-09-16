@@ -1,0 +1,74 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    lvWall
+    {
+        type            noSlip;
+    }
+
+    mitralInlet
+    {
+        // Diastolic filling: E-wave + A-wave flow rate profile
+        // Mitral area ~ 1.59e-3 m², peak Q ~ 2.32e-4 m³/s
+        type            flowRateInletVelocity;
+        volumetricFlowRate table
+        (
+            // Cycle 1 (0.0 - 0.8 s)
+            (0.00   0.0)
+            (0.02   5.8e-5)
+            (0.05   1.74e-4)
+            (0.08   2.32e-4)
+            (0.12   1.86e-4)
+            (0.18   9.28e-5)
+            (0.25   2.32e-5)
+            (0.30   6.96e-5)
+            (0.34   1.39e-4)
+            (0.38   6.96e-5)
+            (0.44   0.0)
+            (0.80   0.0)
+            // Cycle 2 (0.8 - 1.6 s)
+            (0.82   5.8e-5)
+            (0.85   1.74e-4)
+            (0.88   2.32e-4)
+            (0.92   1.86e-4)
+            (0.98   9.28e-5)
+            (1.05   2.32e-5)
+            (1.10   6.96e-5)
+            (1.14   1.39e-4)
+            (1.18   6.96e-5)
+            (1.24   0.0)
+            (1.60   0.0)
+            // Cycle 3 (1.6 - 2.4 s)
+            (1.62   5.8e-5)
+            (1.65   1.74e-4)
+            (1.68   2.32e-4)
+            (1.72   1.86e-4)
+            (1.78   9.28e-5)
+            (1.85   2.32e-5)
+            (1.90   6.96e-5)
+            (1.94   1.39e-4)
+            (1.98   6.96e-5)
+            (2.04   0.0)
+            (2.40   0.0)
+        );
+        value           uniform (0 0 0);
+    }
+
+    aorticOutlet
+    {
+        // Reference pressure outlet — zero gradient velocity
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+}

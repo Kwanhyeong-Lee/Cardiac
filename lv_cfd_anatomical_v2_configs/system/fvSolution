@@ -1,0 +1,78 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+
+solvers
+{
+    p
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-06;
+        relTol          0.01;
+        minIter         1;
+        // v2 ADD: max iterations cap
+        maxIter         1000;
+    }
+    pFinal
+    {
+        $p;
+        relTol          0;
+        maxIter         2000;
+    }
+    U
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-08;
+        relTol          0.01;
+    }
+    UFinal
+    {
+        $U;
+        relTol          0;
+    }
+}
+
+PIMPLE
+{
+    // v2 FIX: More correctors for stability
+    nOuterCorrectors        3;     // was 2
+    nCorrectors             4;     // was 3
+    nNonOrthogonalCorrectors 4;    // was 3 — mesh has non-ortho issues
+    pRefCell            0;
+    pRefValue           0;
+
+    // v2 ADD: Residual control to prevent divergence
+    residualControl
+    {
+        U
+        {
+            tolerance   1e-5;
+            relTol      0;
+        }
+        p
+        {
+            tolerance   1e-4;
+            relTol      0;
+        }
+    }
+}
+
+relaxationFactors
+{
+    fields
+    {
+        p               0.3;
+        pFinal          1.0;
+    }
+    equations
+    {
+        U               0.5;    // v2 FIX: was 0.7 — more conservative
+        UFinal          1.0;
+    }
+}

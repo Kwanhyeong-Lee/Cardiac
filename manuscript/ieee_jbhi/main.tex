@@ -1,0 +1,273 @@
+%=====================================================================
+% IEEE Journal of Biomedical and Health Informatics (J-BHI) submission
+% Port-Hamiltonian PINN Cardiac Digital Twin
+% Compile in Overleaf: menu > IEEEtran (journal). Upload the figures/ folder.
+%=====================================================================
+\documentclass[journal]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\graphicspath{{figures/}}
+
+\begin{document}
+
+\title{Port-Hamiltonian Physics-Informed Neural Networks for Cardiac Hemodynamic Inference with Architecturally Guaranteed Energy Consistency}
+
+\author{Kwanhyeong~Lee%
+\thanks{K. Lee is an undergraduate student, Soonchunhyang University College of Medicine, Republic of Korea (e-mail: alex026376@sch.ac.kr).}%
+\thanks{Manuscript submitted 2026.}}
+
+\markboth{IEEE Journal of Biomedical and Health Informatics,~Vol.~XX, No.~X, 2026}%
+{Lee: Port-Hamiltonian PINN with Guaranteed Energy Consistency}
+
+\maketitle
+
+\begin{abstract}
+Cardiac digital twins aim to individualize cardiovascular care, but their machine-learning components typically offer no guarantee that the physiological states they predict are physically admissible: a network can attain high accuracy while internally representing negative energies or a dissipation operator that manufactures energy. We present a port-Hamiltonian physics-informed neural network (pH-PINN) in which cardiovascular energy structure is imposed \emph{architecturally} rather than by penalty---non-negative kinetic and potential energy through softplus outputs, the partition $H=T+V$ by construction, and a Cholesky-parameterized dissipation $R(x)=LL^{\top}\succeq0$---so the passivity inequality $dH/dt\le y^{\top}u$ holds pointwise for every input, including inputs outside the training distribution. In a four-way ablation of capacity-matched models on a \emph{patient-level} split of $4{,}241$ subjects (849 held out, none shared between partitions), accuracy was statistically indistinguishable across architectures (mean $R^2$ $0.974$--$0.975$; between-model gap $0.0011$, below every model's seed-to-seed SD), while physical validity separated them completely: the hard-constrained model gave zero violations across all seeds and all $1{,}183$ held-out records, an identical-capacity unconstrained network gave a non-positive-semidefinite dissipation matrix in every case, and a soft-constrained model reduced violations by three orders of magnitude without eliminating them. Penalties make violations rare; architecture makes them impossible. We report the resulting PV-area partition (gross and net mechanical efficiency $77.8\%$ and $71.9\%$) and place it in cohort context using invasive arterial waveforms from 841 VitalDB patients, which contain the computed stroke work (median $7{,}222$~mmHg$\cdot$mL) but show characteristic impedance to be identifiable in only $1.7\%$ of patients. Because the hemodynamic targets are surrogate-derived from the network's own inputs, we position the accuracy results as evidence of an energy-consistent \emph{emulator}, not independent measurement validation.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Physics-informed neural network, cardiac digital twin, port-Hamiltonian system, ventricular--arterial coupling, hemodynamic inference, patient-anchored hybrid geometry, energy dissipation.
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:intro}
+\IEEEPARstart{C}{ardiac} digital twins---computational replicas of an individual patient's heart that integrate anatomical, hemodynamic, and electrophysiological data---are an emerging technology in cardiovascular medicine \cite{corral2020}. By allowing therapies to be tested \emph{in silico} before clinical use, they can improve treatment planning for heart failure, valvular disease, and cardiac surgery. Building a clinically useful twin, however, requires solving three coupled problems: faithful anatomical reconstruction, accurate hemodynamic modeling, and reliable parameter inference from non-invasive measurements.
+
+Existing methods typically address these problems separately. Anatomical pipelines extract cardiac geometry from imaging but seldom feed downstream hemodynamic analysis; computational fluid dynamics resolves intracardiac flow in high fidelity but at hours of computation per cycle, limiting bedside use; and machine-learning surrogates accelerate inference but often lack the physical constraints needed for physiologically plausible predictions outside the training distribution \cite{greener2022}.
+
+Physics-informed neural networks (PINNs) offer a principled way to combine data-driven flexibility with physical fidelity \cite{raissi2019}: by embedding governing equations as soft penalties in the loss, they can learn solutions that respect conservation laws even from sparse or noisy clinical data. Yet cardiac PINNs typically enforce individual ordinary differential equations---most often the time-varying elastance model---without exploiting the deeper geometric structure of Hamiltonian mechanics that governs energy exchange in a dissipative system. The port-Hamiltonian $J$--$R$ structure is well established in cardiovascular engineering---for example, in the passivity-based control of cardiac assist devices \cite{hammoud2026}---but we adopt it here as an architectural prior for non-invasive inference rather than for device control.
+
+In this work we propose a port-Hamiltonian PINN (pH-PINN) that enforces energy balance through the port-Hamiltonian structure~\eqref{eq:ph}, in which $J(x)=-J^{\top}(x)$ is the skew-symmetric interconnection encoding energy-conserving dynamics, $R(x)\succeq 0$ is the positive semidefinite dissipation capturing viscous and viscoelastic losses, $H$ is the total (kinetic plus potential) energy, and $g(x)u$ is the external input from cardiac contraction. Rather than demanding strict conservation ($dH/dt=0$, which is non-physical for a dissipative circulation), the architecture guarantees the passivity inequality $dH/dt\le y^{\top}u$ pointwise by emitting a positive semidefinite $R(x)$, together with a non-negative energy partition $H=T+V$. We embed this pH-PINN in a modular digital-twin pipeline that couples (i)~a patient-anchored reconstruction assembling 13 cardiac structures ($957{,}608$ mesh elements) across three provenance tiers to (ii)~a Windkessel--PINN bridge that maps hemodynamic waveforms to lumped-parameter indices ($E_a$, $E_{es}$, coupling ratio) within the same energy-balance framework, with the dissipation strength fixed by the Windkessel characteristic impedance.
+
+We evaluate the framework on 9{,}842 critically ill patients from two independent ICU databases (eICU and MIMIC-IV) and separate directly measured quantities (cardiac output by thermodilution, systemic vascular resistance by Swan--Ganz catheterization) from surrogate-derived indices ($E_{es}$, mechanical efficiency). This distinction, often blurred in the PINN literature \cite{karniadakis2021,kissas2020}, determines how much validation weight each result carries.
+
+% Graphical abstract (Figure1_GraphicalAbstract.png) submitted as a separate file; not counted toward the page limit.
+
+\section{Methods}\label{sec:methods}
+
+\subsection{Patient-Anchored Anatomical Reconstruction}\label{sec:anat}
+The anatomical component provides geometric context only: the hemodynamic inference evaluated in Section~\ref{sec:results} is lumped-parameter (0D) and does not consume the mesh, because the ICU cohorts have no paired volumetric imaging. We summarise it briefly and report it in full in Supplementary Section~S1. A 13-structure geometry ($957{,}608$ elements) was assembled under a three-tier patient-specificity hierarchy following the hybrid atlas-registration approach of Zhang \emph{et al.} \cite{zhang2012} and Kong \emph{et al.} \cite{kong2023}, consistent with the view that practical cardiac digital twins combine patient-derived imaging with population-level anatomical priors \cite{corral2020,rodero2021,hoogendoorn2013}: Tier~1, the LV surface segmented directly from MM-WHS Case~1009 ($166{,}936$ elements) \cite{zhuang2019}; Tier~2, papillary muscles separated by $K$-means and wall thickness derived from the same CT ($6.8\pm2.1$~mm); and Tier~3, six further structures registered from the STACOM2025 atlas by iterative closest point alignment (mean distance $0.35$--$0.58$ against a target of $<0.15$; see Section~\ref{sec:limits}). Valve and chordal geometries were generated parametrically from published dimensions \cite{kunzelman1994,thubrikar1981,lam1970}, and the assembly was checked against 20 MM-WHS cases (Supplementary Fig.~S1, Table~S2). Because only Tier~1 is patient-specific, we use ``patient-anchored'' rather than ``patient-specific'' throughout.
+
+\subsection{Port-Hamiltonian Physics-Informed Neural Network}\label{sec:pinn}
+The pH-PINN architecture consists of a fully connected neural network with 61{,}169 trainable parameters that maps non-invasive hemodynamic features (heart rate, blood pressure, echocardiographic measurements) to physiological parameters ($E_{es}$, $E_{ed}$, $E_a$, ventricular--arterial coupling ratio, end-diastolic pressure, mechanical efficiency, relaxation time constant $\tau$).
+
+\emph{State variables and energy heads.} The encoder maps the $11$ non-invasive input features to the port-Hamiltonian state $x=(q,p)\in\mathbb{R}^{5}$---generalized chamber volumes $q=(V_{LV},V_{LA},V_{art})$ and inertance-scaled valve-flow momenta $p=(p_{mv},p_{ao})$---plus auxiliary elastances ($E_{es}$, $E_{ed}$, $V_0$, $\tau$). Separate non-negative heads emit the potential $V(q)=\mathrm{softplus}(f_V(q))$ and the kinetic energy $T(q,p)=\tfrac{1}{2}p^{\top}M^{-1}(q)p$ ($M^{-1}(q)\succ0$), so that $T,V\ge0$ and $H=T+V$ hold \emph{by construction}. Input features, state bounds, per-head definitions, and an architecture schematic appear in Supplementary Section~S3 (Fig.~S2, Table~S3). The network performs \emph{per-beat} (steady-state) inference: it maps a patient's non-invasive feature vector to the state $x=(q,p)$ and the associated energetics for a representative cardiac cycle. It does not take time as an input and does not integrate a trajectory; all derivatives are taken with respect to the state, not with respect to time.
+
+\emph{Port-Hamiltonian formulation.} The cardiovascular system is inherently dissipative: viscous losses in blood flow, myocardial viscoelasticity, and valve turbulence all dissipate energy. A pure Hamiltonian formulation ($dH/dt=0$) would be non-physical. We therefore adopt the port-Hamiltonian framework \cite{vanderschaft2014}, which decomposes the system dynamics into energy-conserving ($J$) and energy-dissipating ($R$) components:
+\begin{equation}\label{eq:ph}
+\dot{x} = \left[J(x) - R(x)\right]\frac{\partial H}{\partial x} + g(x)\,u
+\end{equation}
+\begin{equation}\label{eq:balance}
+\frac{dH}{dt} = -\left(\frac{\partial H}{\partial x}\right)^{\!\top}\! R(x)\left(\frac{\partial H}{\partial x}\right) + y^{\top}u \;\le\; y^{\top}u
+\end{equation}
+Equation~\eqref{eq:balance} encodes the energy balance: the rate of change of the Hamiltonian equals the dissipated power (first term, always non-positive) plus the supplied power. Because the network emits $R(x)\succeq0$ by construction, the quadratic form $(\partial H/\partial x)^{\top}R(\partial H/\partial x)$ is non-negative for every sample, so the passivity inequality $dH/dt\le y^{\top}u$ in~\eqref{eq:balance} holds \emph{structurally} and does not have to be imposed by a penalty. Given a state estimate, the instantaneous rate $\dot{x}$ is evaluated from~\eqref{eq:ph}; because the present model performs per-beat inference on cross-sectional data, $\dot{x}$ is not compared against a measured time derivative, and no time-marching residual is minimized.
+
+\emph{Dissipation parameterization.} We parameterize $R(x)=r_{\text{diss}}\,I$ as a scalar (isotropic) dissipation matrix, where $r_{\text{diss}}$ is calibrated from the Windkessel characteristic impedance $Z_c$ ($=R_1$) \cite{westerhof2009}, scaled by the systolic ejection duty cycle:
+\begin{equation}\label{eq:rdiss}
+r_{\text{diss}} = R_1 \times \left(T_{\text{sys}} / T_{\text{cycle}}\right)
+\end{equation}
+This grounds the dissipation in a measurable hemodynamic quantity: $Z_c$ represents the resistive component of aortic input impedance, capturing wave reflection and viscous losses at the aortic root---exactly the energy dissipation that a port-Hamiltonian cardiovascular model should capture \cite{westerhof2009}. For the nominal case ($R_1=0.072$, HR${}=75$, $T_{\text{sys}}=0.285$~s), $r_{\text{diss}}=0.026$~mmHg$\cdot$s/mL, consistent with the expected physiological range of $0.01$--$0.05$ for normal cardiac function. Learning a state-dependent $R(x)$ from clinical data (e.g., Doppler-derived turbulence kinetic energy) is a natural extension, but is outside the scope of this initial validation.
+
+The training objective combines data fidelity with the algebraic energy constraints that remain after the architectural ones:
+\begin{equation}\label{eq:ltotal}
+L_{\text{total}} = L_{\text{data}} + \lambda_H\left(L_{\text{part}} + L_{\text{pos}}\right) + \lambda_{\text{PSD}}\,L_{\text{PSD}}
+\end{equation}
+where $L_{\text{data}}$ is the mean squared error over the clinical and energetic targets, $L_{\text{part}}=\lVert H-(T+V)\rVert^{2}$ is the Hamiltonian partition consistency, $L_{\text{pos}}=\lVert\mathrm{ReLU}(-T)\rVert^{2}+\lVert\mathrm{ReLU}(-V)\rVert^{2}$ penalizes negative energies, and $L_{\text{PSD}}$ penalizes negative eigenvalues of $R$. In the hard-constrained architecture all three physics terms are already satisfied by construction, so they act as numerical safeguards rather than as active constraints; they become active only in the unconstrained and soft-constrained ablation variants (Section~\ref{sec:ablation}). All computations use single-precision (float32) arithmetic. The network was trained for 150 epochs with the AdamW optimizer and a cosine learning-rate schedule, converging at epoch~115 (best validation loss).
+
+\subsection{Windkessel--PINN Bridge}\label{sec:wk}
+The Windkessel--PINN bridge connects lumped-parameter hemodynamics to the pH-PINN for calibrated parameter estimation. A three-element Windkessel model (proximal resistance $R_1$, distal resistance $R_2$, arterial compliance $C$) is fitted to hemodynamic waveforms. The resulting Windkessel parameters, combined with cardiac-function indices from pressure--volume (PV) loop analysis (Section~\ref{sec:pv}), are fed into the pH-PINN.
+
+\subsubsection{PV loop energy partition with dissipation}\label{sec:pv}
+Following the Suga--Sagawa framework \cite{suga1974}, stroke work (SW) was computed as the area under the arterial elastance ($E_a$) line on the PV diagram:
+\begin{equation}\label{eq:sw}
+\text{SW} = P_{es}\,\text{SV} = E_a\,\text{SV}^2
+\end{equation}
+Potential energy (PE) was computed from the end-systolic pressure--volume relation (ESPVR):
+\begin{equation}\label{eq:pe}
+\text{PE} = \tfrac{1}{2}\, E_{es}\,(V_{es} - V_0)^2
+\end{equation}
+Dissipation energy per beat was computed from the port-Hamiltonian energy balance~\eqref{eq:balance}:
+\begin{equation}\label{eq:ediss}
+E_{\text{diss}} = r_{\text{diss}}\,\frac{\text{SV}^{2}}{T_{\text{sys}}}
+\end{equation}
+where $T_{\text{sys}}$ is the ejection duration (taken as $0.35\,T_{\text{cycle}}$). Equation~\eqref{eq:ediss} is the energy dissipated by a resistance $r_{\text{diss}}$ carrying a mean ejection flow $\text{SV}/T_{\text{sys}}$ over that interval, and is dimensionally consistent (mmHg$\cdot$mL). Net stroke work is $\text{SW}_{\text{net}}=\text{SW}-E_{\text{diss}}$. The PV area ($\text{PVA}=\text{SW}+\text{PE}$) represents total mechanical energy per beat. Dual efficiency metrics are reported: gross efficiency $\eta_{\text{gross}}=\text{SW}/\text{PVA}$ (Suga--Sagawa \cite{suga1974}) and net efficiency $\eta_{\text{net}}=(\text{SW}-E_{\text{diss}})/\text{PVA}$, which accounts for the port-Hamiltonian dissipation.
+
+\subsection{Validation Strategy and Cohorts}\label{sec:val}
+External validation used two independent ICU databases: the eICU Collaborative Research Database ($n=3{,}991$) and MIMIC-IV ($n=5{,}851$) \cite{johnson2023,johnson2016,pollard2018}. To avoid overstating validation strength we classify every validation variable by measurement provenance (Table~\ref{tab:prov}). The distinction is consequential: agreement with a surrogate-derived index shows that the network reproduces the closed-form relationship used to construct that index, not that it matches an independent gold-standard measurement. We quantify how far this reaches in Sections~\ref{sec:xval} and~\ref{sec:limits}.
+
+\subsection{Ablation Design}\label{sec:ablation}
+To test whether the port-Hamiltonian structure contributes beyond raw network capacity, we compared four matched-capacity models on the same 13-target cardiac energetics dataset ($n=5{,}851$): (A)~the pH-PINN with \emph{hard} architectural constraints---softplus non-negativity of kinetic ($T$) and potential ($V$) energy, $H=T+V$ by construction, and a Cholesky-parameterized dissipation matrix $R=LL^{\top}\succeq0$; (B)~a vanilla multilayer perceptron with no physics structure; (C)~a no-structure PINN with encoder/decoder topology identical to (A) but \emph{without} the hard constraints; and (D)~a soft-constraint PINN that instead penalizes constraint violations in the loss. Models (A), (C), and (D) share an identical $73{,}773$-parameter architecture---a capacity-matched re-implementation of the production pH-PINN (Section~\ref{sec:pinn}, $61{,}169$ parameters) used solely for this comparison, so that the four variants differ only in their constraints and not in capacity. All variants were trained for 80 epochs (AdamW, cosine learning-rate schedule) and evaluated over three random seeds; we report the mean $\pm$ standard deviation.
+
+Because the cohort contains $4{,}241$ distinct subjects across $5{,}851$ records ($1.38$ records per subject), a record-level split can place two records from the same patient on either side of the partition. All ablation results reported here therefore use a \emph{patient-level} split (\texttt{GroupShuffleSplit} grouped by \texttt{subject\_id}, $80/20$), giving $3{,}392$ training and $849$ held-out subjects with an explicit assertion that the two subject sets are disjoint. We report predictive accuracy (mean $R^2$ over 13 targets, and over the clinical subset) together with physical-validity diagnostics on the held-out set: the $H=T+V$ consistency error, the number of cases with negative $T$ or $V$, and the number with a non-positive-semidefinite (non-PSD) dissipation matrix.
+
+\subsection{Model Applicability and Target Population}\label{sec:pop}
+The present framework targets patients requiring \emph{LV-centric pump function assessment}. This scope reflects the three-tier patient-specificity hierarchy (Supplementary Table~S2): only the LV surface is directly patient-specific (Tier~1), while other structures are atlas-registered (Tier~3) and therefore contribute geometric context but not patient-specific hemodynamic constraints.
+
+\emph{Inclusion criteria:} Adult patients ($\ge 18$~years) with preserved or reduced LV systolic function undergoing echocardiographic or catheter-based hemodynamic assessment. Applicable conditions include heart failure with reduced ejection fraction (HFrEF), heart failure with preserved ejection fraction (HFpEF), hypertensive heart disease, and ischemic cardiomyopathy.
+
+\emph{Exclusion criteria:} (1)~Hemodynamically significant valvular disease (moderate or greater mitral/aortic regurgitation or stenosis), as the Windkessel model assumes unidirectional aortic outflow without regurgitant fraction. (2)~Significant right ventricular pathology (pulmonary hypertension, RV infarction, arrhythmogenic RV cardiomyopathy), as the RV is Tier~3 atlas-registered. (3)~Congenital heart disease (septal defects, single-ventricle physiology), which violates the two-chamber (LV--aorta) Windkessel assumption. (4)~Mechanical circulatory support (LVAD, ECMO, IABP), which fundamentally alters the PV relationship. These criteria ensure the model operates within the domain where its physics-based assumptions are valid and its patient-specific data inputs are most informative.
+
+\section{Results}\label{sec:results}
+
+\subsection{pH-PINN Training and Convergence}\label{sec:train}
+The pH-PINN converged after 115 epochs (final validation loss $0.074$, training loss $0.073$), attaining $R^2=0.975$ for cardiac output and $R^2=0.951$ for $E_{es}$; per-target accuracy ranged from $0.957$ (end-diastolic pressure) to $0.991$ ($E_{ed}$) across the seven principal targets (Supplementary Table~S1, Fig.~S3). The Hamiltonian partition error $L_{\text{part}}=\lVert H-(T+V)\rVert^{2}$ stayed at float32 rounding level throughout ($5.2\times10^{-15}$ at epoch~1, $2.8\times10^{-15}$ at epoch~150). Because $H$ is formed as $T+V$ inside the network, this is the expected behaviour---a mean squared error of ${\sim}10^{-15}$ is a root-mean-square deviation of ${\sim}3\times10^{-8}$, the float32 epsilon---so it verifies the \emph{algebraic} partition and the absence of numerical drift, and is not a residual of the dynamic balance~\eqref{eq:balance}, which holds structurally through $R(x)\succeq0$. As Section~\ref{sec:limits} makes explicit, these accuracy figures are bounded in interpretation by the surrogate construction of the targets; the discriminating evidence in this paper is the ablation that follows.
+
+% Training-convergence figure moved to Supplementary Material (Fig. S3) to meet the page limit.
+
+\subsection{Ablation: Physics Constraints as Inductive Bias}\label{sec:ablres}
+Table~\ref{tab:ablation} and Fig.~\ref{fig:ablation} summarize the ablation. On the patient-level split, all four models reached statistically indistinguishable predictive accuracy---mean $R^2$ of $0.9752\pm0.0017$ (hard), $0.9743\pm0.0018$ (vanilla MLP), $0.9748\pm0.0017$ (no-structure), and $0.9741\pm0.0029$ (soft). The largest between-model difference ($0.0011$) is smaller than the seed-to-seed standard deviation of every model, so predictive accuracy does \emph{not} separate the four architectures (Fig.~\ref{fig:ablation}(A)). We emphasise that this near-saturated $R^2$ reflects the deterministic structure of the surrogate targets (Section~\ref{sec:val}) rather than the difficulty of the inference problem, and we therefore do not treat it as evidence of clinical performance.
+
+Physical validity is the discriminating factor. The hard-constrained pH-PINN~(A) produced zero violations across all three seeds and all $1{,}183$ held-out cases: $H=T+V$ at float32 rounding level ($2.1\times10^{-15}$), no negative energies, and no non-PSD dissipation matrices---a guarantee that follows from the architecture and not from the data. The same-capacity no-structure PINN~(C)---an identical $73{,}773$-parameter topology whose $R^2$ matches (A) to within seed variability---produced (seed mean) $539$ negative kinetic-energy cases, $482$ negative potential-energy cases, and a non-PSD dissipation matrix in \emph{every} test case (Fig.~\ref{fig:ablation}(B)). The vanilla MLP~(B) violated $H=T+V$ by $O(1)$ and produced ${\sim}800$--$900$ negative-energy cases. Most informative is the soft-constraint model~(D): with a hand-tuned penalty it reduced violations by three orders of magnitude but did \emph{not} eliminate them, still yielding a negative potential energy in one case and a non-PSD dissipation matrix in $1.3$ cases per seed. A penalty therefore makes violations rare on in-distribution data but cannot make them impossible, whereas the hard-constrained architecture makes the failure mode unrepresentable. This distinction---rare versus impossible---is the property required for a physiological digital twin whose internal states are to be trusted outside the training distribution, and it is the primary claim of this work.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{Fig6_ablation_preview.png}
+\caption{Ablation study: physics constraints as architectural inductive bias, evaluated on a patient-level split (849 held-out subjects, no subject appearing in both partitions). (A)~Mean $R^2$ over 13 targets (three seeds; bars show mean, error bars SD)---accuracy is indistinguishable across all four matched-capacity models. (B)~Physical-validity violations over the $1{,}183$ held-out records (seed mean): negative kinetic energy ($T<0$), negative potential energy ($V<0$), and non-PSD dissipation ($R\not\succeq0$). The hard-constrained model (A) attains zero violations by construction; the soft-constraint model (D) reduces but does not eliminate them ($0.3$ and $1.3$ cases per seed); the unconstrained models (B, C) violate physical validity in hundreds to all cases despite matched accuracy.}
+\label{fig:ablation}
+\end{figure*}
+
+\begin{table*}[!t]
+\caption{Ablation: Predictive Accuracy vs. Physical Validity Across Four Matched-Capacity Models (Patient-Level Split, 3 Seeds; 849 Held-Out Subjects / $1{,}183$ Records)}
+\label{tab:ablation}
+\centering
+\footnotesize
+\begin{tabular}{llccccccl}
+\hline
+\textbf{Model} & \textbf{Params} & \textbf{$R^2$ (all)} & \textbf{$R^2$ (clin.)} & \textbf{$H{=}T{+}V$ MSE} & \textbf{$T<0$} & \textbf{$V<0$} & \textbf{$R\not\succeq0$} & \textbf{Validity}\\
+\hline
+A: pH-PINN (hard) & 73{,}773 & $0.9752{\pm}0.0017$ & 0.9816 & $2.1\times10^{-15}$ & 0 & 0 & 0 & guaranteed\\
+B: Vanilla MLP & 111{,}885 & $0.9743{\pm}0.0018$ & 0.9814 & $9.2\times10^{-1}$ & 822 & 909 & n/a & none\\
+C: No-structure PINN & 73{,}773 & $0.9748{\pm}0.0017$ & 0.9808 & $1.8\times10^{-15}$ & 539 & 482 & 1183 & none\\
+D: Soft-constraint PINN & 73{,}773 & $0.9741{\pm}0.0029$ & 0.9805 & $4.5\times10^{-16}$ & 0.0 & 0.3 & 1.3 & not guaranteed\\
+\hline
+\end{tabular}
+
+\vspace{2pt}
+\begin{minipage}{\textwidth}
+\footnotesize Patient-level split (\texttt{GroupShuffleSplit} by \texttt{subject\_id}): $3{,}392$ training and 849 held-out subjects, disjoint by assertion. $R^2$ (all) is the mean over 13 targets, $\pm$ SD over three seeds; $R^2$ (clin.) is the seed mean over the clinical subset; violation counts are seed means over the $1{,}183$ held-out records. Models A, C, and D share an identical $73{,}773$-parameter architecture, isolating the effect of the physics constraints. Accuracy is indistinguishable across all four models; only model A attains zero violations \emph{by construction}. Model D reduces violations by three orders of magnitude but does not eliminate them, illustrating that a penalty makes violations rare rather than impossible. ``n/a'': the vanilla MLP has no explicit dissipation matrix.
+\end{minipage}
+\end{table*}
+
+\begin{table}[!t]
+\caption{Provenance of Validation Variables}
+\label{tab:prov}
+\centering
+\footnotesize
+\begin{tabular}{lll}
+\hline
+\textbf{Parameter} & \textbf{Provenance} & \textbf{Definition / method}\\
+\hline
+CO & Direct & Thermodilution (Swan--Ganz)\\
+SVR & Direct$^\dagger$ & $80(\text{MAP}-\text{CVP})/\text{CO}$\\
+PAWP & Direct & Pulmonary artery catheter\\
+SV & Semi-direct & CO/HR\\
+$E_a$ & Surrogate & $P_{es}/\text{SV}$, $P_{es}\approx0.9\,\text{SBP}$\\
+$E_{es}$ & Surrogate & Single-beat estimation \cite{chen2001}\\
+SW & Surrogate & $P_{es}\,\text{SV}$\\
+Mech.\ eff. & Surrogate & SW/PVA (Suga model) \cite{suga1974}\\
+\hline
+\end{tabular}
+
+\vspace{2pt}
+\begin{minipage}{\columnwidth}
+\footnotesize $^\dagger$Assembled from directly measured quantities, but an algebraic function of variables that are themselves network inputs (Section~\ref{sec:xval}). Surrogate variables are computed from directly measured hemodynamics by closed-form formulas whose arguments also appear among the inputs; agreement with them therefore demonstrates internal consistency, not independent measurement validation.
+\end{minipage}
+\end{table}
+
+% Anatomical-reconstruction results (chamber volumes, wall thickness, assembly inventory) moved to Supplementary Material (Fig. S1, Table S2) to meet the page limit.
+
+\subsection{Hemodynamic Cross-Validation}\label{sec:xval}
+Cross-validation between eICU ($n=3{,}991$) and MIMIC-IV ($n=5{,}851$) showed agreement across the key hemodynamic parameters (Supplementary Fig.~S4). Distribution overlaps were $80.5\%$ for stroke volume, $72.5\%$ for arterial elastance, $83.4\%$ for stroke work, and $65.2\%$ for cardiac output, the lower CO value reflecting known differences in CO measurement methodology between the two databases. Bland--Altman analysis \cite{blandaltman1986} for SVR gave Pearson $r=0.916$ ($p<10^{-300}$), bias $175.5$ and limits of agreement $-98.2$ to $449.3$~dyn$\cdot$s/cm$^{5}$, with a mean absolute error of $182.7$~dyn$\cdot$s/cm$^{5}$ over $2{,}704$ paired measurements.
+
+We deliberately do \emph{not} present these as the study's principal validation evidence. SVR, although assembled from directly measured quantities, is the algebraic function $\text{SVR}=80(\text{MAP}-\text{CVP})/\text{CO}$ of variables that are themselves network inputs; the surrogate-derived indices ($E_a$, $E_{es}$, SW, mechanical efficiency) stand in the same relation to the inputs by construction (Table~\ref{tab:prov}). High agreement therefore establishes that the network has learned a smooth, energy-consistent representation of these mappings---which is what an emulator must do---but not that it recovers a quantity it could not otherwise have inferred. Breaking that dependence requires input modalities that are not arguments of the targets; we specify what this would take in Section~\ref{sec:limits}.
+
+\subsection{Windkessel--PINN Integration and PV Loop Analysis}\label{sec:wkpv}
+The Windkessel model fitted to hemodynamic waveforms yielded physiologically plausible parameters: $R_1=0.072$~mmHg$\cdot$s/mL, $R_2=1.128$~mmHg$\cdot$s/mL, and $C=1.750$~mL/mmHg. These corresponded to a mean aortic pressure of $104.5$~mmHg at 75~bpm with stroke volume 70~mL and cardiac output 5.25~L/min.
+
+The pH-PINN integration with port-Hamiltonian dissipation yielded $E_{es}=2.5$~mmHg/mL, $E_a=1.50$~mmHg/mL, and a ventricular--arterial coupling ratio ($E_a/E_{es}$) of 0.60, indicating efficient coupling within the physiological range of $0.5$--$1.2$. The dissipation parameter $r_{\text{diss}}=0.026$~mmHg$\cdot$s/mL, estimated from $Z_c$ via~\eqref{eq:rdiss}, falls within the expected range for normal cardiac function ($0.01$--$0.05$).
+
+PV loop energy partition following the Suga--Sagawa framework~(\ref{eq:sw})--(\ref{eq:pe}) with port-Hamiltonian dissipation~\eqref{eq:ediss} gave stroke work $\text{SW}=P_{es}\,\text{SV}=7{,}000$~mmHg$\cdot$mL ($0.93$~J) and potential energy $\text{PE}=2{,}000$~mmHg$\cdot$mL, yielding $\text{PVA}=9{,}000$~mmHg$\cdot$mL. Dissipation energy per beat was $E_{\text{diss}}=525$~mmHg$\cdot$mL ($5.8\%$ of PVA), giving net stroke work $\text{SW}_{\text{net}}=6{,}475$~mmHg$\cdot$mL. Gross efficiency (SW/PVA) was $77.8\%$ and net efficiency $((\text{SW}-E_{\text{diss}})/\text{PVA})$ was $71.9\%$ (Fig.~\ref{fig:pvloop}(A)). The gross value agrees with the closed-form Suga--Sagawa prediction for the observed coupling ratio: for a linear ESPVR, $\text{PE}/\text{SW}=\tfrac{1}{2}E_a/E_{es}$, so $E_a/E_{es}=0.60$ implies $\eta_{\text{gross}}=1/(1+0.30)=76.9\%$ \cite{suga1974}---within $0.9$ percentage points of the computed value.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.98\textwidth]{Fig5_pvloop_preview.png}
+\caption{Energy partition and cohort context. (A)~PV-area decomposition for the reference operating point: stroke work (SW $=7{,}000$~mmHg$\cdot$mL), dissipation ($E_{\text{diss}}=525$~mmHg$\cdot$mL, $5.8\%$ of PVA), net stroke work ($6{,}475$~mmHg$\cdot$mL), and potential energy (PE $=2{,}000$~mmHg$\cdot$mL); gross and net efficiencies are $77.8\%$ and $71.9\%$. (B)~Distribution of stroke work over the 841 VitalDB patients with invasive arterial waveforms, with the corrected reference value (green) and the cohort median (dotted); the value implied by the alternative convention $\text{SW}=\tfrac12 E_a\text{SV}^2$ ($3{,}675$, red dashed) lies outside the cohort's lower tail. (C)~Distribution of total arterial compliance $C$ in the same cohort; the nominal $C=1.75$~mL/mmHg sits at the 92nd percentile, whereas the cohort median is $1.12$~mL/mmHg.}
+\label{fig:pvloop}
+\end{figure*}
+
+\subsection{Cohort Context from Invasive Arterial Waveforms}\label{sec:vitaldb}
+The operating point in Section~\ref{sec:wkpv} is a single reference case, which is insufficient to establish that the energetic quantities are physiologically representative. We therefore repeated the Windkessel and stroke-work computation on an independent open cohort with invasive recordings: VitalDB \cite{lee2022vitaldb}, from which we selected 841 surgical patients having a radial or femoral arterial pressure waveform (\texttt{SNUADC/ART}, 500~Hz) together with a device-measured cardiac output and stroke volume. For each patient we fitted the diastolic pressure decay to obtain $\tau$, took $C=\text{SV}/\text{PP}$, $R_{\text{tot}}=(\overline{\text{MAP}}-\text{CVP})/\bar{Q}$, and $R_2=\tau/C$, and computed stroke work as $P_{es}\,\text{SV}$ with $P_{es}\approx0.9\,\text{SBP}$.
+
+Stroke work in this cohort had a median of $7{,}222$~mmHg$\cdot$mL (IQR $5{,}816$--$9{,}300$), which contains the value obtained from $\text{SW}=P_{es}\,\text{SV}$ ($7{,}000$) and excludes the value that the alternative convention $\text{SW}=\tfrac12 E_a\text{SV}^2$ would give ($3{,}675$; Fig.~\ref{fig:pvloop}(B)). This provides an external check that the rectangular work-loop form, and not the triangular one, is the appropriate approximation for the systolic portion of the loop. Total arterial compliance had a median of $1.12$~mL/mmHg (IQR $0.88$--$1.40$), placing the nominal $C=1.75$~mL/mmHg at the 92nd percentile of the cohort (Fig.~\ref{fig:pvloop}(C)); the reference case is therefore a compliant, rather than a typical, patient, and the derived Windkessel quantities should be read accordingly.
+
+The same analysis shows that one component of the framework is \emph{not} identifiable from these data. Separating the characteristic impedance $Z_c$ requires the diastolic window to be long relative to $\tau$, and in this surgical cohort the observable diastolic interval was on median only $0.46$ of the interval needed ($0.9\,R_{\text{tot}}C$); only 14 of 841 patients ($1.7\%$) satisfied the criterion. Consequently $\tau$ is systematically underestimated, $R_2=\tau/C$ absorbs that bias, and the residual $Z_c=R_{\text{tot}}-R_2$ inflates to a median $62\%$ of total resistance---an order of magnitude above the physiological $5$--$10\%$. We therefore report $R_{\text{tot}}$, $C$, and $\tau$ as identifiable from this data source and treat $Z_c$---and hence $r_{\text{diss}}$ and $E_{\text{diss}}$---as calibrated from the literature rather than measured. This does not affect the architectural guarantee, which depends on $R(x)\succeq0$ and not on the numerical value of $r_{\text{diss}}$, but it does bound how far the dissipation magnitude can be interpreted.
+
+
+\section{Discussion}\label{sec:discussion}
+We have presented a modular cardiac digital-twin framework that integrates anatomical reconstruction, Windkessel modeling, and a port-Hamiltonian PINN with scalar dissipation for hemodynamic inference. We discuss three contributions and their limitations.
+
+\emph{Architectural constraints versus penalties.} The port-Hamiltonian form imposes a geometric constraint on the whole state map rather than a residual on individual equations, and the ablation isolates what that buys. A penalty shapes the loss surface, so violations become improbable wherever the training data constrain the network; an architecture that emits $T,V\ge0$ through softplus, forms $H$ as $T+V$, and factors $R=LL^{\top}$ removes the violating region from the model's range entirely. Model D makes the difference concrete: three orders of magnitude fewer violations, but not zero, and no argument that the residual rate would not grow under distribution shift. For a digital twin intended to support counterfactual reasoning---where the queries are by design off-distribution---a bound that degrades with distance from the training data is the wrong kind of bound.
+
+\emph{Modular pipeline architecture.} Anatomy, lumped-parameter hemodynamics, and parameter inference are usually developed in isolation. Coupling them through a single energy functional means a change in any component propagates as an energy-consistent change in the others, which is what makes the guarantee a property of the pipeline rather than of one module.
+
+\emph{Validation scope.} Cross-validation across $9{,}842$ ICU patients is a large-scale external test of consistency, but its interpretation is bounded by provenance (Table~\ref{tab:prov}): the surrogate targets are functions of the network's own inputs. We therefore position these results as evidence that the pH-PINN is a differentiable, energy-consistent \emph{emulator} of established hemodynamic relationships---suitable for sensitivity and counterfactual analysis under guaranteed energy constraints---rather than as independent measurement of the underlying quantities. Validation against conductance-catheter PV loops remains the decisive test.
+
+\subsection{Limitations}\label{sec:limits}
+\emph{Patient-specificity hierarchy.} Only the LV surface is directly patient-specific (Tier~1). The remaining structures are adapted from patient data (Tier~2) or registered from a population atlas (Tier~3). The atlas-registered structures had ICP distances of $0.35$--$0.58$, exceeding the target of $<0.15$, which may introduce geometric errors in the far-field anatomy. We deliberately use ``patient-anchored'' rather than ``patient-specific'' to reflect this hierarchy. Because the hemodynamic inference is lumped-parameter and is driven by the Tier-1 LV state and the Windkessel parameters, this far-field geometric error contributes anatomical context but does not enter the hemodynamic targets. The anatomical and inference components were validated on different cohorts---the mesh on MM-WHS/STACOM imaging, the hemodynamics on eICU and MIMIC-IV---so the geometry supports the framework conceptually rather than providing subject-specific constraints for the $9{,}842$ ICU patients.
+
+\emph{Target population constraints.} The model is explicitly scoped to LV-centric pump-function assessment (Section~\ref{sec:pop}). Patients with hemodynamically significant valvular disease, RV pathology, congenital heart disease, or mechanical circulatory support fall outside the validated operating domain. These exclusions delimit the model's validated operating domain rather than assert universal applicability; because the pipeline is modular, right-ventricular, valvular, or congenital physiology can be incorporated as additional layers without altering the validated LV core.
+
+\emph{Scalar dissipation approximation.} The current implementation uses a scalar dissipation $R(x)=r_{\text{diss}}\,I$ estimated from the Windkessel characteristic impedance~\eqref{eq:rdiss}, which captures aggregate viscous losses but not spatially varying or state-dependent dissipation. In pathological states (aortic stenosis, prosthetic-valve turbulence), dissipation may be substantially higher and state-dependent. A fully learned $R(x)$ from Doppler-derived turbulence data would provide spatially resolved energy-loss maps. The scalar form is a deliberate first-order choice, not a structural constraint: the same architecture already accommodates a fully learned, Cholesky-parameterized PSD matrix $R(x)=LL^{\top}$---the hard-constrained model of the ablation (Section~\ref{sec:ablation})---so replacing the $Z_c$-calibrated scalar with an anisotropic, state-dependent $R(x)$ is a change of parameterization, not of framework.
+
+\emph{Surrogate circularity.} The most important limitation is structural rather than numerical. The network's input feature vector (EF, EDV, ESV, SBP, DBP, HR, $E/e'$, LAVI, $E/A$, deceleration time, CO) contains the arguments of the closed-form expressions used to construct most of the targets---for example $E_a=P_{es}/\text{SV}$ with $P_{es}\approx0.9\,\text{SBP}$, and $\text{SVR}=80(\text{MAP}-\text{CVP})/\text{CO}$. The learned mapping is consequently close to deterministic, and the reported $R^2\approx0.97$ measures how well a smooth function approximator recovers an algebraic identity, not how well the model estimates an unobserved physiological state. This is why we place the ablation, not the accuracy table, at the centre of the paper: the ablation compares four models on the \emph{same} circular targets, so the circularity cancels and what remains is the difference the architecture makes. Removing the circularity requires input modalities that are not arguments of the targets---the morphology of the invasive arterial waveform (dicrotic notch timing, $\mathrm{d}P/\mathrm{d}t_{\max}$, systolic/diastolic area ratio) mapped to device-measured cardiac output---which is the design of the successor study, and no conclusion in this paper should be read as anticipating its result.
+
+\emph{Identifiability of the dissipation magnitude.} As quantified in Section~\ref{sec:vitaldb}, $Z_c$ and hence $r_{\text{diss}}$ cannot be separated from the observable diastolic decay in $98.3\%$ of the VitalDB cohort. The value of $r_{\text{diss}}$ used here is therefore literature-calibrated. The architectural guarantee is unaffected---it requires only $R(x)\succeq0$---but absolute dissipation energies should be treated as illustrative until validated against high-fidelity aortic flow measurement.
+
+\emph{ICU population bias.} The eICU--MIMIC-IV validation is limited to critically ill patients and may not generalize to ambulatory cohorts with less extreme hemodynamic states. Prospective validation in outpatient echocardiography cohorts is planned.
+
+\subsection{Future Work}
+Three priorities, in order of what each would resolve. First, replacing the surrogate-derived targets with a waveform-driven formulation---invasive arterial pressure morphology as input, device-measured cardiac output as target---so that predictive accuracy becomes an independent test rather than the recovery of an identity. Second, upgrading the scalar dissipation to a state-dependent $R(x)$ learned from data in which $Z_c$ is identifiable, which the present analysis shows requires either longer diastolic windows or direct aortic flow measurement. Third, prospective validation against simultaneous echocardiographic and conductance-catheter PV loop recordings, which remains the only route to ground-truth validation of the elastance targets.
+
+\section{Conclusion}\label{sec:conclusion}
+Imposing port-Hamiltonian energy structure architecturally, rather than through loss penalties, changes what a cardiac inference model can be relied upon to do. Under a patient-level ablation in which four capacity-matched models were statistically indistinguishable in accuracy, only the hard-constrained architecture produced physically admissible internal states in every case, and only it does so by a mechanism that cannot be defeated by a distribution shift: the softplus, the partition $H=T+V$, and the Cholesky factorization make negative energy and energy-generating dissipation unrepresentable rather than merely penalized. We have been explicit that the accuracy figures reported here rest on surrogate targets derived from the model's own inputs, and that the dissipation magnitude rests on a characteristic impedance that invasive waveform data show to be identifiable in only $1.7\%$ of patients; neither limitation touches the structural guarantee, and both define the waveform-driven study that must follow. The contribution we claim is the guarantee, and the demonstration that it costs nothing in accuracy to obtain.
+
+\section*{Data and Code Availability}
+This study uses publicly available, de-identified research databases: MIMIC-IV and the eICU Collaborative Research Database (PhysioNet, credentialed access), the MM-WHS Challenge dataset, and the STACOM2025 whole-heart atlas. Hemodynamic and energetic targets were derived from these sources using the surrogate formulas cited in Section~\ref{sec:val}; the model, training, ablation, and figure-generation code (PyTorch), together with the derived result files needed to reproduce every figure, are released as a reproducibility package accompanying this submission and will be deposited in a public repository (GitHub/Zenodo) upon acceptance. Networks were trained with AdamW (learning rate $2\times10^{-3}$, weight decay $10^{-4}$, cosine schedule, gradient-norm clipping at $1.0$); the ablation used batch size 512 and was repeated over three random seeds.
+
+% Table (per-parameter pH-PINN performance, 7 targets) moved to Supplementary Material (Table S1) to meet the page limit.
+
+% Table (three-tier patient-specificity hierarchy) moved to Supplementary Material (Table S2) to meet the page limit.
+
+
+
+\begin{thebibliography}{22}
+\bibitem{corral2020} J. Corral-Acero, F. Margara, M. Marciniak, C. Rodero, F. Loncaric, Y. Feng, A. Gilbert, J. F. Fernandes, H. A. Bukhari, A. Wajdan, M. V. Martinez, M. S. Santos, M. Shamohammdi, H. Luo, P. Westphal, P. Leeson, P. DiAchille, V. Gurev, M. Mayr, L. Geris, P. Pathmanathan, T. Morrison, R. Cornelussen, F. Prinzen, T. Delhaas, A. Doltra, M. Sitges, E. J. Vigmond, E. Zacur, V. Grau, B. Rodriguez, E. W. Remme, S. Niederer, P. Mortier, K. McLeod, M. Potse, E. Pueyo, A. Bueno-Orovio, and P. Lamata, ``The `Digital Twin' to enable the vision of precision cardiology,'' \emph{Eur. Heart J.}, vol.~41, no.~48, pp.~4556--4564, 2020, doi:~10.1093/eurheartj/ehaa159.
+\bibitem{greener2022} J. G. Greener, S. M. Kandathil, L. Moffat, and D. T. Jones, ``A guide to machine learning for biologists,'' \emph{Nat. Rev. Mol. Cell Biol.}, vol.~23, no.~1, pp.~40--55, 2022, doi:~10.1038/s41580-021-00407-0.
+\bibitem{raissi2019} M. Raissi, P. Perdikaris, and G. E. Karniadakis, ``Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations,'' \emph{J. Comput. Phys.}, vol.~378, pp.~686--707, 2019, doi:~10.1016/j.jcp.2018.10.045.
+\bibitem{karniadakis2021} G. E. Karniadakis, I. G. Kevrekidis, L. Lu, P. Perdikaris, S. Wang, and L. Yang, ``Physics-informed machine learning,'' \emph{Nat. Rev. Phys.}, vol.~3, no.~6, pp.~422--440, 2021, doi:~10.1038/s42254-021-00314-5.
+\bibitem{kissas2020} G. Kissas, Y. Yang, E. Hwuang, W. R. Witschey, J. A. Detre, and P. Perdikaris, ``Machine learning in cardiovascular flows modeling: Predicting arterial blood pressure from non-invasive 4D flow MRI data using physics-informed neural networks,'' \emph{Comput. Methods Appl. Mech. Eng.}, vol.~358, art.~no.~112623, 2020, doi:~10.1016/j.cma.2019.112623.
+\bibitem{zhang2012} Y. Zhang, X. Liang, J. Ma, Y. Jing, M. J. Gonzales, C. Villongco, A. Krishnamurthy, L. R. Frank, V. Nigam, P. Stark, S. M. Narayan, and A. D. McCulloch, ``An atlas-based geometry pipeline for cardiac Hermite model construction and diffusion tensor reorientation,'' \emph{Med. Image Anal.}, vol.~16, no.~6, pp.~1130--1141, 2012, doi:~10.1016/j.media.2012.06.005.
+\bibitem{kong2023} F. Kong and S. C. Shadden, ``Learning whole heart mesh generation from patient images for computational simulations,'' \emph{IEEE Trans. Med. Imag.}, vol.~42, no.~2, pp.~533--545, 2023, doi:~10.1109/TMI.2022.3219284.
+\bibitem{rodero2021} C. Rodero, M. Strocchi, M. Marciniak, S. Longobardi, J. Whitaker, M. D. O'Neill, K. Gillette, C. Augustin, G. Plank, E. J. Vigmond, P. Lamata, and S. A. Niederer, ``Linking statistical shape models and simulated function in the healthy adult human heart,'' \emph{PLoS Comput. Biol.}, vol.~17, no.~4, art.~no.~e1008851, 2021, doi:~10.1371/journal.pcbi.1008851.
+\bibitem{zhuang2019} X. Zhuang, L. Li, C. Payer, D. \v{S}tern, M. Urschler, M. P. Heinrich, J. Oster, C. Wang, \"{O}. Smedby, C. Bian, X. Yang, P.-A. Heng, A. Mortazi, U. Bagci, G. Yang, C. Sun, G. Galisot, J.-Y. Ramel, T. Brouard, Q. Tong, W. Si, X. Liao, G. Zeng, Z. Shi, G. Zheng, C. Wang, T. MacGillivray, D. Newby, K. Rhode, S. Ourselin, R. Mohiaddin, J. Keegan, D. Firmin, and G. Yang, ``Evaluation of algorithms for multi-modality whole heart segmentation: An open-access grand challenge,'' \emph{Med. Image Anal.}, vol.~58, art.~no.~101537, 2019, doi:~10.1016/j.media.2019.101537.
+\bibitem{kunzelman1994} K. S. Kunzelman, R. P. Cochran, E. D. Verrier, and R. C. Eberhart, ``Anatomic basis for mitral valve modelling,'' \emph{J. Heart Valve Dis.}, vol.~3, no.~5, pp.~491--496, 1994.
+\bibitem{thubrikar1981} M. Thubrikar, W. C. Piepgrass, T. W. Shaner, and S. P. Nolan, ``The design of the normal aortic valve,'' \emph{Am. J. Physiol.}, vol.~241, no.~6, pp.~H795--H801, 1981, doi:~10.1152/ajpheart.1981.241.6.H795.
+\bibitem{lam1970} J. H. Lam, N. Ranganathan, E. D. Wigle, and M. D. Silver, ``Morphology of the human mitral valve. I. Chordae tendineae: A new classification,'' \emph{Circulation}, vol.~41, no.~3, pp.~449--458, 1970, doi:~10.1161/01.CIR.41.3.449.
+\bibitem{vanderschaft2014} A. van der Schaft and D. Jeltsema, ``Port-Hamiltonian systems theory: An introductory overview,'' \emph{Found. Trends Syst. Control}, vol.~1, no.~2--3, pp.~173--378, 2014, doi:~10.1561/2600000002.
+\bibitem{suga1974} H. Suga and K. Sagawa, ``Instantaneous pressure-volume relationships and their ratio in the excised, supported canine left ventricle,'' \emph{Circ. Res.}, vol.~35, no.~1, pp.~117--126, 1974, doi:~10.1161/01.RES.35.1.117.
+\bibitem{johnson2016} A. E. W. Johnson, T. J. Pollard, L. Shen, L.-W. H. Lehman, M. Feng, M. Ghassemi, B. Moody, P. Szolovits, L. A. Celi, and R. G. Mark, ``MIMIC-III, a freely accessible critical care database,'' \emph{Sci. Data}, vol.~3, art.~no.~160035, 2016, doi:~10.1038/sdata.2016.35.
+\bibitem{johnson2023} A. E. W. Johnson, L. Bulgarelli, L. Shen, A. Gayles, A. Shammout, S. Horng, T. J. Pollard, S. Hao, B. Moody, B. Gow, L.-W. H. Lehman, L. A. Celi, and R. G. Mark, ``MIMIC-IV, a freely accessible electronic health record dataset,'' \emph{Sci. Data}, vol.~10, no.~1, art.~no.~1, 2023, doi:~10.1038/s41597-022-01899-x.
+\bibitem{pollard2018} T. J. Pollard, A. E. W. Johnson, J. D. Raffa, L. A. Celi, R. G. Mark, and O. Badawi, ``The eICU Collaborative Research Database, a freely available multi-center database for critical care research,'' \emph{Sci. Data}, vol.~5, art.~no.~180178, 2018, doi:~10.1038/sdata.2018.178.
+\bibitem{westerhof2009} N. Westerhof, J.-W. Lankhaar, and B. E. Westerhof, ``The arterial Windkessel,'' \emph{Med. Biol. Eng. Comput.}, vol.~47, no.~2, pp.~131--141, 2009, doi:~10.1007/s11517-008-0359-2.
+\bibitem{hoogendoorn2013} C. Hoogendoorn, N. Duchateau, D. S\'{a}nchez-Quintana, T. Whitmarsh, F. M. Sukno, M. De Craene, K. Lekadir, and A. F. Frangi, ``A high-resolution atlas and statistical model of the human heart from multislice CT,'' \emph{IEEE Trans. Med. Imag.}, vol.~32, no.~1, pp.~28--44, 2013, doi:~10.1109/TMI.2012.2230015.
+\bibitem{lee2022vitaldb} H.-C. Lee, Y. Park, S. B. Yoon, S. M. Yang, D. Park, and C.-W. Jung, ``VitalDB, a high-fidelity multi-parameter vital signs database in surgical patients,'' \emph{Sci.~Data}, vol.~9, no.~1, art.~279, 2022, doi:~10.1038/s41597-022-01411-5.
+
+\bibitem{blandaltman1986} J. M. Bland and D. G. Altman, ``Statistical methods for assessing agreement between two methods of clinical measurement,'' \emph{Lancet}, vol.~327, no.~8476, pp.~307--310, 1986, doi:~10.1016/S0140-6736(86)90837-8.
+\bibitem{chen2001} C.-H. Chen, B. Fetics, E. Nevo, C. E. Rochitte, K.-R. Chiou, P.-A. Ding, M. Kawaguchi, and D. A. Kass, ``Noninvasive single-beat determination of left ventricular end-systolic elastance in humans,'' \emph{J. Am. Coll. Cardiol.}, vol.~38, no.~7, pp.~2028--2034, 2001, doi:~10.1016/S0735-1097(01)01651-5.
+\bibitem{hammoud2026} A. Hammoud, N. Liu, Y. Le Gorrec, Y. Civet, and Y. Perriard, ``Energy-based control of a dielectric elastomer cardiac assist device,'' \emph{Mechatronics}, vol.~117, art.~no.~103515, 2026, doi:~10.1016/j.mechatronics.2026.103515.
+\end{thebibliography}
+
+\end{document}

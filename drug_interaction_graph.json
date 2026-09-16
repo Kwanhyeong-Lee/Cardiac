@@ -1,0 +1,251 @@
+{
+  "nodes": [
+    {
+      "drug": "ACEi",
+      "n_interactions": 5,
+      "mean_interaction": -697.7956164910645,
+      "synergistic_count": 3,
+      "antagonistic_count": 1
+    },
+    {
+      "drug": "ARB",
+      "n_interactions": 6,
+      "mean_interaction": -753.7026948551302,
+      "synergistic_count": 3,
+      "antagonistic_count": 2
+    },
+    {
+      "drug": "ARNI",
+      "n_interactions": 2,
+      "mean_interaction": 3040.6854509877476,
+      "synergistic_count": 1,
+      "antagonistic_count": 1
+    },
+    {
+      "drug": "BB",
+      "n_interactions": 6,
+      "mean_interaction": -1939.5804085101788,
+      "synergistic_count": 5,
+      "antagonistic_count": 1
+    },
+    {
+      "drug": "CCB",
+      "n_interactions": 6,
+      "mean_interaction": 1464.721232338591,
+      "synergistic_count": 1,
+      "antagonistic_count": 5
+    },
+    {
+      "drug": "Loop",
+      "n_interactions": 6,
+      "mean_interaction": 784.4317293116386,
+      "synergistic_count": 3,
+      "antagonistic_count": 3
+    },
+    {
+      "drug": "MRA",
+      "n_interactions": 7,
+      "mean_interaction": 1663.1018579749448,
+      "synergistic_count": 3,
+      "antagonistic_count": 4
+    },
+    {
+      "drug": "RAASi",
+      "n_interactions": 4,
+      "mean_interaction": -1178.5752183572145,
+      "synergistic_count": 3,
+      "antagonistic_count": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "ACEi",
+      "target": "ARB",
+      "weight": 1.9142478975065842,
+      "interaction": 1.9142478975065842,
+      "classification": "Additive",
+      "n_both": 36,
+      "p_value": 0.6029152276473735
+    },
+    {
+      "source": "ACEi",
+      "target": "BB",
+      "weight": 1369.3381143419192,
+      "interaction": -1369.3381143419192,
+      "classification": "Synergistic",
+      "n_both": 476,
+      "p_value": 0.5273264549748118
+    },
+    {
+      "source": "ACEi",
+      "target": "Loop",
+      "weight": 1675.5951607115085,
+      "interaction": -1675.5951607115085,
+      "classification": "Synergistic",
+      "n_both": 362,
+      "p_value": 0.7419086287257919
+    },
+    {
+      "source": "ACEi",
+      "target": "MRA",
+      "weight": 3751.113358873947,
+      "interaction": -3751.113358873947,
+      "classification": "Synergistic",
+      "n_both": 72,
+      "p_value": 0.5508696803984845
+    },
+    {
+      "source": "ACEi",
+      "target": "CCB",
+      "weight": 3305.1543035745462,
+      "interaction": 3305.1543035745462,
+      "classification": "Antagonistic",
+      "n_both": 251,
+      "p_value": 0.06029673730455219
+    },
+    {
+      "source": "ARB",
+      "target": "ARNI",
+      "weight": 1744.5616512404795,
+      "interaction": -1744.5616512404795,
+      "classification": "Synergistic",
+      "n_both": 27,
+      "p_value": 0.060979983429968604
+    },
+    {
+      "source": "ARB",
+      "target": "BB",
+      "weight": 5059.342690747919,
+      "interaction": -5059.342690747919,
+      "classification": "Synergistic",
+      "n_both": 354,
+      "p_value": 0.003345516346511109
+    },
+    {
+      "source": "ARB",
+      "target": "Loop",
+      "weight": 305.4370939990006,
+      "interaction": 305.4370939990006,
+      "classification": "Antagonistic",
+      "n_both": 275,
+      "p_value": 0.1560816625448026
+    },
+    {
+      "source": "ARB",
+      "target": "MRA",
+      "weight": 2322.7631539565964,
+      "interaction": 2322.7631539565964,
+      "classification": "Antagonistic",
+      "n_both": 67,
+      "p_value": 0.9982102121605545
+    },
+    {
+      "source": "ARB",
+      "target": "CCB",
+      "weight": 348.4263229954863,
+      "interaction": -348.4263229954863,
+      "classification": "Synergistic",
+      "n_both": 215,
+      "p_value": 0.6021831785418339
+    },
+    {
+      "source": "ARNI",
+      "target": "MRA",
+      "weight": 7825.932553215975,
+      "interaction": 7825.932553215975,
+      "classification": "Antagonistic",
+      "n_both": 23,
+      "p_value": 0.45576936755671715
+    },
+    {
+      "source": "RAASi",
+      "target": "BB",
+      "weight": 3896.9050155052914,
+      "interaction": -3896.9050155052914,
+      "classification": "Synergistic",
+      "n_both": 816,
+      "p_value": 0.019114575703369767
+    },
+    {
+      "source": "RAASi",
+      "target": "Loop",
+      "weight": 710.4701328845407,
+      "interaction": -710.4701328845407,
+      "classification": "Synergistic",
+      "n_both": 630,
+      "p_value": 0.24850410022187344
+    },
+    {
+      "source": "RAASi",
+      "target": "MRA",
+      "weight": 1517.3080673219633,
+      "interaction": -1517.3080673219633,
+      "classification": "Synergistic",
+      "n_both": 135,
+      "p_value": 0.5619822835149242
+    },
+    {
+      "source": "RAASi",
+      "target": "CCB",
+      "weight": 1410.3823422829369,
+      "interaction": 1410.3823422829369,
+      "classification": "Antagonistic",
+      "n_both": 454,
+      "p_value": 0.39669542093773325
+    },
+    {
+      "source": "BB",
+      "target": "Loop",
+      "weight": 1412.9881585098956,
+      "interaction": -1412.9881585098956,
+      "classification": "Synergistic",
+      "n_both": 1178,
+      "p_value": 0.2032305039937233
+    },
+    {
+      "source": "BB",
+      "target": "MRA",
+      "weight": 191.11189186240767,
+      "interaction": -191.11189186240767,
+      "classification": "Synergistic",
+      "n_both": 240,
+      "p_value": 0.8413821984032425
+    },
+    {
+      "source": "BB",
+      "target": "CCB",
+      "weight": 292.2034199063605,
+      "interaction": 292.2034199063605,
+      "classification": "Antagonistic",
+      "n_both": 722,
+      "p_value": 0.3783704100232764
+    },
+    {
+      "source": "Loop",
+      "target": "MRA",
+      "weight": 5511.8718497119735,
+      "interaction": 5511.8718497119735,
+      "classification": "Antagonistic",
+      "n_both": 384,
+      "p_value": 0.4249530063907837
+    },
+    {
+      "source": "Loop",
+      "target": "CCB",
+      "weight": 2688.334884264802,
+      "interaction": 2688.334884264802,
+      "classification": "Antagonistic",
+      "n_both": 605,
+      "p_value": 0.040332986476830236
+    },
+    {
+      "source": "MRA",
+      "target": "CCB",
+      "weight": 1440.6787669983873,
+      "interaction": 1440.6787669983873,
+      "classification": "Antagonistic",
+      "n_both": 92,
+      "p_value": 0.18510757931908858
+    }
+  ]
+}

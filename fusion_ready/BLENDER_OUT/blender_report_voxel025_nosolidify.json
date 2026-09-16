@@ -1,0 +1,170 @@
+{
+ "blender": "5.2.1 LTS",
+ "voxel_mm": 0.25,
+ "parts": {
+  "LV_bloodpool": {
+   "source": ".\\PRINT\\frame_A_patient\\lv_surface.stl",
+   "kind": "solid",
+   "before": {
+    "faces": 39992,
+    "verts": 19994,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 149.778,
+    "bbox_min_mm": [
+     -33.23,
+     -41.04,
+     -35.47
+    ],
+    "bbox_max_mm": [
+     33.24,
+     41.04,
+     35.47
+    ],
+    "extent_mm": [
+     66.47,
+     82.08,
+     70.94
+    ]
+   },
+   "after": {
+    "faces": 39992,
+    "verts": 19994,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 149.778,
+    "bbox_min_mm": [
+     -33.23,
+     -41.04,
+     -35.47
+    ],
+    "bbox_max_mm": [
+     33.24,
+     41.04,
+     35.47
+    ],
+    "extent_mm": [
+     66.47,
+     82.08,
+     70.94
+    ]
+   },
+   "print3d_toolbox": null
+  },
+  "mitral_valve": {
+   "source": ".\\frame_A_patient\\mitral_valve_refit_v1.stl",
+   "kind": "shell",
+   "before": {
+    "faces": 22344,
+    "verts": 11920,
+    "non_manifold_edges": 1480,
+    "boundary_edges": 1480,
+    "manifold": false,
+    "volume_mL": null,
+    "bbox_min_mm": [
+     -5.76,
+     -40.77,
+     -3.8
+    ],
+    "bbox_max_mm": [
+     29.99,
+     -3.61,
+     31.62
+    ],
+    "extent_mm": [
+     35.74,
+     37.16,
+     35.42
+    ]
+   },
+   "after": {
+    "faces": 56878,
+    "verts": 57664,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 0.291,
+    "bbox_min_mm": [
+     -5.5,
+     -40.6,
+     -3.55
+    ],
+    "bbox_max_mm": [
+     29.87,
+     -3.73,
+     31.52
+    ],
+    "extent_mm": [
+     35.37,
+     36.87,
+     35.06
+    ]
+   },
+   "print3d_toolbox": null
+  },
+  "aortic_valve": {
+   "source": ".\\frame_A_patient\\aortic_valve_refit_v1.stl",
+   "kind": "shell",
+   "before": {
+    "faces": 44636,
+    "verts": 22780,
+    "non_manifold_edges": 920,
+    "boundary_edges": 920,
+    "manifold": false,
+    "volume_mL": null,
+    "bbox_min_mm": [
+     8.33,
+     -28.35,
+     28.1
+    ],
+    "bbox_max_mm": [
+     38.11,
+     1.72,
+     58.04
+    ],
+    "extent_mm": [
+     29.79,
+     30.07,
+     29.94
+    ]
+   },
+   "after": {
+    "faces": 33280,
+    "verts": 33448,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 0.187,
+    "bbox_min_mm": [
+     9.15,
+     -28.26,
+     28.22
+    ],
+    "bbox_max_mm": [
+     35.25,
+     -1.25,
+     54.02
+    ],
+    "extent_mm": [
+     26.1,
+     27.01,
+     25.81
+    ]
+   },
+   "print3d_toolbox": null
+  }
+ },
+ "seconds": 1.7,
+ "log": [
+  "[LV_bloodpool] imported  faces 39,992  manifold True  non-manifold edges 0",
+  "[mitral_valve] imported  faces 22,344  manifold False  non-manifold edges 1480",
+  "[mitral_valve] remeshed  faces 56,878  manifold True  volume 0.291 mL  extent [35.37, 36.87, 35.06] mm",
+  "[aortic_valve] imported  faces 44,636  manifold False  non-manifold edges 920",
+  "[aortic_valve] remeshed  faces 33,280  manifold True  volume 0.187 mL  extent [26.1, 27.01, 25.81] mm",
+  "[LV_bloodpool] -> LV_bloodpool.stl",
+  "[mitral_valve] -> mitral_valve.stl",
+  "[aortic_valve] -> aortic_valve.stl"
+ ]
+}

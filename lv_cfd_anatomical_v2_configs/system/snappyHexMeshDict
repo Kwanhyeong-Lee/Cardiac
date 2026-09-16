@@ -1,0 +1,150 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+
+castellatedMesh true;
+snap            true;
+addLayers       true;
+
+geometry
+{
+    lv_surface.stl
+    {
+        type triSurfaceMesh;
+        name lvWall;
+        regions
+        {
+            lv_surface
+            {
+                name lvWall;
+            }
+        }
+    }
+    mitralRegion
+    {
+        type searchableSphere;
+        centre (-0.0222 0.0044 -0.1489);
+        radius 0.015;
+    }
+    aorticRegion
+    {
+        type searchableSphere;
+        centre (-0.0153 0.0192 -0.1311);
+        radius 0.012;
+    }
+}
+
+castellatedMeshControls
+{
+    maxLocalCells       500000;
+    maxGlobalCells      3000000;   // v2: increased from 2M
+    minRefinementCells  10;
+    maxLoadUnbalance    0.10;
+    nCellsBetweenLevels 4;         // v2: was 3 — smoother transitions
+
+    features ();
+
+    refinementSurfaces
+    {
+        lvWall
+        {
+            level (2 3);
+            patchInfo { type wall; }
+        }
+    }
+
+    resolveFeatureAngle 30;
+
+    refinementRegions
+    {
+        mitralRegion
+        {
+            mode inside;
+            levels ((1e15 4));
+        }
+        aorticRegion
+        {
+            mode inside;
+            levels ((1e15 4));
+        }
+    }
+
+    locationInMesh (-0.0373 0.0318 -0.1596);
+    allowFreeStandingZoneFaces true;
+}
+
+snapControls
+{
+    nSmoothPatch        5;     // v2: was 3
+    tolerance           2.0;
+    nSolveIter          200;   // v2: was 100 — better snapping
+    nRelaxIter          8;     // v2: was 5
+    nFeatureSnapIter    15;    // v2: was 10
+    implicitFeatureSnap false;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap false;
+}
+
+addLayersControls
+{
+    relativeSizes   true;
+    layers
+    {
+        lvWall
+        {
+            nSurfaceLayers 2;  // v2: was 3 — fewer layers to avoid degenerate cells
+        }
+    }
+    expansionRatio      1.15;   // v2: was 1.2 — gentler expansion
+    finalLayerThickness 0.4;    // v2: was 0.3
+    minThickness        0.15;   // v2: was 0.1
+    nGrow               0;
+    featureAngle        60;
+    nRelaxIter          5;      // v2: was 3
+    nSmoothSurfaceNormals 2;    // v2: was 1
+    nSmoothNormals      5;      // v2: was 3
+    nSmoothThickness    10;
+    maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3;
+    minMedialAxisAngle  90;
+    nBufferCellsNoExtrude 0;
+    nLayerIter          50;
+}
+
+meshQualityControls
+{
+    // v2 FIX: Tighter quality controls to prevent degenerate cells
+    maxNonOrtho     60;        // was 65
+    maxBoundarySkewness 15;    // was 20
+    maxInternalSkewness 3;     // was 4
+    maxConcave      75;        // was 80
+    minVol          1e-15;     // was 1e-13 — tighter but not zero
+    minTetQuality   1e-15;     // v2: was -1e30 (disabled!)
+    minArea         1e-15;     // v2: was -1 (disabled!)
+    minTwist        0.05;      // was 0.02
+    minDeterminant  0.01;      // was 0.001
+    minFaceWeight   0.05;      // was 0.02
+    minVolRatio     0.01;
+    minTriangleTwist -1;
+    nSmoothScale    4;
+    errorReduction  0.75;
+
+    // v2 ADD: Relaxed quality for snapping/layering phases
+    relaxed
+    {
+        maxNonOrtho     75;
+        maxBoundarySkewness 25;
+        maxInternalSkewness 6;
+        maxConcave      85;
+        minVol          1e-17;
+        minTetQuality   -1e30;
+        minArea         -1;
+        minTwist        0.01;
+        minDeterminant  0.0005;
+        minFaceWeight   0.01;
+    }
+}

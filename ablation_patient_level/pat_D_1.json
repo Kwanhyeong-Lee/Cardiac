@@ -1,0 +1,32 @@
+{
+ "letter": "D",
+ "seed": 1,
+ "split": "patient-level GroupShuffleSplit",
+ "n_train_rows": 4675,
+ "n_test_rows": 1176,
+ "n_train_patients": 3392,
+ "n_test_patients": 849,
+ "n_params": 73773,
+ "mean_r2_all": 0.9754153670583418,
+ "mean_r2_clin": 0.982238130317399,
+ "H_T_V_MSE": 4.666553851747789e-16,
+ "T_neg": 0,
+ "V_neg": 1,
+ "R_PSD_viol": 2,
+ "time_s": 12.0,
+ "r2": {
+  "pre_pinn_Ees": 0.9874601114970522,
+  "pre_pinn_Eed": 0.9925513456840719,
+  "pre_pinn_Ea": 0.9837037125348369,
+  "pre_pinn_coupling": 0.9829420723640641,
+  "pre_pinn_EDP": 0.9493701591906346,
+  "pre_pinn_efficiency": 0.9907857978647846,
+  "pre_pinn_tau": 0.9888537130863491,
+  "pre_H_total": 0.9790949114145107,
+  "pre_T_kinetic": 0.9905785472352133,
+  "pre_V_potential": 0.9798036734519722,
+  "pre_mech_eff": 0.8978338043937449,
+  "pre_VA_coupling": 0.9807111341680157,
+  "pre_SW_J": 0.9767107888731936
+ }
+}

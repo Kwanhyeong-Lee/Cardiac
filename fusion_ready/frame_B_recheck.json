@@ -1,0 +1,116 @@
+{
+ "method": "48 axis-aligned transforms (24 proper rotations + 24 reflections), translation optimised per candidate against an LV signed-distance grid; scored on inside-fraction, base-on-endocardium gap, and tip-to-mitral-annulus distance (mitral position now verified via refit, which pm_recovery.json named as the precondition for this test).",
+ "top": [
+  {
+   "perm": [
+    0,
+    2,
+    1
+   ],
+   "signs": [
+    -1,
+    -1,
+    -1
+   ],
+   "det": 1.0,
+   "inside": 0.945,
+   "base_gap_mm": 6.69,
+   "tip_to_MV_mm": 28.7,
+   "score": 0.8086,
+   "translation_mm": [
+    -2.81,
+    -0.66,
+    -0.88
+   ]
+  },
+  {
+   "perm": [
+    0,
+    2,
+    1
+   ],
+   "signs": [
+    1,
+    1,
+    1
+   ],
+   "det": -1.0,
+   "inside": 0.911,
+   "base_gap_mm": 8.77,
+   "tip_to_MV_mm": 29.3,
+   "score": 0.7306,
+   "translation_mm": [
+    -2.95,
+    -0.66,
+    -0.88
+   ]
+  },
+  {
+   "perm": [
+    1,
+    2,
+    0
+   ],
+   "signs": [
+    -1,
+    1,
+    -1
+   ],
+   "det": 1.0,
+   "inside": 0.8967,
+   "base_gap_mm": 8.14,
+   "tip_to_MV_mm": 29.4,
+   "score": 0.7285,
+   "translation_mm": [
+    -2.95,
+    -0.66,
+    -0.88
+   ]
+  },
+  {
+   "perm": [
+    0,
+    2,
+    1
+   ],
+   "signs": [
+    -1,
+    -1,
+    1
+   ],
+   "det": -1.0,
+   "inside": 0.9237,
+   "base_gap_mm": 9.68,
+   "tip_to_MV_mm": 24.6,
+   "score": 0.7167,
+   "translation_mm": [
+    -2.95,
+    -0.66,
+    -0.88
+   ]
+  },
+  {
+   "perm": [
+    0,
+    2,
+    1
+   ],
+   "signs": [
+    1,
+    1,
+    -1
+   ],
+   "det": 1.0,
+   "inside": 0.9083,
+   "base_gap_mm": 8.61,
+   "tip_to_MV_mm": 22.4,
+   "score": 0.7138,
+   "translation_mm": [
+    -3.07,
+    -0.66,
+    -0.83
+   ]
+  }
+ ],
+ "spread_1_to_5": 0.0948
+}

@@ -1,0 +1,115 @@
+{
+  "simulation": {
+    "solver": "pimpleFoam",
+    "openfoam_version": "2312",
+    "date": "Jun 26 2026",
+    "host": "BOOK-6MNHGOA2J9",
+    "case": "/home/alex0/lv_cfd_anatomical",
+    "turbulence": "laminar",
+    "status": "CRASHED_SIGFPE"
+  },
+  "time_stepping": {
+    "total_steps": 18,
+    "physical_time_start": 1.20012e-05,
+    "physical_time_end": 2.64154e-05,
+    "target_end_time": 2.4,
+    "progress_pct": 0.0011006416666666666,
+    "deltaT_max": 1.4399711e-05,
+    "deltaT_min": 9.6969323e-83,
+    "deltaT_collapse_ratio": 1.484975923777461e+77
+  },
+  "courant_number": {
+    "max_ever": 304315460000000.0,
+    "target": 0.8,
+    "steps_exceeding_target": 16
+  },
+  "convergence": {
+    "pressure_solves": 420,
+    "pressure_high_residual_pct": 61.19047619047619,
+    "velocity_solves": 0
+  },
+  "continuity": {
+    "final_cumulative": -120743.5
+  },
+  "execution": {
+    "wall_clock_s": 4633,
+    "cpu_time_s": 4627.34
+  },
+  "boundary_conditions": {
+    "mitralInlet": {
+      "U": "flowRateInletVelocity (table)",
+      "p": "zeroGradient"
+    },
+    "aorticOutlet": {
+      "U": "not specified (needs inletOutlet)",
+      "p": "fixedValue 0"
+    },
+    "lvWall": {
+      "U": "noSlip",
+      "p": "zeroGradient"
+    }
+  },
+  "diagnosis": [
+    {
+      "severity": "CRITICAL",
+      "issue": "Pressure solver non-convergence",
+      "detail": "61% of pressure solves had init residual > 0.1. The pressure Poisson equation never properly converged, indicating fundamental mesh/BC issues."
+    },
+    {
+      "severity": "CRITICAL",
+      "issue": "Courant number explosion",
+      "detail": "Max Co reached 3.04e+14 (target < 0.8). Even with adaptive timestepping, the solver couldn't control the Courant number, suggesting localized velocity jets."
+    },
+    {
+      "severity": "HIGH",
+      "issue": "deltaT collapse to machine zero",
+      "detail": "Time step collapsed from 1.44e-05 to 9.70e-83 (1e+77\u00d7 reduction). The simulation stalled at t\u22482.6e-5s."
+    },
+    {
+      "severity": "HIGH",
+      "issue": "No aortic outlet velocity BC",
+      "detail": "The aortic outlet has fixedValue p=0 but no explicit velocity BC. For PIMPLE with flowRateInletVelocity at inlet, the outlet needs inletOutlet or pressureInletOutletVelocity."
+    },
+    {
+      "severity": "MEDIUM",
+      "issue": "Mesh quality at valve openings",
+      "detail": "snappyHexMesh creates cells at boundary intersections that may have very high non-orthogonality. Consider checkMesh quality report."
+    },
+    {
+      "severity": "MEDIUM",
+      "issue": "backward ddt scheme too aggressive",
+      "detail": "Second-order backward differencing is less stable than Euler for startup. Consider Euler for initial transient, then switch to backward."
+    },
+    {
+      "severity": "LOW",
+      "issue": "Laminar flow assumption",
+      "detail": "Laminar model at peak Re \u2248 5000-8000 may be insufficient. Consider kOmegaSST or Smagorinsky LES."
+    }
+  ],
+  "recommended_fixes": [
+    "Add inletOutlet velocity BC at aorticOutlet",
+    "Use Euler ddt for startup transient",
+    "Reduce maxCo to 0.3",
+    "Increase PIMPLE correctors",
+    "Run checkMesh quality analysis",
+    "Initialize with potentialFoam"
+  ],
+  "postprocessing_data": {
+    "flowRateAortic": {
+      "value": -3.34202295e+21,
+      "status": "DIVERGED"
+    },
+    "flowRateMitral": {
+      "value": -7.66046146e-08,
+      "status": "near_zero"
+    },
+    "pressure_probes": {
+      "status": "DIVERGED",
+      "max_value": 1.56e+62
+    },
+    "velocity_probes": {
+      "status": "DIVERGED",
+      "max_value": 1.72e+31
+    }
+  }
+}

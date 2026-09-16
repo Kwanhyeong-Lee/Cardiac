@@ -1,0 +1,39 @@
+{
+ "label": "device vs TD",
+ "n": 24,
+ "pearson_r": 0.7068,
+ "pearson_r_ci": [
+  0.3169,
+  0.8897
+ ],
+ "ccc": 0.6406,
+ "ccc_ci": [
+  0.377,
+  0.8056
+ ],
+ "bias": -1.025,
+ "bias_ci": [
+  -1.675,
+  -0.2208
+ ],
+ "sd_diff": 1.834,
+ "sd_diff_ci": [
+  1.3648,
+  2.7591
+ ],
+ "pct_error": 52.9686,
+ "pct_error_ci": [
+  40.6323,
+  77.5961
+ ],
+ "mae": 1.675,
+ "mae_ci": [
+  1.2292,
+  2.2
+ ],
+ "loa": [
+  -4.62,
+  2.57
+ ],
+ "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+}

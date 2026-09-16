@@ -1,0 +1,123 @@
+{
+ "lv_geometry": {
+  "axis_base_to_apex": [
+   -0.4479129210826094,
+   0.767676068076241,
+   -0.4583093601817956
+  ],
+  "base_centre": [
+   14.575785907492525,
+   -31.45523638185431,
+   21.136023902794175
+  ],
+  "r_base": 16.875242352510423,
+  "length": 95.37036315258163
+ },
+ "design": {
+  "mv_centre_mm": [
+   13.232047144244698,
+   -29.152208177625585,
+   19.761095822248787
+  ],
+  "mv_annulus_r_mm": 15.19,
+  "av_centre_mm": [
+   19.867471673473844,
+   -18.537960555881057,
+   35.419103534532155
+  ],
+  "av_annulus_r_mm": 11.41,
+  "mv_av_centroid_distance_mm": 20.0
+ },
+ "mitral": {
+  "before": {
+   "label": "original",
+   "faces": 22344,
+   "frac_inside_LV": 0.542,
+   "outside_median_mm": 8.77,
+   "outside_max_mm": 22.1,
+   "axial_span_mm": 56.3,
+   "protrudes_above_base_mm": 12.3
+  },
+  "after": {
+   "label": "refit",
+   "faces": 22344,
+   "frac_inside_LV": 0.659,
+   "outside_median_mm": 3.83,
+   "outside_max_mm": 11.4,
+   "axial_span_mm": 31.4,
+   "protrudes_above_base_mm": 4.1
+  },
+  "leaflet_zone": {
+   "criterion": "leaflet-zone (>5 mm apical) inside >= 0.90",
+   "original": {
+    "n_leaflet": 8294,
+    "leaflet_inside": 0.779,
+    "n_annulus": 2964,
+    "annulus_inside": 0.0,
+    "frac_vertices_in_leaflet_zone": 0.696
+   },
+   "refit": {
+    "n_leaflet": 8803,
+    "leaflet_inside": 0.875,
+    "n_annulus": 3117,
+    "annulus_inside": 0.082,
+    "frac_vertices_in_leaflet_zone": 0.739
+   }
+  }
+ },
+ "aortic": {
+  "before": {
+   "label": "original",
+   "faces": 44636,
+   "frac_inside_LV": 0.125,
+   "outside_median_mm": 10.07,
+   "outside_max_mm": 31.64,
+   "axial_span_mm": 44.6,
+   "protrudes_above_base_mm": 14.3
+  },
+  "after": {
+   "label": "refit",
+   "faces": 44636,
+   "frac_inside_LV": 0.045,
+   "outside_median_mm": 10.39,
+   "outside_max_mm": 26.86,
+   "axial_span_mm": 30.0,
+   "protrudes_above_base_mm": 14.8
+  }
+ },
+ "accepted": false,
+ "gate_note": "The first gate (+20 points overall inside fraction) was mis-designed: annulus and saddle vertices lie ON the base plane by construction, so ~100% inside is not attainable for a correctly seated valve. Replaced by the leaflet-zone criterion, stated before evaluation.",
+ "residual_analysis_refit_v1": {
+  "outside_leaflet_fraction": 0.126,
+  "depth_below_base_mm": {
+   "median": 6.8,
+   "range": [
+    5.0,
+    11.7
+   ]
+  },
+  "beyond_wall_mm": {
+   "median": 1.49,
+   "p95": 4.82,
+   "max": 5.77
+  },
+  "angular_sectors_45deg": [
+   0,
+   10,
+   27,
+   17,
+   0,
+   16,
+   86,
+   29
+  ],
+  "interpretation": "Residual is shallow (top 7 mm of the leaflet zone), small (median 1.5 mm beyond the wall, vs 8.8 mm for the original) and concentrated in one 45-degree sector (46%). The LV basal cross-section is elliptical (LV extents 66x82 mm); the generated valve is round, so it protrudes only along the short axis. Fix for a v2: orient the generator's D-shape factor to the LV basal cross-section principal axes.",
+  "lv_cavity_mean_radius_mm": {
+   "10mm_below_base": 20.4,
+   "20mm": 26.2,
+   "30mm": 27.7
+  },
+  "valve_annulus_r_mm": 15.19
+ },
+ "decision": "refit_v1 NOT promoted to canonical mitral_valve.stl (leaflet criterion 87.5% < 90%). Written alongside as mitral_valve_refit_v1.stl / aortic_valve_refit_v1.stl. Recommended for printing: refit_v1 -- every metric improves and the residual is 1.5 mm, one-sided, shallow. The original is 60 degrees misoriented and should not be printed as anatomy."
+}

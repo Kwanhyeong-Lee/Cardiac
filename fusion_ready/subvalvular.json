@@ -1,0 +1,160 @@
+{
+ "constants": {
+  "PM_ANGLE": 120.0,
+  "DEPTH_BASE": 0.62,
+  "LEN": 24.0,
+  "DIAM": 11.0,
+  "EMBED": 2.5,
+  "N_CH": 5,
+  "CH_R": 1.0,
+  "CH_SPAN": 70.0,
+  "CH_OVER": 1.2
+ },
+ "septal_dir": [
+  0.78,
+  0.586,
+  0.22
+ ],
+ "sgn_posteromedial": 1.0,
+ "muscles": {
+  "posteromedial": {
+   "angle_from_aortic_deg": 120.0,
+   "base_mm": [
+    6.0,
+    10.7,
+    -31.3
+   ],
+   "tip_mm": [
+    11.2,
+    -3.8,
+    -13.0
+   ],
+   "tip_sdf_mm": 10.6,
+   "tip_depth_frac": 0.38,
+   "free_edge_candidates": 311,
+   "chordae_kept": 5,
+   "chordae_dropped": 0
+  },
+  "anterolateral": {
+   "angle_from_aortic_deg": -120.0,
+   "base_mm": [
+    -34.3,
+    2.9,
+    -5.0
+   ],
+   "tip_mm": [
+    -17.2,
+    -9.5,
+    6.3
+   ],
+   "tip_sdf_mm": 10.8,
+   "tip_depth_frac": 0.38,
+   "free_edge_candidates": 273,
+   "chordae_kept": 5,
+   "chordae_dropped": 0
+  }
+ },
+ "chordae": [
+  {
+   "muscle": "posteromedial",
+   "length_mm": 29.3,
+   "target": [
+    -0.4,
+    -22.6,
+    -0.9
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 35.3,
+   "target": [
+    3.8,
+    -25.1,
+    7.8
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 27.9,
+   "target": [
+    18.1,
+    -18.7,
+    3.0
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 29.3,
+   "target": [
+    15.8,
+    -20.7,
+    3.9
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 28.6,
+   "target": [
+    -0.3,
+    -22.0,
+    -1.4
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 26.5,
+   "target": [
+    -0.4,
+    -22.6,
+    -0.9
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 31.0,
+   "target": [
+    3.1,
+    -26.3,
+    6.7
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 25.0,
+   "target": [
+    -1.2,
+    -22.1,
+    3.6
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 27.1,
+   "target": [
+    -4.2,
+    -24.0,
+    16.8
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 26.4,
+   "target": [
+    -0.3,
+    -22.0,
+    -1.4
+   ]
+  }
+ ],
+ "union": {
+  "faces": 754854,
+  "watertight": true,
+  "components": 1,
+  "volume_mL": 166.77,
+  "added_mL": 2.9,
+  "cavity_blocked_frac": 0.0187,
+  "mitral_axis_blocked": false,
+  "aortic_axis_blocked": false
+ },
+ "verdict": "OK"
+}

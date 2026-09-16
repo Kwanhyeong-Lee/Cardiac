@@ -1,0 +1,481 @@
+{
+  "total_meshes": 13,
+  "total_triangles": 957608,
+  "total_size_mb": 175.725104,
+  "meshes": [
+    {
+      "name": "lv_surface",
+      "file": "lv_surface.stl",
+      "triangles": 166936,
+      "size_mb": 45.69,
+      "source": "MM-WHS Case 1009, CT segmentation",
+      "bbox_mm": {
+        "min": [
+          -70.4956301,
+          -9.23020365,
+          -195.120807
+        ],
+        "max": [
+          -4.027244349999999,
+          72.85161480000001,
+          -124.178912
+        ],
+        "size": [
+          66.46838575,
+          82.08181845000001,
+          70.941895
+        ]
+      },
+      "centroid_mm": [
+        -40.07156825783091,
+        31.15170573175838,
+        -160.52334015683223
+      ]
+    },
+    {
+      "name": "mitral_valve",
+      "file": "mitral_valve.stl",
+      "triangles": 22344,
+      "size_mb": 5.73,
+      "source": "Parametric (generate_valves.py), Kunzelman 1993",
+      "bbox_mm": {
+        "min": [
+          -41.45192,
+          -18.09983,
+          -184.65
+        ],
+        "max": [
+          0.3,
+          26.899829999999998,
+          -137.91510000000002
+        ],
+        "size": [
+          41.751920000000005,
+          44.99966,
+          46.734899999999996
+        ]
+      },
+      "centroid_mm": [
+        -22.529242361607192,
+        5.063064408488348,
+        -159.18572576082906
+      ]
+    },
+    {
+      "name": "aortic_valve",
+      "file": "aortic_valve.stl",
+      "triangles": 45284,
+      "size_mb": 11.55,
+      "source": "Parametric (generate_valves.py), Thubrikar 1990",
+      "bbox_mm": {
+        "min": [
+          -33.13219,
+          5.692003000000001,
+          -142.7086
+        ],
+        "max": [
+          11.19964,
+          50.56055,
+          -98.0191
+        ],
+        "size": [
+          44.331830000000004,
+          44.868547,
+          44.689499999999995
+        ]
+      },
+      "centroid_mm": [
+        -13.145679095913124,
+        23.820862255247157,
+        -125.54247644259833
+      ]
+    },
+    {
+      "name": "aortic_root",
+      "file": "aortic_root.stl",
+      "triangles": 32744,
+      "size_mb": 8.25,
+      "source": "Parametric (generate_valves.py)",
+      "bbox_mm": {
+        "min": [
+          184.2816,
+          1.709045,
+          -142.4375
+        ],
+        "max": [
+          224.3206,
+          34.42387,
+          -118.0625
+        ],
+        "size": [
+          40.039000000000016,
+          32.714825000000005,
+          24.374999999999993
+        ]
+      },
+      "centroid_mm": [
+        203.58260807773834,
+        17.02649577587619,
+        -126.67122411735937
+      ]
+    },
+    {
+      "name": "laa_stacom",
+      "file": "laa_stacom.stl",
+      "triangles": 69706,
+      "size_mb": 3.49,
+      "source": "STACOM2025 Case 1, label 8 (LAA)",
+      "bbox_mm": {
+        "min": [
+          -59858.32595825195,
+          136261.8865966797,
+          110267.7001953125
+        ],
+        "max": [
+          -19923.45428466797,
+          184725.98266601562,
+          146189.3310546875
+        ],
+        "size": [
+          39934.871673583984,
+          48464.09606933594,
+          35921.630859375
+        ]
+      },
+      "centroid_mm": [
+        -42247.27919280508,
+        161041.47396759494,
+        128503.62891473378
+      ]
+    },
+    {
+      "name": "rv_stacom",
+      "file": "rv_stacom.stl",
+      "triangles": 58304,
+      "size_mb": 2.92,
+      "source": "STACOM2025 Case 1, label 3 (RV blood pool)",
+      "bbox_mm": {
+        "min": [
+          -98281.96716308594,
+          147091.12548828125,
+          61261.25717163086
+        ],
+        "max": [
+          -22640.47622680664,
+          226535.87341308594,
+          113245.49865722656
+        ],
+        "size": [
+          75641.4909362793,
+          79444.74792480469,
+          51984.2414855957
+        ]
+      },
+      "centroid_mm": [
+        -64471.29783505404,
+        186283.96833819692,
+        87521.41759644661
+      ]
+    },
+    {
+      "name": "coronary_stacom",
+      "file": "coronary_stacom.stl",
+      "triangles": 117932,
+      "size_mb": 5.9,
+      "source": "STACOM2025 Case 1, label 9 (Coronary)",
+      "bbox_mm": {
+        "min": [
+          -93979.736328125,
+          136867.78259277344,
+          49799.57580566406
+        ],
+        "max": [
+          21885.276794433594,
+          238977.9052734375,
+          130672.89733886719
+        ],
+        "size": [
+          115865.0131225586,
+          102110.12268066406,
+          80873.32153320312
+        ]
+      },
+      "centroid_mm": [
+        -41971.51271401903,
+        190982.65274602143,
+        93534.35703565429
+      ]
+    },
+    {
+      "name": "pv_stacom",
+      "file": "pv_stacom.stl",
+      "triangles": 49554,
+      "size_mb": 2.48,
+      "source": "STACOM2025 Case 1, label 10 (Pulmonary Veins)",
+      "bbox_mm": {
+        "min": [
+          -63170.860290527344,
+          110283.1802368164,
+          89190.59753417969
+        ],
+        "max": [
+          58413.516998291016,
+          168774.99389648438,
+          156138.77868652344
+        ],
+        "size": [
+          121584.37728881836,
+          58491.81365966797,
+          66948.18115234375
+        ]
+      },
+      "centroid_mm": [
+        -2128.8582881660573,
+        138459.19388882178,
+        120739.56148510649
+      ]
+    },
+    {
+      "name": "pa_stacom",
+      "file": "pa_stacom.stl",
+      "triangles": 58372,
+      "size_mb": 2.92,
+      "source": "STACOM2025 Case 1, label 7 (Pulmonary Artery)",
+      "bbox_mm": {
+        "min": [
+          -57228.88946533203,
+          111663.38348388672,
+          119425.94909667969
+        ],
+        "max": [
+          58016.76559448242,
+          207779.1748046875,
+          170638.76342773438
+        ],
+        "size": [
+          115245.65505981445,
+          96115.79132080078,
+          51212.81433105469
+        ]
+      },
+      "centroid_mm": [
+        -14148.812174021008,
+        160167.74416781298,
+        145483.15113795816
+      ]
+    },
+    {
+      "name": "ra_stacom",
+      "file": "ra_stacom.stl",
+      "triangles": 80488,
+      "size_mb": 4.02,
+      "source": "STACOM2025 Case 1, label 5 (Right Atrium)",
+      "bbox_mm": {
+        "min": [
+          -80673.69079589844,
+          178411.95678710938,
+          50761.50894165039
+        ],
+        "max": [
+          6160.790920257568,
+          239550.9796142578,
+          138338.68408203125
+        ],
+        "size": [
+          86834.481716156,
+          61139.02282714844,
+          87577.17514038086
+        ]
+      },
+      "centroid_mm": [
+        -36602.070786543954,
+        213304.7828467044,
+        88337.07154900259
+      ]
+    },
+    {
+      "name": "anterolateral_pm",
+      "file": "anterolateral_pm.stl",
+      "triangles": 122314,
+      "size_mb": 39.54,
+      "source": "K-means split from papillary_muscles.stl",
+      "bbox_mm": {
+        "min": [
+          49.56052452325821,
+          124.02337789535522,
+          92.5000011920929
+        ],
+        "max": [
+          97.41206467151642,
+          172.60733246803284,
+          144.6875035762787
+        ],
+        "size": [
+          47.85154014825821,
+          48.58395457267761,
+          52.18750238418579
+        ]
+      },
+      "centroid_mm": [
+        70.63159674822334,
+        147.77603335491978,
+        116.3641503984429
+      ]
+    },
+    {
+      "name": "posteromedial_pm",
+      "file": "posteromedial_pm.stl",
+      "triangles": 131606,
+      "size_mb": 42.56,
+      "source": "K-means split from papillary_muscles.stl",
+      "bbox_mm": {
+        "min": [
+          51.02536454796791,
+          118.40814352035522,
+          60.31249836087227
+        ],
+        "max": [
+          97.90034592151642,
+          172.60733246803284,
+          102.8124988079071
+        ],
+        "size": [
+          46.87498137354851,
+          54.19918894767761,
+          42.500000447034836
+        ]
+      },
+      "centroid_mm": [
+        74.31898454587197,
+        140.91571987128768,
+        80.19216766777471
+      ]
+    },
+    {
+      "name": "chordae_combined",
+      "file": "chordae_combined.stl",
+      "triangles": 2024,
+      "size_mb": 0.67,
+      "source": "Parametric (generate_chordae.py), Lam 1970",
+      "bbox_mm": {
+        "min": [
+          53.82583573447896,
+          130.8429636430182,
+          73.28517873594689
+        ],
+        "max": [
+          81.4006860138334,
+          156.0335631302359,
+          115.32927727255827
+        ],
+        "size": [
+          27.574850279354433,
+          25.19059948721769,
+          42.04409853661139
+        ]
+      },
+      "centroid_mm": [
+        69.74457301990418,
+        144.3012173780883,
+        104.38532501100663
+      ]
+    }
+  ],
+  "overlaps": [
+    {
+      "mesh1": "lv_surface",
+      "mesh2": "mitral_valve",
+      "centroid_dist_mm": 31.5
+    },
+    {
+      "mesh1": "lv_surface",
+      "mesh2": "aortic_valve",
+      "centroid_dist_mm": 44.7
+    },
+    {
+      "mesh1": "mitral_valve",
+      "mesh2": "aortic_valve",
+      "centroid_dist_mm": 39.6
+    },
+    {
+      "mesh1": "laa_stacom",
+      "mesh2": "rv_stacom",
+      "centroid_dist_mm": 53015.4
+    },
+    {
+      "mesh1": "laa_stacom",
+      "mesh2": "coronary_stacom",
+      "centroid_dist_mm": 46036.9
+    },
+    {
+      "mesh1": "laa_stacom",
+      "mesh2": "pv_stacom",
+      "centroid_dist_mm": 46687.6
+    },
+    {
+      "mesh1": "laa_stacom",
+      "mesh2": "pa_stacom",
+      "centroid_dist_mm": 32841.9
+    },
+    {
+      "mesh1": "laa_stacom",
+      "mesh2": "ra_stacom",
+      "centroid_dist_mm": 66156.4
+    },
+    {
+      "mesh1": "rv_stacom",
+      "mesh2": "coronary_stacom",
+      "centroid_dist_mm": 23758.6
+    },
+    {
+      "mesh1": "rv_stacom",
+      "mesh2": "pv_stacom",
+      "centroid_dist_mm": 85306.7
+    },
+    {
+      "mesh1": "rv_stacom",
+      "mesh2": "ra_stacom",
+      "centroid_dist_mm": 38826.3
+    },
+    {
+      "mesh1": "coronary_stacom",
+      "mesh2": "pv_stacom",
+      "centroid_dist_mm": 71318.1
+    },
+    {
+      "mesh1": "coronary_stacom",
+      "mesh2": "pa_stacom",
+      "centroid_dist_mm": 66500.7
+    },
+    {
+      "mesh1": "coronary_stacom",
+      "mesh2": "ra_stacom",
+      "centroid_dist_mm": 23539.8
+    },
+    {
+      "mesh1": "pv_stacom",
+      "mesh2": "pa_stacom",
+      "centroid_dist_mm": 35042.6
+    },
+    {
+      "mesh1": "pa_stacom",
+      "mesh2": "ra_stacom",
+      "centroid_dist_mm": 81199.6
+    },
+    {
+      "mesh1": "anterolateral_pm",
+      "mesh2": "posteromedial_pm",
+      "centroid_dist_mm": 37.0
+    },
+    {
+      "mesh1": "anterolateral_pm",
+      "mesh2": "chordae_combined",
+      "centroid_dist_mm": 12.5
+    },
+    {
+      "mesh1": "posteromedial_pm",
+      "mesh2": "chordae_combined",
+      "centroid_dist_mm": 24.9
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+ "why": "Section 3 of CLAUDE_CODE_TASK.md prescribes shrinking VOXEL_MM when valve volume < 2.5 mL, on the premise that the remesh voxel is eating a 1 mm wall. The premise is false: the valve components are zero-thickness open sheets (every component has Euler characteristic 1 or 0 = disc/annulus, no enclosed volume), so the remesh film thickness is set by the voxel alone and shrinking the voxel makes it thinner.",
+ "ladder_run_as_instructed_no_solidify": {
+  "voxel_0.25": {"mitral_mL": 0.291, "aortic_mL": 0.187, "mitral_manifold": true, "aortic_manifold": true},
+  "voxel_0.20": {"mitral_mL": 0.217, "aortic_mL": 0.191, "mitral_manifold": true, "aortic_manifold": true},
+  "voxel_0.15": {"mitral_mL": 0.152, "aortic_mL": 0.163, "mitral_manifold": true, "aortic_manifold": true}
+ },
+ "measured_film_thickness_at_voxel_0.25_mm": {"mitral": 0.278, "aortic": 0.282,
+   "note": "= 1.11 x voxel; 2*V/A. Confirms thickness is a pure voxel artefact, not a preserved wall."},
+ "manifoldness": "was never the failure mode - true at every voxel tested",
+ "fix_applied": "SOLIDIFY 1.2 mm (centred, rim-capped) BEFORE the voxel remesh, in blender_pipeline.py. 1.2 mm is the value the script's own docstring already named as the intended solidify.",
+ "note_on_the_2.5_mL_floor": "The 2.5-6.0 mL band was derived as area x 1 mm = 3.3 mL, which double-counts regions where leaflets overlap. A true 1.0 mm wall yields 2.21 mL (mitral) because the remesh unions the overlaps. At 1.2 mm both valves land in band and the measured wall is >= 1.0 mm over 99.8% of area."
+}

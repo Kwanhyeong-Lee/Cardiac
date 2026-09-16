@@ -1,0 +1,28 @@
+{
+  "case": "MM-WHS Case 1009 — LV CFD",
+  "solver": "OpenFOAM 2312 pimpleFoam",
+  "mesh_cells": 16000,
+  "cardiac_cycles": 3,
+  "heart_rate_bpm": 75,
+  "simulation_time_s": 2.4,
+  "execution_time_s": 167,
+  "hemodynamics": {
+    "peak_E_wave_velocity_ms": 0.8,
+    "peak_A_wave_velocity_ms": 0.4,
+    "stroke_volume_mL": 265.2,
+    "max_pressure_drop_mmHg": 0.013,
+    "mean_WSS_Pa": 0.00014,
+    "max_courant": 0.038
+  },
+  "windkessel_parameters": {
+    "R_resistance_mmHg_s_per_mL": 0.174985,
+    "C_compliance_mL_per_mmHg": 21109.751449,
+    "L_inertance_mmHg_s2_per_mL": 1282305.49186317
+  },
+  "pH_PINN_mapping": {
+    "R_matrix_diagonal": "↔ SVR (systemic vascular resistance)",
+    "H_potential_compliance": "↔ diastolic compliance",
+    "J_matrix_inertance": "↔ blood inertia term",
+    "note": "CFD Windkessel R,C,L validate pH-PINN v5 learned parameters"
+  }
+}

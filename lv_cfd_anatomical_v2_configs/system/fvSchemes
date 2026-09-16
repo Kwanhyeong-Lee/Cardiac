@@ -1,0 +1,35 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+
+// v2 FIX: Euler for stability (switch to backward after t > 0.02s if stable)
+ddtSchemes      { default Euler; }
+
+gradSchemes
+{
+    default         Gauss linear;
+    // v2 ADD: Limited gradient for robustness
+    grad(U)         cellLimited Gauss linear 1;
+    grad(p)         Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    // v2 FIX: upwind for startup stability (change to linearUpwind after stable)
+    div(phi,U)      Gauss upwind;
+    div((nuEff*dev2(T(grad(U))))) Gauss linear;
+}
+
+laplacianSchemes
+{
+    // v2 FIX: More limited correction (0.333 instead of 0.5)
+    default Gauss linear limited corrected 0.333;
+}
+
+interpolationSchemes { default linear; }
+snGradSchemes   { default limited corrected 0.333; }

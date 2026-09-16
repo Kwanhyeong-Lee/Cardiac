@@ -1,0 +1,35 @@
+// snappyHexMeshDict geometry block for the phantom domain (metres). Regions come from the
+// solid names in LV_phantom_m.stl, so inlet / outlet / LV become separate patches directly --
+// no topoSet/createPatch box hack needed.
+geometry
+{
+    LV_phantom_m.stl
+    {
+        type triSurfaceMesh;
+        name phantom;
+        regions
+        {
+            inlet  { name inlet;  }
+            outlet { name outlet; }
+            LV     { name LV;     }
+        }
+    }
+}
+castellatedMeshControls
+{
+    refinementSurfaces
+    {
+        phantom
+        {
+            level (2 3);
+            regions
+            {
+                inlet  { level (3 3); patchInfo { type patch; } }
+                outlet { level (3 3); patchInfo { type patch; } }
+                LV     { level (2 3); patchInfo { type wall;  } }
+            }
+        }
+    }
+    // locationInMesh: any point inside the cavity, e.g. the blood-pool centroid (frame A origin)
+    locationInMesh (0 0 0);
+}

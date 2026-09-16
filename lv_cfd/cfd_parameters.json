@@ -1,0 +1,25 @@
+{
+  "units": "SI (m, s, kg, Pa)",
+  "geometry": {
+    "long_axis_m": 0.08,
+    "short_axis_m": 0.05,
+    "wall_thickness_m": 0.01
+  },
+  "blood": {
+    "density": 1060,
+    "viscosity": 0.0035,
+    "nu": 3.3e-06
+  },
+  "hemodynamics": {
+    "heart_rate_bpm": 75,
+    "cycle_period_s": 0.8,
+    "stroke_volume_m3": 7e-05,
+    "peak_velocity_m_s": 0.8,
+    "systolic_BP_Pa": 15998.64,
+    "diastolic_BP_Pa": 10665.76
+  },
+  "reynolds_number": {
+    "Re_peak": 6057.142857142858,
+    "note": "Peak Re \u2248 6057, transitional flow regime"
+  }
+}

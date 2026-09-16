@@ -1,0 +1,11 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      turbulenceProperties;
+}
+
+simulationType  laminar;
+// LV flow: Re ~ 1000-3000, laminar assumption valid for diastolic filling
+// Turbulence may occur briefly during peak E-wave but overall laminar

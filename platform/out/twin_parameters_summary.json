@@ -1,0 +1,33 @@
+{
+  "input": "mimic_pinn_v4_inference.csv",
+  "n_records": 33000,
+  "modality": "echo",
+  "source": "MIMIC-IV",
+  "hemo_nonnull_pct": {
+    "Ees": 100.0,
+    "Eed": 100.0,
+    "Ea": 100.0,
+    "coupling": 100.0,
+    "EDP": 100.0,
+    "efficiency": 100.0,
+    "tau": 100.0,
+    "V0": 100.0
+  },
+  "validation_tier_legend": {
+    "i": "합성recovery",
+    "ii": "침습(동물)",
+    "iii": "임상outcome"
+  },
+  "tier_assigned": {
+    "Ees": "ii",
+    "Eed": "i",
+    "Ea": "i",
+    "coupling": "i",
+    "EDP": "i",
+    "efficiency": "i",
+    "tau": "i",
+    "V0": "i"
+  },
+  "output_jsonl": "C:\\Users\\USER\\OneDrive\\PINN\\260421 (심장) - main\\platform\\out\\twin_parameters_0d.jsonl",
+  "note": "energetics/windkessel/geometry/ep는 해당 모듈(CFD/ECG) append 대기"
+}

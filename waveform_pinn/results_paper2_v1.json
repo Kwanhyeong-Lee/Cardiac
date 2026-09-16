@@ -1,0 +1,1411 @@
+[
+ {
+  "label": "control: permuted labels",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.8634,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": -0.135,
+   "ccc": -0.1316,
+   "bias": 0.069,
+   "sd_diff": 2.0851,
+   "pct_error": 82.3469,
+   "mae": 1.6312,
+   "loa": [
+    -4.018,
+    4.156
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": -0.2997,
+   "pearson_r_ci": [
+    -0.532,
+    0.0073
+   ],
+   "ccc": -0.1283,
+   "ccc_ci": [
+    -0.2916,
+    -0.0133
+   ],
+   "bias": -1.9687,
+   "bias_ci": [
+    -2.75,
+    -1.1578
+   ],
+   "sd_diff": 2.278,
+   "sd_diff_ci": [
+    1.8683,
+    2.8395
+   ],
+   "pct_error": 79.4402,
+   "pct_error_ci": [
+    65.8247,
+    96.7024
+   ],
+   "mae": 2.5054,
+   "mae_ci": [
+    1.9839,
+    3.1304
+   ],
+   "loa": [
+    -6.433,
+    2.496
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 2
+ },
+ {
+  "label": "control: level only (no morphology)",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 5,
+  "internal_r2": -0.1453,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3318,
+   "ccc": 0.3266,
+   "bias": 0.0153,
+   "sd_diff": 1.9151,
+   "pct_error": 75.9491,
+   "mae": 1.3043,
+   "loa": [
+    -3.738,
+    3.769
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.4324,
+   "pearson_r_ci": [
+    0.0948,
+    0.7152
+   ],
+   "ccc": 0.3514,
+   "ccc_ci": [
+    0.1374,
+    0.5828
+   ],
+   "bias": -1.2586,
+   "bias_ci": [
+    -1.851,
+    -0.3103
+   ],
+   "sd_diff": 2.1134,
+   "sd_diff_ci": [
+    1.4159,
+    3.2537
+   ],
+   "pct_error": 69.4048,
+   "pct_error_ci": [
+    48.5815,
+    104.3127
+   ],
+   "mae": 1.9486,
+   "mae_ci": [
+    1.4833,
+    2.529
+   ],
+   "loa": [
+    -5.401,
+    2.884
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 1
+ },
+ {
+  "label": "linear baseline",
+  "target": "CO_pc",
+  "seed": 0,
+  "internal_r2": 0.276,
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5843,
+   "pearson_r_ci": [
+    0.298,
+    0.7651
+   ],
+   "ccc": 0.2652,
+   "ccc_ci": [
+    0.127,
+    0.4137
+   ],
+   "bias": -1.5809,
+   "bias_ci": [
+    -2.0998,
+    -1.1015
+   ],
+   "sd_diff": 1.4664,
+   "sd_diff_ci": [
+    1.2162,
+    1.7893
+   ],
+   "pct_error": 49.4648,
+   "pct_error_ci": [
+    41.6619,
+    60.2073
+   ],
+   "mae": 1.6964,
+   "mae_ci": [
+    1.2774,
+    2.1985
+   ],
+   "loa": [
+    -4.455,
+    1.293
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 3
+ },
+ {
+  "label": "primary: CO, full morphology",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.2615,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.5479,
+   "ccc": 0.5246,
+   "bias": -0.0328,
+   "sd_diff": 1.5375,
+   "pct_error": 61.2674,
+   "mae": 1.1548,
+   "loa": [
+    -3.046,
+    2.981
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.4997,
+   "pearson_r_ci": [
+    0.1853,
+    0.7585
+   ],
+   "ccc": 0.3773,
+   "ccc_ci": [
+    0.1298,
+    0.6534
+   ],
+   "bias": -1.3121,
+   "bias_ci": [
+    -1.8944,
+    -0.7335
+   ],
+   "sd_diff": 1.69,
+   "sd_diff_ci": [
+    1.4006,
+    2.0784
+   ],
+   "pct_error": 55.7447,
+   "pct_error_ci": [
+    45.6438,
+    69.3444
+   ],
+   "mae": 1.7078,
+   "mae_ci": [
+    1.2982,
+    2.1788
+   ],
+   "loa": [
+    -4.624,
+    2.0
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 0
+ },
+ {
+  "label": "secondary: SV",
+  "target": "SV_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.0321,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3911,
+   "ccc": 0.3737,
+   "bias": -0.3704,
+   "sd_diff": 21.2863,
+   "pct_error": 62.2618,
+   "mae": 16.4911,
+   "loa": [
+    -42.091,
+    41.351
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "job": 4
+ },
+ {
+  "label": "secondary: R_tot",
+  "target": "R_tot",
+  "model": "A",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.2361,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.545,
+   "ccc": 0.5253,
+   "bias": 0.0393,
+   "sd_diff": 0.3895,
+   "pct_error": 72.9183,
+   "mae": 0.2714,
+   "loa": [
+    -0.724,
+    0.803
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "job": 5
+ },
+ {
+  "label": "ablation B",
+  "target": "CO_pc",
+  "model": "B",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.2058,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.5465,
+   "ccc": 0.5381,
+   "bias": 0.0963,
+   "sd_diff": 1.5918,
+   "pct_error": 62.6274,
+   "mae": 1.1887,
+   "loa": [
+    -3.024,
+    3.216
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 38,
+   "V_neg": 81,
+   "HTV_mse": 0.3074741065502167,
+   "R_nonpsd": -1
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5356,
+   "pearson_r_ci": [
+    0.2737,
+    0.7423
+   ],
+   "ccc": 0.4293,
+   "ccc_ci": [
+    0.2287,
+    0.6488
+   ],
+   "bias": -1.1997,
+   "bias_ci": [
+    -1.7627,
+    -0.617
+   ],
+   "sd_diff": 1.6781,
+   "sd_diff_ci": [
+    1.3827,
+    2.0803
+   ],
+   "pct_error": 54.8438,
+   "pct_error_ci": [
+    45.3516,
+    66.2954
+   ],
+   "mae": 1.6864,
+   "mae_ci": [
+    1.3145,
+    2.1229
+   ],
+   "loa": [
+    -4.489,
+    2.089
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 6
+ },
+ {
+  "label": "ablation C",
+  "target": "CO_pc",
+  "model": "C",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.1897,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.4936,
+   "ccc": 0.4692,
+   "bias": -0.0105,
+   "sd_diff": 1.6108,
+   "pct_error": 64.0474,
+   "mae": 1.1824,
+   "loa": [
+    -3.168,
+    3.147
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 115,
+   "V_neg": 67,
+   "HTV_mse": 0.12348194420337677,
+   "R_nonpsd": 178
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5979,
+   "pearson_r_ci": [
+    0.3189,
+    0.7942
+   ],
+   "ccc": 0.4391,
+   "ccc_ci": [
+    0.2118,
+    0.6669
+   ],
+   "bias": -1.4362,
+   "bias_ci": [
+    -1.9792,
+    -0.9005
+   ],
+   "sd_diff": 1.5499,
+   "sd_diff_ci": [
+    1.3184,
+    1.8314
+   ],
+   "pct_error": 51.6524,
+   "pct_error_ci": [
+    43.177,
+    62.35
+   ],
+   "mae": 1.7073,
+   "mae_ci": [
+    1.2961,
+    2.1469
+   ],
+   "loa": [
+    -4.474,
+    1.602
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 7
+ },
+ {
+  "label": "ablation D",
+  "target": "CO_pc",
+  "model": "D",
+  "seed": 0,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.1905,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.5049,
+   "ccc": 0.4862,
+   "bias": 0.0126,
+   "sd_diff": 1.61,
+   "pct_error": 63.8667,
+   "mae": 1.1635,
+   "loa": [
+    -3.143,
+    3.168
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 1.7422316886950284e-06,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5963,
+   "pearson_r_ci": [
+    0.3342,
+    0.774
+   ],
+   "ccc": 0.4203,
+   "ccc_ci": [
+    0.2173,
+    0.622
+   ],
+   "bias": -1.4804,
+   "bias_ci": [
+    -1.9972,
+    -0.9424
+   ],
+   "sd_diff": 1.5136,
+   "sd_diff_ci": [
+    1.2913,
+    1.7924
+   ],
+   "pct_error": 50.6282,
+   "pct_error_ci": [
+    42.7462,
+    61.2389
+   ],
+   "mae": 1.7208,
+   "mae_ci": [
+    1.3188,
+    2.1613
+   ],
+   "loa": [
+    -4.447,
+    1.486
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 8
+ },
+ {
+  "label": "control: level only (no morphology)",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 1,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 5,
+  "internal_r2": 0.0239,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3363,
+   "ccc": 0.3005,
+   "bias": -0.1538,
+   "sd_diff": 1.86,
+   "pct_error": 72.9207,
+   "mae": 1.3697,
+   "loa": [
+    -3.799,
+    3.492
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.4842,
+   "pearson_r_ci": [
+    0.1522,
+    0.7513
+   ],
+   "ccc": 0.3703,
+   "ccc_ci": [
+    0.1246,
+    0.7182
+   ],
+   "bias": -1.3263,
+   "bias_ci": [
+    -1.9472,
+    -0.7195
+   ],
+   "sd_diff": 1.7567,
+   "sd_diff_ci": [
+    1.4867,
+    2.097
+   ],
+   "pct_error": 58.0136,
+   "pct_error_ci": [
+    49.8198,
+    71.1579
+   ],
+   "mae": 1.767,
+   "mae_ci": [
+    1.347,
+    2.2467
+   ],
+   "loa": [
+    -4.769,
+    2.117
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 10
+ },
+ {
+  "label": "control: permuted labels",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 1,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.7631,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.0349,
+   "ccc": 0.0347,
+   "bias": -0.05,
+   "sd_diff": 2.1548,
+   "pct_error": 84.6893,
+   "mae": 1.6368,
+   "loa": [
+    -4.273,
+    4.174
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": -0.0816,
+   "pearson_r_ci": [
+    -0.375,
+    0.2632
+   ],
+   "ccc": -0.0466,
+   "ccc_ci": [
+    -0.2288,
+    0.1401
+   ],
+   "bias": -1.6532,
+   "bias_ci": [
+    -2.4402,
+    -0.904
+   ],
+   "sd_diff": 2.2217,
+   "sd_diff_ci": [
+    1.7461,
+    2.9025
+   ],
+   "pct_error": 75.4058,
+   "pct_error_ci": [
+    60.2707,
+    97.7523
+   ],
+   "mae": 2.1696,
+   "mae_ci": [
+    1.6549,
+    2.8571
+   ],
+   "loa": [
+    -6.008,
+    2.701
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 11
+ },
+ {
+  "label": "linear baseline",
+  "target": "CO_pc",
+  "seed": 1,
+  "internal_r2": 0.1943,
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5613,
+   "pearson_r_ci": [
+    0.2931,
+    0.7448
+   ],
+   "ccc": 0.26,
+   "ccc_ci": [
+    0.1235,
+    0.4046
+   ],
+   "bias": -1.6451,
+   "bias_ci": [
+    -2.1717,
+    -1.157
+   ],
+   "sd_diff": 1.4832,
+   "sd_diff_ci": [
+    1.2431,
+    1.7945
+   ],
+   "pct_error": 50.3039,
+   "pct_error_ci": [
+    42.6276,
+    60.5348
+   ],
+   "mae": 1.7374,
+   "mae_ci": [
+    1.306,
+    2.247
+   ],
+   "loa": [
+    -4.552,
+    1.262
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 12
+ },
+ {
+  "label": "primary: CO, full morphology",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 2,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.2798,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3286,
+   "ccc": 0.3259,
+   "bias": 0.1696,
+   "sd_diff": 1.718,
+   "pct_error": 68.5456,
+   "mae": 1.3105,
+   "loa": [
+    -3.198,
+    3.537
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.3835,
+   "pearson_r_ci": [
+    0.1464,
+    0.6192
+   ],
+   "ccc": 0.3309,
+   "ccc_ci": [
+    0.137,
+    0.5642
+   ],
+   "bias": -0.9176,
+   "bias_ci": [
+    -1.6633,
+    0.0514
+   ],
+   "sd_diff": 2.4855,
+   "sd_diff_ci": [
+    1.8936,
+    3.4977
+   ],
+   "pct_error": 79.4015,
+   "pct_error_ci": [
+    62.1297,
+    102.1829
+   ],
+   "mae": 2.1028,
+   "mae_ci": [
+    1.5989,
+    2.6828
+   ],
+   "loa": [
+    -5.789,
+    3.954
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 18
+ },
+ {
+  "label": "control: permuted labels",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 2,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.4337,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": -0.0592,
+   "ccc": -0.0516,
+   "bias": -0.1858,
+   "sd_diff": 2.1748,
+   "pct_error": 88.1094,
+   "mae": 1.6326,
+   "loa": [
+    -4.448,
+    4.077
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": -0.0935,
+   "pearson_r_ci": [
+    -0.4442,
+    0.2835
+   ],
+   "ccc": -0.0431,
+   "ccc_ci": [
+    -0.1685,
+    0.1508
+   ],
+   "bias": -2.1223,
+   "bias_ci": [
+    -2.9564,
+    -1.3919
+   ],
+   "sd_diff": 2.2412,
+   "sd_diff_ci": [
+    1.8385,
+    2.893
+   ],
+   "pct_error": 79.2189,
+   "pct_error_ci": [
+    66.0016,
+    100.0425
+   ],
+   "mae": 2.3221,
+   "mae_ci": [
+    1.6971,
+    3.1219
+   ],
+   "loa": [
+    -6.515,
+    2.27
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 20
+ },
+ {
+  "label": "primary: CO, full morphology",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 1,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.1549,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.4634,
+   "ccc": 0.4205,
+   "bias": -0.2694,
+   "sd_diff": 1.7155,
+   "pct_error": 68.0259,
+   "mae": 1.2308,
+   "loa": [
+    -3.632,
+    3.093
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.4884,
+   "pearson_r_ci": [
+    0.2276,
+    0.6905
+   ],
+   "ccc": 0.328,
+   "ccc_ci": [
+    0.1535,
+    0.5288
+   ],
+   "bias": -1.5637,
+   "bias_ci": [
+    -2.1313,
+    -0.9913
+   ],
+   "sd_diff": 1.6779,
+   "sd_diff_ci": [
+    1.4574,
+    1.9443
+   ],
+   "pct_error": 56.5177,
+   "pct_error_ci": [
+    49.9501,
+    64.2945
+   ],
+   "mae": 1.8119,
+   "mae_ci": [
+    1.3501,
+    2.333
+   ],
+   "loa": [
+    -4.852,
+    1.725
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 9
+ },
+ {
+  "label": "linear baseline",
+  "target": "CO_pc",
+  "seed": 2,
+  "internal_r2": -0.0099,
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5432,
+   "pearson_r_ci": [
+    0.2593,
+    0.7357
+   ],
+   "ccc": 0.2779,
+   "ccc_ci": [
+    0.125,
+    0.4383
+   ],
+   "bias": -1.6051,
+   "bias_ci": [
+    -2.1406,
+    -1.1098
+   ],
+   "sd_diff": 1.4992,
+   "sd_diff_ci": [
+    1.2569,
+    1.7992
+   ],
+   "pct_error": 50.6759,
+   "pct_error_ci": [
+    43.0707,
+    60.9624
+   ],
+   "mae": 1.7195,
+   "mae_ci": [
+    1.2865,
+    2.2232
+   ],
+   "loa": [
+    -4.544,
+    1.333
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 21
+ },
+ {
+  "label": "ablation B",
+  "target": "CO_pc",
+  "model": "B",
+  "seed": 1,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.1602,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.4885,
+   "ccc": 0.4615,
+   "bias": -0.2446,
+   "sd_diff": 1.7137,
+   "pct_error": 67.7881,
+   "mae": 1.2486,
+   "loa": [
+    -3.603,
+    3.114
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 92,
+   "V_neg": 14,
+   "HTV_mse": 0.07409115880727768,
+   "R_nonpsd": -1
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.4623,
+   "pearson_r_ci": [
+    0.2058,
+    0.6802
+   ],
+   "ccc": 0.3397,
+   "ccc_ci": [
+    0.1509,
+    0.5728
+   ],
+   "bias": -1.3595,
+   "bias_ci": [
+    -1.9462,
+    -0.7576
+   ],
+   "sd_diff": 1.7335,
+   "sd_diff_ci": [
+    1.4986,
+    2.0524
+   ],
+   "pct_error": 57.404,
+   "pct_error_ci": [
+    50.2601,
+    65.9237
+   ],
+   "mae": 1.7435,
+   "mae_ci": [
+    1.3139,
+    2.2297
+   ],
+   "loa": [
+    -4.757,
+    2.038
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 15
+ },
+ {
+  "label": "ablation C",
+  "target": "CO_pc",
+  "model": "C",
+  "seed": 1,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.1591,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.4672,
+   "ccc": 0.4345,
+   "bias": -0.1769,
+   "sd_diff": 1.7232,
+   "pct_error": 67.7118,
+   "mae": 1.2432,
+   "loa": [
+    -3.554,
+    3.201
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 30,
+   "V_neg": 24,
+   "HTV_mse": 4.063721179962158,
+   "R_nonpsd": 178
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5155,
+   "pearson_r_ci": [
+    0.1985,
+    0.7336
+   ],
+   "ccc": 0.3786,
+   "ccc_ci": [
+    0.1381,
+    0.6203
+   ],
+   "bias": -1.3594,
+   "bias_ci": [
+    -1.9123,
+    -0.7793
+   ],
+   "sd_diff": 1.6468,
+   "sd_diff_ci": [
+    1.4483,
+    1.9068
+   ],
+   "pct_error": 54.5337,
+   "pct_error_ci": [
+    47.9189,
+    64.6606
+   ],
+   "mae": 1.6838,
+   "mae_ci": [
+    1.2439,
+    2.1472
+   ],
+   "loa": [
+    -4.587,
+    1.868
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 16
+ },
+ {
+  "label": "ablation D",
+  "target": "CO_pc",
+  "model": "D",
+  "seed": 1,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": 0.1627,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.4651,
+   "ccc": 0.4275,
+   "bias": -0.1961,
+   "sd_diff": 1.7173,
+   "pct_error": 67.6075,
+   "mae": 1.2283,
+   "loa": [
+    -3.562,
+    3.17
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 1.0934631973213982e-06,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.5485,
+   "pearson_r_ci": [
+    0.2679,
+    0.7529
+   ],
+   "ccc": 0.3726,
+   "ccc_ci": [
+    0.1721,
+    0.5583
+   ],
+   "bias": -1.481,
+   "bias_ci": [
+    -2.0027,
+    -0.9304
+   ],
+   "sd_diff": 1.5573,
+   "sd_diff_ci": [
+    1.3494,
+    1.8053
+   ],
+   "pct_error": 52.0952,
+   "pct_error_ci": [
+    45.1103,
+    60.7203
+   ],
+   "mae": 1.7268,
+   "mae_ci": [
+    1.3043,
+    2.1921
+   ],
+   "loa": [
+    -4.533,
+    1.571
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 17
+ },
+ {
+  "label": "ablation B",
+  "target": "CO_pc",
+  "model": "B",
+  "seed": 2,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.217,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3316,
+   "ccc": 0.3291,
+   "bias": 0.092,
+   "sd_diff": 1.6809,
+   "pct_error": 67.5903,
+   "mae": 1.2673,
+   "loa": [
+    -3.203,
+    3.387
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 48,
+   "V_neg": 55,
+   "HTV_mse": 0.06035179644823074,
+   "R_nonpsd": -1
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.4153,
+   "pearson_r_ci": [
+    0.1388,
+    0.6445
+   ],
+   "ccc": 0.3358,
+   "ccc_ci": [
+    0.1235,
+    0.5962
+   ],
+   "bias": -1.246,
+   "bias_ci": [
+    -1.9233,
+    -0.5583
+   ],
+   "sd_diff": 2.0057,
+   "sd_diff_ci": [
+    1.6986,
+    2.4417
+   ],
+   "pct_error": 65.7987,
+   "pct_error_ci": [
+    57.2895,
+    76.5269
+   ],
+   "mae": 1.8712,
+   "mae_ci": [
+    1.4094,
+    2.3924
+   ],
+   "loa": [
+    -5.177,
+    2.685
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 24
+ },
+ {
+  "label": "ablation C",
+  "target": "CO_pc",
+  "model": "C",
+  "seed": 2,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.1852,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3789,
+   "ccc": 0.376,
+   "bias": 0.1594,
+   "sd_diff": 1.6536,
+   "pct_error": 66.0459,
+   "mae": 1.2369,
+   "loa": [
+    -3.082,
+    3.4
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 39,
+   "V_neg": 126,
+   "HTV_mse": 0.7188737392425537,
+   "R_nonpsd": 178
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.3244,
+   "pearson_r_ci": [
+    0.0354,
+    0.5853
+   ],
+   "ccc": 0.2725,
+   "ccc_ci": [
+    0.0487,
+    0.5273
+   ],
+   "bias": -1.122,
+   "bias_ci": [
+    -1.829,
+    -0.3574
+   ],
+   "sd_diff": 2.176,
+   "sd_diff_ci": [
+    1.7723,
+    2.7289
+   ],
+   "pct_error": 70.6679,
+   "pct_error_ci": [
+    58.7404,
+    85.172
+   ],
+   "mae": 1.9693,
+   "mae_ci": [
+    1.5115,
+    2.479
+   ],
+   "loa": [
+    -5.387,
+    3.143
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 25
+ },
+ {
+  "label": "ablation D",
+  "target": "CO_pc",
+  "model": "D",
+  "seed": 2,
+  "n_train": 712,
+  "n_val": 178,
+  "n_features": 21,
+  "internal_r2": -0.2493,
+  "internal_agreement": {
+   "label": "PC held-out",
+   "n": 178,
+   "pearson_r": 0.3578,
+   "ccc": 0.3542,
+   "bias": 0.2016,
+   "sd_diff": 1.6936,
+   "pct_error": 67.3593,
+   "mae": 1.2995,
+   "loa": [
+    -3.118,
+    3.521
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 3.1166160852080793e-07,
+   "R_nonpsd": 0
+  },
+  "external_agreement": {
+   "label": "thermodilution (TD-only)",
+   "n": 31,
+   "pearson_r": 0.3456,
+   "pearson_r_ci": [
+    0.0246,
+    0.6197
+   ],
+   "ccc": 0.2637,
+   "ccc_ci": [
+    0.0399,
+    0.5322
+   ],
+   "bias": -1.328,
+   "bias_ci": [
+    -1.9889,
+    -0.6561
+   ],
+   "sd_diff": 1.9724,
+   "sd_diff_ci": [
+    1.6767,
+    2.3963
+   ],
+   "pct_error": 65.146,
+   "pct_error_ci": [
+    55.5857,
+    77.9165
+   ],
+   "mae": 1.8772,
+   "mae_ci": [
+    1.4155,
+    2.4235
+   ],
+   "loa": [
+    -5.194,
+    2.538
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 26
+ }
+]

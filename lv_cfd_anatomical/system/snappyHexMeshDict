@@ -1,0 +1,143 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+
+castellatedMesh true;
+snap            true;
+addLayers       true;
+
+geometry
+{
+    lv_surface.stl
+    {
+        type triSurfaceMesh;
+        name lvWall;
+        regions
+        {
+            lv_surface
+            {
+                name lvWall;
+            }
+        }
+    }
+
+    // Mitral valve region (sphere for refinement)
+    mitralRegion
+    {
+        type searchableSphere;
+        centre (-0.0222 0.0044 -0.1489);
+        radius 0.015;
+    }
+
+    // Aortic valve region (sphere for refinement)
+    aorticRegion
+    {
+        type searchableSphere;
+        centre (-0.0153 0.0192 -0.1311);
+        radius 0.012;
+    }
+}
+
+castellatedMeshControls
+{
+    maxLocalCells       500000;
+    maxGlobalCells      2000000;
+    minRefinementCells  10;
+    maxLoadUnbalance    0.10;
+    nCellsBetweenLevels 3;
+    
+    features
+    (
+    );
+
+    refinementSurfaces
+    {
+        lvWall
+        {
+            level (2 3);
+            patchInfo
+            {
+                type wall;
+            }
+        }
+    }
+
+    resolveFeatureAngle 30;
+
+    refinementRegions
+    {
+        mitralRegion
+        {
+            mode inside;
+            levels ((1e15 4));
+        }
+        aorticRegion
+        {
+            mode inside;
+            levels ((1e15 4));
+        }
+    }
+
+    locationInMesh (-0.0373 0.0318 -0.1596);
+    allowFreeStandingZoneFaces true;
+}
+
+snapControls
+{
+    nSmoothPatch    3;
+    tolerance       2.0;
+    nSolveIter      100;
+    nRelaxIter      5;
+    nFeatureSnapIter 10;
+    implicitFeatureSnap false;
+    explicitFeatureSnap true;
+    multiRegionFeatureSnap false;
+}
+
+addLayersControls
+{
+    relativeSizes   true;
+    layers
+    {
+        lvWall
+        {
+            nSurfaceLayers 3;
+        }
+    }
+    expansionRatio      1.2;
+    finalLayerThickness 0.3;
+    minThickness        0.1;
+    nGrow               0;
+    featureAngle        60;
+    nRelaxIter          3;
+    nSmoothSurfaceNormals 1;
+    nSmoothNormals      3;
+    nSmoothThickness    10;
+    maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3;
+    minMedialAxisAngle  90;
+    nBufferCellsNoExtrude 0;
+    nLayerIter          50;
+}
+
+meshQualityControls
+{
+    maxNonOrtho     65;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave      80;
+    minVol          1e-13;
+    minTetQuality   -1e30;
+    minArea         -1;
+    minTwist        0.02;
+    minDeterminant  0.001;
+    minFaceWeight   0.02;
+    minVolRatio     0.01;
+    minTriangleTwist -1;
+    nSmoothScale    4;
+    errorReduction  0.75;
+}

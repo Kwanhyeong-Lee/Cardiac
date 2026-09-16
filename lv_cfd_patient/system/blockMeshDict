@@ -1,0 +1,67 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+scale 1;
+
+// Single-block patient-specific LV chamber — Case 1009
+// Cavity tutorial vertex pattern (proven to work)
+// Volume: 150.4 mL
+
+vertices
+(
+    (0        0        0       )  // 0
+    (0.046678  0        0       )  // 1
+    (0.046678  0.073959  0       )  // 2
+    (0        0.073959  0       )  // 3
+    (0        0        0.043566 )  // 4
+    (0.046678  0        0.043566 )  // 5
+    (0.046678  0.073959  0.043566 )  // 6
+    (0        0.073959  0.043566 )  // 7
+);
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) (31 49 29) simpleGrading (1 1 1)
+);
+
+edges ();
+
+boundary
+(
+    top
+    {
+        // y=Ly face — will be split into inlet/outlet/wall by topoSet
+        type patch;
+        faces
+        (
+            (3 7 6 2)
+        );
+    }
+
+    bottom
+    {
+        // y=0 face (apex)
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+
+    walls
+    {
+        type wall;
+        faces
+        (
+            (0 4 7 3)   // x=0
+            (1 2 6 5)   // x=W
+            (0 3 2 1)   // z=0
+            (4 5 6 7)   // z=D
+        );
+    }
+);

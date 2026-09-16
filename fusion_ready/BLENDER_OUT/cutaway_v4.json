@@ -1,0 +1,45 @@
+{
+ "source": "hollow_ventricle_v4_CT.stl",
+ "plane_point": [
+  13.232047144244698,
+  -29.152208177625585,
+  19.761095822248787
+ ],
+ "plane_normal": [
+  0.8465072051030731,
+  0.19914970250852115,
+  -0.4937255793447928
+ ],
+ "halves": {
+  "A": {
+   "faces": 362576,
+   "watertight": true,
+   "components": 1,
+   "component_volumes_mL": [
+    96.004
+   ],
+   "volume_mL": 96.0,
+   "extent_mm": [
+    78.5,
+    106.7,
+    96.7
+   ]
+  },
+  "B": {
+   "faces": 370946,
+   "watertight": true,
+   "components": 1,
+   "component_volumes_mL": [
+    85.761
+   ],
+   "volume_mL": 85.76,
+   "extent_mm": [
+    71.7,
+    107.0,
+    92.8
+   ]
+  }
+ },
+ "sum_check_mL": 181.76,
+ "whole_mL": 181.77
+}

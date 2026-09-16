@@ -1,0 +1,109 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application     pimpleFoam;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         2.4;
+
+// v2 FIX: Much smaller initial deltaT (was 1e-5)
+deltaT          1e-6;
+
+writeControl    adjustableRunTime;
+writeInterval   0.04;
+purgeWrite      0;
+writeFormat     ascii;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+
+// v2 FIX: More conservative CFL control
+adjustTimeStep  yes;
+maxCo           0.3;       // was 0.8 — halved for stability
+maxDeltaT       5e-4;      // was 0.002 — prevent large jumps
+
+functions
+{
+    fieldAverage
+    {
+        type            fieldAverage;
+        libs            (fieldFunctionObjects);
+        writeControl    writeTime;
+        fields
+        (
+            U { mean on; prime2Mean on; base time; }
+            p { mean on; prime2Mean on; base time; }
+        );
+    }
+
+    probes
+    {
+        type            probes;
+        libs            (sampling);
+        writeControl    timeStep;
+        writeInterval   10;
+        fields          (U p);
+        probeLocations
+        (
+            (-0.0373 0.0318 -0.1596)   // LV center
+            (-0.0250 0.0080 -0.1500)   // near mitral
+            (-0.0200 0.0220 -0.1350)   // near aortic
+            (-0.0373 0.0200 -0.1500)   // mid-cavity
+        );
+    }
+
+    flowRateMitral
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   10;
+        writeFields     false;
+        surfaceFormat   none;
+        regionType      patch;
+        name            mitralInlet;
+        operation       sum;
+        fields          (phi);
+    }
+
+    flowRateAortic
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   10;
+        writeFields     false;
+        surfaceFormat   none;
+        regionType      patch;
+        name            aorticOutlet;
+        operation       sum;
+        fields          (phi);
+    }
+
+    // v2 ADD: Monitor residuals
+    residuals
+    {
+        type            solverInfo;
+        libs            (utilityFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   1;
+        fields          (U p);
+    }
+
+    // v2 ADD: Wall shear stress
+    wallShearStress
+    {
+        type            wallShearStress;
+        libs            (fieldFunctionObjects);
+        writeControl    writeTime;
+        patches         (lvWall);
+    }
+}

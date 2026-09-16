@@ -1,0 +1,31 @@
+{
+ "transform_cardiac_meshes_to_frameA": [
+  [
+   -1.0,
+   0.0,
+   0.0,
+   135.425
+  ],
+  [
+   0.0,
+   1.0,
+   0.0,
+   -156.425
+  ],
+  [
+   0.0,
+   0.0,
+   1.0,
+   -83.155
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "note": "mirror in X about the cardiac_meshes LV bbox centre, then origin-centre. cardiac_meshes is left-right mirrored relative to true anatomy (3/3 chiral landmark tests violated, 2/2 non-chiral pass); frame A is correctly handed.",
+ "validation_mean_mm": 0.044274944700854774,
+ "validation_max_mm": 0.222846954316254
+}

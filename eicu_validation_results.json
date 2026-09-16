@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "eicu_patients": 3991,
+    "mimic_patients": 5851,
+    "validation_type": "Hemodynamic cross-validation (Strategy A)",
+    "data_source": "eICU Swan-Ganz invasive measurements"
+  },
+  "svr_validation": {
+    "pearson_r": 0.9162,
+    "p_value": 0.0,
+    "mae": 182.7,
+    "n_pairs": 2704,
+    "bland_altman_bias": 175.5,
+    "bland_altman_loa_lower": -98.2,
+    "bland_altman_loa_upper": 449.3
+  },
+  "distribution_comparison": {
+    "Stroke Volume (mL)": {
+      "mimic_mean": 59.46674283455397,
+      "mimic_std": 22.49214893534155,
+      "mimic_n": 5762,
+      "eicu_mean": 63.62221664994984,
+      "eicu_std": 17.446337925830463,
+      "eicu_n": 3988,
+      "ks_stat": 0.17531542910578315,
+      "ks_p": 9.84731650384983e-64,
+      "overlap": 0.8054228635228838
+    },
+    "Arterial Elastance": {
+      "mimic_mean": 2.212244916126475,
+      "mimic_std": 0.8478343329370972,
+      "mimic_n": 5694,
+      "eicu_mean": 1.7600997994484833,
+      "eicu_std": 0.5296172580174595,
+      "eicu_n": 3989,
+      "ks_stat": 0.27149181675670614,
+      "ks_p": 1.3090701176944725e-152,
+      "overlap": 0.7246430581887332
+    },
+    "Stroke Work (J)": {
+      "mimic_mean": 92.3325055299249,
+      "mimic_std": 39.53525928848974,
+      "mimic_n": 5831,
+      "eicu_mean": 88.76142570784263,
+      "eicu_std": 28.479359855990378,
+      "eicu_n": 3991,
+      "ks_stat": 0.09221219360780071,
+      "ks_p": 5.549070139575481e-18,
+      "overlap": 0.8343333897255792
+    },
+    "Cardiac Output (L/min)": {
+      "mimic_mean": 4.210432885568781,
+      "mimic_std": 1.6738488193771537,
+      "mimic_n": 5801,
+      "eicu_mean": 5.23544976196442,
+      "eicu_std": 1.3309930550429656,
+      "eicu_n": 3991,
+      "ks_stat": 0.34653383835401763,
+      "ks_p": 2.1313810808942284e-252,
+      "overlap": 0.6522439235910519
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+ "date": "2026-09-16",
+ "what": "mitral_valve_refit_v2.stl - addresses the residual that valve_refit.json left open.",
+ "problem_restated": "refit_v1 met every improvement metric but missed its stated acceptance gate: leaflet-zone (>5 mm apical of the base plane) inside-fraction 0.875 vs the 0.90 required. valve_refit.json diagnosed the cause as a round generated annulus against an elliptical LV basal cross-section (LV extents 66 x 82 mm), protruding along the short axis, 46% of the residual in one 45-degree sector.",
+ "method": {
+  "approach": "smoothed shrink-wrap of the protruding leaflet-zone vertices onto the endocardium with a 1.0 mm clearance, displacement diffused over the mesh (12 Laplacian passes per iteration, 6 iterations) so no crease forms; the annulus ring (<=5 mm apical) is anchored and never moves.",
+  "honest_caveat": "This is a DEFORMATION of refit_v1, not a re-parameterisation of generate_valves.py. The task described v2 as 'orient the generator's D-shape factor to the LV basal cross-section principal axes'. This achieves the same anatomical goal - the valve now conforms to the elliptical basal cross-section - but by direct mesh deformation. Two earlier attempts that did work radially (scaling about the base->apex axis, then about the true cavity centreline) both made the metric WORSE (0.878 -> 0.798) because the residual is shallow and one-sided, so a global radial shrink distorts the whole valve. Recorded here so the approach is not retried blindly.",
+  "metric_validation": "the leaflet-zone metric reimplemented here reproduces valve_refit.json's published 0.875 as 0.878 on the same file, confirming it is the same measurement."
+ },
+ "result": {
+  "leaflet_inside": {"v1": 0.878, "v2": 0.978, "gate": 0.90, "verdict": "PASS"},
+  "outside_leaflet_vertices": {"v1": 1075, "v2": 193, "of_total": 8803},
+  "beyond_wall_mm": {"v1": {"median": 1.55, "p95": 4.85, "max": 6.02},
+                     "v2": {"median": 0.65, "p95": 3.02, "max": 4.94}},
+  "angular_sectors_45deg": {"v1": [438,319,0,28,110,163,0,17], "v2": [31,70,0,9,31,47,0,5]},
+  "mesh": {"degenerate_faces": 0, "components": 9, "area_cm2": {"v1": 32.94, "v2": 34.08},
+           "extent_mm_unchanged": [35.7, 37.2, 35.4],
+           "displacement_mm": {"mean": 0.31, "max": 7.06}},
+  "after_print_pipeline": {"volume_mL": 2.625, "manifold": true, "non_manifold_edges": 0,
+                           "extent_mm": [36.22, 37.47, 35.83],
+                           "note": "the deformation pinched off 7 tiny islands (42 faces total) which drop_loose_fragments() removes"}
+ },
+ "decision": "PROMOTED. v2 clears the pre-set 0.90 leaflet gate that blocked v1, so mitral_valve.stl <- refit_v2 and aortic_valve.stl <- refit_v1 (the aortic was never gated; it is expected to sit mostly outside the blood pool, and its original is ~60 degrees misoriented). Originals preserved as *_ORIGINAL_unfitted.stl, the convention refit_valves.py itself uses on its accept path. blender_pipeline.py now reads the canonical names.",
+ "supersedes": "valve_refit.json -> decision (refit_v1 NOT promoted). That decision stands for v1; v2 is what was promoted."
+}

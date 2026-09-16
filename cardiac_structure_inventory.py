@@ -1,0 +1,510 @@
+"""
+Cardiac Structure Inventory for Patient-Specific CFD
+=====================================================
+MM-WHS Case 1009 기반 — 현재 모델 vs 필요 구조물 전수 조사
+각 구조물의 해부학적 특성, 탄성값, 두께, CFD 모델링 방법 포함
+
+References:
+  [1] Holzapfel & Ogden, Proc R Soc A, 2009 — myocardium constitutive
+  [2] Prot et al., Ann Biomed Eng, 2009 — mitral valve leaflet
+  [3] Zuo et al., J Mech Behav Biomed Mater, 2016 — chordae tendineae
+  [4] Kunzelman et al., J Heart Valve Dis, 1993 — papillary muscles
+  [5] Humphrey, Cardiovascular Solid Mechanics, 2002 — general
+  [6] Dodge et al., Circulation, 1992 — coronary anatomy
+  [7] Al-Atabi et al., J Biomech, 2010 — trabeculae
+  [8] Beigel et al., JACC, 2014 — LAA morphology
+"""
+import json
+
+inventory = {
+    "case": "MM-WHS 1009",
+    "voxel_mm": [0.488, 0.488, 0.625],
+    "modality": "Contrast-enhanced cardiac CT",
+    
+    # ============================================================
+    # A. 현재 모델에 포함된 구조 (Present)
+    # ============================================================
+    "present": {
+        "LV_blood_cavity": {
+            "label": 550,
+            "volume_mL": 76.5,
+            "status": "PRESENT — CFD fluid domain",
+            "note": "내부 trabeculae/papillary가 blood pool로 합쳐져 있음 (24.8% tissue-like voxels)"
+        },
+        "LV_wall": {
+            "label": 500,
+            "volume_mL": 150.4,
+            "thickness_mm": "8-15 (wall), 2-3 (apex)",
+            "youngs_modulus_kPa": "10-50 (passive diastole) → 200-500 (active systole)",
+            "constitutive": "Holzapfel-Ogden anisotropic hyperelastic (fiber-reinforced)",
+            "fiber_angle_deg": "epicardium -60° → endocardium +60° (transmural rotation)",
+            "status": "PRESENT — rigid wall BC in current CFD",
+            "limitation": "현재 rigid wall → FSI 필요 시 deformable로 전환"
+        },
+        "myocardium": {
+            "label": 205,
+            "volume_mL": 125.7,
+            "density_kg_m3": 1050,
+            "status": "PRESENT — wall geometry에 포함"
+        },
+        "left_atrium": {
+            "label": 420,
+            "volume_mL": 54.7,
+            "status": "PRESENT — 경계조건(inlet pressure)으로만 반영",
+            "limitation": "LA chamber 자체는 CFD domain에 미포함"
+        },
+        "ascending_aorta": {
+            "label": 820,
+            "volume_mL": 50.7,
+            "status": "PRESENT — outlet pressure BC로만 반영",
+            "limitation": "Aorta geometry는 CFD domain에 미포함"
+        }
+    },
+    
+    # ============================================================
+    # B. 누락된 구조물 — 상세 물성 포함
+    # ============================================================
+    "missing": {
+        
+        # ------ B1. 판막 (Valves) ------
+        "mitral_valve_leaflets": {
+            "anatomy": {
+                "description": "이첨판 — anterior leaflet (A1-A3) + posterior leaflet (P1-P3)",
+                "annulus_diameter_mm": "25-35 (여성 25-30, 남성 30-35)",
+                "leaflet_area_cm2": "anterior ~5-6, posterior ~6-8",
+                "commissure_count": 2,
+                "scallop_count": "anterior 3 (A1-A3), posterior 3 (P1-P3)"
+            },
+            "biomechanics": {
+                "thickness_mm": "0.4-1.3 (anterior thicker, belly ~1.0, edge ~0.4)",
+                "youngs_modulus_kPa": {
+                    "circumferential": "2000-8000 (highly anisotropic)",
+                    "radial": "500-2000",
+                    "note": "nonlinear — J-shaped stress-strain curve"
+                },
+                "constitutive_model": "Fung-type exponential or May-Newman-Yin",
+                "poisson_ratio": 0.49,
+                "density_kg_m3": 1100,
+                "ultimate_stress_MPa": "2-4 (circumferential)",
+                "max_strain_percent": "15-25 (radial), 5-10 (circumferential)"
+            },
+            "cfd_modeling": {
+                "approach_1": "Prescribed kinematics — leaflet open/close timing from echo",
+                "approach_2": "FSI — FE leaflet coupled to fluid via ALE or IB method",
+                "approach_3": "Resistance model — time-varying porosity zone",
+                "recommended": "Tier 1: resistance → Tier 2: prescribed → Tier 3: FSI",
+                "open_duration_ms": "~400-500 (diastolic filling)",
+                "orifice_area_cm2": "4-6 (normal), <1.5 (stenosis)"
+            },
+            "priority": "HIGH — 유입 혈류 패턴에 직접 영향",
+            "resolution_needed_mm": 0.3
+        },
+        
+        "aortic_valve_cusps": {
+            "anatomy": {
+                "description": "3개 반월판 — Left Coronary Cusp (LCC), Right (RCC), Non-coronary (NCC)",
+                "annulus_diameter_mm": "20-26",
+                "cusp_height_mm": "14-17",
+                "coaptation_height_mm": "3-6",
+                "sinuses_of_valsalva": "3 sinuses, diameter 30-35mm",
+                "sinotubular_junction_mm": "25-30"
+            },
+            "biomechanics": {
+                "thickness_mm": "0.3-0.7 (belly ~0.3, attachment ~0.7)",
+                "youngs_modulus_kPa": {
+                    "circumferential": "2000-15000",
+                    "radial": "500-3000",
+                    "note": "more stiff than mitral — collagen-rich"
+                },
+                "constitutive_model": "Fung-type or Holzapfel fiber-reinforced",
+                "density_kg_m3": 1100,
+                "calcification_effect": "E increases 10-100x with calcification"
+            },
+            "cfd_modeling": {
+                "approach": "Similar to mitral — prescribed or FSI",
+                "ejection_time_ms": "~250-350",
+                "peak_velocity_ms": "1.0-1.5 (normal), >4.0 (severe stenosis)",
+                "orifice_area_cm2": "3-4 (normal), <1.0 (severe stenosis)"
+            },
+            "priority": "HIGH — 유출 dynamics 결정",
+            "resolution_needed_mm": 0.2
+        },
+        
+        # ------ B2. 건삭 (Chordae Tendineae) ------
+        "chordae_tendineae": {
+            "anatomy": {
+                "description": "유두근에서 판막 엽(leaflet)으로 연결되는 섬유성 줄",
+                "types": {
+                    "primary_marginal": "leaflet free edge에 부착 — 가장 가늘고 많음",
+                    "secondary_strut": "leaflet body에 부착 — 가장 두꺼움, 하중 부담 최대",
+                    "tertiary_basal": "leaflet base/annulus에 부착 — posterior leaflet에만"
+                },
+                "count": "약 25-120개 (개인차 큼)",
+                "length_mm": "primary 15-25, secondary 10-20, tertiary 5-15",
+                "diameter_mm": "primary 0.3-0.9, secondary 0.9-2.5, tertiary 0.5-1.5",
+                "branching": "1st order에서 2-4개 branch가 분지"
+            },
+            "biomechanics": {
+                "youngs_modulus_MPa": {
+                    "marginal": "40-80",
+                    "strut": "20-50",
+                    "note": "marginal이 더 stiff (콜라겐 밀도 높음)"
+                },
+                "ultimate_stress_MPa": "5-15",
+                "ultimate_strain_percent": "12-22",
+                "cross_section_mm2": "primary 0.07-0.64, secondary 0.64-4.9",
+                "constitutive_model": "1D nonlinear elastic (exponential or polynomial)",
+                "prestress_N": "0.1-0.5 (resting tension)"
+            },
+            "cfd_modeling": {
+                "approach_1": "1D beam elements in FE solver (preCICE coupling)",
+                "approach_2": "Immersed thin structures (IBM)",
+                "approach_3": "Omit but model valve constraint → 대부분 CFD 연구가 이 방식",
+                "hemodynamic_impact": "혈류 교란 미미하지만, valve 역학에는 필수",
+                "recommended": "Valve FSI 할 때만 포함 (standalone CFD에서는 생략 가능)"
+            },
+            "priority": "MEDIUM — valve FSI에서만 필수",
+            "resolution_needed_mm": 0.15
+        },
+        
+        # ------ B3. 유두근 (Papillary Muscles) ------
+        "papillary_muscles": {
+            "anatomy": {
+                "description": "LV 내벽에서 돌출된 원추형 근육 — chordae를 통해 MV에 연결",
+                "types": {
+                    "anterolateral": "anterior wall — LAD/LCx dual supply",
+                    "posteromedial": "posterior wall — PDA single supply (경색 취약)"
+                },
+                "height_mm": "15-30",
+                "diameter_mm": "8-15 (base)",
+                "location": "LV cavity 중하부 1/3, free wall에 부착"
+            },
+            "biomechanics": {
+                "density_kg_m3": 1060,
+                "youngs_modulus_kPa": {
+                    "passive": "10-30 (similar to myocardium)",
+                    "active": "100-300 (during contraction)"
+                },
+                "constitutive_model": "Transversely isotropic — fiber direction along long axis",
+                "contraction_force_N": "5-10 (holding chordae tension)",
+                "shortening_percent": "10-15 during systole"
+            },
+            "cfd_modeling": {
+                "approach_1": "Static geometry added as wall boundary (from CT thresholding)",
+                "approach_2": "Moving wall BC (prescribed displacement)",
+                "approach_3": "Full FSI with myocardium model",
+                "hemodynamic_impact": "상당 — 혈류 와류 패턴, 특히 diastolic filling jet 방향에 영향",
+                "recommended": "Tier 1에서도 추가 가능 — CT HU thresholding으로 추출"
+            },
+            "priority": "HIGH — CT에서 추출 가능, 혈류 패턴에 유의미한 영향",
+            "resolution_needed_mm": 1.0,
+            "extractable_from_CT": True,
+            "method": "LV cavity 내 HU < 150 voxels → marching cubes → STL"
+        },
+        
+        # ------ B4. 심실 섬유주 (Trabeculae Carneae) ------
+        "trabeculae_carneae": {
+            "anatomy": {
+                "description": "심실 내벽의 근육성 능선/기둥/다리 구조",
+                "types": {
+                    "ridges": "벽에서 돌출된 능선 (가장 흔함)",
+                    "bridges": "벽 사이를 가로지르는 다리형",
+                    "pillars": "벽에서 자유단으로 돌출 (유두근 형태)"
+                },
+                "thickness_mm": "1-5",
+                "density_distribution": "apex에 가장 밀집, base쪽은 상대적 smooth",
+                "coverage_percent": "LV 내표면의 ~60-80%"
+            },
+            "biomechanics": {
+                "youngs_modulus_kPa": "10-50 (myocardium과 동일 — 같은 조직)",
+                "density_kg_m3": 1060,
+                "note": "Trabeculae는 근육이므로 myocardium 물성과 동일"
+            },
+            "cfd_modeling": {
+                "approach_1": "Surface roughness model — wall function 수정",
+                "approach_2": "Explicit geometry from high-res CT/MRI",
+                "approach_3": "Porous zone near endocardium",
+                "hemodynamic_impact": {
+                    "washout": "trabeculae 사이 stagnation → 혈전 형성 위험 부위",
+                    "mixing": "혈류 mixing 증가 → heat transfer 향상",
+                    "wss": "local WSS 패턴 변화"
+                },
+                "recommended": "CT thresholding으로 일부 추출 가능, 완전한 재현은 high-res MRI 필요"
+            },
+            "priority": "MEDIUM-HIGH — 혈전 위험 평가에 중요",
+            "resolution_needed_mm": 0.5,
+            "clinical_relevance": "LVNC (Left Ventricular Non-Compaction) 진단, thrombus 형성"
+        },
+        
+        # ------ B5. 관상동맥 (Coronary Arteries) ------
+        "coronary_arteries": {
+            "anatomy": {
+                "description": "대동맥 근부(aortic root)에서 기시하여 심장 표면을 주행",
+                "branches": {
+                    "LM": {
+                        "name": "Left Main",
+                        "length_mm": "5-15",
+                        "diameter_mm": "3.5-5.5",
+                        "origin": "Left coronary sinus"
+                    },
+                    "LAD": {
+                        "name": "Left Anterior Descending",
+                        "length_mm": "100-150",
+                        "diameter_mm": "2.5-4.5 (proximal) → 1.0-2.0 (distal)",
+                        "branches": "diagonal (D1, D2), septal perforators"
+                    },
+                    "LCx": {
+                        "name": "Left Circumflex",
+                        "length_mm": "60-100",
+                        "diameter_mm": "2.0-4.0",
+                        "branches": "obtuse marginals (OM1, OM2)"
+                    },
+                    "RCA": {
+                        "name": "Right Coronary Artery",
+                        "length_mm": "100-120",
+                        "diameter_mm": "2.5-4.5 (proximal)",
+                        "branches": "PDA, PLV",
+                        "origin": "Right coronary sinus"
+                    }
+                },
+                "ostia_height_above_annulus_mm": "12-15 (LCA), 14-17 (RCA)",
+                "ostia_diameter_mm": "3-5"
+            },
+            "biomechanics": {
+                "wall_thickness_mm": "0.5-1.0 (intima-media)",
+                "youngs_modulus_kPa": {
+                    "circumferential": "500-2000 (healthy)",
+                    "axial": "300-800",
+                    "calcified_plaque": "5000-50000",
+                    "lipid_core": "1-10"
+                },
+                "constitutive_model": "Holzapfel-Gasser-Ogden (HGO) — 2-fiber family",
+                "residual_stress": "opening angle 100-160°",
+                "blood_flow_ml_min": "~250 total (5% of CO), LCA 60%, RCA 40%"
+            },
+            "cfd_modeling": {
+                "approach_1": "Coronary CTA → segmentation → CFD (별도 시뮬레이션)",
+                "approach_2": "LV CFD에 coronary ostia만 outlet BC로 추가",
+                "approach_3": "1D-3D coupling (coronary tree를 1D lumped로)",
+                "recommended": "현재 MM-WHS에서는 coronary 해상도 부족 → coronary CTA 별도 필요",
+                "tools": "SimVascular, CRIMSON, vmtk (coronary centerline extraction)"
+            },
+            "priority": "HIGH — 관상동맥 혈류역학은 별도 프로젝트급",
+            "resolution_needed_mm": 0.2,
+            "data_source": "Coronary CTA (0.3-0.5mm resolution) 필요 — 일반 cardiac CT 해상도 부족",
+            "clinical_relevance": "CAD 진단, FFR 예측, stent planning"
+        },
+        
+        # ------ B6. 심방귀 (Left Atrial Appendage, LAA) ------
+        "left_atrial_appendage": {
+            "anatomy": {
+                "description": "좌심방에서 돌출된 맹관형 주머니 — AF 시 혈전 호발 부위",
+                "morphology_types": {
+                    "chicken_wing": "48% — 꺾인 형태, 혈전 위험 가장 낮음",
+                    "cactus": "30% — 중심에서 분지, 중간 위험",
+                    "windsock": "19% — 긴 단일 로브, 높은 위험",
+                    "cauliflower": "3% — 짧고 복잡, 혈전 위험 가장 높음"
+                },
+                "orifice_diameter_mm": "17-26 (oval shape)",
+                "depth_mm": "16-51",
+                "volume_mL": "0.7-19.2 (median ~6.5)",
+                "lobes": "1-4 (평균 2.2개)"
+            },
+            "biomechanics": {
+                "wall_thickness_mm": "0.5-2.0 (pectinate region thinner)",
+                "youngs_modulus_kPa": {
+                    "passive": "50-200 (LA wall보다 얇고 부드러움)",
+                    "note": "구조적으로 취약 — Watchman/Amulet device 삽입 시 천공 위험"
+                },
+                "density_kg_m3": 1050
+            },
+            "cfd_modeling": {
+                "approach_1": "LA + LAA를 하나의 CFD domain으로 확장",
+                "approach_2": "LAA만 별도 sub-domain (inlet: LA-LAA orifice)",
+                "hemodynamic_focus": {
+                    "stasis": "LAA 내 low-velocity zone → thrombus 형성",
+                    "washout_time": "혈류 체류 시간 — AF 환자에서 크게 증가",
+                    "velocity_threshold": "< 0.2 m/s = stasis zone"
+                },
+                "recommended": "CT에서 LAA segmentation 가능 — label 420에 부분 포함"
+            },
+            "priority": "HIGH — AF 환자 혈전 위험 평가의 핵심 구조",
+            "resolution_needed_mm": 0.5,
+            "clinical_relevance": "AF stroke prevention, LAAO device sizing (Watchman, Amulet)"
+        },
+        
+        # ------ B7. 우심실 (Right Ventricle) ------
+        "right_ventricle": {
+            "anatomy": {
+                "description": "MM-WHS label 620이 존재하지만 Case 1009에서 누락됨",
+                "wall_thickness_mm": "3-5 (LV의 1/3)",
+                "moderator_band": "RV apex → interventricular septum 가로지르는 근육 다리"
+            },
+            "biomechanics": {
+                "youngs_modulus_kPa": "5-20 (LV보다 얇고 유연)",
+                "fiber_architecture": "LV보다 단순 — circumferential 우세",
+                "pressure_mmHg": "systolic 25-30 (LV의 1/4-1/5)"
+            },
+            "priority": "LOW for LV-focused CFD — 별도 RV CFD 시 필요",
+            "note": "현재 프로젝트는 LV-focused이므로 후순위"
+        },
+        
+        # ------ B8. 심실중격 (Interventricular Septum) ------
+        "interventricular_septum": {
+            "anatomy": {
+                "description": "LV와 RV 사이 근육벽 — LV wall에 포함되어 있으나 별도 물성",
+                "thickness_mm": "8-12 (membranous portion 2-3)",
+                "membranous_septum_mm2": "~10-15 (매우 얇은 부분)"
+            },
+            "biomechanics": {
+                "youngs_modulus_kPa": "LV free wall과 유사하나 fiber 방향 다름",
+                "fiber_angle": "free wall과 ~30-45° offset — 수축 역학에 영향",
+                "conduction": "His bundle, left/right bundle branches 통과"
+            },
+            "priority": "MEDIUM — septal motion이 LV hemodynamics에 영향",
+            "note": "현재 LV wall geometry에 포함됨 — 별도 물성 부여 시 필요"
+        },
+        
+        # ------ B9. 승모판 고리 (Mitral Annulus) ------
+        "mitral_annulus": {
+            "anatomy": {
+                "description": "승모판 부착 부위의 섬유성 고리",
+                "shape": "D-shaped (saddle-shaped in 3D)",
+                "circumference_mm": "90-120",
+                "area_cm2": "5-11",
+                "saddle_height_mm": "5-10 (높을수록 MR 위험 낮음)"
+            },
+            "biomechanics": {
+                "youngs_modulus_kPa": "200-1000 (fibrous tissue, myocardium보다 stiff)",
+                "motion": "systole에서 6-8mm 하강 (longitudinal shortening)",
+                "area_change_percent": "20-30% (diastole→systole)"
+            },
+            "priority": "HIGH for valve modeling — annular dynamics가 MR 결정"
+        },
+        
+        # ------ B10. 대동맥판 고리 및 Sinus of Valsalva ------
+        "aortic_root_complex": {
+            "anatomy": {
+                "description": "대동맥판 고리 + Valsalva sinus + STJ",
+                "annulus_diameter_mm": "20-26",
+                "sinus_diameter_mm": "30-35",
+                "stj_diameter_mm": "25-30",
+                "coronary_ostia": "LCA from left sinus, RCA from right sinus"
+            },
+            "biomechanics": {
+                "sinus_wall_thickness_mm": "1.0-2.0",
+                "youngs_modulus_kPa": "400-1500 (aortic wall)",
+                "constitutive": "HGO model — 2 fiber families"
+            },
+            "cfd_relevance": "coronary perfusion, aortic regurgitation jet, TAVI planning",
+            "priority": "HIGH — 관상동맥 기시부 + valve 모델링에 필수"
+        },
+        
+        # ------ B11. 심낭 (Pericardium) ------
+        "pericardium": {
+            "anatomy": {
+                "description": "심장 외부를 감싸는 이중막 (fibrous + serous)",
+                "thickness_mm": "1-3 (fibrous layer)",
+                "pericardial_fluid_mL": "15-50 (normal)"
+            },
+            "biomechanics": {
+                "youngs_modulus_kPa": "500-5000 (highly nonlinear, J-shaped)",
+                "constraint_effect": "심장 과팽창 방지 — diastolic filling 제한"
+            },
+            "priority": "LOW for intracardiac CFD — FSI coupling 시에만 관련"
+        }
+    },
+    
+    # ============================================================
+    # C. 구현 우선순위 로드맵
+    # ============================================================
+    "implementation_roadmap": {
+        "phase_1_immediate": {
+            "description": "현재 CT 데이터에서 추출 가능한 구조물",
+            "structures": [
+                "papillary_muscles (HU thresholding → STL)",
+                "trabeculae_carneae (partial, coarse geometry)",
+                "left_atrial_appendage (LA label에서 분리)"
+            ],
+            "effort": "1-2주",
+            "tools": "Python + marching cubes + meshlab"
+        },
+        "phase_2_valve_resistance": {
+            "description": "판막을 저항 모델로 구현",
+            "structures": [
+                "mitral_valve (time-varying porosity)",
+                "aortic_valve (time-varying porosity)"
+            ],
+            "effort": "1주",
+            "tools": "OpenFOAM fvOptions"
+        },
+        "phase_3_geometric_valves": {
+            "description": "판막 형상 기반 모델링",
+            "structures": [
+                "mitral_valve_leaflets (idealized or patient-specific from echo)",
+                "aortic_valve_cusps (idealized 3-cusp geometry)",
+                "mitral_annulus (saddle-shape from CT)",
+                "aortic_root_complex (Valsalva sinus from CT)"
+            ],
+            "effort": "2-4주",
+            "tools": "overPimpleDyMFoam, overset mesh"
+        },
+        "phase_4_coronary": {
+            "description": "관상동맥 추가 — 별도 데이터 필요",
+            "structures": [
+                "coronary_arteries (coronary CTA 필요)",
+                "coronary_ostia (aortic root에 outlet BC 추가)"
+            ],
+            "effort": "별도 프로젝트 (coronary CTA 데이터 획득 선행)",
+            "tools": "vmtk, SimVascular"
+        },
+        "phase_5_full_fsi": {
+            "description": "완전 FSI — 구조 역학 + 유체",
+            "structures": [
+                "chordae_tendineae (1D beam elements)",
+                "deformable_LV_wall (Holzapfel-Ogden)",
+                "interventricular_septum (별도 물성)"
+            ],
+            "effort": "2-3개월",
+            "tools": "preCICE + CalculiX/FEBio + OpenFOAM"
+        }
+    }
+}
+
+# Save
+out_path = "cardiac_structure_inventory.json"
+with open(out_path, 'w', encoding='utf-8') as f:
+    json.dump(inventory, f, indent=2, ensure_ascii=False)
+
+# Print summary
+print("=" * 70)
+print("CARDIAC STRUCTURE INVENTORY — MM-WHS Case 1009")
+print("=" * 70)
+
+print(f"\n✅ PRESENT ({len(inventory['present'])} structures):")
+for k, v in inventory['present'].items():
+    print(f"   {k}: {v.get('status','')}")
+
+print(f"\n❌ MISSING ({len(inventory['missing'])} structures):")
+for k, v in inventory['missing'].items():
+    prio = v.get('priority', 'N/A')
+    thickness = ''
+    if 'biomechanics' in v:
+        thickness = v['biomechanics'].get('thickness_mm', 
+                    v['biomechanics'].get('wall_thickness_mm', ''))
+    if 'anatomy' in v:
+        thickness = thickness or v['anatomy'].get('thickness_mm', '')
+    
+    young = ''
+    if 'biomechanics' in v:
+        ym = v['biomechanics'].get('youngs_modulus_kPa', '')
+        if isinstance(ym, dict):
+            young = f"E={ym.get('circumferential','?')} kPa (circ)"
+        elif ym:
+            young = f"E={ym} kPa"
+    
+    print(f"   [{prio:20s}] {k}")
+    if thickness: print(f"      thickness: {thickness} mm")
+    if young: print(f"      {young}")
+
+print(f"\nSaved: {out_path}")

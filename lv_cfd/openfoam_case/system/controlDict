@@ -1,0 +1,57 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application     pimpleFoam;    // Transient incompressible NS
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         2.4000;
+deltaT          0.000800;
+
+writeControl    adjustableRunTime;
+writeInterval   0.0400;
+purgeWrite      0;
+
+adjustTimeStep  yes;
+maxCo           0.9;
+maxDeltaT       0.004000;
+
+functions
+{
+    fieldAverage1
+    {
+        type            fieldAverage;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    writeTime;
+        fields
+        (
+            U { mean on; prime2Mean on; base time; }
+            p { mean on; prime2Mean on; base time; }
+        );
+    }
+    
+    wallShearStress1
+    {
+        type            wallShearStress;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    writeTime;
+        patches         (wall);
+    }
+    
+    forces1
+    {
+        type            forces;
+        libs            ("libforces.so");
+        writeControl    timeStep;
+        writeInterval   10;
+        patches         (wall);
+        rho             rhoInf;
+        rhoInf          1060;
+        CofR            (0 0 0);
+    }
+}

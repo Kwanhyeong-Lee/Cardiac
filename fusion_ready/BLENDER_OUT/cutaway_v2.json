@@ -1,0 +1,45 @@
+{
+ "source": "hollow_ventricle_v2_fixed_valves.stl",
+ "plane_point": [
+  13.232047144244698,
+  -29.152208177625585,
+  19.761095822248787
+ ],
+ "plane_normal": [
+  0.8465072051030731,
+  0.19914970250852115,
+  -0.4937255793447928
+ ],
+ "halves": {
+  "A": {
+   "faces": 401494,
+   "watertight": true,
+   "components": 1,
+   "component_volumes_mL": [
+    87.251
+   ],
+   "volume_mL": 87.25,
+   "extent_mm": [
+    78.3,
+    106.4,
+    96.5
+   ]
+  },
+  "B": {
+   "faces": 369862,
+   "watertight": true,
+   "components": 1,
+   "component_volumes_mL": [
+    76.616
+   ],
+   "volume_mL": 76.62,
+   "extent_mm": [
+    71.5,
+    106.7,
+    92.7
+   ]
+  }
+ },
+ "sum_check_mL": 163.87,
+ "whole_mL": 163.87
+}

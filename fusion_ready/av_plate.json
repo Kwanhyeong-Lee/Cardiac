@@ -1,0 +1,35 @@
+{
+ "plane_origin_mm": [
+  11.216438999372954,
+  -25.6976658712825,
+  17.69870370143071
+ ],
+ "normal_basal": [
+  0.4479129210826094,
+  -0.767676068076241,
+  0.4583093601817956
+ ],
+ "thickness_mm": 12.5,
+ "apical_start_mm": 4.5,
+ "outline_area_cm2": 35.68,
+ "plate_area_cm2": 27.92,
+ "mitral_hole": "D_from_sheet_annulus",
+ "mitral_hole_area_cm2": 4.75,
+ "mitral_circle_equivalent_r_mm": 12.3,
+ "aortic_orifice_r_mm": 9.91,
+ "mitral_centre_in_outline": true,
+ "aortic_centre_in_outline": true,
+ "plate_faces": 2176,
+ "plate_watertight": true,
+ "plate_volume_mL": 34.9,
+ "mitral_annulus_ring_embedded_frac": 0.833,
+ "aortic_annulus_ring_embedded_frac": 0.625,
+ "mitral_sheet_annulus_verts": 328,
+ "mitral_sheet_annulus_inside_plate_frac": 0.869,
+ "mitral_sheet_annulus_attached_frac_within_0p6mm": 0.872,
+ "mitral_sheet_annulus_axis_range_mm": [
+  -7.1,
+  4.0
+ ],
+ "plate_volume_frac_overlapping_muscle": 0.067
+}

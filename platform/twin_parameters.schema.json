@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "twin_parameters",
+  "description": "Cardiac Digital Twin 플랫폼의 canonical 파라미터 레코드. 0D/3D/EP 모듈이 공유(PLATFORM_ARCHITECTURE §4.1).",
+  "type": "object",
+  "required": ["id", "provenance", "validation_tier"],
+  "properties": {
+    "id": {"type": "string", "description": "patient|measurement|cohort id"},
+    "provenance": {
+      "type": "object",
+      "required": ["modality", "source"],
+      "properties": {
+        "modality": {"type": "string", "enum": ["echo", "ecg", "cfd", "animal", "waveform", "synthetic"]},
+        "source": {"type": "string"},
+        "subject_id": {"type": ["integer", "string", "null"]},
+        "timestamp": {"type": ["string", "null"]}
+      }
+    },
+    "hemodynamic": {
+      "type": "object",
+      "properties": {
+        "Ees": {"type": ["number", "null"]}, "Eed": {"type": ["number", "null"]},
+        "Ea": {"type": ["number", "null"]}, "tau": {"type": ["number", "null"]},
+        "V0": {"type": ["number", "null"]}, "coupling": {"type": ["number", "null"]},
+        "EDP": {"type": ["number", "null"]}, "efficiency": {"type": ["number", "null"]}
+      }
+    },
+    "energetics": {
+      "type": "object",
+      "properties": {
+        "H_PVA": {"type": ["number", "null"]}, "SW": {"type": ["number", "null"]},
+        "PE": {"type": ["number", "null"]}, "eff": {"type": ["number", "null"]}
+      }
+    },
+    "windkessel": {
+      "type": "object",
+      "properties": {
+        "R1": {"type": ["number", "null"]}, "R2": {"type": ["number", "null"]},
+        "C": {"type": ["number", "null"]}
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "properties": {
+        "mesh_ids": {"type": "array", "items": {"type": "string"}},
+        "LV_mL": {"type": ["number", "null"]}, "RV_mL": {"type": ["number", "null"]}
+      }
+    },
+    "ep": {
+      "type": "object",
+      "properties": {
+        "QRS_ms": {"type": ["number", "null"]}, "QTc_ms": {"type": ["number", "null"]},
+        "LVH_mV": {"type": ["number", "null"]}, "PTFV1": {"type": ["number", "null"]},
+        "AF": {"type": ["integer", "null"]}
+      }
+    },
+    "validation_tier": {
+      "type": "object",
+      "description": "각 파라미터의 검증 수준: i=합성recovery, ii=침습(동물), iii=임상outcome",
+      "additionalProperties": {"type": "string", "enum": ["i", "ii", "iii", "unvalidated"]}
+    }
+  }
+}

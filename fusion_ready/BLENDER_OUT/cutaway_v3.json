@@ -1,0 +1,45 @@
+{
+ "source": "hollow_ventricle_v3_IDEALISED_subvalvular.stl",
+ "plane_point": [
+  13.232047144244698,
+  -29.152208177625585,
+  19.761095822248787
+ ],
+ "plane_normal": [
+  0.8465072051030731,
+  0.19914970250852115,
+  -0.4937255793447928
+ ],
+ "halves": {
+  "A": {
+   "faces": 403358,
+   "watertight": true,
+   "components": 1,
+   "component_volumes_mL": [
+    88.683
+   ],
+   "volume_mL": 88.68,
+   "extent_mm": [
+    78.3,
+    106.4,
+    96.5
+   ]
+  },
+  "B": {
+   "faces": 372506,
+   "watertight": true,
+   "components": 1,
+   "component_volumes_mL": [
+    78.084
+   ],
+   "volume_mL": 78.08,
+   "extent_mm": [
+    71.5,
+    106.7,
+    92.7
+   ]
+  }
+ },
+ "sum_check_mL": 166.76,
+ "whole_mL": 166.77
+}

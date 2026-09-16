@@ -1,0 +1,90 @@
+{
+ "method": "24 proper rotations (axis permutation x sign, det=+1) + translation of PM centroid to LV centroid; score = fraction of PM vertices inside LV",
+ "best": {
+  "perm": [
+   0,
+   2,
+   1
+  ],
+  "signs": [
+   -1,
+   -1,
+   -1
+  ],
+  "inside": 0.8515
+ },
+ "top5": [
+  {
+   "perm": [
+    0,
+    2,
+    1
+   ],
+   "signs": [
+    -1,
+    -1,
+    -1
+   ],
+   "inside": 0.8515
+  },
+  {
+   "perm": [
+    1,
+    2,
+    0
+   ],
+   "signs": [
+    -1,
+    1,
+    -1
+   ],
+   "inside": 0.8347
+  },
+  {
+   "perm": [
+    1,
+    0,
+    2
+   ],
+   "signs": [
+    -1,
+    -1,
+    -1
+   ],
+   "inside": 0.8192
+  },
+  {
+   "perm": [
+    0,
+    1,
+    2
+   ],
+   "signs": [
+    -1,
+    -1,
+    1
+   ],
+   "inside": 0.8096
+  },
+  {
+   "perm": [
+    1,
+    2,
+    0
+   ],
+   "signs": [
+    1,
+    -1,
+    -1
+   ],
+   "inside": 0.8072
+  }
+ ],
+ "verdict": "NOT RECOVERED. The best rotation scores 0.852 but the 5th-best scores 0.807: a spread of 0.044 across rotations means the inside-fraction metric does not identify the rotation at all -- a ~50 mm blob centred in a ~70 mm cavity is mostly inside under ANY proper rotation. The earlier 'RECOVERED' came from a 0.85 threshold crossed by 0.0015 and is withdrawn. Recovery needs a registration with an anatomical constraint (PM bases on the LV free-wall endocardium, tips toward the mitral annulus), which in turn needs the mitral valve position verified first.",
+ "discrimination": {
+  "best": 0.8515,
+  "fifth": 0.8072,
+  "spread": 0.0443,
+  "conclusion": "not discriminating"
+ }
+}

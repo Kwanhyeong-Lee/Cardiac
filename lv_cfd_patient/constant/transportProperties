@@ -1,0 +1,12 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      transportProperties;
+}
+
+// Blood properties
+transportModel  Newtonian;
+nu              [0 2 -1 0 0 0 0] 3.3e-06;
+// rho = 1060 kg/m³, mu = 0.0035 Pa·s → nu = mu/rho = 3.3e-6 m²/s

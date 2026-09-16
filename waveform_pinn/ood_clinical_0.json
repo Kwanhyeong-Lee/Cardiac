@@ -1,0 +1,151 @@
+{
+ "seed": 0,
+ "n_train_windows": 11730,
+ "n_train_patients": 389,
+ "runs": [
+  {
+   "model": "A",
+   "n_params": 56983,
+   "results": [
+    {
+     "set": "IN-DIST (general surgery)",
+     "n_windows": 2915,
+     "n_patients": 98,
+     "r2_patient": 0.8063,
+     "co_min": 2.17,
+     "co_max": 10.03,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 0,
+     "V_neg": 0,
+     "R_nonpsd": 0
+    },
+    {
+     "set": "THORACIC",
+     "n_windows": 6202,
+     "n_patients": 226,
+     "r2_patient": 0.8205,
+     "co_min": 1.97,
+     "co_max": 9.63,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 0,
+     "V_neg": 0,
+     "R_nonpsd": 0
+    },
+    {
+     "set": "TRANSPLANT",
+     "n_windows": 6007,
+     "n_patients": 175,
+     "r2_patient": 0.4188,
+     "co_min": 1.75,
+     "co_max": 10.62,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 0,
+     "V_neg": 0,
+     "R_nonpsd": 0
+    }
+   ]
+  },
+  {
+   "model": "C",
+   "n_params": 58402,
+   "results": [
+    {
+     "set": "IN-DIST (general surgery)",
+     "n_windows": 2915,
+     "n_patients": 98,
+     "r2_patient": 0.8242,
+     "co_min": 2.23,
+     "co_max": 10.1,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 2233,
+     "V_neg": 736,
+     "R_nonpsd": 2915
+    },
+    {
+     "set": "THORACIC",
+     "n_windows": 6202,
+     "n_patients": 226,
+     "r2_patient": 0.8221,
+     "co_min": 1.52,
+     "co_max": 10.18,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 4857,
+     "V_neg": 1580,
+     "R_nonpsd": 6202
+    },
+    {
+     "set": "TRANSPLANT",
+     "n_windows": 6007,
+     "n_patients": 175,
+     "r2_patient": 0.4128,
+     "co_min": 1.75,
+     "co_max": 10.48,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 3031,
+     "V_neg": 3608,
+     "R_nonpsd": 6007
+    }
+   ]
+  },
+  {
+   "model": "E",
+   "n_params": 39720,
+   "results": [
+    {
+     "set": "IN-DIST (general surgery)",
+     "n_windows": 2915,
+     "n_patients": 98,
+     "r2_patient": 0.7557,
+     "co_min": 3.85,
+     "co_max": 10.36,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 0,
+     "V_neg": 0,
+     "R_nonpsd": 0
+    },
+    {
+     "set": "THORACIC",
+     "n_windows": 6202,
+     "n_patients": 226,
+     "r2_patient": 0.7958,
+     "co_min": 3.85,
+     "co_max": 10.7,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 0,
+     "V_neg": 0,
+     "R_nonpsd": 0
+    },
+    {
+     "set": "TRANSPLANT",
+     "n_windows": 6007,
+     "n_patients": 175,
+     "r2_patient": 0.3732,
+     "co_min": 3.85,
+     "co_max": 11.35,
+     "co_negative": 0,
+     "co_negative_pct": 0.0,
+     "co_over_25": 0,
+     "T_neg": 0,
+     "V_neg": 0,
+     "R_nonpsd": 0
+    }
+   ]
+  }
+ ]
+}

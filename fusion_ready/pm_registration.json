@@ -1,0 +1,101 @@
+{
+ "transform_frameB_mm_to_frameA_mm": [
+  [
+   -0.97040583257428,
+   0.059939693861910205,
+   0.23392253676283234,
+   37.47894610839979
+  ],
+  [
+   -0.24064886496286889,
+   -0.15974829797680165,
+   -0.9573758953961593,
+   138.0369384133115
+  ],
+  [
+   -0.02001609097453968,
+   -0.9853363458196674,
+   0.16944509939459293,
+   123.44526927838292
+  ],
+  [
+   0.0,
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "start_candidate": {
+  "perm": [
+   0,
+   2,
+   1
+  ],
+  "signs": [
+   -1,
+   -1,
+   -1
+  ],
+  "det": 1.0
+ },
+ "refinement": {
+  "rotation_deg": 16.950097743160523,
+  "translation_mm": [
+   1.411183066842828,
+   4.783150028734427,
+   -2.709447304386892
+  ],
+  "optimizer": "Powell",
+  "n_eval": 1121
+ },
+ "metrics_before": {
+  "base_gap_mm": 5.468746418431502,
+  "base_median_sdf_mm": 5.250198360059107,
+  "frac_inside": 0.90848026868178,
+  "tip_to_annulus_mm": 40.45054376659157,
+  "tip_depth_below_annulus_mm": 31.513100009864523,
+  "cost": 576.905395393808
+ },
+ "metrics_after": {
+  "base_gap_mm": 2.236576297771516,
+  "base_median_sdf_mm": 1.7474368908999258,
+  "frac_inside": 0.964735516372796,
+  "tip_to_annulus_mm": 40.31606007405413,
+  "tip_depth_below_annulus_mm": 35.344544161025354,
+  "cost": 39.468808023684645
+ },
+ "acceptance": {
+  "base_gap_mm <= 1.5": false,
+  "frac_inside >= 0.95": true,
+  "tip_to_annulus 15-40": false,
+  "rotation_refinement <= 15deg": false
+ },
+ "accepted": false,
+ "per_pm_fullres": {
+  "anterolateral_pm": {
+   "faces": 122298,
+   "frac_inside": 0.943,
+   "centre_mm": [
+    -0.4,
+    -15.8,
+    -7.0
+   ]
+  },
+  "posteromedial_pm": {
+   "faces": 131568,
+   "frac_inside": 0.919,
+   "centre_mm": [
+    -5.2,
+    17.0,
+    -6.8
+   ]
+  }
+ },
+ "verdict": "RIGID FIT INFEASIBLE within anatomical tolerances. Two runs: (1) with soft containment the optimiser buried 24% of the muscle through the wall to close the base gap (rotation 46.7 deg) -- rejected, cost re-specified; (2) with near-hard containment and a 15-deg refinement bound, the optimum violates every gate slightly and simultaneously (base gap 2.24 mm, tips 40.3 mm, rotation 17.0 deg, full-res inside 0.943/0.919). Simultaneous marginal violation of independent constraints is the signature of joint infeasibility, not of a local minimum.",
+ "root_cause_hypothesis": "Upstream segmentation. papillary_muscles.stl is 50 disconnected fragments spanning 84 mm (a real PM pair spans ~40-50 mm); the k-means split into anterolateral/posteromedial inherits that. The pair's mutual pose is therefore not trustworthy, so registering them as one rigid body imposes a wrong constraint, and registering them separately would be fitting noise.",
+ "recommended_next": "Re-derive the papillary muscles from LV_myocardium_frameA.stl (Claude Code's mirrored, validated myocardium, already in frame A): the myocardium regions that protrude inside the blood-pool convex hull ARE the PMs and trabeculae. That uses data already in the correct frame and needs no registration.",
+ "files": {
+  "bestfit_compromise": "frame_A_patient/*_registered.stl (renamed *_bestfit_NOTACCEPTED.stl)",
+  "sdf_cache": "lv_sdf_grid.npz (2.5 mm, +12 mm margin, 65,208 pts, 26 s to rebuild)"
+ }
+}

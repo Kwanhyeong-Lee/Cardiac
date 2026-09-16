@@ -1,0 +1,67 @@
+{
+ "constants": {
+  "PORT_R_MV": 9.5,
+  "PORT_R_AV": 7.9,
+  "PORT_LEN": 45.0,
+  "MARGIN": 15.0,
+  "WALL": 4.0,
+  "CLEAR": 0.4,
+  "POUR_LIP": 8.0,
+  "FOOT": 6.0,
+  "FOOT_H": 32.0
+ },
+ "procedure": [
+  "print core in PVA (or wax); print box in PLA/PETG",
+  "stand box on its feet, port face down; drop core stubs through the two bores",
+  "seal the 0.4 mm stub clearance from outside with hot glue or clay",
+  "degas and pour clear silicone (e.g. Ecoflex/Sylgard, ~0.95 L) to MARGIN above the apex",
+  "cure, lift block out, cut stubs flush, dissolve core in warm water (PVA)",
+  "push barb fittings into the 19 mm (mitral, inflow) and 12.7 mm (aortic, outflow) ports"
+ ],
+ "core": {
+  "faces": 40948,
+  "watertight": true,
+  "volume_mL": 173.66,
+  "extent_mm": [
+   80.3,
+   110.8,
+   98.5
+  ],
+  "note": "print in PVA/wax; this is the cavity + tubing ports"
+ },
+ "mould_box": {
+  "faces": 868,
+  "watertight": true,
+  "outer_extent_mm": [
+   102.3,
+   94.7,
+   141.4
+  ],
+  "inner_extent_mm": [
+   94.3,
+   86.7,
+   138.4
+  ],
+  "silicone_volume_mL": 982.0,
+  "bores_mm": {
+   "mitral": 19.8,
+   "aortic": 16.6
+  }
+ },
+ "checks": {
+  "core_touching_box_wall_frac": 0.0,
+  "silicone_min_mm": 15.0,
+  "silicone_p05_mm": 16.4,
+  "stubs_protrude_past_outer_face_mm": 25.0,
+  "feet_clear_stubs": true,
+  "pour_face_open": true,
+  "port_face_closed": true,
+  "PASS": true
+ },
+ "files": [
+  "core_LV_with_ports.stl",
+  "mould_box.stl",
+  "core_PRINT_ORIENTED.stl",
+  "mould_box_PRINT_ORIENTED.stl"
+ ]
+}

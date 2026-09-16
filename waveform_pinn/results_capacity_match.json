@@ -1,0 +1,1505 @@
+[
+ {
+  "model": "A",
+  "seed": 0,
+  "n_params": 56983,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55048,
+  "n_train": 17944,
+  "n_val": 4467,
+  "n_test": 5551,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 46,
+  "val_mse": 0.18063,
+  "train_seconds": 34.8,
+  "internal_r2": 0.8794,
+  "internal_r2_window": 0.8274,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 1.51506989547085e-05
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5551,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 2.058,
+    "max": 17.253
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 427,
+    "n_below_lo": 486,
+    "n_above_hi": 110,
+    "n_outside": 596,
+    "min": -11.032,
+    "max": 30.215
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 936,
+    "n_below_lo": 1001,
+    "n_above_hi": 576,
+    "n_outside": 1577,
+    "min": -34.861,
+    "max": 59.685
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 1245,
+    "n_below_lo": 1284,
+    "n_above_hi": 1088,
+    "n_outside": 2372,
+    "min": -60.438,
+    "max": 114.123
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 1397,
+    "n_below_lo": 1428,
+    "n_above_hi": 1388,
+    "n_outside": 2816,
+    "min": -115.631,
+    "max": 198.56
+   }
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6625,
+   "pearson_r_ci": [
+    0.4101,
+    0.8116
+   ],
+   "ccc": 0.515,
+   "ccc_ci": [
+    0.3283,
+    0.6837
+   ],
+   "bias": -1.184,
+   "bias_ci": [
+    -1.6945,
+    -0.681
+   ],
+   "sd_diff": 1.5135,
+   "sd_diff_ci": [
+    1.2314,
+    1.9048
+   ],
+   "pct_error": 45.7884,
+   "pct_error_ci": [
+    36.6229,
+    57.8875
+   ],
+   "mae": 1.5514,
+   "mae_ci": [
+    1.2256,
+    1.9877
+   ],
+   "loa": [
+    -4.151,
+    1.783
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E",
+  "seed": 0,
+  "n_params": 39720,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 37785,
+  "n_train": 17944,
+  "n_val": 4467,
+  "n_test": 5551,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 46,
+  "val_mse": 0.1915,
+  "train_seconds": 36.4,
+  "internal_r2": 0.8526,
+  "internal_r2_window": 0.8188,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": -3.2159131162965703e-10
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5551,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.34,
+    "max": 16.878
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 2,
+    "n_outside": 2,
+    "min": 3.34,
+    "max": 20.595
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 55,
+    "n_outside": 55,
+    "min": 3.34,
+    "max": 187.305
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 137,
+    "n_outside": 137,
+    "min": 3.34,
+    "max": 1192.862
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 155,
+    "n_outside": 155,
+    "min": 3.34,
+    "max": 3432.073
+   }
+  },
+  "affine": {
+   "scale": 1.0085,
+   "shift": -0.9949,
+   "implied_floor_Lmin": 3.34,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 3.34,
+   "frac_train_targets_below_floor": 0.1371,
+   "frac_test_pred_within_0p10_of_floor": 0.1234
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6586,
+   "pearson_r_ci": [
+    0.4312,
+    0.8072
+   ],
+   "ccc": 0.5169,
+   "ccc_ci": [
+    0.3348,
+    0.6873
+   ],
+   "bias": -1.1796,
+   "bias_ci": [
+    -1.6936,
+    -0.6677
+   ],
+   "sd_diff": 1.5247,
+   "sd_diff_ci": [
+    1.2553,
+    1.9342
+   ],
+   "pct_error": 46.1093,
+   "pct_error_ci": [
+    37.5591,
+    58.1278
+   ],
+   "mae": 1.5447,
+   "mae_ci": [
+    1.213,
+    1.9992
+   ],
+   "loa": [
+    -4.168,
+    1.809
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E2",
+  "seed": 0,
+  "n_params": 56986,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55051,
+  "n_train": 17944,
+  "n_val": 4467,
+  "n_test": 5551,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 47,
+  "val_mse": 0.18941,
+  "train_seconds": 38.9,
+  "internal_r2": 0.8803,
+  "internal_r2_window": 0.8243,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": -4.614910143760642e-12
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5551,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.327,
+    "max": 17.611
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 26,
+    "n_outside": 26,
+    "min": 3.327,
+    "max": 28.83
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 257,
+    "n_outside": 257,
+    "min": 3.327,
+    "max": 56.21
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 578,
+    "n_outside": 578,
+    "min": 3.327,
+    "max": 243.793
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 762,
+    "n_outside": 762,
+    "min": 3.327,
+    "max": 475.207
+   }
+  },
+  "affine": {
+   "scale": 0.9976,
+   "shift": -1.0024,
+   "implied_floor_Lmin": 3.327,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 3.327,
+   "frac_train_targets_below_floor": 0.1371,
+   "frac_test_pred_within_0p10_of_floor": 0.1175
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6156,
+   "pearson_r_ci": [
+    0.3659,
+    0.7789
+   ],
+   "ccc": 0.495,
+   "ccc_ci": [
+    0.3008,
+    0.6768
+   ],
+   "bias": -1.1563,
+   "bias_ci": [
+    -1.7016,
+    -0.6128
+   ],
+   "sd_diff": 1.6221,
+   "sd_diff_ci": [
+    1.3368,
+    2.0439
+   ],
+   "pct_error": 48.9694,
+   "pct_error_ci": [
+    39.9096,
+    61.618
+   ],
+   "mae": 1.6036,
+   "mae_ci": [
+    1.2657,
+    2.0685
+   ],
+   "loa": [
+    -4.336,
+    2.023
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E3",
+  "seed": 0,
+  "n_params": 56984,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55049,
+  "n_train": 17944,
+  "n_val": 4467,
+  "n_test": 5551,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 47,
+  "val_mse": 0.1797,
+  "train_seconds": 29.7,
+  "internal_r2": 0.8907,
+  "internal_r2_window": 0.8336,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 0.001610744207949456
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5551,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 1.697,
+    "max": 17.67
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 81,
+    "n_above_hi": 166,
+    "n_outside": 247,
+    "min": 0.013,
+    "max": 85.01
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 257,
+    "n_above_hi": 605,
+    "n_outside": 862,
+    "min": 0.0,
+    "max": 1319.495
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 424,
+    "n_above_hi": 1062,
+    "n_outside": 1486,
+    "min": 0.0,
+    "max": 4845.245
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 541,
+    "n_above_hi": 1418,
+    "n_outside": 1959,
+    "min": 0.0,
+    "max": 15850.89
+   }
+  },
+  "affine": {
+   "scale": "fixed 1/sigma_y",
+   "shift": "fixed -mu_y/sigma_y",
+   "implied_floor_Lmin": 0.0,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 0.0,
+   "frac_train_targets_below_floor": 0.0,
+   "frac_test_pred_within_0p10_of_floor": 0.0
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6278,
+   "pearson_r_ci": [
+    0.3753,
+    0.7921
+   ],
+   "ccc": 0.4916,
+   "ccc_ci": [
+    0.2972,
+    0.6718
+   ],
+   "bias": -1.2065,
+   "bias_ci": [
+    -1.7445,
+    -0.6792
+   ],
+   "sd_diff": 1.5891,
+   "sd_diff_ci": [
+    1.3056,
+    2.0348
+   ],
+   "pct_error": 48.1547,
+   "pct_error_ci": [
+    38.9591,
+    61.2185
+   ],
+   "mae": 1.617,
+   "mae_ci": [
+    1.2859,
+    2.0738
+   ],
+   "loa": [
+    -4.321,
+    1.908
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "A",
+  "seed": 1,
+  "n_params": 56983,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55048,
+  "n_train": 17988,
+  "n_val": 4387,
+  "n_test": 5587,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 24,
+  "val_mse": 0.14949,
+  "train_seconds": 21.0,
+  "internal_r2": 0.8423,
+  "internal_r2_window": 0.7927,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 0.00038966751512498765
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5587,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 2.202,
+    "max": 12.293
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 210,
+    "n_below_lo": 268,
+    "n_above_hi": 14,
+    "n_outside": 282,
+    "min": -12.112,
+    "max": 25.333
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 579,
+    "n_below_lo": 640,
+    "n_above_hi": 218,
+    "n_outside": 858,
+    "min": -26.437,
+    "max": 43.507
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 947,
+    "n_below_lo": 992,
+    "n_above_hi": 553,
+    "n_outside": 1545,
+    "min": -62.998,
+    "max": 93.568
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 1263,
+    "n_below_lo": 1309,
+    "n_above_hi": 792,
+    "n_outside": 2101,
+    "min": -92.646,
+    "max": 137.225
+   }
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6167,
+   "pearson_r_ci": [
+    0.3412,
+    0.7854
+   ],
+   "ccc": 0.4823,
+   "ccc_ci": [
+    0.2738,
+    0.6621
+   ],
+   "bias": -1.1775,
+   "bias_ci": [
+    -1.7293,
+    -0.6543
+   ],
+   "sd_diff": 1.6039,
+   "sd_diff_ci": [
+    1.2972,
+    2.0435
+   ],
+   "pct_error": 48.4992,
+   "pct_error_ci": [
+    38.8012,
+    62.0819
+   ],
+   "mae": 1.5718,
+   "mae_ci": [
+    1.2263,
+    2.0426
+   ],
+   "loa": [
+    -4.321,
+    1.966
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E",
+  "seed": 1,
+  "n_params": 39720,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 37785,
+  "n_train": 17988,
+  "n_val": 4387,
+  "n_test": 5587,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 52,
+  "val_mse": 0.16966,
+  "train_seconds": 21.9,
+  "internal_r2": 0.8236,
+  "internal_r2_window": 0.7795,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 3.907506006756697e-07
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5587,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.388,
+    "max": 11.852
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.388,
+    "max": 18.171
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 1,
+    "n_outside": 1,
+    "min": 3.388,
+    "max": 36.592
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 3,
+    "n_outside": 3,
+    "min": 3.388,
+    "max": 37.453
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 7,
+    "n_outside": 7,
+    "min": 3.388,
+    "max": 166.056
+   }
+  },
+  "affine": {
+   "scale": 1.008,
+   "shift": -0.955,
+   "implied_floor_Lmin": 3.388,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 3.388,
+   "frac_train_targets_below_floor": 0.1277,
+   "frac_test_pred_within_0p10_of_floor": 0.1256
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6341,
+   "pearson_r_ci": [
+    0.3641,
+    0.7952
+   ],
+   "ccc": 0.5053,
+   "ccc_ci": [
+    0.2955,
+    0.6821
+   ],
+   "bias": -1.1139,
+   "bias_ci": [
+    -1.6583,
+    -0.5988
+   ],
+   "sd_diff": 1.5703,
+   "sd_diff_ci": [
+    1.2721,
+    1.9968
+   ],
+   "pct_error": 47.2539,
+   "pct_error_ci": [
+    37.7834,
+    60.3972
+   ],
+   "mae": 1.5327,
+   "mae_ci": [
+    1.2072,
+    1.9902
+   ],
+   "loa": [
+    -4.192,
+    1.964
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E2",
+  "seed": 1,
+  "n_params": 56986,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55051,
+  "n_train": 17988,
+  "n_val": 4387,
+  "n_test": 5587,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 56,
+  "val_mse": 0.16692,
+  "train_seconds": 36.6,
+  "internal_r2": 0.8339,
+  "internal_r2_window": 0.7837,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 2.6694699535844567e-06
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5587,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.372,
+    "max": 12.588
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 34,
+    "n_outside": 34,
+    "min": 3.372,
+    "max": 29.943
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 214,
+    "n_outside": 214,
+    "min": 3.372,
+    "max": 59.346
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 476,
+    "n_outside": 476,
+    "min": 3.372,
+    "max": 289.685
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 690,
+    "n_outside": 690,
+    "min": 3.372,
+    "max": 473.317
+   }
+  },
+  "affine": {
+   "scale": 0.9932,
+   "shift": -0.9639,
+   "implied_floor_Lmin": 3.372,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 3.372,
+   "frac_train_targets_below_floor": 0.1277,
+   "frac_test_pred_within_0p10_of_floor": 0.129
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6432,
+   "pearson_r_ci": [
+    0.3742,
+    0.8055
+   ],
+   "ccc": 0.5131,
+   "ccc_ci": [
+    0.2996,
+    0.6936
+   ],
+   "bias": -1.1384,
+   "bias_ci": [
+    -1.6762,
+    -0.6255
+   ],
+   "sd_diff": 1.5573,
+   "sd_diff_ci": [
+    1.254,
+    1.9958
+   ],
+   "pct_error": 46.9486,
+   "pct_error_ci": [
+    37.1462,
+    60.3092
+   ],
+   "mae": 1.5442,
+   "mae_ci": [
+    1.2239,
+    2.0022
+   ],
+   "loa": [
+    -4.191,
+    1.914
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E3",
+  "seed": 1,
+  "n_params": 56984,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55049,
+  "n_train": 17988,
+  "n_val": 4387,
+  "n_test": 5587,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 44,
+  "val_mse": 0.15201,
+  "train_seconds": 28.5,
+  "internal_r2": 0.8384,
+  "internal_r2_window": 0.7884,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 0.03989587774308396
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5587,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 2.072,
+    "max": 12.638
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 2,
+    "n_above_hi": 191,
+    "n_outside": 193,
+    "min": 0.326,
+    "max": 53.215
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 5,
+    "n_above_hi": 638,
+    "n_outside": 643,
+    "min": 0.104,
+    "max": 301.375
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 19,
+    "n_above_hi": 1152,
+    "n_outside": 1171,
+    "min": 0.049,
+    "max": 683.405
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 57,
+    "n_above_hi": 1786,
+    "n_outside": 1843,
+    "min": 0.008,
+    "max": 7187.689
+   }
+  },
+  "affine": {
+   "scale": "fixed 1/sigma_y",
+   "shift": "fixed -mu_y/sigma_y",
+   "implied_floor_Lmin": 0.0,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 0.0,
+   "frac_train_targets_below_floor": 0.0,
+   "frac_test_pred_within_0p10_of_floor": 0.0
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6276,
+   "pearson_r_ci": [
+    0.3555,
+    0.7897
+   ],
+   "ccc": 0.4893,
+   "ccc_ci": [
+    0.2834,
+    0.6679
+   ],
+   "bias": -1.1774,
+   "bias_ci": [
+    -1.7155,
+    -0.6555
+   ],
+   "sd_diff": 1.5816,
+   "sd_diff_ci": [
+    1.2754,
+    2.0149
+   ],
+   "pct_error": 47.8224,
+   "pct_error_ci": [
+    38.1392,
+    60.8882
+   ],
+   "mae": 1.5789,
+   "mae_ci": [
+    1.2499,
+    2.0364
+   ],
+   "loa": [
+    -4.277,
+    1.922
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "A",
+  "seed": 2,
+  "n_params": 56983,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55048,
+  "n_train": 17904,
+  "n_val": 4577,
+  "n_test": 5481,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 24,
+  "val_mse": 0.2116,
+  "train_seconds": 17.7,
+  "internal_r2": 0.8726,
+  "internal_r2_window": 0.8185,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 0.0003409470334905914
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5481,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 2.087,
+    "max": 11.381
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 288,
+    "n_below_lo": 346,
+    "n_above_hi": 17,
+    "n_outside": 363,
+    "min": -9.124,
+    "max": 31.138
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 613,
+    "n_below_lo": 666,
+    "n_above_hi": 186,
+    "n_outside": 852,
+    "min": -23.65,
+    "max": 49.638
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 942,
+    "n_below_lo": 980,
+    "n_above_hi": 484,
+    "n_outside": 1464,
+    "min": -55.636,
+    "max": 104.486
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 1246,
+    "n_below_lo": 1284,
+    "n_above_hi": 611,
+    "n_outside": 1895,
+    "min": -98.312,
+    "max": 159.367
+   }
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6219,
+   "pearson_r_ci": [
+    0.3418,
+    0.8021
+   ],
+   "ccc": 0.4839,
+   "ccc_ci": [
+    0.2625,
+    0.681
+   ],
+   "bias": -1.2012,
+   "bias_ci": [
+    -1.761,
+    -0.6817
+   ],
+   "sd_diff": 1.5954,
+   "sd_diff_ci": [
+    1.28,
+    2.0638
+   ],
+   "pct_error": 48.3291,
+   "pct_error_ci": [
+    38.2728,
+    62.4188
+   ],
+   "mae": 1.5832,
+   "mae_ci": [
+    1.2405,
+    2.0547
+   ],
+   "loa": [
+    -4.328,
+    1.926
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E",
+  "seed": 2,
+  "n_params": 39720,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 37785,
+  "n_train": 17904,
+  "n_val": 4577,
+  "n_test": 5481,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 38,
+  "val_mse": 0.22435,
+  "train_seconds": 23.0,
+  "internal_r2": 0.8471,
+  "internal_r2_window": 0.8026,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 1.5691942733167252e-08
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5481,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.444,
+    "max": 11.489
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.444,
+    "max": 15.575
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.444,
+    "max": 16.145
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 1,
+    "n_outside": 1,
+    "min": 3.444,
+    "max": 26.601
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 3,
+    "n_outside": 3,
+    "min": 3.444,
+    "max": 808.085
+   }
+  },
+  "affine": {
+   "scale": 0.9975,
+   "shift": -0.9296,
+   "implied_floor_Lmin": 3.444,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 3.444,
+   "frac_train_targets_below_floor": 0.1512,
+   "frac_test_pred_within_0p10_of_floor": 0.2
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6601,
+   "pearson_r_ci": [
+    0.4134,
+    0.8127
+   ],
+   "ccc": 0.5565,
+   "ccc_ci": [
+    0.337,
+    0.7476
+   ],
+   "bias": -1.0431,
+   "bias_ci": [
+    -1.5847,
+    -0.5396
+   ],
+   "sd_diff": 1.5463,
+   "sd_diff_ci": [
+    1.2469,
+    2.0153
+   ],
+   "pct_error": 46.285,
+   "pct_error_ci": [
+    36.8067,
+    59.8995
+   ],
+   "mae": 1.4382,
+   "mae_ci": [
+    1.1054,
+    1.9015
+   ],
+   "loa": [
+    -4.074,
+    1.988
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E2",
+  "seed": 2,
+  "n_params": 56986,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55051,
+  "n_train": 17904,
+  "n_val": 4577,
+  "n_test": 5481,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 38,
+  "val_mse": 0.22067,
+  "train_seconds": 26.0,
+  "internal_r2": 0.8466,
+  "internal_r2_window": 0.8052,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 8.703498614430014e-09
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5481,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 3.429,
+    "max": 10.992
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 28,
+    "n_outside": 28,
+    "min": 3.429,
+    "max": 28.158
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 201,
+    "n_outside": 201,
+    "min": 3.429,
+    "max": 79.177
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 585,
+    "n_outside": 585,
+    "min": 3.429,
+    "max": 357.171
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 805,
+    "n_outside": 805,
+    "min": 3.429,
+    "max": 734.052
+   }
+  },
+  "affine": {
+   "scale": 0.994,
+   "shift": -0.9375,
+   "implied_floor_Lmin": 3.429,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 3.429,
+   "frac_train_targets_below_floor": 0.1512,
+   "frac_test_pred_within_0p10_of_floor": 0.198
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6306,
+   "pearson_r_ci": [
+    0.3779,
+    0.7957
+   ],
+   "ccc": 0.5308,
+   "ccc_ci": [
+    0.3047,
+    0.7274
+   ],
+   "bias": -1.0528,
+   "bias_ci": [
+    -1.6186,
+    -0.5265
+   ],
+   "sd_diff": 1.6101,
+   "sd_diff_ci": [
+    1.309,
+    2.0947
+   ],
+   "pct_error": 48.2301,
+   "pct_error_ci": [
+    38.5767,
+    62.2542
+   ],
+   "mae": 1.4996,
+   "mae_ci": [
+    1.1646,
+    1.9722
+   ],
+   "loa": [
+    -4.209,
+    2.103
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ },
+ {
+  "model": "E3",
+  "seed": 2,
+  "n_params": 56984,
+  "n_params_dead": 1935,
+  "dead_tensors": [
+   "L_head.bias",
+   "L_head.weight"
+  ],
+  "n_params_active": 55049,
+  "n_train": 17904,
+  "n_val": 4577,
+  "n_test": 5481,
+  "n_train_cases": 590,
+  "n_test_cases": 185,
+  "best_epoch": 35,
+  "val_mse": 0.21145,
+  "train_seconds": 22.8,
+  "internal_r2": 0.8816,
+  "internal_r2_window": 0.8244,
+  "n_test_patients": 185,
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0,
+   "R_min_rel": 0.008987882085931594
+  },
+  "violations_note": "R enters no loss term in these runs (soft=False), so a PSD or non-PSD outcome is a property of the parameterisation, not of training -- which is the claim being made.",
+  "output_range_probe": {
+   "sigma0": {
+    "n": 5481,
+    "n_negative": 0,
+    "n_below_lo": 0,
+    "n_above_hi": 0,
+    "n_outside": 0,
+    "min": 2.159,
+    "max": 10.459
+   },
+   "sigma6": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 7,
+    "n_above_hi": 181,
+    "n_outside": 188,
+    "min": 0.266,
+    "max": 105.708
+   },
+   "sigma12": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 50,
+    "n_above_hi": 503,
+    "n_outside": 553,
+    "min": 0.005,
+    "max": 636.133
+   },
+   "sigma24": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 136,
+    "n_above_hi": 1051,
+    "n_outside": 1187,
+    "min": 0.0,
+    "max": 8914.141
+   },
+   "sigma40": {
+    "n": 4000,
+    "n_negative": 0,
+    "n_below_lo": 178,
+    "n_above_hi": 1678,
+    "n_outside": 1856,
+    "min": 0.002,
+    "max": 18750.552
+   }
+  },
+  "affine": {
+   "scale": "fixed 1/sigma_y",
+   "shift": "fixed -mu_y/sigma_y",
+   "implied_floor_Lmin": 0.0,
+   "guarantee_valid_only_if_scale_positive": true
+  },
+  "floor_cost": {
+   "floor_Lmin": 0.0,
+   "frac_train_targets_below_floor": 0.0,
+   "frac_test_pred_within_0p10_of_floor": 0.0
+  },
+  "n_td_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (patient level)",
+   "n": 33,
+   "pearson_r": 0.6268,
+   "pearson_r_ci": [
+    0.3537,
+    0.801
+   ],
+   "ccc": 0.4781,
+   "ccc_ci": [
+    0.2629,
+    0.6719
+   ],
+   "bias": -1.2436,
+   "bias_ci": [
+    -1.7954,
+    -0.7307
+   ],
+   "sd_diff": 1.5826,
+   "sd_diff_ci": [
+    1.2761,
+    2.0596
+   ],
+   "pct_error": 48.0954,
+   "pct_error_ci": [
+    38.1829,
+    62.3512
+   ],
+   "mae": 1.5976,
+   "mae_ci": [
+    1.2496,
+    2.0724
+   ],
+   "loa": [
+    -4.346,
+    1.858
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  }
+ }
+]

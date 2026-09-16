@@ -1,0 +1,85 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+
+application     pimpleFoam;
+startFrom       startTime;
+startTime       0;
+stopAt          endTime;
+endTime         2.4;
+deltaT          1e-5;
+writeControl    adjustableRunTime;
+writeInterval   0.04;
+purgeWrite      0;
+writeFormat     ascii;
+writePrecision  8;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+adjustTimeStep  yes;
+maxCo           0.8;
+maxDeltaT       0.002;
+
+functions
+{
+    fieldAverage
+    {
+        type            fieldAverage;
+        libs            (fieldFunctionObjects);
+        writeControl    writeTime;
+        fields
+        (
+            U { mean on; prime2Mean on; base time; }
+            p { mean on; prime2Mean on; base time; }
+        );
+    }
+
+    probes
+    {
+        type            probes;
+        libs            (sampling);
+        writeControl    timeStep;
+        writeInterval   10;
+        fields          (U p);
+        probeLocations
+        (
+            (-0.0373 0.0318 -0.1596)   // LV center
+            (-0.0250 0.0080 -0.1500)   // near mitral (shifted inward)
+            (-0.0200 0.0220 -0.1350)   // near aortic (shifted inward)
+            (-0.0373 0.0200 -0.1500)   // mid-cavity
+        );
+    }
+
+    flowRateMitral
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   10;
+        writeFields     false;
+        surfaceFormat   none;
+        regionType      patch;
+        name            mitralInlet;
+        operation       sum;
+        fields          (phi);
+    }
+
+    flowRateAortic
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   10;
+        writeFields     false;
+        surfaceFormat   none;
+        regionType      patch;
+        name            aorticOutlet;
+        operation       sum;
+        fields          (phi);
+    }
+}

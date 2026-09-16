@@ -1,0 +1,387 @@
+{
+  "n_episodes": 2720,
+  "drugs": {
+    "dobutamine": 186,
+    "dopamine": 190,
+    "epinephrine": 286,
+    "milrinone": 342,
+    "nitroglycerin": 454,
+    "nitroprusside": 143,
+    "norepinephrine": 567,
+    "phenylephrine": 460,
+    "vasopressin": 92
+  },
+  "pharmacological_concordance": 0.8444444444444444,
+  "drug_details": {
+    "dobutamine": {
+      "n": 186,
+      "metrics": {
+        "delta_sbp": {
+          "mean": -2.6021505376344085,
+          "std": 18.966337055323436,
+          "p": 0.06290505759707782,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_co": {
+          "mean": 0.10564516129032259,
+          "std": 1.155865354032266,
+          "p": 0.2141500043054025,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_hr": {
+          "mean": -1.1344086021505377,
+          "std": 10.448752617895575,
+          "p": 0.14039263079163014,
+          "expected": "+",
+          "concordant": "False"
+        },
+        "delta_svr": {
+          "mean": -151.7319587628866,
+          "std": 739.0102970000926,
+          "p": 0.04594377832905234,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_SW": {
+          "mean": 0.002511290322580647,
+          "std": 0.22608604731552656,
+          "p": 0.8797554567022012,
+          "expected": "+",
+          "concordant": "True"
+        }
+      },
+      "concordance": 0.8
+    },
+    "dopamine": {
+      "n": 190,
+      "metrics": {
+        "delta_sbp": {
+          "mean": 0.8052631578947368,
+          "std": 19.651163480080708,
+          "p": 0.5728515850359179,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": 0.20747368421052634,
+          "std": 1.3294594266199637,
+          "p": 0.03273609914848821,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_hr": {
+          "mean": 0.9736842105263158,
+          "std": 10.89460533971814,
+          "p": 0.2195084710134775,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_svr": {
+          "mean": 31.0,
+          "std": 568.6060553263974,
+          "p": 0.6293336785445623,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_SW": {
+          "mean": 0.02751736842105263,
+          "std": 0.25957739864483204,
+          "p": 0.14561448562949098,
+          "expected": "+",
+          "concordant": "True"
+        }
+      },
+      "concordance": 1.0
+    },
+    "epinephrine": {
+      "n": 286,
+      "metrics": {
+        "delta_sbp": {
+          "mean": 2.6363636363636362,
+          "std": 19.567264268184985,
+          "p": 0.023433843966539275,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": -0.027832167832167836,
+          "std": 1.2038576239535443,
+          "p": 0.6961038831748305,
+          "expected": "+",
+          "concordant": "False"
+        },
+        "delta_hr": {
+          "mean": -0.993006993006993,
+          "std": 10.6359182933967,
+          "p": 0.11546345841043962,
+          "expected": "+",
+          "concordant": "False"
+        },
+        "delta_svr": {
+          "mean": 12.06875,
+          "std": 352.50963895782496,
+          "p": 0.6655557442069441,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_SW": {
+          "mean": 0.01954090909090909,
+          "std": 0.23064916755976544,
+          "p": 0.1530201007443285,
+          "expected": "+",
+          "concordant": "True"
+        }
+      },
+      "concordance": 0.6
+    },
+    "milrinone": {
+      "n": 342,
+      "metrics": {
+        "delta_sbp": {
+          "mean": 0.6052631578947368,
+          "std": 19.510107954439615,
+          "p": 0.5665376020949231,
+          "expected": "-",
+          "concordant": "False"
+        },
+        "delta_co": {
+          "mean": 0.22046783625730995,
+          "std": 1.143426097698467,
+          "p": 0.00041465017059887863,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_hr": {
+          "mean": 0.05555555555555555,
+          "std": 10.94373030437567,
+          "p": 0.9252592595277788,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_svr": {
+          "mean": -96.40112994350282,
+          "std": 611.4693393402988,
+          "p": 0.037381174738894296,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_SW": {
+          "mean": 0.042237134502923976,
+          "std": 0.21700572960523626,
+          "p": 0.0003661623868831256,
+          "expected": "~",
+          "concordant": true
+        }
+      },
+      "concordance": 0.8
+    },
+    "nitroglycerin": {
+      "n": 454,
+      "metrics": {
+        "delta_sbp": {
+          "mean": -4.323788546255507,
+          "std": 20.377962986047145,
+          "p": 7.868697368628684e-06,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": 0.13,
+          "std": 1.207822735996224,
+          "p": 0.022285712960841784,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_hr": {
+          "mean": 0.5330396475770925,
+          "std": 10.48735224859271,
+          "p": 0.2793921338394868,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_svr": {
+          "mean": -84.92592592592592,
+          "std": 381.37097547747277,
+          "p": 0.0006131771155995495,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_SW": {
+          "mean": -0.01732004405286344,
+          "std": 0.2616934063231673,
+          "p": 0.15916359616568207,
+          "expected": "-",
+          "concordant": "True"
+        }
+      },
+      "concordance": 1.0
+    },
+    "nitroprusside": {
+      "n": 143,
+      "metrics": {
+        "delta_sbp": {
+          "mean": -5.293706293706293,
+          "std": 20.565879087593693,
+          "p": 0.0025010181467296183,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": 0.08860139860139861,
+          "std": 1.1602085785029488,
+          "p": 0.36267794909706663,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_hr": {
+          "mean": 1.2097902097902098,
+          "std": 9.368702126396318,
+          "p": 0.12476978492771448,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_svr": {
+          "mean": -132.2520325203252,
+          "std": 542.2001716367159,
+          "p": 0.007803759606203416,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_SW": {
+          "mean": -0.02932727272727273,
+          "std": 0.23481940444023047,
+          "p": 0.13752458949305454,
+          "expected": "~",
+          "concordant": true
+        }
+      },
+      "concordance": 1.0
+    },
+    "norepinephrine": {
+      "n": 567,
+      "metrics": {
+        "delta_sbp": {
+          "mean": 2.1710758377425043,
+          "std": 17.203233612329598,
+          "p": 0.0027726641864344935,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": 0.06516754850088184,
+          "std": 1.2403830474441093,
+          "p": 0.21144105879088063,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_hr": {
+          "mean": -0.8395061728395061,
+          "std": 10.416960472233994,
+          "p": 0.055487215401921086,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_svr": {
+          "mean": -41.42490842490842,
+          "std": 468.91035575068133,
+          "p": 0.14553624197543766,
+          "expected": "+",
+          "concordant": "False"
+        },
+        "delta_SW": {
+          "mean": 0.033588536155202825,
+          "std": 0.23717533760787216,
+          "p": 0.0007966311558747971,
+          "expected": "+",
+          "concordant": "True"
+        }
+      },
+      "concordance": 0.8
+    },
+    "phenylephrine": {
+      "n": 460,
+      "metrics": {
+        "delta_sbp": {
+          "mean": 2.5282608695652176,
+          "std": 19.413998532418976,
+          "p": 0.005438851378139124,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": 0.0415217391304348,
+          "std": 1.1837624507608744,
+          "p": 0.45225749921796843,
+          "expected": "-",
+          "concordant": "False"
+        },
+        "delta_hr": {
+          "mean": -0.558695652173913,
+          "std": 9.959549475049087,
+          "p": 0.22954411337149833,
+          "expected": "-",
+          "concordant": "True"
+        },
+        "delta_svr": {
+          "mean": 30.405797101449274,
+          "std": 284.86927819541893,
+          "p": 0.21202690349523587,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_SW": {
+          "mean": 0.030261739130434784,
+          "std": 0.2431472297849364,
+          "p": 0.007869501058501071,
+          "expected": "~",
+          "concordant": true
+        }
+      },
+      "concordance": 0.8
+    },
+    "vasopressin": {
+      "n": 92,
+      "metrics": {
+        "delta_sbp": {
+          "mean": 1.3478260869565217,
+          "std": 17.20876008879192,
+          "p": 0.4544471664561417,
+          "expected": "+",
+          "concordant": "True"
+        },
+        "delta_co": {
+          "mean": -0.3261956521739131,
+          "std": 1.4543484190306437,
+          "p": 0.034100292237996335,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_hr": {
+          "mean": -0.42391304347826086,
+          "std": 10.657746185315037,
+          "p": 0.7037145982181876,
+          "expected": "~",
+          "concordant": true
+        },
+        "delta_svr": {
+          "mean": -36.51428571428571,
+          "std": 406.02393231612024,
+          "p": 0.5981572446509245,
+          "expected": "+",
+          "concordant": "False"
+        },
+        "delta_SW": {
+          "mean": -0.031516304347826096,
+          "std": 0.26339565829407685,
+          "p": 0.2541092130498739,
+          "expected": "~",
+          "concordant": true
+        }
+      },
+      "concordance": 0.8
+    }
+  },
+  "response_mortality_auc": 0.4841677079217618
+}

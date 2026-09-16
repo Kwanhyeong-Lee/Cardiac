@@ -1,0 +1,335 @@
+{
+ "units_out": "mm",
+ "groups": {
+  "frame_A_patient": {
+   "status": "coherent patient CT frame (MM-WHS case 1009). Valve *seating* not yet verified: MV-AV centroid separation 48 mm is large for two annuli sharing the aortomitral curtain (typ. 20-30 mm).",
+   "parts": {
+    "lv_surface": {
+     "faces": 166928,
+     "vertices": 83460,
+     "components": 1,
+     "watertight": true,
+     "volume_mL": 149.78,
+     "area_cm2": 152.2,
+     "centre_mm": [
+      0.0,
+      0.0,
+      -0.0
+     ],
+     "extent_mm": [
+      66.47,
+      82.08,
+      70.94
+     ],
+     "source_unit": "m"
+    },
+    "mitral_valve": {
+     "faces": 22344,
+     "vertices": 11920,
+     "components": 9,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 72.45,
+     "centre_mm": [
+      16.69,
+      -27.41,
+      -1.63
+     ],
+     "extent_mm": [
+      41.75,
+      45.0,
+      46.73
+     ],
+     "source_unit": "m"
+    },
+    "aortic_valve": {
+     "faces": 44636,
+     "vertices": 22780,
+     "components": 9,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 71.35,
+     "centre_mm": [
+      26.3,
+      -3.68,
+      39.29
+     ],
+     "extent_mm": [
+      44.33,
+      44.87,
+      44.69
+     ],
+     "source_unit": "m"
+    }
+   },
+   "common_offset_mm": [
+    37.261,
+    -31.811,
+    159.65
+   ]
+  },
+  "frame_B_papillary": {
+   "status": "internally consistent, but ~260 mm from the LV in a different frame. Axis-relabelling recovery was attempted and FAILED to identify a rotation (see pm_recovery.json). Not usable in the assembly yet.",
+   "parts": {
+    "anterolateral_pm": {
+     "faces": 122298,
+     "vertices": 60764,
+     "components": 16,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 119.18,
+     "centre_mm": [
+      73.49,
+      148.32,
+      118.59
+     ],
+     "extent_mm": [
+      47.85,
+      48.58,
+      52.19
+     ],
+     "source_unit": "m"
+    },
+    "posteromedial_pm": {
+     "faces": 131568,
+     "vertices": 65272,
+     "components": 38,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 127.13,
+     "centre_mm": [
+      74.46,
+      145.51,
+      81.56
+     ],
+     "extent_mm": [
+      46.87,
+      54.2,
+      42.5
+     ],
+     "source_unit": "m"
+    },
+    "papillary_muscles": {
+     "faces": 253866,
+     "vertices": 125244,
+     "components": 50,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 246.31,
+     "centre_mm": [
+      73.73,
+      145.51,
+      102.5
+     ],
+     "extent_mm": [
+      48.34,
+      54.2,
+      84.38
+     ],
+     "source_unit": "m"
+    },
+    "chordae_al": {
+     "faces": 1012,
+     "vertices": 573,
+     "components": 11,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 3.13,
+     "centre_mm": [
+      63.05,
+      140.74,
+      112.32
+     ],
+     "extent_mm": [
+      18.45,
+      19.8,
+      5.13
+     ],
+     "source_unit": "m"
+    },
+    "chordae_pm": {
+     "faces": 1012,
+     "vertices": 573,
+     "components": 11,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 6.86,
+     "centre_mm": [
+      76.11,
+      147.91,
+      94.31
+     ],
+     "extent_mm": [
+      10.58,
+      16.25,
+      42.04
+     ],
+     "source_unit": "m"
+    },
+    "chordae_combined": {
+     "faces": 2024,
+     "vertices": 1146,
+     "components": 22,
+     "watertight": false,
+     "volume_mL": null,
+     "area_cm2": 9.99,
+     "centre_mm": [
+      67.61,
+      143.44,
+      94.31
+     ],
+     "extent_mm": [
+      27.57,
+      25.19,
+      42.04
+     ],
+     "source_unit": "m"
+    }
+   }
+  },
+  "frame_C_stacom_UNREGISTERED": {
+   "status": "STACOM2025 atlas frame. Registration to the patient FAILED its own validation (RMS 28.2 mm, RV-LV gap 34.9 mm). Visual/placeholder use only.",
+   "parts": {
+    "rv_stacom": {
+     "faces": 58304,
+     "vertices": 29154,
+     "components": 1,
+     "watertight": true,
+     "volume_mL": 112.45,
+     "area_cm2": 131.59,
+     "centre_mm": [
+      -60.46,
+      186.81,
+      87.25
+     ],
+     "extent_mm": [
+      75.64,
+      79.44,
+      51.98
+     ],
+     "source_unit": "mm"
+    },
+    "ra_stacom": {
+     "faces": 80488,
+     "vertices": 40246,
+     "components": 1,
+     "watertight": true,
+     "volume_mL": 146.32,
+     "area_cm2": 183.28,
+     "centre_mm": [
+      -37.26,
+      208.98,
+      94.55
+     ],
+     "extent_mm": [
+      86.83,
+      61.14,
+      87.58
+     ],
+     "source_unit": "mm"
+    },
+    "pa_stacom": {
+     "faces": 58372,
+     "vertices": 29188,
+     "components": 1,
+     "watertight": true,
+     "volume_mL": 70.02,
+     "area_cm2": 130.28,
+     "centre_mm": [
+      0.39,
+      159.72,
+      145.03
+     ],
+     "extent_mm": [
+      115.25,
+      96.12,
+      51.21
+     ],
+     "source_unit": "mm"
+    },
+    "pv_stacom": {
+     "faces": 49554,
+     "vertices": 24779,
+     "components": 7,
+     "watertight": true,
+     "volume_mL": 23.43,
+     "area_cm2": 112.46,
+     "centre_mm": [
+      -2.38,
+      139.53,
+      122.66
+     ],
+     "extent_mm": [
+      121.58,
+      58.49,
+      66.95
+     ],
+     "source_unit": "mm"
+    },
+    "laa_stacom": {
+     "faces": 69706,
+     "vertices": 34851,
+     "components": 3,
+     "watertight": true,
+     "volume_mL": 8.25,
+     "area_cm2": 38.62,
+     "centre_mm": [
+      -39.89,
+      160.49,
+      128.23
+     ],
+     "extent_mm": [
+      39.93,
+      48.46,
+      35.92
+     ],
+     "source_unit": "mm"
+    },
+    "coronary_stacom": {
+     "faces": 117932,
+     "vertices": 58970,
+     "components": 2,
+     "watertight": true,
+     "volume_mL": 5.21,
+     "area_cm2": 66.2,
+     "centre_mm": [
+      -36.05,
+      187.92,
+      90.24
+     ],
+     "extent_mm": [
+      115.87,
+      102.11,
+      80.87
+     ],
+     "source_unit": "mm"
+    }
+   }
+  },
+  "frame_D_orphan": {
+   "status": "x = +204 mm while the LV sits at x = -37 mm. Origin of the offset unknown. Do not use until explained.",
+   "parts": {
+    "aortic_root": {
+     "faces": 32744,
+     "vertices": 16374,
+     "components": 1,
+     "watertight": true,
+     "volume_mL": 12.88,
+     "area_cm2": 34.22,
+     "centre_mm": [
+      204.3,
+      18.07,
+      -130.25
+     ],
+     "extent_mm": [
+      40.04,
+      32.71,
+      24.38
+     ],
+     "source_unit": "m"
+    }
+   }
+  }
+ },
+ "frame_B_recovery": "NOT RECOVERED. The best rotation scores 0.852 but the 5th-best scores 0.807: a spread of 0.044 across rotations means the inside-fraction metric does not identify the rotation at all -- a ~50 mm blob centred in a ~70 mm cavity is mostly inside under ANY proper rotation. The earlier 'RECOVERED' came from a 0.85 threshold crossed by 0.0015 and is withdrawn. Recovery needs a registration with an anatomical constraint (PM bases on the LV free-wall endocardium, tips toward the mitral annulus), which in turn needs the mitral valve position verified first."
+}

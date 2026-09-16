@@ -1,0 +1,45 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+actions
+(
+    // --- Inlet faces (mitral valve region) ---
+    // Step 1: all faces on "top" patch
+    {
+        name    inletFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   top;
+    }
+    // Step 2: subset to x < mvd (mitral valve width = 0.0189 m)
+    {
+        name    inletFaces;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (-0.001 0.073 -0.001) (0.0195 0.075 0.045);
+    }
+
+    // --- Outlet faces (aortic valve region) ---
+    {
+        name    outletFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   top;
+    }
+    // subset to x > W-avd (aortic valve starts at 0.031078 m)
+    {
+        name    outletFaces;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (0.0305 0.073 -0.001) (0.048 0.075 0.045);
+    }
+);

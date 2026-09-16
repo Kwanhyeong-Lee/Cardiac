@@ -1,0 +1,222 @@
+{
+ "blender": "5.2.1 LTS",
+ "voxel_mm": 0.25,
+ "solidify_mm": 1.2,
+ "parts": {
+  "LV_bloodpool": {
+   "source": ".\\PRINT\\frame_A_patient\\lv_surface.stl",
+   "kind": "solid",
+   "before": {
+    "faces": 39992,
+    "verts": 19994,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 149.778,
+    "bbox_min_mm": [
+     -33.23,
+     -41.04,
+     -35.47
+    ],
+    "bbox_max_mm": [
+     33.24,
+     41.04,
+     35.47
+    ],
+    "extent_mm": [
+     66.47,
+     82.08,
+     70.94
+    ]
+   },
+   "solidified": null,
+   "after": {
+    "faces": 39992,
+    "verts": 19994,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 149.778,
+    "bbox_min_mm": [
+     -33.23,
+     -41.04,
+     -35.47
+    ],
+    "bbox_max_mm": [
+     33.24,
+     41.04,
+     35.47
+    ],
+    "extent_mm": [
+     66.47,
+     82.08,
+     70.94
+    ]
+   },
+   "print3d_toolbox": null
+  },
+  "mitral_valve": {
+   "source": ".\\frame_A_patient\\mitral_valve.stl",
+   "kind": "shell",
+   "before": {
+    "faces": 22344,
+    "verts": 11920,
+    "non_manifold_edges": 1480,
+    "boundary_edges": 1480,
+    "manifold": false,
+    "volume_mL": null,
+    "bbox_min_mm": [
+     -5.76,
+     -40.77,
+     -3.8
+    ],
+    "bbox_max_mm": [
+     29.99,
+     -3.61,
+     31.62
+    ],
+    "extent_mm": [
+     35.74,
+     37.16,
+     35.42
+    ]
+   },
+   "solidified": {
+    "faces": 46168,
+    "verts": 23840,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 4.093,
+    "bbox_min_mm": [
+     -5.82,
+     -41.18,
+     -4.06
+    ],
+    "bbox_max_mm": [
+     30.52,
+     -3.59,
+     31.98
+    ],
+    "extent_mm": [
+     36.35,
+     37.58,
+     36.05
+    ]
+   },
+   "after": {
+    "faces": 96250,
+    "verts": 96242,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 2.625,
+    "bbox_min_mm": [
+     -5.79,
+     -41.09,
+     -4.01
+    ],
+    "bbox_max_mm": [
+     30.43,
+     -3.62,
+     31.82
+    ],
+    "extent_mm": [
+     36.22,
+     37.47,
+     35.83
+    ]
+   },
+   "print3d_toolbox": null
+  },
+  "aortic_valve": {
+   "source": ".\\frame_A_patient\\aortic_valve.stl",
+   "kind": "shell",
+   "before": {
+    "faces": 44636,
+    "verts": 22780,
+    "non_manifold_edges": 920,
+    "boundary_edges": 920,
+    "manifold": false,
+    "volume_mL": null,
+    "bbox_min_mm": [
+     8.33,
+     -28.35,
+     28.1
+    ],
+    "bbox_max_mm": [
+     38.11,
+     1.72,
+     58.04
+    ],
+    "extent_mm": [
+     29.79,
+     30.07,
+     29.94
+    ]
+   },
+   "solidified": {
+    "faces": 90192,
+    "verts": 45560,
+    "non_manifold_edges": 6,
+    "boundary_edges": 0,
+    "manifold": false,
+    "volume_mL": null,
+    "bbox_min_mm": [
+     7.73,
+     -29.18,
+     27.74
+    ],
+    "bbox_max_mm": [
+     38.58,
+     2.32,
+     58.58
+    ],
+    "extent_mm": [
+     30.85,
+     31.49,
+     30.85
+    ]
+   },
+   "after": {
+    "faces": 122734,
+    "verts": 122734,
+    "non_manifold_edges": 0,
+    "boundary_edges": 0,
+    "manifold": true,
+    "volume_mL": 3.197,
+    "bbox_min_mm": [
+     7.73,
+     -28.84,
+     27.82
+    ],
+    "bbox_max_mm": [
+     38.57,
+     2.32,
+     58.52
+    ],
+    "extent_mm": [
+     30.83,
+     31.15,
+     30.7
+    ]
+   },
+   "print3d_toolbox": null
+  }
+ },
+ "seconds": 3.0,
+ "log": [
+  "[LV_bloodpool] imported  faces 39,992  manifold True  non-manifold edges 0",
+  "[mitral_valve] imported  faces 22,344  manifold False  non-manifold edges 1480",
+  "[mitral_valve] solidified 1.2 mm  faces 46,168  manifold True  volume 4.093 mL",
+  "[mitral_valve] dropped 7 loose fragment(s), 42 faces",
+  "[mitral_valve] remeshed  faces 96,250  manifold True  volume 2.625 mL  extent [36.22, 37.47, 35.83] mm",
+  "[aortic_valve] imported  faces 44,636  manifold False  non-manifold edges 920",
+  "[aortic_valve] solidified 1.2 mm  faces 90,192  manifold False  volume None mL",
+  "[aortic_valve] dropped 1 loose fragment(s), 892 faces",
+  "[aortic_valve] remeshed  faces 122,734  manifold True  volume 3.197 mL  extent [30.83, 31.15, 30.7] mm",
+  "[LV_bloodpool] -> LV_bloodpool.stl",
+  "[mitral_valve] -> mitral_valve.stl",
+  "[aortic_valve] -> aortic_valve.stl"
+ ]
+}

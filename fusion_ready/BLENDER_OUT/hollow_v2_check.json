@@ -1,0 +1,30 @@
+{
+ "parts": {
+  "myocardium": {
+   "faces": 361772,
+   "volume_mL": 125.64
+  },
+  "plate": {
+   "faces": 2176,
+   "volume_mL": 34.9
+  },
+  "mitral": {
+   "faces": 192500,
+   "volume_mL": 2.63
+  },
+  "aortic": {
+   "faces": 245468,
+   "volume_mL": 3.2
+  }
+ },
+ "union": {
+  "faces": 751754,
+  "watertight": true,
+  "components": 1,
+  "volume_mL": 163.87
+ },
+ "cavity_blocked_frac": 0.0167,
+ "mitral_axis_blocked": false,
+ "aortic_axis_blocked": false,
+ "verdict": "OK"
+}

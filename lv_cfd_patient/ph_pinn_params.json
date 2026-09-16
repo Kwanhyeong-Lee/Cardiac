@@ -1,0 +1,164 @@
+{
+  "model_A": {
+    "description": "3-element Windkessel in port-Hamiltonian form",
+    "J": [
+      [
+        0.0,
+        -1.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "R": [
+      [
+        3.5804741598935726e-06,
+        0.0
+      ],
+      [
+        0.0,
+        188613.19141069768
+      ]
+    ],
+    "g": [
+      [
+        0.0
+      ],
+      [
+        1.0
+      ]
+    ],
+    "H_coeffs": {
+      "C": 2.2573291373077225e-07,
+      "L": 45058.21641220232,
+      "C_mL_mmHg": 30.09516352441402,
+      "L_mmHg_s2_mL": 0.00033796535014627983
+    },
+    "resistance": {
+      "R_total": 467905.8089085222,
+      "R_c": 188613.19141069768,
+      "R_p": 279292.6174978245,
+      "R_c_fraction": 0.40310076904296877
+    },
+    "state_dim": 2,
+    "input_dim": 1,
+    "output_dim": 1,
+    "states": {
+      "x0": {
+        "name": "q",
+        "unit": "m^3",
+        "description": "charge (stored volume on C)"
+      },
+      "x1": {
+        "name": "phi",
+        "unit": "Pa*s",
+        "description": "flux linkage (flow momentum through L)"
+      }
+    },
+    "output_eq": "p_ao = q/C + R_c * phi/L",
+    "hamiltonian_form": "H = q^2/(2C) + phi^2/(2L)",
+    "validation": {
+      "rmse_Pa": 31.69965976070983,
+      "rmse_mmHg": 0.23776765845629252,
+      "mae_mmHg": 0.14911617733634547,
+      "nrmse": 0.15843734811462018,
+      "r_squared": 0.29702703461567426,
+      "pearson_r": 0.5865987798835376,
+      "peak_error_pct": 2.381096352167214
+    },
+    "energy": {
+      "E_input_J": 2.5060373203032215e-09,
+      "E_dissipated_J": 0.0016524069359218083,
+      "dH_J": -0.0016523685915535136,
+      "H_range_J": [
+        1.5277142648685598e-10,
+        0.0016523687443249402
+      ]
+    }
+  },
+  "model_B": {
+    "description": "Calibrated LV impedance model (algebraic, highest accuracy)",
+    "form": "p_LV = L_eff * dQ/dt + R_eff * Q + p_base",
+    "L_eff": 19477.925412618522,
+    "R_eff": 383804.6436702008,
+    "p_base": -4.214724054734688,
+    "pH_form": {
+      "J": [
+        [
+          0.0
+        ]
+      ],
+      "R": [
+        [
+          383804.6436702008
+        ]
+      ],
+      "g": [
+        [
+          1.0
+        ]
+      ],
+      "H_coeff_L_eff": 19477.925412618522,
+      "state_dim": 1,
+      "state": {
+        "name": "phi",
+        "unit": "Pa*s",
+        "description": "flow momentum = L_eff * Q"
+      }
+    },
+    "validation": {
+      "rmse_Pa": 11.079329097608444,
+      "rmse_mmHg": 0.08310203190477523,
+      "mae_mmHg": 0.06167284620290705,
+      "nrmse": 0.05537534264925885,
+      "r_squared": 0.9141270569849332,
+      "pearson_r": 0.9560999199795667,
+      "peak_error_pct": 7.46158118228032
+    }
+  },
+  "recommended_model": "model_B",
+  "recommendation_reason": "Model B achieves R^2=0.914 vs Model A R^2=0.297. The LV cavity pressure is dominated by inertial (L*dQ/dt) and resistive (R*Q) effects of the inlet flow, which Model B captures directly. Model A provides the full Windkessel structure needed for downstream vasculature coupling.",
+  "windkessel_source": {
+    "R_Pa_s_m3": 467905.8089085222,
+    "C_m3_Pa": 2.2573291373077225e-07,
+    "L_Pa_s2_m3": 45058.21641220232,
+    "R_mmHg_s_mL": 0.0035095918821238968,
+    "C_mL_mmHg": 30.09516352441402,
+    "L_mmHg_s2_mL": 0.00033796535014627983
+  },
+  "rho": 1060.0,
+  "units": "SI (Pa, m^3, s)",
+  "source": {
+    "case": "Case 1009 (MM-WHS CT)",
+    "method": "OpenFOAM LV CFD -> Windkessel extraction -> pH mapping",
+    "cardiac_cycle": {
+      "period_s": 0.78985876,
+      "HR_bpm": 75.96294810986207,
+      "SV_mL": 39.942760203499994,
+      "CO_L_min": 2.9957070152624996
+    }
+  },
+  "nn_training": {
+    "model_A_scaling": {
+      "q_scale": 2.7194940592839724e-05,
+      "phi_scale": 4.668777315172396,
+      "u_scale": 0.00023187622599999395,
+      "p_scale": 125.21381825956615,
+      "H_scale": 0.0016523687443249402
+    },
+    "model_B_scaling": {
+      "Q_scale": 0.00023187622599999395,
+      "dQdt_scale": 0.0027853111999997103,
+      "p_scale": 128.2680029999968
+    },
+    "time_scale": 0.78985876,
+    "suggested_loss_weights": {
+      "data_loss": 1.0,
+      "hamiltonian_loss": 0.1,
+      "skew_symmetry_loss": 0.01,
+      "dissipation_psd_loss": 0.01,
+      "energy_conservation_loss": 0.05
+    }
+  }
+}

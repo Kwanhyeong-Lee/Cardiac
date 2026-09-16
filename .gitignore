@@ -1,0 +1,80 @@
+# ===== NEVER commit: credentialed / licensed patient data and anything derived per patient =====
+MIMIC IV/
+MIMIC*/
+eicu*/
+eICU*/
+INSPIRE*/
+inspire*/
+vitaldb*/
+external_datasets/
+external_data/
+paediatric-intensive-care-database*
+**/*physionet*/
+*.csv
+*.csv.gz
+*.parquet
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.mat
+*.bin
+*.xls
+*.xlsx
+# public / synthetic tables that ARE allowed (whitelist)
+!heart_failure_clinical_records.csv
+!synth_cardiotox_dataset.csv
+!lv_cfd/mitral_flow_profile.csv
+# MM-WHS images are research-licensed, not redistributable
+*.nii
+*.nii.gz
+*.nrrd
+*.mhd
+*.raw
+**/MM-WHS/
+
+# ===== regenerable heavy outputs (fusion_ready/PIPELINE.md) =====
+*.stl
+*.glb
+*.obj
+*.ply
+*.vtk
+*.vtu
+*.npz
+*.npy
+*.pt
+*.pth
+*.ckpt
+*.blend
+*.blend1
+*.zip
+!manuscript/pH_PINN_JBHI_LaTeX_main.zip
+lv_cfd*/processor*/
+lv_cfd*/postProcessing/
+lv_cfd*/constant/polyMesh/
+lv_cfd*/constant/extendedFeatureEdgeMesh/
+lv_cfd*/[1-9]*/
+lv_cfd*/0.[0-9]*/
+lv_cfd*/log.*
+lv_cfd_v2/
+cardiac_meshes/
+cardiac_meshes_all/
+# manuscript version series lives in the handover asset archive
+PINN_Cardiac_Ees_Manuscript_CMBM_v*.docx
+
+# ===== other repositories / tooling / scratch =====
+pH-PINN-cardiac/
+_handover/
+node_modules/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.fuse_hidden*
+.~lock.*
+~$*
+*.tmp
+Thumbs.db
+.DS_Store
+*.log

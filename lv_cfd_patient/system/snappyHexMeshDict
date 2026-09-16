@@ -1,0 +1,120 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+
+castellatedMesh true;
+snap            true;
+addLayers       false;
+
+geometry
+{
+    LV.stl
+    {
+        type triSurfaceMesh;
+        name LV;
+        regions
+        {
+            LV
+            {
+                name LV;
+            }
+        }
+    }
+};
+
+castellatedMeshControls
+{
+    maxLocalCells   500000;
+    maxGlobalCells  2000000;
+    minRefinementCells 10;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 3;
+    
+    features ();
+    
+    refinementSurfaces
+    {
+        LV
+        {
+            level (2 3);
+            patchInfo
+            {
+                type wall;
+            }
+        }
+    }
+    
+    resolveFeatureAngle 30;
+    
+    refinementRegions
+    {
+    }
+    
+    // Point inside the LV cavity (centroid)
+    locationInMesh (0.138506 0.156204 0.081887);
+    
+    allowFreeStandingZoneFaces true;
+}
+
+snapControls
+{
+    nSmoothPatch    3;
+    tolerance       2.0;
+    nSolveIter      100;
+    nRelaxIter      5;
+    nFeatureSnapIter 10;
+    implicitFeatureSnap true;
+    explicitFeatureSnap false;
+    multiRegionFeatureSnap false;
+}
+
+addLayersControls
+{
+    relativeSizes true;
+    layers
+    {
+        "LV.*"
+        {
+            nSurfaceLayers 2;
+        }
+    }
+    expansionRatio  1.2;
+    finalLayerThickness 0.3;
+    minThickness    0.1;
+    nGrow           0;
+    featureAngle    60;
+    nRelaxIter      3;
+    nSmoothSurfaceNormals 1;
+    nSmoothNormals  3;
+    nSmoothThickness 10;
+    maxFaceThicknessRatio 0.5;
+    maxThicknessToMedialRatio 0.3;
+    minMedialAxisAngle 90;
+    nBufferCellsNoExtrude 0;
+    nLayerIter      50;
+}
+
+meshQualityControls
+{
+    maxNonOrtho     65;
+    maxBoundarySkewness 20;
+    maxInternalSkewness 4;
+    maxConcave      80;
+    minVol          1e-13;
+    minTetQuality   -1e30;
+    minArea         -1;
+    minTwist        0.02;
+    minDeterminant  0.001;
+    minFaceWeight   0.05;
+    minVolRatio     0.01;
+    minTriangleTwist -1;
+    nSmoothScale    4;
+    errorReduction  0.75;
+}
+
+writeFlags ();
+mergeTolerance 1e-6;

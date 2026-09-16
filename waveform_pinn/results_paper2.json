@@ -1,0 +1,1088 @@
+[
+ {
+  "label": "v3: morphology + demographics",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 22411,
+  "n_val": 5551,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8948,
+  "internal_r2_window": 0.835,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9463,
+   "ccc": 0.9431,
+   "bias": -0.0069,
+   "sd_diff": 0.5355,
+   "pct_error": 21.0899,
+   "mae": 0.3564,
+   "loa": [
+    -1.056,
+    1.043
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6312,
+   "pearson_r_ci": [
+    0.3731,
+    0.7945
+   ],
+   "ccc": 0.5175,
+   "ccc_ci": [
+    0.3071,
+    0.6981
+   ],
+   "bias": -1.0833,
+   "bias_ci": [
+    -1.626,
+    -0.5601
+   ],
+   "sd_diff": 1.5892,
+   "sd_diff_ci": [
+    1.2869,
+    2.0243
+   ],
+   "pct_error": 47.7132,
+   "pct_error_ci": [
+    38.0675,
+    60.7326
+   ],
+   "mae": 1.5229,
+   "mae_ci": [
+    1.1889,
+    1.9793
+   ],
+   "loa": [
+    -4.198,
+    2.032
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 4
+ },
+ {
+  "label": "v3 control: demographics + HR/MAP only",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 22414,
+  "n_val": 5551,
+  "n_features": 8,
+  "n_val_patients": 185,
+  "internal_r2": 0.6582,
+  "internal_r2_window": 0.5099,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.8136,
+   "ccc": 0.8042,
+   "bias": 0.0616,
+   "sd_diff": 0.9633,
+   "pct_error": 37.6841,
+   "mae": 0.7318,
+   "loa": [
+    -1.826,
+    1.95
+   ],
+   "interpretation": "trend agreement only (30% <= PE < 45%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.4419,
+   "pearson_r_ci": [
+    0.1092,
+    0.6838
+   ],
+   "ccc": 0.2929,
+   "ccc_ci": [
+    0.0708,
+    0.4898
+   ],
+   "bias": -1.387,
+   "bias_ci": [
+    -2.0241,
+    -0.7781
+   ],
+   "sd_diff": 1.8388,
+   "sd_diff_ci": [
+    1.5133,
+    2.42
+   ],
+   "pct_error": 56.4951,
+   "pct_error_ci": [
+    46.0045,
+    73.841
+   ],
+   "mae": 1.8807,
+   "mae_ci": [
+    1.4911,
+    2.3815
+   ],
+   "loa": [
+    -4.991,
+    2.217
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 5
+ },
+ {
+  "label": "linear baseline",
+  "target": "CO_pc",
+  "seed": 0,
+  "n_val_patients": 185,
+  "internal_r2": 0.5208,
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6136,
+   "pearson_r_ci": [
+    0.3515,
+    0.7988
+   ],
+   "ccc": 0.4058,
+   "ccc_ci": [
+    0.1979,
+    0.6479
+   ],
+   "bias": -1.4771,
+   "bias_ci": [
+    -2.0497,
+    -0.9737
+   ],
+   "sd_diff": 1.5891,
+   "sd_diff_ci": [
+    1.2975,
+    2.1222
+   ],
+   "pct_error": 49.1653,
+   "pct_error_ci": [
+    40.4393,
+    64.8736
+   ],
+   "mae": 1.6164,
+   "mae_ci": [
+    1.1819,
+    2.1533
+   ],
+   "loa": [
+    -4.592,
+    1.638
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 6
+ },
+ {
+  "label": "control: permuted labels",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 0,
+  "n_train": 22411,
+  "n_val": 5551,
+  "n_features": 21,
+  "n_val_patients": 185,
+  "internal_r2": -0.7571,
+  "internal_r2_window": -0.0052,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": -0.0687,
+   "ccc": -0.0122,
+   "bias": 0.3489,
+   "sd_diff": 0.4236,
+   "pct_error": 17.222,
+   "mae": 0.4521,
+   "loa": [
+    -0.481,
+    1.179
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": -0.1747,
+   "pearson_r_ci": [
+    -0.3825,
+    0.0756
+   ],
+   "ccc": -0.0099,
+   "ccc_ci": [
+    -0.0269,
+    -0.0001
+   ],
+   "bias": -2.1337,
+   "bias_ci": [
+    -2.821,
+    -1.4722
+   ],
+   "sd_diff": 2.0346,
+   "sd_diff_ci": [
+    1.6821,
+    2.5277
+   ],
+   "pct_error": 66.3134,
+   "pct_error_ci": [
+    55.5487,
+    85.0048
+   ],
+   "mae": 2.3292,
+   "mae_ci": [
+    1.7511,
+    2.9763
+   ],
+   "loa": [
+    -6.121,
+    1.854
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 2
+ },
+ {
+  "label": "ablation B (v3 inputs)",
+  "target": "CO_pc",
+  "model": "B",
+  "seed": 0,
+  "n_train": 22411,
+  "n_val": 5551,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.9023,
+  "internal_r2_window": 0.8368,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9499,
+   "ccc": 0.9485,
+   "bias": 0.0007,
+   "sd_diff": 0.516,
+   "pct_error": 20.3079,
+   "mae": 0.3455,
+   "loa": [
+    -1.011,
+    1.012
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 2414,
+   "V_neg": 3843,
+   "HTV_mse": 0.005466335453093052,
+   "R_nonpsd": -1
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6305,
+   "pearson_r_ci": [
+    0.3828,
+    0.7892
+   ],
+   "ccc": 0.513,
+   "ccc_ci": [
+    0.3074,
+    0.6874
+   ],
+   "bias": -1.1074,
+   "bias_ci": [
+    -1.6485,
+    -0.5853
+   ],
+   "sd_diff": 1.5903,
+   "sd_diff_ci": [
+    1.3018,
+    2.0201
+   ],
+   "pct_error": 47.8339,
+   "pct_error_ci": [
+    38.5027,
+    60.6167
+   ],
+   "mae": 1.5413,
+   "mae_ci": [
+    1.208,
+    2.0018
+   ],
+   "loa": [
+    -4.224,
+    2.01
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 9
+ },
+ {
+  "label": "ablation C (v3 inputs)",
+  "target": "CO_pc",
+  "model": "C",
+  "seed": 0,
+  "n_train": 22411,
+  "n_val": 5551,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8893,
+  "internal_r2_window": 0.8358,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9436,
+   "ccc": 0.9394,
+   "bias": -0.0105,
+   "sd_diff": 0.5493,
+   "pct_error": 21.6408,
+   "mae": 0.3592,
+   "loa": [
+    -1.087,
+    1.066
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 2647,
+   "V_neg": 1434,
+   "HTV_mse": 0.31181997060775757,
+   "R_nonpsd": 5551
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6281,
+   "pearson_r_ci": [
+    0.3663,
+    0.7924
+   ],
+   "ccc": 0.5063,
+   "ccc_ci": [
+    0.2988,
+    0.6901
+   ],
+   "bias": -1.1333,
+   "bias_ci": [
+    -1.6779,
+    -0.6128
+   ],
+   "sd_diff": 1.5935,
+   "sd_diff_ci": [
+    1.3034,
+    2.0275
+   ],
+   "pct_error": 48.0225,
+   "pct_error_ci": [
+    38.5848,
+    60.9121
+   ],
+   "mae": 1.5525,
+   "mae_ci": [
+    1.2138,
+    2.0177
+   ],
+   "loa": [
+    -4.256,
+    1.99
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 10
+ },
+ {
+  "label": "ablation D (v3 inputs)",
+  "target": "CO_pc",
+  "model": "D",
+  "seed": 0,
+  "n_train": 22411,
+  "n_val": 5551,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8889,
+  "internal_r2_window": 0.8288,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9438,
+   "ccc": 0.9388,
+   "bias": -0.0168,
+   "sd_diff": 0.55,
+   "pct_error": 21.6811,
+   "mae": 0.3605,
+   "loa": [
+    -1.095,
+    1.061
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 9.59597059591033e-08,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6274,
+   "pearson_r_ci": [
+    0.372,
+    0.7843
+   ],
+   "ccc": 0.5157,
+   "ccc_ci": [
+    0.3122,
+    0.6907
+   ],
+   "bias": -1.0556,
+   "bias_ci": [
+    -1.5998,
+    -0.5294
+   ],
+   "sd_diff": 1.5922,
+   "sd_diff_ci": [
+    1.3025,
+    2.0085
+   ],
+   "pct_error": 47.7049,
+   "pct_error_ci": [
+    38.4359,
+    60.3099
+   ],
+   "mae": 1.5156,
+   "mae_ci": [
+    1.1836,
+    1.9622
+   ],
+   "loa": [
+    -4.176,
+    2.065
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 11
+ },
+ {
+  "label": "v3: morphology + demographics",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 1,
+  "n_train": 22375,
+  "n_val": 5587,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8498,
+  "internal_r2_window": 0.7988,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9246,
+   "ccc": 0.9151,
+   "bias": 0.0739,
+   "sd_diff": 0.5349,
+   "pct_error": 21.8696,
+   "mae": 0.3698,
+   "loa": [
+    -0.974,
+    1.122
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6315,
+   "pearson_r_ci": [
+    0.3516,
+    0.8009
+   ],
+   "ccc": 0.4915,
+   "ccc_ci": [
+    0.2825,
+    0.6792
+   ],
+   "bias": -1.1875,
+   "bias_ci": [
+    -1.726,
+    -0.672
+   ],
+   "sd_diff": 1.5749,
+   "sd_diff_ci": [
+    1.2675,
+    2.0046
+   ],
+   "pct_error": 47.6577,
+   "pct_error_ci": [
+    37.8,
+    60.8492
+   ],
+   "mae": 1.5841,
+   "mae_ci": [
+    1.2552,
+    2.0405
+   ],
+   "loa": [
+    -4.274,
+    1.899
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 16
+ },
+ {
+  "label": "ablation D (v3 inputs)",
+  "target": "CO_pc",
+  "model": "D",
+  "seed": 1,
+  "n_train": 22375,
+  "n_val": 5587,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.853,
+  "internal_r2_window": 0.7998,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9265,
+   "ccc": 0.9173,
+   "bias": 0.0796,
+   "sd_diff": 0.5282,
+   "pct_error": 21.5838,
+   "mae": 0.3719,
+   "loa": [
+    -0.956,
+    1.115
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 1,
+   "HTV_mse": 6.0514366850839e-08,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6171,
+   "pearson_r_ci": [
+    0.3353,
+    0.7894
+   ],
+   "ccc": 0.4896,
+   "ccc_ci": [
+    0.2737,
+    0.6797
+   ],
+   "bias": -1.1502,
+   "bias_ci": [
+    -1.7026,
+    -0.6243
+   ],
+   "sd_diff": 1.6069,
+   "sd_diff_ci": [
+    1.2947,
+    2.0464
+   ],
+   "pct_error": 48.4878,
+   "pct_error_ci": [
+    38.3501,
+    62.2699
+   ],
+   "mae": 1.5821,
+   "mae_ci": [
+    1.2498,
+    2.0425
+   ],
+   "loa": [
+    -4.3,
+    1.999
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 23
+ },
+ {
+  "label": "v3: morphology + demographics",
+  "target": "CO_pc",
+  "model": "A",
+  "seed": 2,
+  "n_train": 22481,
+  "n_val": 5481,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8805,
+  "internal_r2_window": 0.8254,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9393,
+   "ccc": 0.937,
+   "bias": 0.0666,
+   "sd_diff": 0.5348,
+   "pct_error": 22.1318,
+   "mae": 0.3535,
+   "loa": [
+    -0.982,
+    1.115
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 0.0,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6179,
+   "pearson_r_ci": [
+    0.3522,
+    0.7899
+   ],
+   "ccc": 0.5026,
+   "ccc_ci": [
+    0.281,
+    0.6927
+   ],
+   "bias": -1.093,
+   "bias_ci": [
+    -1.6532,
+    -0.5709
+   ],
+   "sd_diff": 1.6111,
+   "sd_diff_ci": [
+    1.3065,
+    2.0821
+   ],
+   "pct_error": 48.4052,
+   "pct_error_ci": [
+    38.8329,
+    62.0173
+   ],
+   "mae": 1.5455,
+   "mae_ci": [
+    1.2167,
+    2.0074
+   ],
+   "loa": [
+    -4.251,
+    2.065
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 28
+ },
+ {
+  "label": "ablation D (v3 inputs)",
+  "target": "CO_pc",
+  "model": "D",
+  "seed": 2,
+  "n_train": 22481,
+  "n_val": 5481,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.873,
+  "internal_r2_window": 0.8248,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9354,
+   "ccc": 0.9328,
+   "bias": 0.0684,
+   "sd_diff": 0.5515,
+   "pct_error": 22.8171,
+   "mae": 0.3617,
+   "loa": [
+    -1.013,
+    1.149
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 0,
+   "V_neg": 0,
+   "HTV_mse": 1.7710377164803504e-08,
+   "R_nonpsd": 0
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6089,
+   "pearson_r_ci": [
+    0.3498,
+    0.7793
+   ],
+   "ccc": 0.5093,
+   "ccc_ci": [
+    0.2915,
+    0.7025
+   ],
+   "bias": -1.0392,
+   "bias_ci": [
+    -1.611,
+    -0.512
+   ],
+   "sd_diff": 1.6411,
+   "sd_diff_ci": [
+    1.3379,
+    2.0972
+   ],
+   "pct_error": 49.1085,
+   "pct_error_ci": [
+    39.6231,
+    62.3287
+   ],
+   "mae": 1.5455,
+   "mae_ci": [
+    1.218,
+    1.9978
+   ],
+   "loa": [
+    -4.256,
+    2.177
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 35
+ },
+ {
+  "label": "ablation B (v3 inputs)",
+  "target": "CO_pc",
+  "model": "B",
+  "seed": 1,
+  "n_train": 22375,
+  "n_val": 5587,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8551,
+  "internal_r2_window": 0.8003,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.928,
+   "ccc": 0.9177,
+   "bias": 0.0738,
+   "sd_diff": 0.525,
+   "pct_error": 21.4662,
+   "mae": 0.3704,
+   "loa": [
+    -0.955,
+    1.103
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 4353,
+   "V_neg": 2334,
+   "HTV_mse": 0.02899618074297905,
+   "R_nonpsd": -1
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6271,
+   "pearson_r_ci": [
+    0.3388,
+    0.7924
+   ],
+   "ccc": 0.4827,
+   "ccc_ci": [
+    0.2691,
+    0.6629
+   ],
+   "bias": -1.2096,
+   "bias_ci": [
+    -1.7513,
+    -0.6928
+   ],
+   "sd_diff": 1.5812,
+   "sd_diff_ci": [
+    1.2768,
+    2.0208
+   ],
+   "pct_error": 47.9268,
+   "pct_error_ci": [
+    38.0652,
+    61.7384
+   ],
+   "mae": 1.5926,
+   "mae_ci": [
+    1.2546,
+    2.0535
+   ],
+   "loa": [
+    -4.309,
+    1.889
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 21
+ },
+ {
+  "label": "ablation C (v3 inputs)",
+  "target": "CO_pc",
+  "model": "C",
+  "seed": 1,
+  "n_train": 22375,
+  "n_val": 5587,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8534,
+  "internal_r2_window": 0.8002,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9267,
+   "ccc": 0.9174,
+   "bias": 0.0782,
+   "sd_diff": 0.5277,
+   "pct_error": 21.5646,
+   "mae": 0.3673,
+   "loa": [
+    -0.956,
+    1.112
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 2424,
+   "V_neg": 1307,
+   "HTV_mse": 0.10251057147979736,
+   "R_nonpsd": 5587,
+   "R_min_rel": -12.741398104302093
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6293,
+   "pearson_r_ci": [
+    0.3455,
+    0.794
+   ],
+   "ccc": 0.5006,
+   "ccc_ci": [
+    0.2846,
+    0.6869
+   ],
+   "bias": -1.1502,
+   "bias_ci": [
+    -1.6925,
+    -0.6348
+   ],
+   "sd_diff": 1.585,
+   "sd_diff_ci": [
+    1.2772,
+    2.0216
+   ],
+   "pct_error": 47.8282,
+   "pct_error_ci": [
+    37.8775,
+    61.381
+   ],
+   "mae": 1.5632,
+   "mae_ci": [
+    1.2321,
+    2.0237
+   ],
+   "loa": [
+    -4.257,
+    1.956
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 22
+ },
+ {
+  "label": "ablation B (v3 inputs)",
+  "target": "CO_pc",
+  "model": "B",
+  "seed": 2,
+  "n_train": 22481,
+  "n_val": 5481,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8759,
+  "internal_r2_window": 0.8277,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9367,
+   "ccc": 0.934,
+   "bias": 0.0592,
+   "sd_diff": 0.546,
+   "pct_error": 22.6143,
+   "mae": 0.3579,
+   "loa": [
+    -1.011,
+    1.129
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 4685,
+   "V_neg": 2531,
+   "HTV_mse": 0.011940591037273407,
+   "R_nonpsd": -1
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6309,
+   "pearson_r_ci": [
+    0.3679,
+    0.8011
+   ],
+   "ccc": 0.5024,
+   "ccc_ci": [
+    0.2825,
+    0.6908
+   ],
+   "bias": -1.1197,
+   "bias_ci": [
+    -1.667,
+    -0.6057
+   ],
+   "sd_diff": 1.5768,
+   "sd_diff_ci": [
+    1.2762,
+    2.0377
+   ],
+   "pct_error": 47.4724,
+   "pct_error_ci": [
+    37.828,
+    61.3857
+   ],
+   "mae": 1.5236,
+   "mae_ci": [
+    1.1883,
+    1.9891
+   ],
+   "loa": [
+    -4.21,
+    1.971
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 33
+ },
+ {
+  "label": "ablation C (v3 inputs)",
+  "target": "CO_pc",
+  "model": "C",
+  "seed": 2,
+  "n_train": 22481,
+  "n_val": 5481,
+  "n_features": 27,
+  "n_val_patients": 185,
+  "internal_r2": 0.8745,
+  "internal_r2_window": 0.8272,
+  "internal_agreement": {
+   "label": "PC held-out (patient)",
+   "n": 185,
+   "pearson_r": 0.9358,
+   "ccc": 0.9332,
+   "bias": 0.0561,
+   "sd_diff": 0.5495,
+   "pct_error": 22.7659,
+   "mae": 0.3599,
+   "loa": [
+    -1.021,
+    1.133
+   ],
+   "interpretation": "interchangeable (PE < 30%)"
+  },
+  "violations": {
+   "T_neg": 2692,
+   "V_neg": 3286,
+   "HTV_mse": 0.1255081743001938,
+   "R_nonpsd": 5481,
+   "R_min_rel": -1.9643543935557581
+  },
+  "n_test_patients": 33,
+  "external_agreement": {
+   "label": "thermodilution (TD-only, patient level)",
+   "n": 33,
+   "pearson_r": 0.6218,
+   "pearson_r_ci": [
+    0.3533,
+    0.7914
+   ],
+   "ccc": 0.5067,
+   "ccc_ci": [
+    0.2854,
+    0.698
+   ],
+   "bias": -1.0947,
+   "bias_ci": [
+    -1.6588,
+    -0.5772
+   ],
+   "sd_diff": 1.6056,
+   "sd_diff_ci": [
+    1.3017,
+    2.0727
+   ],
+   "pct_error": 48.2461,
+   "pct_error_ci": [
+    38.5544,
+    62.2164
+   ],
+   "mae": 1.555,
+   "mae_ci": [
+    1.2332,
+    2.0141
+   ],
+   "loa": [
+    -4.242,
+    2.052
+   ],
+   "interpretation": "not transferable (PE >= 45%) \u2014 consistent with having learned the pulse-contour algorithm rather than a representation of flow"
+  },
+  "job": 34
+ }
+]

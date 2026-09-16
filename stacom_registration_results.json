@@ -1,0 +1,122 @@
+{
+  "method": "landmark-based affine (LV+RA+PA+LA+Ao centroids, 5-point overdetermined)",
+  "accuracy": "preliminary \u2014 centroid error ~6.5mm max, needs ParaView verification",
+  "transform_matrix": [
+    [
+      -0.001032860916175766,
+      0.00017864282024095422,
+      0.0005433077458119695,
+      0.06038514752306807
+    ],
+    [
+      0.0001085297151172437,
+      0.0014350372080292558,
+      -0.0004398817268106608,
+      -0.061538469854564626
+    ],
+    [
+      -0.0021572799147031086,
+      0.0017619974072129443,
+      8.455750246195405e-05,
+      -0.12822262945091262
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "results": {
+    "laa_stacom": {
+      "original_centroid": [
+        -42.23444603746296,
+        161.07425013588337,
+        128.4315852515038
+      ],
+      "registered_centroid": [
+        0.2014533407241298,
+        0.10850944505588829,
+        0.25463125549415183
+      ],
+      "dist_to_lv": 0.4869,
+      "n_faces": 69706,
+      "output": "laa_registered.stl"
+    },
+    "rv_stacom": {
+      "original_centroid": [
+        -64.63707512518819,
+        186.46786238523376,
+        87.48614404997822
+      ],
+      "registered_centroid": [
+        0.20784446652481683,
+        0.15955308228628842,
+        0.34612734566889025
+      ],
+      "dist_to_lv": 0.5788,
+      "n_faces": 58304,
+      "output": "rv_registered.stl"
+    },
+    "coronary_stacom": {
+      "original_centroid": [
+        -41.9483419262947,
+        191.03188931773946,
+        93.5007794976615
+      ],
+      "registered_centroid": [
+        0.18748426388491024,
+        0.16792217756457628,
+        0.30527133611260354
+      ],
+      "dist_to_lv": 0.5365,
+      "n_faces": 117932,
+      "output": "coronary_registered.stl"
+    },
+    "pv_stacom": {
+      "original_centroid": [
+        -2.2898184142277365,
+        138.33012597797153,
+        120.66225881647625
+      ],
+      "registered_centroid": [
+        0.1531992695825566,
+        0.08381857349249822,
+        0.131078100861261
+      ],
+      "dist_to_lv": 0.3542,
+      "n_faces": 49554,
+      "output": "pv_registered.stl"
+    },
+    "pa_stacom": {
+      "original_centroid": [
+        -13.810888366177949,
+        160.05824313908334,
+        145.34425883660478
+      ],
+      "registered_centroid": [
+        0.18036474548115594,
+        0.10446006506647956,
+        0.19331556306013736
+      ],
+      "dist_to_lv": 0.4237,
+      "n_faces": 58372,
+      "output": "pa_registered.stl"
+    },
+    "ra_stacom": {
+      "original_centroid": [
+        -36.63117005459245,
+        214.30542402909802,
+        87.49547362196516
+      ],
+      "registered_centroid": [
+        0.18498911975269475,
+        0.2023911940148095,
+        0.3356750386510075
+      ],
+      "dist_to_lv": 0.5714,
+      "n_faces": 80488,
+      "output": "ra_registered.stl"
+    }
+  }
+}

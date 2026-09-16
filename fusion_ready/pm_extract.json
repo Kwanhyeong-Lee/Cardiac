@@ -1,0 +1,53 @@
+{
+ "params": {
+  "PITCH": 1.0,
+  "R_CLOSE": 8.0,
+  "V_MIN": 0.3,
+  "T_MIN": 2.0,
+  "DEPTH": [
+   0.2,
+   0.9
+  ]
+ },
+ "blood_pool_mL": 149.78,
+ "closed_cavity_mL": 160.81,
+ "filled_by_closing_mL": 0.4,
+ "myo_inside_closed_mL": 8.93,
+ "n_components": 1,
+ "components": [
+  {
+   "idx": 0,
+   "volume_mL": 8.932,
+   "area_cm2": 282.94,
+   "thickness_2V_A_mm": 0.63,
+   "depth_frac": 0.481,
+   "angle_from_aortic_deg": 152.7,
+   "septal_dot": -0.36,
+   "extent_mm": [
+    67.0,
+    83.0,
+    71.0
+   ],
+   "faces": 187506,
+   "watertight": true
+  }
+ ],
+ "kept": [],
+ "septal_dir_frameA": [
+  0.78,
+  0.586,
+  0.22
+ ],
+ "aortic_dir_frameA": [
+  0.288,
+  0.609,
+  0.739
+ ],
+ "rv_centroid_frameA": [
+  25.3,
+  25.0,
+  9.6
+ ],
+ "verdict": "NO PAPILLARY MUSCLE IN THE MYOCARDIUM LABEL -- segmentation lumped them into the cavity",
+ "labels": {}
+}

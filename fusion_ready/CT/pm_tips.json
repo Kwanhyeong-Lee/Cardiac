@@ -1,0 +1,51 @@
+{
+ "muscles": [
+  {
+   "file": "pm_candidate_2_CT.stl",
+   "volume_mL": 2.07,
+   "angle_from_aortic_deg": -120.9,
+   "septal_dot": -0.96,
+   "radial_mm": 18.9,
+   "tip_mm": [
+    -19.7,
+    -15.57,
+    2.0
+   ],
+   "base_mm": [
+    -29.28,
+    10.24,
+    -6.72
+   ],
+   "tip_depth_frac": 0.359,
+   "length_mm": 28.9,
+   "label": "anterolateral"
+  },
+  {
+   "file": "pm_candidate_1_CT.stl",
+   "volume_mL": 3.11,
+   "angle_from_aortic_deg": 153.3,
+   "septal_dot": -0.36,
+   "radial_mm": 22.8,
+   "tip_mm": [
+    2.74,
+    -7.89,
+    -21.74
+   ],
+   "base_mm": [
+    -20.04,
+    12.59,
+    -26.51
+   ],
+   "tip_depth_frac": 0.431,
+   "length_mm": 31.0,
+   "label": "posteromedial"
+  }
+ ],
+ "apex_depth_mm": 92.8,
+ "volumes": {
+  "myoCT_raw_mL": 143.36,
+  "myoCT_smooth_mL": 142.79,
+  "blood_raw_mL": 132.69,
+  "blood_smooth_mL": 132.94
+ }
+}

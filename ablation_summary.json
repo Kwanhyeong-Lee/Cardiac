@@ -1,0 +1,181 @@
+{
+  "n_test": 1171,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "epochs": 80,
+  "rows": [
+    {
+      "Model": "pH-PINN (hard constraints)",
+      "letter": "A",
+      "Params": 73773,
+      "R2_mean": 0.9722723334263533,
+      "R2_std": 0.0010636283385137603,
+      "R2_temporal_single": 0.9701123696107131,
+      "T_neg": 0,
+      "V_neg": 0,
+      "R_PSD_viol": 0,
+      "guarantee": "by construction"
+    },
+    {
+      "Model": "Vanilla MLP",
+      "letter": "B",
+      "Params": 111885,
+      "R2_mean": 0.9722444262260046,
+      "R2_std": 0.0005753332827016533,
+      "R2_temporal_single": 0.9689733477739187,
+      "T_neg": 800,
+      "V_neg": 895,
+      "R_PSD_viol": -1,
+      "guarantee": "none"
+    },
+    {
+      "Model": "No-structure PINN",
+      "letter": "C",
+      "Params": 73773,
+      "R2_mean": 0.9727191604100741,
+      "R2_std": 0.0002723027105829719,
+      "R2_temporal_single": 0.9705696151806757,
+      "T_neg": 689,
+      "V_neg": 514,
+      "R_PSD_viol": 1171,
+      "guarantee": "none"
+    },
+    {
+      "Model": "Soft-constraint PINN",
+      "letter": "D",
+      "Params": 73773,
+      "R2_mean": 0.9703719463103857,
+      "R2_std": 0.001330249666086714,
+      "R2_temporal_single": 0.9680082706304697,
+      "T_neg": 0,
+      "V_neg": 0,
+      "R_PSD_viol": 0,
+      "guarantee": "soft penalty"
+    }
+  ],
+  "raw_seed": {
+    "A": {
+      "letter": "A",
+      "name": "pH-PINN (hard constraints)",
+      "seeds": [
+        {
+          "seed": 0,
+          "mean_r2": 0.9737059428141668,
+          "mean_r2_clinical": 0.9794862951551165,
+          "T_neg": 0,
+          "V_neg": 0,
+          "PSD_viol": 0
+        },
+        {
+          "seed": 1,
+          "mean_r2": 0.9711611546002902,
+          "mean_r2_clinical": 0.9784624406269619,
+          "T_neg": 0,
+          "V_neg": 0,
+          "PSD_viol": 0
+        },
+        {
+          "seed": 2,
+          "mean_r2": 0.9719499028646029,
+          "mean_r2_clinical": 0.9807670542172023,
+          "T_neg": 0,
+          "V_neg": 0,
+          "PSD_viol": 0
+        }
+      ]
+    },
+    "B": {
+      "letter": "B",
+      "name": "Vanilla MLP",
+      "seeds": [
+        {
+          "seed": 0,
+          "mean_r2": 0.9730579715508682,
+          "mean_r2_clinical": 0.9787031667573112,
+          "T_neg": 799,
+          "V_neg": 899,
+          "PSD_viol": -1
+        },
+        {
+          "seed": 1,
+          "mean_r2": 0.9718486345731295,
+          "mean_r2_clinical": 0.9785170895712716,
+          "T_neg": 803,
+          "V_neg": 894,
+          "PSD_viol": -1
+        },
+        {
+          "seed": 2,
+          "mean_r2": 0.9718266725540161,
+          "mean_r2_clinical": 0.9794526781354632,
+          "T_neg": 800,
+          "V_neg": 892,
+          "PSD_viol": -1
+        }
+      ]
+    },
+    "C": {
+      "letter": "C",
+      "name": "No-structure PINN",
+      "seeds": [
+        {
+          "seed": 0,
+          "mean_r2": 0.9729267267080454,
+          "mean_r2_clinical": 0.9791650601795742,
+          "T_neg": 885,
+          "V_neg": 419,
+          "PSD_viol": 1171
+        },
+        {
+          "seed": 1,
+          "mean_r2": 0.972334467447721,
+          "mean_r2_clinical": 0.9790108459336417,
+          "T_neg": 190,
+          "V_neg": 702,
+          "PSD_viol": 1171
+        },
+        {
+          "seed": 2,
+          "mean_r2": 0.9728962870744559,
+          "mean_r2_clinical": 0.9806210398674011,
+          "T_neg": 994,
+          "V_neg": 423,
+          "PSD_viol": 1171
+        }
+      ]
+    },
+    "D": {
+      "letter": "D",
+      "name": "Soft-constraint PINN",
+      "seeds": [
+        {
+          "seed": 0,
+          "mean_r2": 0.9687748505518987,
+          "mean_r2_clinical": 0.977647602558136,
+          "T_neg": 0,
+          "V_neg": 1,
+          "PSD_viol": 0
+        },
+        {
+          "seed": 1,
+          "mean_r2": 0.9703095005108759,
+          "mean_r2_clinical": 0.9776782052857536,
+          "T_neg": 0,
+          "V_neg": 0,
+          "PSD_viol": 0
+        },
+        {
+          "seed": 2,
+          "mean_r2": 0.9720314878683823,
+          "mean_r2_clinical": 0.9799533571515765,
+          "T_neg": 0,
+          "V_neg": 0,
+          "PSD_viol": 0
+        }
+      ]
+    }
+  }
+}

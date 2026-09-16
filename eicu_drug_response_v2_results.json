@@ -1,0 +1,11 @@
+{
+  "version": "v2",
+  "n": 2720,
+  "deaths": 111,
+  "best_auc": 0.8371008579058344,
+  "best_config": "v4_comprehensive+GBM",
+  "responder_mort": 0.035634743875278395,
+  "nonresponder_mort": 0.0433589462129528,
+  "responder_OR": 0.815271728008887,
+  "responder_p": 0.3558063738168651
+}

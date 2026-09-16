@@ -1,0 +1,57 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+
+actions
+(
+    // ---- Mitral valve region ----
+    {
+        name    mitralFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo { patch lvWall; }
+    }
+    {
+        name    mitralFaces;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (-0.0447 -0.0181 -0.1714) (0.0003 0.0269 -0.1264);
+        }
+    }
+
+    // ---- Aortic valve region ----
+    {
+        name    aorticFaces;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        sourceInfo { patch lvWall; }
+    }
+    {
+        name    aorticFaces;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        sourceInfo
+        {
+            box (-0.0322 0.0023 -0.1480) (0.0016 0.0361 -0.1142);
+        }
+    }
+
+    // Remove overlap: subtract aortic from mitral
+    {
+        name    mitralFaces;
+        type    faceSet;
+        action  subtract;
+        source  setToFace;
+        sourceInfo { set aorticFaces; }
+    }
+);

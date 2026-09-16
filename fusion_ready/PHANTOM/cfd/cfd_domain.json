@@ -1,0 +1,59 @@
+{
+ "frame": "frame A (mm origin at LV blood-pool centroid, NOT the lv_cfd_patient frame); STL in metres",
+ "patches": {
+  "inlet": {
+   "centre_m": [
+    0.03339,
+    -0.0637,
+    0.04039
+   ],
+   "area_cm2": 2.833,
+   "radius_mm": 9.5,
+   "flow_direction_into_domain": [
+    -0.4479129210826094,
+    0.767676068076241,
+    -0.4583093601817956
+   ],
+   "faces": 96
+  },
+  "outlet": {
+   "centre_m": [
+    0.04002,
+    -0.05308,
+    0.05604
+   ],
+   "area_cm2": 1.959,
+   "radius_mm": 7.9,
+   "outward_normal": [
+    0.4479129210826094,
+    -0.767676068076241,
+    0.4583093601817956
+   ],
+   "faces": 96
+  },
+  "LV": {
+   "type": "wall",
+   "faces": 40756,
+   "area_cm2": 204.2
+  }
+ },
+ "bounds_m": [
+  [
+   -0.033233554840087894,
+   -0.06978555297851563,
+   -0.035470947265625004
+  ],
+  [
+   0.04708600997924805,
+   0.041040924072265624,
+   0.06306368255615234
+  ]
+ ],
+ "volume_mL": 173.66,
+ "note": [
+  "cavity is PM-inclusive: the segmentation lumps papillary muscles into the blood pool (extract_pm.py)",
+  "no leaflets in the domain; on the bench use one-way valves in the inlet/outlet tubing",
+  "silicone wall is compliant; the CFD wall is rigid -- either use a stiff silicone (Sylgard 184) or model FSI",
+  "same geometry as the physical phantom: validation compares like with like"
+ ]
+}

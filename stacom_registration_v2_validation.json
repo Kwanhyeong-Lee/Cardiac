@@ -1,0 +1,118 @@
+{
+  "reflection_check": {
+    "det_linear": 3.7131710791594684e-10,
+    "implied_uniform_scale": 0.0007187562812972989,
+    "reflection": false,
+    "verdict": "PASS (반사 없음, 우수계 보존)"
+  },
+  "anchor_accuracy_mm": {
+    "RA_fit_anchor": {
+      "surface_rms": 5.38,
+      "hausdorff": 15.85
+    },
+    "PA_independent": {
+      "surface_rms": 28.2,
+      "hausdorff": 69.41
+    },
+    "note": "RA는 적합 앵커(하한), PA는 독립 검증(일반화 성능의 실제 지표)"
+  },
+  "anatomical_directions": {
+    "laa": {
+      "RAS_mm": [
+        36.5,
+        -8.0,
+        101.7
+      ],
+      "expected_sign": [
+        0,
+        1,
+        1
+      ],
+      "anatomically_consistent": false
+    },
+    "rv": {
+      "RAS_mm": [
+        61.3,
+        -6.1,
+        72.7
+      ],
+      "expected_sign": [
+        1,
+        1,
+        0
+      ],
+      "anatomically_consistent": false
+    },
+    "coronary": {
+      "RAS_mm": [
+        44.4,
+        -7.6,
+        69.6
+      ],
+      "expected_sign": [
+        0,
+        0,
+        0
+      ],
+      "anatomically_consistent": null
+    },
+    "pv": {
+      "RAS_mm": [
+        15.5,
+        -34.1,
+        102.6
+      ],
+      "expected_sign": [
+        0,
+        -1,
+        1
+      ],
+      "anatomically_consistent": true
+    },
+    "pa": {
+      "RAS_mm": [
+        13.1,
+        -9.4,
+        105.7
+      ],
+      "expected_sign": [
+        0,
+        1,
+        1
+      ],
+      "anatomically_consistent": false,
+      "direction_cosine_vs_GT": 0.933
+    },
+    "ra": {
+      "RAS_mm": [
+        40.7,
+        0.2,
+        54.2
+      ],
+      "expected_sign": [
+        1,
+        0,
+        1
+      ],
+      "anatomically_consistent": true,
+      "direction_cosine_vs_GT": 1.0
+    }
+  },
+  "adjacency_mm": {
+    "RV_to_LV": {
+      "min_gap": 34.86,
+      "median_gap": 60.85,
+      "expect": "septum 공유 → min≈0"
+    },
+    "coronary_to_LV": {
+      "min_gap": 2.24,
+      "median_gap": 57.47,
+      "expect": "epicardial 밀착 → median 작음"
+    }
+  },
+  "interpenetration": {
+    "RV_pts_inside_LV_fraction": 0.0,
+    "expect": "낮아야 함 (중격/벽으로 분리). 큰 값이면 오정합",
+    "note": null
+  }
+}

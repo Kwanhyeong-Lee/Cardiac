@@ -1,0 +1,39 @@
+{
+ "label": "device (FloTrac) vs thermodilution, patient level",
+ "n": 24,
+ "pearson_r": 0.8015,
+ "pearson_r_ci": [
+  0.5497,
+  0.9436
+ ],
+ "ccc": 0.6824,
+ "ccc_ci": [
+  0.4754,
+  0.8185
+ ],
+ "bias": -1.1073,
+ "bias_ci": [
+  -1.6708,
+  -0.5625
+ ],
+ "sd_diff": 1.4383,
+ "sd_diff_ci": [
+  1.1366,
+  1.9203
+ ],
+ "pct_error": 40.1353,
+ "pct_error_ci": [
+  32.5176,
+  50.3957
+ ],
+ "mae": 1.4448,
+ "mae_ci": [
+  1.0656,
+  1.9231
+ ],
+ "loa": [
+  -3.926,
+  1.712
+ ],
+ "interpretation": "trend agreement only (30% <= PE < 45%)"
+}

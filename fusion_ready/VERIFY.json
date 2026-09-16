@@ -1,0 +1,589 @@
+{
+ "frame_A_patient": {
+  "aortic_valve": {
+   "source": {
+    "faces": 44636,
+    "watertight": false,
+    "components": 9,
+    "area_cm2": 71.345,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 40000,
+    "reduction_pct": 10.4,
+    "watertight": false,
+    "components": 9,
+    "area_retained_pct": 99.93,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0004,
+     "p95": 0.0008,
+     "max": 0.4388
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 77.6,
+    "watertight": false,
+    "components": 9,
+    "area_retained_pct": 99.36,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0069,
+     "p95": 0.0151,
+     "max": 2.2175
+    }
+   },
+   "seconds": 3.2
+  },
+  "lv_surface": {
+   "source": {
+    "faces": 166928,
+    "watertight": true,
+    "components": 1,
+    "area_cm2": 152.201,
+    "volume_mL": 149.783
+   },
+   "PRINT": {
+    "faces": 39992,
+    "reduction_pct": 76.0,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 100.01,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0027,
+     "p95": 0.0071,
+     "max": 0.0171
+    },
+    "note": "quadric decimation to 40k then MeshFix (pymeshfix) for manifold closure"
+   },
+   "CAD": {
+    "faces": 9998,
+    "reduction_pct": 94.0,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 100.03,
+    "volume_retained_pct": 99.98,
+    "dist_mm": {
+     "mean": 0.0083,
+     "p95": 0.0218,
+     "max": 0.0533
+    }
+   },
+   "seconds": 3.5
+  },
+  "mitral_valve": {
+   "source": {
+    "faces": 22344,
+    "watertight": false,
+    "components": 9,
+    "area_cm2": 72.45,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 22344,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 9,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 55.2,
+    "watertight": false,
+    "components": 8,
+    "area_retained_pct": 93.82,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0227,
+     "p95": 0.0113,
+     "max": 2.4735
+    }
+   },
+   "seconds": 1.8
+  }
+ },
+ "frame_D_orphan": {
+  "aortic_root": {
+   "source": {
+    "faces": 32744,
+    "watertight": true,
+    "components": 1,
+    "area_cm2": 34.215,
+    "volume_mL": 12.881
+   },
+   "PRINT": {
+    "faces": 32744,
+    "reduction_pct": 0.0,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 69.5,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0007
+    }
+   },
+   "seconds": 3.3
+  }
+ },
+ "frame_B_papillary": {
+  "anterolateral_pm": {
+   "source": {
+    "faces": 122298,
+    "watertight": false,
+    "components": 16,
+    "area_cm2": 119.179,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 39953,
+    "reduction_pct": 67.3,
+    "watertight": false,
+    "components": 132,
+    "area_retained_pct": 99.78,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0108,
+     "p95": 0.0634,
+     "max": 0.9023
+    }
+   },
+   "CAD": {
+    "faces": 9919,
+    "reduction_pct": 91.9,
+    "watertight": false,
+    "components": 90,
+    "area_retained_pct": 91.88,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.1076,
+     "p95": 0.2845,
+     "max": 1.1943
+    }
+   },
+   "seconds": 7.3
+  },
+  "chordae_al": {
+   "source": {
+    "faces": 1012,
+    "watertight": false,
+    "components": 11,
+    "area_cm2": 3.13,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 1012,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 11,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "CAD": {
+    "faces": 1012,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 11,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "seconds": 0.2
+  },
+  "chordae_combined": {
+   "source": {
+    "faces": 2024,
+    "watertight": false,
+    "components": 22,
+    "area_cm2": 9.989,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 2024,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 22,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "CAD": {
+    "faces": 2024,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 22,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "seconds": 0.3
+  },
+  "chordae_pm": {
+   "source": {
+    "faces": 1012,
+    "watertight": false,
+    "components": 11,
+    "area_cm2": 6.86,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 1012,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 11,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "CAD": {
+    "faces": 1012,
+    "reduction_pct": 0.0,
+    "watertight": false,
+    "components": 11,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    }
+   },
+   "seconds": 0.2
+  },
+  "papillary_muscles": {
+   "source": {
+    "faces": 253866,
+    "watertight": false,
+    "components": 50,
+    "area_cm2": 246.312,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 39651,
+    "reduction_pct": 84.4,
+    "watertight": false,
+    "components": 350,
+    "area_retained_pct": 96.91,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0608,
+     "p95": 0.1792,
+     "max": 0.5479
+    }
+   },
+   "CAD": {
+    "faces": 9870,
+    "reduction_pct": 96.1,
+    "watertight": false,
+    "components": 144,
+    "area_retained_pct": 84.53,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.1817,
+     "p95": 0.4845,
+     "max": 2.5519
+    }
+   },
+   "seconds": 9.1
+  },
+  "posteromedial_pm": {
+   "source": {
+    "faces": 131568,
+    "watertight": false,
+    "components": 38,
+    "area_cm2": 127.133,
+    "volume_mL": null
+   },
+   "PRINT": {
+    "faces": 39816,
+    "reduction_pct": 69.7,
+    "watertight": false,
+    "components": 250,
+    "area_retained_pct": 99.44,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.0187,
+     "p95": 0.0883,
+     "max": 0.714
+    }
+   },
+   "CAD": {
+    "faces": 9882,
+    "reduction_pct": 92.5,
+    "watertight": false,
+    "components": 142,
+    "area_retained_pct": 89.51,
+    "volume_retained_pct": null,
+    "dist_mm": {
+     "mean": 0.1267,
+     "p95": 0.3441,
+     "max": 1.7019
+    }
+   },
+   "seconds": 10.3
+  }
+ },
+ "frame_C_stacom_UNREGISTERED": {
+  "coronary_stacom": {
+   "source": {
+    "faces": 117932,
+    "watertight": true,
+    "components": 2,
+    "area_cm2": 66.205,
+    "volume_mL": 5.205
+   },
+   "PRINT": {
+    "faces": 40000,
+    "reduction_pct": 66.1,
+    "watertight": true,
+    "components": 2,
+    "area_retained_pct": 100.11,
+    "volume_retained_pct": 99.81,
+    "dist_mm": {
+     "mean": 0.0063,
+     "p95": 0.0184,
+     "max": 0.0466
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 91.5,
+    "watertight": true,
+    "components": 2,
+    "area_retained_pct": 100.56,
+    "volume_retained_pct": 98.59,
+    "dist_mm": {
+     "mean": 0.0329,
+     "p95": 0.0821,
+     "max": 0.2178
+    }
+   },
+   "seconds": 10.0
+  },
+  "laa_stacom": {
+   "source": {
+    "faces": 69706,
+    "watertight": true,
+    "components": 3,
+    "area_cm2": 38.625,
+    "volume_mL": 8.251
+   },
+   "PRINT": {
+    "faces": 40000,
+    "reduction_pct": 42.6,
+    "watertight": true,
+    "components": 3,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0013,
+     "p95": 0.0048,
+     "max": 0.0441
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 85.7,
+    "watertight": true,
+    "components": 3,
+    "area_retained_pct": 100.16,
+    "volume_retained_pct": 99.96,
+    "dist_mm": {
+     "mean": 0.015,
+     "p95": 0.0397,
+     "max": 0.2384
+    }
+   },
+   "seconds": 9.4
+  },
+  "pa_stacom": {
+   "source": {
+    "faces": 58372,
+    "watertight": true,
+    "components": 1,
+    "area_cm2": 130.279,
+    "volume_mL": 70.02
+   },
+   "PRINT": {
+    "faces": 40000,
+    "reduction_pct": 31.5,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 99.99,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0015,
+     "p95": 0.0061,
+     "max": 0.012
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 82.9,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": 99.95,
+    "dist_mm": {
+     "mean": 0.0172,
+     "p95": 0.045,
+     "max": 0.1385
+    }
+   },
+   "seconds": 4.3
+  },
+  "pv_stacom": {
+   "source": {
+    "faces": 49554,
+    "watertight": true,
+    "components": 7,
+    "area_cm2": 112.465,
+    "volume_mL": 23.426
+   },
+   "PRINT": {
+    "faces": 40004,
+    "reduction_pct": 19.3,
+    "watertight": true,
+    "components": 7,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0007,
+     "p95": 0.0039,
+     "max": 0.0102
+    },
+    "note": "per-component proportional decimation; earlier whole-mesh pass collapsed 3 of 7 veins"
+   },
+   "CAD": {
+    "faces": 9898,
+    "reduction_pct": 80.0,
+    "watertight": true,
+    "components": 7,
+    "area_retained_pct": 99.79,
+    "volume_retained_pct": 99.78,
+    "dist_mm": {
+     "mean": 0.0273,
+     "p95": 0.0696,
+     "max": 1.3164
+    },
+    "note": "per-component proportional decimation; earlier whole-mesh pass collapsed 3 of 7 veins"
+   },
+   "seconds": 7.1
+  },
+  "ra_stacom": {
+   "source": {
+    "faces": 80488,
+    "watertight": true,
+    "components": 1,
+    "area_cm2": 183.277,
+    "volume_mL": 146.315
+   },
+   "PRINT": {
+    "faces": 40000,
+    "reduction_pct": 50.3,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 99.99,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0029,
+     "p95": 0.0084,
+     "max": 0.0212
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 87.6,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 99.96,
+    "volume_retained_pct": 99.98,
+    "dist_mm": {
+     "mean": 0.0183,
+     "p95": 0.0481,
+     "max": 0.1478
+    }
+   },
+   "seconds": 4.8
+  },
+  "rv_stacom": {
+   "source": {
+    "faces": 58304,
+    "watertight": true,
+    "components": 1,
+    "area_cm2": 131.59,
+    "volume_mL": 112.449
+   },
+   "PRINT": {
+    "faces": 40000,
+    "reduction_pct": 31.4,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 100.0,
+    "volume_retained_pct": 100.0,
+    "dist_mm": {
+     "mean": 0.0013,
+     "p95": 0.0055,
+     "max": 0.0126
+    }
+   },
+   "CAD": {
+    "faces": 10000,
+    "reduction_pct": 82.8,
+    "watertight": true,
+    "components": 1,
+    "area_retained_pct": 99.98,
+    "volume_retained_pct": 99.98,
+    "dist_mm": {
+     "mean": 0.0149,
+     "p95": 0.0392,
+     "max": 0.114
+    }
+   },
+   "seconds": 4.1
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "model_vs_TD": {
+  "label": "model vs thermodilution",
+  "four_quadrant": {
+   "n_pairs": 114,
+   "n_patients": 31,
+   "exclusion_zone": 1.067,
+   "concordance": 0.4737,
+   "ci": [
+    0.3925,
+    0.5462
+   ],
+   "meets_92pct": false
+  },
+  "polar": {
+   "n_pairs": 163,
+   "angular_bias": -13.52,
+   "radial_loa": [
+    -201.3,
+    174.2
+   ],
+   "within_30deg": false
+  }
+ },
+ "device_vs_TD": {
+  "label": "device (FloTrac) vs thermodilution",
+  "four_quadrant": {
+   "n_pairs": 97,
+   "n_patients": 24,
+   "exclusion_zone": 1.078,
+   "concordance": 0.5979,
+   "ci": [
+    0.5185,
+    0.675
+   ],
+   "meets_92pct": false
+  },
+  "polar": {
+   "n_pairs": 136,
+   "angular_bias": -6.14,
+   "radial_loa": [
+    -200.4,
+    188.2
+   ],
+   "within_30deg": false
+  }
+ }
+}
