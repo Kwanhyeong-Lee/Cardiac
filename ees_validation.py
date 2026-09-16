@@ -17,6 +17,11 @@ from sklearn.linear_model import LinearRegression
 warnings.filterwarnings('ignore')
 np.random.seed(42)
 
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
+
 # ── Constants ──
 V0 = 10.0; A_EDP = 0.337; B_EDP = 0.028
 
@@ -138,7 +143,7 @@ print(f"Sim test: MAE={mean_absolute_error(yte,yp_sim):.4f}, R²={r2_score(yte,y
 
 # ── Step 2: Apply to UCI Heart Failure Dataset ──
 print("\n--- Applying PINN to UCI Heart Failure (N=299) ---")
-uci = pd.read_csv('/sessions/vibrant-youthful-hopper/mnt/260421/heart_failure_clinical_records.csv')
+uci = pd.read_csv(os.path.join(OUT, 'heart_failure_clinical_records.csv'))
 EF_echo = uci['ejection_fraction'].values  # Ground truth from echocardiography
 
 # Derive hemodynamic features from clinical data
@@ -402,7 +407,7 @@ for i in range(len(categories)):
         ax.text(i, max(counts_alive[i], counts_dead[i]) + 3, 
                 f'MR={mortality_rate:.0f}%', ha='center', fontsize=8, color=c3)
 
-plt.savefig('/sessions/vibrant-youthful-hopper/mnt/260421/PINN_Ees_validation.png', 
+plt.savefig(os.path.join(OUT, 'PINN_Ees_validation.png'), 
             dpi=200, bbox_inches='tight', facecolor='white')
 plt.close()
 print("Saved: PINN_Ees_validation.png")
@@ -418,7 +423,7 @@ summary = pd.DataFrame({
     'AoP_est': np.round(AoP_est, 1),
     'death_event': death
 })
-summary.to_csv('/sessions/vibrant-youthful-hopper/mnt/260421/PINN_Ees_validation_results.csv', index=False)
+summary.to_csv(os.path.join(OUT, 'PINN_Ees_validation_results.csv'), index=False)
 print("Saved: PINN_Ees_validation_results.csv")
 
 # ── Final Summary ──

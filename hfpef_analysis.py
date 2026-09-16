@@ -30,7 +30,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 np.random.seed(42)
-OUT = "/sessions/vibrant-youthful-hopper/mnt/260421"
+
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
 
 # ============================================================
 # PART A: UCI COHORT (N=299, real mortality)

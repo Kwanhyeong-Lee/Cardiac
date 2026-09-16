@@ -23,6 +23,12 @@ import matplotlib.gridspec as gridspec
 import warnings; warnings.filterwarnings('ignore')
 
 np.random.seed(42)
+
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
+
 V0=10.0; A_ed=0.337; B_ed=0.028
 
 # ============================================================
@@ -515,7 +521,7 @@ ax.text(0.05, 0.95, summary, transform=ax.transAxes, fontsize=9,
         va='top', fontfamily='monospace',
         bbox=dict(boxstyle='round', facecolor='#E3F2FD', alpha=0.8))
 
-plt.savefig('/sessions/vibrant-youthful-hopper/mnt/260421/PINN_calibrated_validation.png',
+plt.savefig(os.path.join(OUT, 'PINN_calibrated_validation.png'),
             dpi=200, bbox_inches='tight', facecolor='white')
 print("\n✓ Figure saved: PINN_calibrated_validation.png")
 
@@ -524,5 +530,5 @@ out = df[['age','ejection_fraction','serum_creatinine','serum_sodium','DEATH_EVE
 out['Ees_raw']=Ees_raw7; out['Ees_calibrated']=Ees_cal7
 out['Ees_finetuned']=Ees_ft7; out['Ees_ft_ablated']=Ees_ft6
 out['Ees_chen']=Ees_chen; out['Ees_shishido']=Ees_shishido
-out.to_csv('/sessions/vibrant-youthful-hopper/mnt/260421/calibrated_pinn_results.csv', index=False)
+out.to_csv(os.path.join(OUT, 'calibrated_pinn_results.csv'), index=False)
 print("✓ CSV saved")

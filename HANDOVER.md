@@ -83,18 +83,30 @@
 private 저장소에도 올리지 않는다. `.gitignore`가 막고 있지만 규칙은 사람이 지킨다. 커밋 전:
 `git ls-files | Select-String -Pattern "\.(csv|parquet|nii|gz|zip|stl|glb|npz)$"` → 허용 목록(UCI csv, synth csv, mitral_flow_profile.csv, LaTeX zip)만 나와야 한다.
 
-**하드코딩 경로 수정 목록** (옮긴 뒤 첫 작업; 전부 이전 샌드박스/WSL 경로):
-```
-calibrated_pinn.py:518, echonet_experiment.py:659, ef_matched_analysis.py:34, hfpef_analysis.py:33,
-quality_enhancement.py:29                         '/sessions/.../mnt/260421'  → 출력 폴더
-ees_validation.py:141, noise_robustness_clinical.py:130, pinn_cardiac.py:434, PINN_cardiac_true.py:195
-                                                  heart_failure_clinical_records.csv 절대경로 → 상대경로 './'
-fusion_ready/ct_refine_lv.py:32                   MMWHS = .../MM-WHS/ct_train → D:\data\MM-WHS\ct_train
-waveform_pinn/inspire_extract.py:43, h2_downstream.py:42   INSPIRE zip 경로
-download_all_datasets.sh:17, setup_samsung_notebook.sh:58, sync_wsl_to_onedrive.sh:9,
-lv_cfd_anatomical_v2_configs/rerun_simulation.sh:19        /mnt/c/Users/alex0/OneDrive/... (WSL 경로)
-```
-권장: 환경변수 `CARDIAC_DATA=D:\data` 하나를 두고 `os.environ.get("CARDIAC_DATA", ".")` 기준으로 고친다. 한 번에 다 고치지 말고, 돌릴 스크립트부터.
+**하드코딩 경로 — 환경변수로 이전 완료** (2026-09-16). 이전 샌드박스(`/sessions/...`)·WSL(`/mnt/c/Users/alex0/OneDrive/...`)
+절대경로는 코드에서 전부 없앴다. 규칙은 환경변수 3개뿐이고, **전부 기본값이 있어서 아무것도 설정하지 않아도 저장소 안에서 그대로 돌아간다.**
+
+| 환경변수 | 기본값 | 무엇 |
+|---|---|---|
+| `CARDIAC_DATA` | `D:\data` (WSL 셸에서는 `/mnt/d/data`) | 저장소 밖 원자료 루트 — MM-WHS, INSPIRE zip, 공개 데이터 내려받을 곳 |
+| `CARDIAC_OUT` | 그 스크립트가 있는 폴더(= 저장소 루트) | 그림·결과 CSV를 쓰고 읽는 곳 |
+| `CARDIAC_REPO` | 스크립트 위치에서 유도 | 저장소 루트 (WSL 셸 스크립트가 저장소를 찾을 때) |
+
+고친 파일 16개:
+
+- 루트 파이썬 9개 — `calibrated_pinn.py`, `echonet_experiment.py`, `ef_matched_analysis.py`, `hfpef_analysis.py`,
+  `quality_enhancement.py`, `ees_validation.py`, `noise_robustness_clinical.py`, `pinn_cardiac.py`, `PINN_cardiac_true.py`.
+  전부 `OUT = os.environ.get("CARDIAC_OUT", 이 파일이 있는 폴더)`를 쓰고, 그림·CSV와 `heart_failure_clinical_records.csv`를
+  `os.path.join(OUT, ...)`로 읽고 쓴다.
+- `fusion_ready/ct_refine_lv.py` — MM-WHS CT (`$CARDIAC_DATA\MM-WHS\ct_train`).
+- `waveform_pinn/inspire_extract.py`, `waveform_pinn/h2_downstream.py` — INSPIRE zip (`$CARDIAC_DATA\INSPIRE\...`).
+- 셸 4개 — `download_all_datasets.sh`(내려받을 곳), `setup_samsung_notebook.sh`(안내 문구),
+  `sync_wsl_to_onedrive.sh`·`lv_cfd_anatomical_v2_configs/rerun_simulation.sh`(저장소 루트를 스크립트 위치에서 유도).
+  뒤 두 개는 이제 OneDrive가 아니라 저장소로 복사한다 — 변수 이름도 `REPO_BASE`/`REPO`로 바꿨다.
+
+아직 안 고친 것: 원고 빌더 `build_v7.js`–`build_v11.js`와 `waveform_pinn/manuscripts/build_paper{A,B}.js`가 그림 PNG를
+옛 샌드박스 경로에서 읽는다. v7–v11 docx는 저장소에서 제외됐고 이미 대체됐으므로 급하지 않다. Paper A/B를 다시 빌드할 때
+같은 방식(`CARDIAC_OUT`)으로 고칠 것.
 
 ## 4. 새 PC 세팅 (RTX 3060 12 GB / 32 GB RAM / RX 5700)
 

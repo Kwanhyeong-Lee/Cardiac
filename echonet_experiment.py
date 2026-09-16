@@ -23,6 +23,11 @@ warnings.filterwarnings('ignore')
 
 np.random.seed(42)
 
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
+
 # ============================================================
 # Configuration
 # ============================================================
@@ -656,13 +661,13 @@ ax.text(0.05, 0.95, summary_text, transform=ax.transAxes, fontsize=9,
         bbox=dict(boxstyle='round', facecolor='lightyellow', alpha=0.8))
 
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-out_path = "/sessions/vibrant-youthful-hopper/mnt/260421/PINN_EchoNet_validation.png"
+out_path = os.path.join(OUT, "PINN_EchoNet_validation.png")
 plt.savefig(out_path, dpi=200, bbox_inches='tight')
 print(f"\n  Figure saved: {out_path}")
 
 # Save results CSV
 import csv
-csv_path = "/sessions/vibrant-youthful-hopper/mnt/260421/echonet_validation_results.csv"
+csv_path = os.path.join(OUT, "echonet_validation_results.csv")
 with open(csv_path, 'w', newline='') as f:
     w = csv.writer(f)
     w.writerow(['metric', 'value'])

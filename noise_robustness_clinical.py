@@ -13,6 +13,11 @@ from sklearn.metrics import mean_absolute_error, r2_score
 warnings.filterwarnings('ignore')
 np.random.seed(42)
 
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
+
 V0 = 10.0; A_EDP = 0.337; B_EDP = 0.028
 
 # ── PINN class ──
@@ -127,7 +132,7 @@ nn = train_pinn(X_sim_s, y_sim, sx, sy, lam=0.0, epochs=300, dims=[7,64,64,1])
 print("Models trained.\n")
 
 # ── Step 2: Load UCI data and get clean E_es reference ──
-uci = pd.read_csv('/sessions/vibrant-youthful-hopper/mnt/260421/heart_failure_clinical_records.csv')
+uci = pd.read_csv(os.path.join(OUT, 'heart_failure_clinical_records.csv'))
 EF_echo = uci['ejection_fraction'].values
 N_uci = len(EF_echo)
 
@@ -433,13 +438,13 @@ summary_text = (
 ax.text(0.05, 0.95, summary_text, transform=ax.transAxes, fontsize=10, va='top',
         fontfamily='monospace', bbox=dict(boxstyle='round', facecolor='#F0F4FF', edgecolor=c_pinn, lw=1.5))
 
-plt.savefig('/sessions/vibrant-youthful-hopper/mnt/260421/PINN_noise_robustness_clinical.png',
+plt.savefig(os.path.join(OUT, 'PINN_noise_robustness_clinical.png'),
             dpi=200, bbox_inches='tight', facecolor='white')
 plt.close()
 print("Saved: PINN_noise_robustness_clinical.png")
 
 # Save CSV
-rdf.to_csv('/sessions/vibrant-youthful-hopper/mnt/260421/noise_robustness_clinical_results.csv', index=False)
+rdf.to_csv(os.path.join(OUT, 'noise_robustness_clinical_results.csv'), index=False)
 print("Saved: noise_robustness_clinical_results.csv")
 
 print(f"""

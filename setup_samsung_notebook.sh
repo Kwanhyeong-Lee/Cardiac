@@ -5,6 +5,11 @@
 # ============================================================
 set -e
 
+# Repository root (the folder holding this script) and the data root outside it.
+# Override with CARDIAC_REPO / CARDIAC_DATA (HANDOVER.md section 3).
+REPO="${CARDIAC_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
+DATA="${CARDIAC_DATA:-/mnt/d/data}"
+
 echo "============================================================"
 echo " Samsung Notebook 7 Force — Cardiac Digital Twin Setup"
 echo "============================================================"
@@ -55,8 +60,8 @@ echo " 데이터 다운로드 안내"
 echo "============================================================"
 
 echo -e "\n--- [A] TotalSegmentator 실행 (RV 추출) ---"
-echo "  cd /mnt/c/Users/alex0/OneDrive/PINN/MM-WHS/ct_train"
-echo "  TotalSegmentator -i ct_train_1009_image.nii.gz -o ../../PINN/260421\ \(심장\)\ -\ main/totalseg_output/ --task heartchambers_highres --device gpu"
+echo "  cd $DATA/MM-WHS/ct_train"
+echo "  TotalSegmentator -i ct_train_1009_image.nii.gz -o \"$REPO/totalseg_output/\" --task heartchambers_highres --device gpu"
 
 echo -e "\n--- [B] ImageCAS + Public Cardiac CT Dataset ---"
 echo "  1. Kaggle 계정 로그인: https://www.kaggle.com/"

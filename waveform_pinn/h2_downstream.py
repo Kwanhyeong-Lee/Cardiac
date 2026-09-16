@@ -39,8 +39,10 @@ from agreement import delong_auc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STORE = os.path.join(HERE, "results_h2_downstream.json")
-ZIP = ("/sessions/vibrant-youthful-hopper/mnt/Cascade theorem/"
-       "inspire-a-publicly-available-research-dataset-for-perioperative-medicine-1.4.2.zip")
+# INSPIRE zip lives outside the repository: default D:\data\INSPIRE\,
+# override the root with CARDIAC_DATA (HANDOVER.md section 3).
+ZIP = os.path.join(os.environ.get("CARDIAC_DATA", r"D:\data"), "INSPIRE",
+                   "inspire-a-publicly-available-research-dataset-for-perioperative-medicine-1.4.2.zip")
 BASE = "inspire-a-publicly-available-research-dataset-for-perioperative-medicine-1.4.2/"
 
 

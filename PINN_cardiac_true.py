@@ -13,6 +13,11 @@ from sklearn.linear_model import LinearRegression
 warnings.filterwarnings('ignore')
 np.random.seed(42)
 
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
+
 V0=10.0; A_EDP=0.337
 
 def gen_patient(ees, edv, aop, hr, bedp):
@@ -192,7 +197,7 @@ rdf=pd.DataFrame(rob)
 
 # UCI Backtest
 print("\n--- UCI Backtest ---")
-uci=pd.read_csv('/sessions/vibrant-youthful-hopper/mnt/260421/heart_failure_clinical_records.csv')
+uci=pd.read_csv(os.path.join(OUT, 'heart_failure_clinical_records.csv'))
 bf=['age','anaemia','creatinine_phosphokinase','diabetes','ejection_fraction',
     'high_blood_pressure','platelets','serum_creatinine','serum_sodium','sex','smoking','time']
 Xb=uci[bf].values; yu=uci['DEATH_EVENT'].values
@@ -378,11 +383,11 @@ ax.text(.02,.98,txt,transform=ax.transAxes,fontsize=7,va='top',fontfamily='monos
         bbox=dict(boxstyle='round',facecolor='#F0F4FF',edgecolor='#0D9488',lw=1.5))
 
 plt.tight_layout(rect=[0,0,1,.96])
-plt.savefig('/sessions/vibrant-youthful-hopper/mnt/260421/PINN_cardiac_results.png',dpi=150,bbox_inches='tight',facecolor='white')
+plt.savefig(os.path.join(OUT, 'PINN_cardiac_results.png'),dpi=150,bbox_inches='tight',facecolor='white')
 plt.close()
 print("\nSaved: PINN_cardiac_results.png")
 
-rdf.to_csv('/sessions/vibrant-youthful-hopper/mnt/260421/pinn_noise_robustness.csv',index=False)
+rdf.to_csv(os.path.join(OUT, 'pinn_noise_robustness.csv'),index=False)
 print("Saved: pinn_noise_robustness.csv")
 
 print(f"""

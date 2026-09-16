@@ -14,7 +14,9 @@
 # ============================================================
 set -e
 
-BASE_DIR="/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/external_datasets"
+# Public datasets live outside the repository. Windows D:\data is /mnt/d/data under WSL;
+# override the root with CARDIAC_DATA (HANDOVER.md section 3).
+BASE_DIR="${CARDIAC_DATA:-/mnt/d/data}/external_datasets"
 mkdir -p "$BASE_DIR"
 cd "$BASE_DIR"
 
@@ -101,10 +103,10 @@ EOF
 # 한계: RV(label 620)이 모든 case에서 0 voxels — 데이터셋 결함
 # ============================================================
 echo ""
-echo "[2/8] MM-WHS — 이미 보유 (OneDrive/PINN heart/MM-WHS/)"
+echo "[2/8] MM-WHS — 이미 보유 (${CARDIAC_DATA:-/mnt/d/data}/MM-WHS/)"
 echo "     출처: Fudan University, 상하이 (중국)"
 echo "     인구: East Asian (중국), CT+MRI 각 20 cases"
-echo "     → 이미 다운로드됨: C:\\Users\\alex0\\OneDrive\\PINN heart\\MM-WHS\\"
+echo "     → 이미 다운로드됨: ${CARDIAC_DATA:-/mnt/d/data}/MM-WHS/"
 
 mkdir -p "$BASE_DIR/02_MMWHS"
 cat > "$BASE_DIR/02_MMWHS/SOURCE_INFO.txt" << 'EOF'
@@ -115,7 +117,7 @@ cat > "$BASE_DIR/02_MMWHS/SOURCE_INFO.txt" << 'EOF'
 # 논문: Medical Image Analysis 2016
 # 인구집단: East Asian (중국 상하이), CT 20 + MRI 20 cases
 # 라이선스: 학술용 (비상업)
-# 경로: C:\Users\alex0\OneDrive\PINN heart\MM-WHS\
+# 경로: D:\data\MM-WHS\ (CARDIAC_DATA)
 # Labels: 205=Myo,420=LA,500=LV wall,550=LV cavity,600=RA,620=RV,820=Aorta,850=PA
 # 한계: RV(label 620) 모든 case에서 0 voxels — 데이터셋 수준 결함
 # 사용 case: 1009 (현재 Digital Twin 대상)

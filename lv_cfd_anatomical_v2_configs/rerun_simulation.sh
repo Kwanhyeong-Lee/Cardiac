@@ -16,14 +16,16 @@
 #
 # 실행 방법: WSL Ubuntu에서
 #   cd ~/lv_cfd_anatomical
-#   bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd_anatomical_v2_configs/rerun_simulation.sh"
+#   bash "/mnt/c/work/Cardiac/lv_cfd_anatomical_v2_configs/rerun_simulation.sh"
 # ============================================================
 set -e
 
 # ── 경로 ──
 WSL_CASE="$HOME/lv_cfd_anatomical"
-ONEDRIVE="/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main"
-V2_CONFIGS="${ONEDRIVE}/lv_cfd_anatomical_v2_configs"
+# Repository root = the parent of the folder holding this script; override with
+# CARDIAC_REPO (HANDOVER.md section 3).
+REPO="${CARDIAC_REPO:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+V2_CONFIGS="${REPO}/lv_cfd_anatomical_v2_configs"
 
 cd "$WSL_CASE"
 
@@ -118,7 +120,7 @@ PID=$!
 echo "  PID: $PID"
 echo "  로그 모니터링: tail -f log.pimpleFoam_v2"
 echo ""
-echo "  시뮬레이션 후 OneDrive 동기화:"
-echo "    bash \"${ONEDRIVE}/sync_wsl_to_onedrive.sh\""
+echo "  시뮬레이션 후 저장소로 동기화:"
+echo "    bash \"${REPO}/sync_wsl_to_onedrive.sh\""
 echo ""
 echo "============================================================"

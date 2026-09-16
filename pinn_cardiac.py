@@ -32,6 +32,11 @@ warnings.filterwarnings('ignore')
 
 np.random.seed(42)
 
+# Paths: default to the folder holding this file (the repository root).
+# CARDIAC_OUT overrides where figures and result CSVs are written and read.
+import os
+OUT = os.environ.get("CARDIAC_OUT", os.path.dirname(os.path.abspath(__file__)))
+
 print("=" * 72)
 print("  TRUE PINN for Cardiac Contractility Estimation")
 print("  Physics Laws in Loss Function — Pure NumPy Implementation")
@@ -431,7 +436,7 @@ rob_df = pd.DataFrame(robustness)
 # ===========================================================================
 print("\n■ PART D: UCI Real Data Backtest")
 
-uci = pd.read_csv('/sessions/vibrant-youthful-hopper/mnt/260421/heart_failure_clinical_records.csv')
+uci = pd.read_csv(os.path.join(OUT, 'heart_failure_clinical_records.csv'))
 print(f"  UCI N={len(uci)}, Deaths={uci['DEATH_EVENT'].sum()}")
 
 # Baseline features (NO physics)
@@ -705,13 +710,13 @@ ax12.text(0.02, 0.98, arch, transform=ax12.transAxes, fontsize=7,
           bbox=dict(boxstyle='round', facecolor='#F0F4FF', edgecolor='#0D9488', linewidth=1.5))
 
 plt.tight_layout(rect=[0, 0, 1, 0.96])
-plt.savefig('/sessions/vibrant-youthful-hopper/mnt/260421/PINN_cardiac_results.png',
+plt.savefig(os.path.join(OUT, 'PINN_cardiac_results.png'),
             dpi=150, bbox_inches='tight', facecolor='white')
 plt.close()
 print("\n  Saved: PINN_cardiac_results.png")
 
 # Save robustness data
-rob_df.to_csv('/sessions/vibrant-youthful-hopper/mnt/260421/pinn_noise_robustness.csv', index=False)
+rob_df.to_csv(os.path.join(OUT, 'pinn_noise_robustness.csv'), index=False)
 print("  Saved: pinn_noise_robustness.csv")
 
 # ===========================================================================

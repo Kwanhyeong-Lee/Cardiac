@@ -29,7 +29,9 @@ from skimage import measure, filters
 warnings.filterwarnings("ignore")
 
 HERE = os.path.dirname(os.path.abspath(__file__)); OUT = os.path.join(HERE, "CT"); os.makedirs(OUT, exist_ok=True)
-MMWHS = "/sessions/vibrant-youthful-hopper/mnt/MM-WHS/ct_train"
+# MM-WHS raw CT lives outside the repository: default D:\data\MM-WHS\ct_train,
+# override the root with CARDIAC_DATA (HANDOVER.md section 3).
+MMWHS = os.path.join(os.environ.get("CARDIAC_DATA", r"D:\data"), "MM-WHS", "ct_train")
 CASE = "1009"
 d = json.load(open(os.path.join(HERE, "valve_refit.json")))
 AXIS = np.array(d["lv_geometry"]["axis_base_to_apex"]); MV_C = np.array(d["design"]["mv_centre_mm"]); AV_C = np.array(d["design"]["av_centre_mm"])
