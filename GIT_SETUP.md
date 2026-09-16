@@ -14,7 +14,11 @@
 
 `.gitignore`는 이미 이 기준으로 작성돼 있다.
 
-## 절차 (현재 PC)
+## 절차 (이미 끝남 — 2026-09-16, 기록용)
+
+> 아래는 이 저장소를 처음 만들 때 쓴 명령이다. 저장소는 이미
+> `https://github.com/Kwanhyeong-Lee/Cardiac` (PRIVATE)에 있으므로 **다시 실행하지 말 것** —
+> 새 PC에서는 아래 "새 PC 세팅"의 clone만 하면 된다.
 
 ```powershell
 # 1. OneDrive 폴더 안에서 git init 하지 말 것 — .git 오브젝트가 동기화 충돌로 깨지는 흔한 사고.
@@ -38,7 +42,7 @@ git push -u origin main
 ## 새 PC 세팅
 
 ```powershell
-git clone <url> C:\work\cardiac-phpinn        # OneDrive 밖에
+git clone https://github.com/Kwanhyeong-Lee/Cardiac.git C:\work\Cardiac   # OneDrive 밖에
 # 데이터: 외장 SSD -> D:\data\{MIMIC IV, eICU, INSPIRE, MM-WHS}
 # 경로는 환경변수로 (코드에 하드코딩된 경로가 있으면 이걸 읽도록 한 줄씩 고침)
 setx CARDIAC_DATA D:\data
@@ -58,4 +62,4 @@ pip install numpy scipy pandas scikit-learn matplotlib trimesh fast-simplificati
 
 ## 하드코딩 경로
 
-`fusion_ready/ct_refine_lv.py`의 `MMWHS = "/sessions/.../mnt/MM-WHS/ct_train"`, `waveform_pinn/inspire_extract.py`의 INSPIRE zip 경로 등은 이 세션의 샌드박스 경로다. 새 PC에서는 `os.environ.get("CARDIAC_DATA")` 기준으로 바꿔야 한다 — 옮긴 뒤 첫 작업으로 `grep -rn "/sessions/" --include=*.py` 해서 전부 고칠 것.
+**끝났다.** 샌드박스/WSL 절대경로는 코드와 문서에서 전부 없앴고, 환경변수 3개(`CARDIAC_DATA`, `CARDIAC_OUT`, `CARDIAC_REPO`)로 대체했다 — 전부 기본값이 있어 clone 직후 설정 없이 돌아간다. 자세한 내용은 `HANDOVER.md` §3.

@@ -181,7 +181,7 @@ python pinn_cardiac.py                               # A: UCI csv만으로 도�
 ## 8. 저장소에 없는 것과 있는 곳
 
 `_handover/` 폴더(원본 OneDrive 폴더 안, 저장소 밖)에 세 개를 만들었다:
-- `cardiac-phpinn-workbench.bundle` — 이 저장소 전체(히스토리 포함, 545 파일). `git clone 파일.bundle 폴더명`.
+- `cardiac-phpinn-workbench.bundle` — 이 저장소 전체(히스토리 포함, 544 파일). `git clone 파일.bundle 폴더명`.
 - `cardiac-phpinn-workbench_tree.zip` — 같은 내용을 git 없이 푼 것(비상용).
 - `handover_assets_geometry.zip` (102 MB, 63 파일) — 저장소에서 뺀 형상 산출물 중 **파이프라인을 6단계부터 재개하는 데 필요한 것 + 최종 프린트 파일**: `BLENDER_OUT/{LV_bloodpool,mitral_valve,aortic_valve,LV_myocardium_frameA}.stl`(Blender 없이 재개 가능), `hollow_ventricle_v4_CT.stl`, v4 절개 A/B, v2, `CT/*_smooth.stl`·유두근·SDF 격자, `frame_A_patient/` 판막·판·건삭, `PRINT/`, `CAD/`, `PHANTOM/`(코어·상자·CFD 패치). 저장소 루트에 그대로 풀면 경로가 맞는다.
 - 넣지 않은 것: GLB 뷰어 모델(113 MB), 원고 v2–v11 docx(45 MB), `frameA_print.blend`, `cardiac_meshes*/` — 전부 OneDrive 원본 폴더에 그대로 있다(같은 계정이면 새 PC에서도 동기화됨). 데이터(§3)는 외장 SSD로 직접 복사한다.

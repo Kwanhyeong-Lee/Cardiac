@@ -8,7 +8,7 @@ Read `PROTOCOL.md` first. The endpoints, cohorts, and decision rules are fixed t
 are not to be renegotiated after seeing results.
 
 ```powershell
-cd "C:\Users\alex0\OneDrive\PINN\260421 (심장) - main\waveform_pinn"
+cd "C:\work\Cardiac\waveform_pinn"
 ```
 
 ## Stage 1 — cohorts  (~15 min)

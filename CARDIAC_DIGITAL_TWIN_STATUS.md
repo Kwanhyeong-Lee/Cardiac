@@ -1,8 +1,8 @@
 # Cardiac Digital Twin — 종합 진행 현황 및 실행 가이드
 
 > **최종 업데이트**: 2026-07-06
-> **작성 목적**: OneDrive로 동기화된 **어떤 컴퓨터에서든** Claude를 통해 이어서 작업할 수 있도록, 현재까지의 모든 진행사항/파일구조/다음 단계/실행 명령어를 기록
-> **환경**: OneDrive 동기화 대상 모든 컴퓨터 (원본: Samsung Notebook 7 Force, i7-8565U / GTX 1650 4GB / 40GB RAM)
+> **작성 목적**: 저장소를 clone한 **어떤 컴퓨터에서든** Claude를 통해 이어서 작업할 수 있도록, 현재까지의 모든 진행사항/파일구조/다음 단계/실행 명령어를 기록
+> **환경**: 저장소를 clone한 모든 컴퓨터 (원본: Samsung Notebook 7 Force, i7-8565U / GTX 1650 4GB / 40GB RAM)
 > **Patient**: MM-WHS Case 1009, CT contrast-enhanced, voxel 0.488×0.488×0.625 mm
 
 ---
@@ -526,7 +526,7 @@ conda install -c vmtk vmtk
 
 ### 디렉토리 구조
 ```
-C:\Users\alex0\OneDrive\PINN heart\MM-WHS\
+%CARDIAC_DATA%\MM-WHS\   (기본 D:\data\MM-WHS\)
 ├── ct_train\           ← Case 1001-1020 (image + label)
 │   ├── ct_train_1009_image.nii.gz    ← 현재 사용 중
 │   └── ct_train_1009_label.nii.gz
@@ -616,7 +616,7 @@ Samsung Notebook의 Claude에게 이 파일을 보여준 뒤, 다음과 같이 �
 ## 13. 파일 디렉토리 트리 (핵심만)
 
 ```
-C:\Users\alex0\OneDrive\PINN\260421 (심장) - main\
+C:\work\Cardiac\
 ├── CARDIAC_DIGITAL_TWIN_STATUS.md      ← 이 문서
 ├── setup_samsung_notebook.sh           ← 환경 설치 스크립트
 ├── sync_wsl_to_onedrive.sh             ← WSL→OneDrive 동기화
@@ -699,10 +699,10 @@ C:\Users\alex0\OneDrive\PINN\260421 (심장) - main\
 
 ## 15. 외부 데이터셋 다운로드 현황
 
-| 데이터셋 | 상태 | 크기 | 출처 국가/인종 | 경로 |
+| 데이터셋 | 상태 | 크기 | 출처 국가/인종 | 경로 (데이터 루트 `$CARDIAC_DATA`, 기본 `D:\data`) |
 |----------|------|------|---------------|------|
 | STACOM2025 labels | **info 확보** | 576 MB | 덴마크/Northern European | `external_datasets/01_STACOM2025_PublicCardiacCT/` |
-| MM-WHS | **보유 중** | ~2 GB | 중국/East Asian | `../PINN heart/MM-WHS/` |
+| MM-WHS | **보유 중** | ~2 GB | 중국/East Asian | `MM-WHS/` |
 | ACDC | 미다운로드 | ~2 GB | 프랑스/Western European | `external_datasets/03_ACDC/` |
 | M&Ms | 미다운로드 | ~12 GB | 스페인+독일+캐나다/Multi | `external_datasets/04_MandMs/` |
 | ImageCAS CTA | 미다운로드 | ~200 GB | 중국/East Asian | `external_datasets/05_ImageCAS/` |
@@ -870,16 +870,16 @@ CFD (flowRate + probe pressure)
 
 ### 17-B. Cross-Computer 작업 이어가기
 
-이 프로젝트는 OneDrive를 통해 어떤 컴퓨터에서든 이어서 작업할 수 있다.
+이 프로젝트는 PRIVATE 저장소 `Kwanhyeong-Lee/Cardiac`를 통해 어떤 컴퓨터에서든 이어서 작업할 수 있다.
 
 **전제 조건:**
-- OneDrive가 동기화되어 있고, `C:\Users\alex0\OneDrive\PINN\260421 (심장) - main` 경로가 동일할 것
+- 저장소를 clone해 뒀을 것: `git clone https://github.com/Kwanhyeong-Lee/Cardiac.git C:\work\Cardiac` (OneDrive 밖)
 - Python 3.10+ (numpy, scipy, trimesh, torch 설치)
 - 선택: OpenFOAM (WSL/Docker), ParaView (시각화), GPU (TotalSegmentator)
 
 **핵심 디렉토리 구조:**
 ```
-C:\Users\alex0\OneDrive\PINN\260421 (심장) - main/
+C:\work\Cardiac/
 ├── CARDIAC_DIGITAL_TWIN_STATUS.md      ← 이 파일 (마스터 인수인계 문서)
 ├── pinn_hamiltonian_v5.py              ← Track A: pH-PINN 모델
 ├── phpinn_v5_trained.pt                ← Track A: 학습된 가중치
@@ -925,7 +925,7 @@ C:\Users\alex0\OneDrive\PINN\260421 (심장) - main/
 **새 컴퓨터에서 Claude에게 전달할 첫 메시지 예시:**
 ```
 CARDIAC_DIGITAL_TWIN_STATUS.md를 읽고 cardiac digital twin 작업을 이어가자.
-경로: C:\Users\alex0\OneDrive\PINN\260421 (심장) - main
+경로: C:\work\Cardiac
 
 현재 상태 요약:
 - CFD 시뮬레이션이 발산함 (Section 18 참조)
@@ -1297,8 +1297,8 @@ CFD 좌표계에 바로 배치한다.
 
 ### 산출 스크립트
 - `run_rv_extraction.sh` — WSL 래퍼. 경로 자동감지 → TotalSegmentator(heartchambers_highres,
-  GPU 없으면 자동 CPU) → 추출 스크립트 호출. CT는 `<OneDrive>/PINN heart/MM-WHS/ct_train/
-  ct_train_1009_image.nii.gz` 자동 탐색.
+  GPU 없으면 자동 CPU) → 추출 스크립트 호출. CT는 `$CARDIAC_DATA/MM-WHS/ct_train/
+  ct_train_1009_image.nii.gz` (기본 `/mnt/d/data`).
 - `extract_rv_totalseg.py` — RV mask(NIfTI) → affine 적용 marching cubes → 스무딩/최대성분/
   decimation → `mm_to_cfd_transform.npy` 적용 → `rv_insegment_registered.stl`.
 

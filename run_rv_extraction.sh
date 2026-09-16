@@ -13,8 +13,9 @@ set -uo pipefail
 
 # ── 경로 자동 감지 ──
 PROJ="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ONEDRIVE_ROOT="$(dirname "$(dirname "$PROJ")")"     # .../OneDrive
-CT="$ONEDRIVE_ROOT/PINN heart/MM-WHS/ct_train/ct_train_1009_image.nii.gz"
+# MM-WHS CT는 저장소 밖. 기본 /mnt/d/data (= Windows D:\data), CARDIAC_DATA로 바꾼다 (HANDOVER.md §3).
+DATA="${CARDIAC_DATA:-/mnt/d/data}"
+CT="$DATA/MM-WHS/ct_train/ct_train_1009_image.nii.gz"
 SEG_DIR="$PROJ/totalseg_output"
 
 echo "PROJ    = $PROJ"

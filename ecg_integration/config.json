@@ -1,11 +1,11 @@
 {
-  "_comment": "ECG 통합 파이프라인 중앙 설정. 경로는 Windows 절대경로로 채운 뒤 실행.",
+  "_comment": "ECG 통합 파이프라인 중앙 설정. paths 안의 ${CARDIAC_REPO}/${CARDIAC_DATA}/${CARDIAC_OUT} 는 실행 시 치환된다(HANDOVER.md §3). 기본값은 저장소 루트와 D:\\data 이므로 ecg_root 만 채우면 된다.",
   "paths": {
-    "project_root": "C:/Users/USER/OneDrive/PINN/260421 (심장) - main",
+    "project_root": "${CARDIAC_REPO}",
     "ecg_root": "FILL_ME: MIMIC-IV-ECG 다운로드 폴더 (record_list.csv, machine_measurements.csv, files/ 포함)",
-    "echo_cohort_csv": "C:/Users/USER/OneDrive/PINN/260421 (심장) - main/mimic_echo_full_extraction.csv",
-    "pinn_cohort_csv": "C:/Users/USER/OneDrive/PINN/260421 (심장) - main/mimic_pinn_v4_inference.csv",
-    "out_dir": "C:/Users/USER/OneDrive/PINN/260421 (심장) - main/ecg_integration/out"
+    "echo_cohort_csv": "${CARDIAC_DATA}/mimic_echo_full_extraction.csv",
+    "pinn_cohort_csv": "${CARDIAC_DATA}/mimic_pinn_v4_inference.csv",
+    "out_dir": "${CARDIAC_OUT}/ecg_integration/out"
   },
   "linkage": {
     "window_hours": 168,

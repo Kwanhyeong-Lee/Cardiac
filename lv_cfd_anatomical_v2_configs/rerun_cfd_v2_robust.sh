@@ -21,14 +21,14 @@ set -uo pipefail
 
 # ── 경로 자동 감지 ─────────────────────────────────────────
 V2_CONFIGS="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ONEDRIVE="$(dirname "$V2_CONFIGS")"
+REPO="$(dirname "$V2_CONFIGS")"      # 저장소 루트
 WSL_CASE="${1:-$HOME/lv_cfd_anatomical}"
 
 echo "============================================================"
 echo " Cardiac LV CFD v2 Robust Re-run"
 echo "============================================================"
 echo " V2 configs : $V2_CONFIGS"
-echo " OneDrive   : $ONEDRIVE"
+echo " Repo       : $REPO"
 echo " Case dir   : $WSL_CASE"
 echo ""
 
@@ -36,8 +36,8 @@ echo ""
 command -v pimpleFoam >/dev/null || { echo "✗ OpenFOAM 미소싱. 'source .../etc/bashrc' 후 재실행"; exit 1; }
 
 if [ ! -d "$WSL_CASE" ]; then
-    echo "케이스 디렉토리가 없습니다. OneDrive에서 복사합니다..."
-    cp -r "$ONEDRIVE/lv_cfd_anatomical" "$WSL_CASE" || { echo "✗ 복사 실패"; exit 1; }
+    echo "케이스 디렉토리가 없습니다. 저장소에서 복사합니다..."
+    cp -r "$REPO/lv_cfd_anatomical" "$WSL_CASE" || { echo "✗ 복사 실패"; exit 1; }
 fi
 cd "$WSL_CASE"
 
@@ -131,5 +131,5 @@ PID=$!
 echo "    PID=$PID   로그: $WSL_CASE/log.pimpleFoam_v2"
 echo ""
 echo "  모니터링:  bash \"$V2_CONFIGS/monitor_cfd.sh\" \"$WSL_CASE\""
-echo "  동기화:    bash \"$ONEDRIVE/sync_wsl_to_onedrive.sh\"   # 완료 후, 모드(b) 권장"
+echo "  동기화:    bash \"$REPO/sync_wsl_to_onedrive.sh\"   # 완료 후, 모드(b) 권장"
 echo "============================================================"
