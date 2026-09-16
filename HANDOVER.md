@@ -104,7 +104,7 @@ private 저장소에도 올리지 않는다. `.gitignore`가 막고 있지만 �
   `sync_wsl_to_onedrive.sh`·`lv_cfd_anatomical_v2_configs/rerun_simulation.sh`(저장소 루트를 스크립트 위치에서 유도).
   뒤 두 개는 이제 OneDrive가 아니라 저장소로 복사한다 — 변수 이름도 `REPO_BASE`/`REPO`로 바꿨다.
 
-원고 빌더 7개도 같은 규칙으로 고쳤다 — **저장소에 남은 샌드박스 절대경로는 이제 0건이다.**
+원고 빌더 7개도 같은 규칙으로 고쳤다.
 
 - `waveform_pinn/manuscripts/build_paper{A,B}.js` — `BASE`를 스크립트 위치에서 유도, `CARDIAC_OUT`으로 덮어쓴다.
   그림 18개가 `waveform_pinn/figures/`에 있어 설정 없이 빌드된다.
@@ -113,6 +113,11 @@ private 저장소에도 올리지 않는다. `.gitignore`가 막고 있지만 �
   두 번째 쓰기(`.../mnt/outputs/`, 샌드박스 전용 마운트)는 지웠다.
 
 빌드하려면 `npm install docx` (node_modules는 저장소에서 제외).
+
+문서 6개(`CARDIAC_DIGITAL_TWIN_STATUS.md`, `CFD_소프트웨어_설치가이드.md`, `ablation_patient_level/RUN_ME.md`,
+`manuscript/pH_PINN_JBHI_GITHUB_PUSH.md`, `vitaldb_validation/FINDINGS.md`, `waveform_pinn/DESIGN.md`)에 있던
+복사해 쓰는 명령줄의 옛 WSL 경로도 `/mnt/c/work/Cardiac`(MM-WHS는 `$CARDIAC_DATA`) 기준으로 고쳤다.
+**결과: 코드·문서를 통틀어 옛 절대경로는 이 문단의 설명 외에 남아 있지 않다.**
 
 ## 4. 새 PC 세팅 (RTX 3060 12 GB / 32 GB RAM / RX 5700)
 

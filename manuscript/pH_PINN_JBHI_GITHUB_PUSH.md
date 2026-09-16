@@ -2,7 +2,7 @@
 
 로컬 git 저장소는 **이미 초기화 + 커밋 완료**:
 - 위치(Windows): `...\260421 (심장) - main\pH-PINN-cardiac`
-- 위치(WSL): `/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/pH-PINN-cardiac`
+- 위치(WSL): `/mnt/c/work/Cardiac/pH-PINN-cardiac`
 - 브랜치 `main`, 파일 42개, 커밋 1개 — 남은 건 GitHub 원격 생성 + push (계정 인증 필요)
 
 > WSL에서는 `C:\...` 백슬래시 경로가 안 먹힙니다. `/mnt/c/...` 를 쓰거나,

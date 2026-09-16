@@ -211,9 +211,9 @@ CFD에서 Windkessel 파라미터(R_total, C) 추출 → pH-PINN의 Ea, tau에 �
 - **task**: `heartchambers_highres`
 - **실행 명령**:
 ```bash
-cd /mnt/c/Users/alex0/OneDrive/PINN\ heart/MM-WHS/ct_train/
+cd ${CARDIAC_DATA:-/mnt/d/data}/MM-WHS/ct_train/
 TotalSegmentator -i ct_train_1009_image.nii.gz \
-  -o /mnt/c/Users/alex0/OneDrive/PINN/260421\ \(심장\)\ -\ main/totalseg_output/ \
+  -o /mnt/c/work/Cardiac/totalseg_output/ \
   --task heartchambers_highres --device gpu
 ```
 - **출력**: RV, LV, RA, LA, myocardium 각각의 NIfTI mask
@@ -327,12 +327,12 @@ SA node, Atrium, AV node, Purkinje fiber, LV endocardium, LV midmyocardium, LV e
 ```bash
 # 1. TotalSegmentator 설치 + RV 세그멘테이션
 pip install TotalSegmentator
-TotalSegmentator -i /mnt/c/Users/alex0/OneDrive/PINN\ heart/MM-WHS/ct_train/ct_train_1009_image.nii.gz \
-  -o /mnt/c/Users/alex0/OneDrive/PINN/260421\ \(심장\)\ -\ main/totalseg_output/ \
+TotalSegmentator -i ${CARDIAC_DATA:-/mnt/d/data}/MM-WHS/ct_train/ct_train_1009_image.nii.gz \
+  -o /mnt/c/work/Cardiac/totalseg_output/ \
   --task heartchambers_highres --device gpu
 
 # 2. WSL 시뮬레이션 데이터 OneDrive 동기화
-bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/sync_wsl_to_onedrive.sh"
+bash "/mnt/c/work/Cardiac/sync_wsl_to_onedrive.sh"
 
 # 3. CFD 후처리 (WSL에서, 시뮬레이션 데이터가 있는 디렉토리에서)
 cd <WSL 내 lv_cfd_anatomical 경로>
@@ -400,7 +400,7 @@ python3 postprocess_analysis.py
 ### 해결
 ```bash
 # WSL Ubuntu 터미널에서 실행
-bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/sync_wsl_to_onedrive.sh"
+bash "/mnt/c/work/Cardiac/sync_wsl_to_onedrive.sh"
 ```
 이 스크립트는 3가지 동기화 모드를 제공한다:
 - **(a) 전체**: 모든 시간 디렉토리 + postProcessing + log + mesh (수 GB)
@@ -409,7 +409,7 @@ bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/sync_wsl_to_onedri
 
 ### 동기화 후 후처리
 ```bash
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd_anatomical"
+cd "/mnt/c/work/Cardiac/lv_cfd_anatomical"
 python3 postprocess_analysis.py
 # → cfd_postprocess_results.json 생성
 ```
@@ -420,7 +420,7 @@ python3 postprocess_analysis.py
 
 ### 설치 스크립트
 ```bash
-bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/setup_samsung_notebook.sh"
+bash "/mnt/c/work/Cardiac/setup_samsung_notebook.sh"
 ```
 
 ### 수동 설치 순서 (스크립트가 실패할 경우)
@@ -1019,7 +1019,7 @@ Failed 5 mesh checks:
 ```bash
 # WSL Ubuntu에서:
 cd ~/lv_cfd_anatomical
-bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd_anatomical_v2_configs/rerun_simulation.sh"
+bash "/mnt/c/work/Cardiac/lv_cfd_anatomical_v2_configs/rerun_simulation.sh"
 ```
 
 이 스크립트가 수행하는 작업:
@@ -1069,7 +1069,7 @@ which pimpleFoam && echo "OK" || echo "OpenFOAM 미설치 — apt install openfo
 ls ~/lv_cfd_anatomical/system/controlDict && echo "OK" || echo "디렉토리 없음 — OneDrive에서 복사 필요"
 
 # OneDrive v2 configs 접근 확인
-ls "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd_anatomical_v2_configs/system/controlDict" && echo "OK"
+ls "/mnt/c/work/Cardiac/lv_cfd_anatomical_v2_configs/system/controlDict" && echo "OK"
 ```
 
 **환경이 없는 경우:**
@@ -1081,7 +1081,7 @@ echo "source /usr/lib/openfoam/openfoam2312/etc/bashrc" >> ~/.bashrc
 source ~/.bashrc
 
 # 시뮬레이션 디렉토리가 WSL에 없으면 OneDrive에서 복사
-cp -r "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd_anatomical" ~/lv_cfd_anatomical
+cp -r "/mnt/c/work/Cardiac/lv_cfd_anatomical" ~/lv_cfd_anatomical
 ```
 
 #### Step 1: 기존 설정 백업 + v2 config 적용
@@ -1093,7 +1093,7 @@ mkdir -p "$BACKUP" && cp -r system 0 "$BACKUP/"
 cp log.* "$BACKUP/" 2>/dev/null
 
 # v2 configs 복사
-V2="/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd_anatomical_v2_configs"
+V2="/mnt/c/work/Cardiac/lv_cfd_anatomical_v2_configs"
 cp "$V2/system/controlDict"       system/controlDict
 cp "$V2/system/fvSchemes"          system/fvSchemes
 cp "$V2/system/fvSolution"         system/fvSolution
@@ -1195,7 +1195,7 @@ grep "cumulative" log.pimpleFoam_v2 | tail -5
 grep "^End$" log.pimpleFoam_v2 && echo "완료" || echo "아직 실행 중"
 
 # 동기화 실행
-bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/sync_wsl_to_onedrive.sh"
+bash "/mnt/c/work/Cardiac/sync_wsl_to_onedrive.sh"
 # 모드 (b) 선택 권장 (결과만 — postProcessing + log + polyMesh)
 ```
 
@@ -1204,7 +1204,7 @@ bash "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/sync_wsl_to_onedri
 시뮬레이션 성공 + OneDrive 동기화 후:
 
 ```bash
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main"
+cd "/mnt/c/work/Cardiac"
 
 # 1. CFD 후처리 (probe 파싱, flowRate, WSS)
 python3 postprocess_analysis.py

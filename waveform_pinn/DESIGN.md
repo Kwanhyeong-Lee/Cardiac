@@ -50,7 +50,7 @@ beat 검출 → 앙상블 평균 beat → 형태 특징:
 
 ## 7. 실행
 ```bash
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/waveform_pinn"
+cd "/mnt/c/work/Cardiac/waveform_pinn"
 python3 extract_features.py 964 0      # 케이스당 ~5초, 약 1시간
 ```
 결과: `wave_features_0.csv` → 이걸로 학습/ablation 진행

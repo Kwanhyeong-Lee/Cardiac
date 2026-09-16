@@ -7,7 +7,7 @@
 
 ## 실행 (WSL)
 ```bash
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/ablation_patient_level"
+cd "/mnt/c/work/Cardiac/ablation_patient_level"
 for L in A B C D; do for S in 0 1 2; do python3 run_ablation_patient.py $L $S; done; done
 ```
 - 필요 패키지: torch, numpy, pandas, scikit-learn

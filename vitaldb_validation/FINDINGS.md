@@ -42,7 +42,7 @@
 ## 전체 실행 (로컬/WSL 권장)
 ```bash
 pip install vitaldb
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/vitaldb_validation"
+cd "/mnt/c/work/Cardiac/vitaldb_validation"
 python3 build_cohort.py        # 964 케이스 CO/SV/CVP 수집
 python3 vitaldb_wk.py 964 0    # 파형 분석 (케이스당 ~5초)
 ```

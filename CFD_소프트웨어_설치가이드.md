@@ -58,7 +58,7 @@ simpleFoam -help
 WSL에서 Windows 파일은 `/mnt/c/` 경로로 접근:
 ```bash
 # 예: OneDrive의 OpenFOAM 케이스
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd/openfoam_case"
+cd "/mnt/c/work/Cardiac/lv_cfd/openfoam_case"
 ```
 
 ### CFD 실행 순서
@@ -157,7 +157,7 @@ pip install pyvista          # 3D 시각화 (VTK 기반, 선택)
 ```bash
 # WSL에서
 source /usr/lib/openfoam/openfoam2312/etc/bashrc
-cd "/mnt/c/Users/alex0/OneDrive/PINN/260421 (심장) - main/lv_cfd/openfoam_case"
+cd "/mnt/c/work/Cardiac/lv_cfd/openfoam_case"
 
 # 1단계: 메시 생성
 blockMesh
