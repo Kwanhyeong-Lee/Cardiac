@@ -1,4 +1,8 @@
 const fs = require("fs");
+const path = require("path");
+// Figures and the built .docx live in the repository root by default;
+// CARDIAC_OUT overrides that folder (HANDOVER.md section 3).
+const OUT_DIR = process.env.CARDIAC_OUT || __dirname;
 const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
         ImageRun, Header, Footer, AlignmentType,
         TabStopType, TabStopPosition,
@@ -54,12 +58,12 @@ function eqn(text, num) {
 }
 
 // ===== Load ONLY 6 figure images =====
-const fig1 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_methodology_overview.png");
-const fig2 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Fig2_validation_summary.png");
-const fig3 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Fig3_noise_physics.png");
-const fig4 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Fig4_echonet.png");
-const fig5 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Fig5_clinical_hfpef.png");
-const fig6 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Fig6_incremental_prognostic.png");
+const fig1 = fs.readFileSync(path.join(OUT_DIR, "PINN_methodology_overview.png"));
+const fig2 = fs.readFileSync(path.join(OUT_DIR, "Fig2_validation_summary.png"));
+const fig3 = fs.readFileSync(path.join(OUT_DIR, "Fig3_noise_physics.png"));
+const fig4 = fs.readFileSync(path.join(OUT_DIR, "Fig4_echonet.png"));
+const fig5 = fs.readFileSync(path.join(OUT_DIR, "Fig5_clinical_hfpef.png"));
+const fig6 = fs.readFileSync(path.join(OUT_DIR, "Fig6_incremental_prognostic.png"));
 
 function figureBlock(imgBuf, captionRuns, figWidth, figHeight) {
   const maxW = 460;
@@ -894,12 +898,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then(buf => {
-  const outPath = "/sessions/vibrant-youthful-hopper/mnt/260421/PINN_Cardiac_Ees_Manuscript_CMBM_v10.docx";
+  const outPath = path.join(OUT_DIR, "PINN_Cardiac_Ees_Manuscript_CMBM_v10.docx");
   fs.writeFileSync(outPath, buf);
   console.log("Written: " + buf.length + " bytes to " + outPath);
-
-  // Also copy to outputs
-  const outPath2 = "/sessions/vibrant-youthful-hopper/mnt/outputs/PINN_Cardiac_Ees_Manuscript_CMBM_v10.docx";
-  fs.writeFileSync(outPath2, buf);
-  console.log("Also written to: " + outPath2);
 }).catch(err => console.error("Error:", err));

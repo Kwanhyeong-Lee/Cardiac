@@ -1,4 +1,8 @@
 const fs = require("fs");
+const path = require("path");
+// Figures and the built .docx live in the repository root by default;
+// CARDIAC_OUT overrides that folder (HANDOVER.md section 3).
+const OUT_DIR = process.env.CARDIAC_OUT || __dirname;
 const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
         ImageRun, Header, Footer, AlignmentType,
         TabStopType, TabStopPosition,
@@ -54,21 +58,21 @@ function eqn(text, num) {
 }
 
 // Load figure images
-const figOverview = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_methodology_overview.png");
-const fig2 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_cardiac_results.png");
-const fig3 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_Ees_validation.png");
-const fig4 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_noise_robustness_clinical.png");
-const fig5 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_calibrated_validation.png");
-const fig6 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_EchoNet_validation.png");
-const fig7 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_feature_importance.png");
-const fig8 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_ML_baseline_comparison.png");
-const fig9 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_subgroup_analysis.png");
-const fig10 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_bootstrap_CI.png");
-const fig11 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Paper2_HFpEF_analysis.png");
-const fig12 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/Paper2_HFpEF_supplementary.png");
-const fig13 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_EF_matched_circularity.png");
-const fig14 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_physics_ablation.png");
-const fig15 = fs.readFileSync("/sessions/vibrant-youthful-hopper/mnt/260421/PINN_invasive_validation.png");
+const figOverview = fs.readFileSync(path.join(OUT_DIR, "PINN_methodology_overview.png"));
+const fig2 = fs.readFileSync(path.join(OUT_DIR, "PINN_cardiac_results.png"));
+const fig3 = fs.readFileSync(path.join(OUT_DIR, "PINN_Ees_validation.png"));
+const fig4 = fs.readFileSync(path.join(OUT_DIR, "PINN_noise_robustness_clinical.png"));
+const fig5 = fs.readFileSync(path.join(OUT_DIR, "PINN_calibrated_validation.png"));
+const fig6 = fs.readFileSync(path.join(OUT_DIR, "PINN_EchoNet_validation.png"));
+const fig7 = fs.readFileSync(path.join(OUT_DIR, "PINN_feature_importance.png"));
+const fig8 = fs.readFileSync(path.join(OUT_DIR, "PINN_ML_baseline_comparison.png"));
+const fig9 = fs.readFileSync(path.join(OUT_DIR, "PINN_subgroup_analysis.png"));
+const fig10 = fs.readFileSync(path.join(OUT_DIR, "PINN_bootstrap_CI.png"));
+const fig11 = fs.readFileSync(path.join(OUT_DIR, "Paper2_HFpEF_analysis.png"));
+const fig12 = fs.readFileSync(path.join(OUT_DIR, "Paper2_HFpEF_supplementary.png"));
+const fig13 = fs.readFileSync(path.join(OUT_DIR, "PINN_EF_matched_circularity.png"));
+const fig14 = fs.readFileSync(path.join(OUT_DIR, "PINN_physics_ablation.png"));
+const fig15 = fs.readFileSync(path.join(OUT_DIR, "PINN_invasive_validation.png"));
 
 function figureBlock(imgBuf, captionRuns, figWidth, figHeight) {
   const maxW = 460;
@@ -1021,7 +1025,7 @@ const doc = new Document({
 });
 
 Packer.toBuffer(doc).then(buf => {
-  const outPath = "/sessions/vibrant-youthful-hopper/mnt/260421/PINN_Cardiac_Ees_Manuscript_CMBM_v8.docx";
+  const outPath = path.join(OUT_DIR, "PINN_Cardiac_Ees_Manuscript_CMBM_v8.docx");
   fs.writeFileSync(outPath, buf);
   console.log("Written: " + buf.length + " bytes to " + outPath);
 }).catch(err => console.error("Error:", err));
