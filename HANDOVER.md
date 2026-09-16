@@ -104,9 +104,12 @@ private 저장소에도 올리지 않는다. `.gitignore`가 막고 있지만 �
   `sync_wsl_to_onedrive.sh`·`lv_cfd_anatomical_v2_configs/rerun_simulation.sh`(저장소 루트를 스크립트 위치에서 유도).
   뒤 두 개는 이제 OneDrive가 아니라 저장소로 복사한다 — 변수 이름도 `REPO_BASE`/`REPO`로 바꿨다.
 
-아직 안 고친 것: 원고 빌더 `build_v7.js`–`build_v11.js`와 `waveform_pinn/manuscripts/build_paper{A,B}.js`가 그림 PNG를
-옛 샌드박스 경로에서 읽는다. v7–v11 docx는 저장소에서 제외됐고 이미 대체됐으므로 급하지 않다. Paper A/B를 다시 빌드할 때
-같은 방식(`CARDIAC_OUT`)으로 고칠 것.
+`waveform_pinn/manuscripts/build_paper{A,B}.js`(Paper A/B 원고 빌더)도 같은 규칙으로 고쳤다 — `BASE`를 스크립트 위치에서
+유도하고 `CARDIAC_OUT`으로 덮어쓴다. 그림 18개는 저장소의 `waveform_pinn/figures/`에 있으므로 설정 없이 빌드된다
+(`npm install docx` 필요).
+
+아직 안 고친 것: 원고 빌더 `build_v7.js`–`build_v11.js`만 옛 샌드박스 경로에서 그림 PNG를 읽는다. v7–v11 docx는
+저장소에서 제외됐고 Paper A/B로 대체됐으므로 손대지 않았다. 되살릴 일이 생기면 같은 방식(`CARDIAC_OUT`)으로 고칠 것.
 
 ## 4. 새 PC 세팅 (RTX 3060 12 GB / 32 GB RAM / RX 5700)
 

@@ -3,7 +3,12 @@ const d = require('docx');
 const {Document,Packer,Paragraph,TextRun,HeadingLevel,Table,TableRow,TableCell,
        WidthType,ShadingType,AlignmentType,ImageRun} = d;
 
-const BASE = "/sessions/vibrant-youthful-hopper/mnt/260421 (심장) - main/waveform_pinn";
+const path = require('path');
+// waveform_pinn/ = the folder above this script. CARDIAC_OUT overrides the root that
+// holds waveform_pinn/figures and waveform_pinn/manuscripts (HANDOVER.md section 3).
+const BASE = process.env.CARDIAC_OUT
+  ? path.join(process.env.CARDIAC_OUT, "waveform_pinn")
+  : path.join(__dirname, "..");
 const FIG  = `${BASE}/figures`;
 const OUT  = `${BASE}/manuscripts/PaperB_constraint_scope.docx`;
 const W = 9360;
