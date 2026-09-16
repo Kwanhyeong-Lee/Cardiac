@@ -1,11 +1,6 @@
 # ===== NEVER commit: credentialed / licensed patient data and anything derived per patient =====
 MIMIC IV/
-MIMIC*/
-eicu*/
-eICU*/
-INSPIRE*/
-inspire*/
-vitaldb*/
+# (data folders for eICU / INSPIRE / VitalDB live OUTSIDE the repo; per-file rules below catch any table)
 external_datasets/
 external_data/
 paediatric-intensive-care-database*
