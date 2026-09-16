@@ -99,8 +99,8 @@ lv_cfd_anatomical_v2_configs/rerun_simulation.sh:19        /mnt/c/Users/alex0/On
 ## 4. 새 PC 세팅 (RTX 3060 12 GB / 32 GB RAM / RX 5700)
 
 ```powershell
-git clone <bundle 또는 원격> C:\work\cardiac-phpinn-workbench      # OneDrive 밖!
-cd C:\work\cardiac-phpinn-workbench
+git clone <bundle 또는 원격> C:\work\Cardiac      # OneDrive 밖!
+cd C:\work\Cardiac
 py -3.11 -m venv .venv; .\.venv\Scripts\Activate.ps1
 pip install torch --index-url https://download.pytorch.org/whl/cu121
 pip install -r requirements.txt

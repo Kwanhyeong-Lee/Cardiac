@@ -1,4 +1,4 @@
-# cardiac-phpinn-workbench
+# Cardiac
 
 Port-Hamiltonian PINNs for cardiac physiology (Papers A/B), and a patient-specific LV geometry
 pipeline from CT segmentation to printable solids, a lost-core silicone flow phantom and a CFD
