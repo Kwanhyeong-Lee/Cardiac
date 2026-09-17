@@ -132,7 +132,7 @@ python -c "import torch;print(torch.cuda.get_device_name(0))"       # 'NVIDIA Ge
 ```
 - **RX 5700은 CUDA 불가**, Windows ROCm도 Navi10 미지원 → 디스플레이용. `CUDA_VISIBLE_DEVICES`가 3060을 가리키는지만 확인.
 - **형상 파이프라인 파이썬 패키지**: `numpy scipy scikit-image nibabel trimesh networkx manifold3d pymeshfix matplotlib` (필수) + **`triangle`**(선택 — 29단계 절단면 재삼각분할용. 없으면 절단면만 예전 부채꼴 뚜껑으로 남고 나머지는 동일).
-- **Unreal Engine 5.4+ (RTX 3060 PC 전용)**: 교육 앱 `fusion_ready/UNREAL/HeartTeach/`. Visual Studio 2022 C++ 워크로드 필요. 빌드 절차는 `_handover/sync_2026-09-17/UNREAL_TASK.md`, 설계는 `UNREAL/HeartTeach/SPEC.md`. 엔진이 만드는 디렉터리는 `.gitignore`에 있음.
+- **Unreal Engine 5.4+ (RTX 3060 컴퓨터 `wjsdm` 전용 — 저장소가 있는 `alex0`가 아니다)**: 교육 앱 `fusion_ready/UNREAL/HeartTeach/`. 그 컴퓨터에는 파이프라인 산출물이 없으므로 에셋 팩은 OneDrive에서 가져와 `HEART_PACK`으로 가리킨다. Visual Studio 2022 C++ 워크로드 필요. 빌드 절차는 `_handover/sync_2026-09-17/UNREAL_TASK.md`, 설계는 `UNREAL/HeartTeach/SPEC.md`. 엔진이 만드는 디렉터리는 `.gitignore`에 있음.
 - **Blender 5.2**(갈래 C 5단계): `fusion_ready/run_blender_pipeline.bat`.
 - **OpenFOAM**: WSL2 Ubuntu + `openfoam2312`; 케이스는 WSL 파일시스템(`~/cases/`)에 복사해서 돌릴 것(OneDrive/NTFS 마운트 위에서 돌리면 느리고 락 문제).
 - **Fusion 360**: `fusion_ready/CAD/`, `PHANTOM/*.stl` 임포트. 로컬 MCP(포트 7654)는 add-in의 POST 전용 API라 표준 MCP 클라이언트로는 안 붙었다(`fusion_ready/MCP_CONNECT.md`).
@@ -179,7 +179,7 @@ python pinn_cardiac.py                               # A: UCI csv만으로 도�
 2. **실물 출력** — 우선순위: 속 빈 전심장 4방 절개 v2 `CT/whole_heart_hollow/whole_heart_hollow_v2_4ch_{A,B}_PRINT_ORIENTED.stl`(부위별 색 출력은 `parts/`) → LV 절개 v5 `hollow_v5_cutaway_{A,B}_PRINT_ORIENTED.stl` → 관상동맥 나무 단독(레진)(절단면 아래), 0.2 mm 레이어, 서포트 필요. 출력물 사진과 실측(벽 두께 캘리퍼)을 `fusion_ready/PRINT_LOG.md`로.
 3. **팬텀 코어 CT판** — `make_flow_phantom_mold.py`의 LV 입력을 `CT/lv_bloodpool_CT_smooth.stl`에 1.5 mm closing 적용한 것으로; 캐스팅 가능성(언더컷·기포) 확인 후 PVA 출력.
 4. **CFD를 팬텀 도메인으로** — `PHANTOM/cfd/LV_phantom_m.stl` + 스니펫으로 `lv_cfd_patient`의 topoSet 우회를 제거. 팬텀 계측(펌프·압력·도플러)과 같은 경계에서 비교 → Paper B의 "하류 소비자" 논지의 실험적 보강.
-5. 하드코딩 경로 정리(§3) → `CARDIAC_DATA` 환경변수. (Claude Code가 PC1에서 진행함 — 새 스크립트 `ct_coronary_*.py`, `ct_hires_lv.py`는 이미 `CARDIAC_DATA`/`CARDIAC_REPO`/`CORO_OUT`을 읽음)
+5. 하드코딩 경로 정리(§3) → `CARDIAC_DATA` 환경변수. (Claude Code가 작업 컴퓨터(alex0)에서 진행함 — 새 스크립트 `ct_coronary_*.py`, `ct_hires_lv.py`는 이미 `CARDIAC_DATA`/`CARDIAC_REPO`/`CORO_OUT`을 읽음)
 6. (선택) 루트 정리: `paperA/`, `paperB/`(=waveform_pinn), `geometry/`(=fusion_ready), `cfd/`로 이동. 이동 후 `run_all.py`와 상대 경로 재확인.
 
 ## 8. 저장소에 없는 것과 있는 곳
