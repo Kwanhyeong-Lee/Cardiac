@@ -1,0 +1,19 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.4",
+	"Category": "",
+	"Description": "Cardiac anatomy teaching app built on the MM-WHS case-1009 geometry pipeline (fusion_ready).",
+	"Modules": [
+		{
+			"Name": "HeartTeach",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [ "Engine", "UMG" ]
+		}
+	],
+	"Plugins": [
+		{ "Name": "PythonScriptPlugin", "Enabled": true },
+		{ "Name": "EditorScriptingUtilities", "Enabled": true },
+		{ "Name": "InterchangeEditor", "Enabled": true }
+	]
+}

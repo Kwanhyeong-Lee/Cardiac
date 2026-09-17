@@ -314,5 +314,133 @@
    "MB": 30.0
   }
  ],
+ "perfusion": {
+  "lv_mass_g": 147.6,
+  "territory_mass_g": {
+   "visible": {
+    "LAD": 85.9,
+    "LCx": 49.3,
+    "RCA": 12.5
+   },
+   "priors_RD": {
+    "LAD": 45.7,
+    "LCx": 33.3,
+    "RCA": 68.6
+   },
+   "priors_LD": {
+    "LAD": 45.7,
+    "LCx": 100.2,
+    "RCA": 1.7
+   }
+  },
+  "far_from_visible_percent": 65.3,
+  "colours": [
+   {
+    "vessel": "LAD",
+    "confidence": "measured",
+    "rgb8": [
+     216,
+     38,
+     38
+    ],
+    "vertex_count": 494080
+   },
+   {
+    "vessel": "LCx",
+    "confidence": "measured",
+    "rgb8": [
+     242,
+     153,
+     25
+    ],
+    "vertex_count": 53222
+   },
+   {
+    "vessel": "RCA",
+    "confidence": "measured",
+    "rgb8": [
+     38,
+     102,
+     216
+    ],
+    "vertex_count": 19417
+   },
+   {
+    "vessel": "LAD",
+    "confidence": "assigned_by_groove_prior",
+    "rgb8": [
+     233,
+     135,
+     135
+    ],
+    "vertex_count": 0
+   },
+   {
+    "vessel": "LCx",
+    "confidence": "assigned_by_groove_prior",
+    "rgb8": [
+     247,
+     198,
+     128
+    ],
+    "vertex_count": 276481
+   },
+   {
+    "vessel": "RCA",
+    "confidence": "assigned_by_groove_prior",
+    "rgb8": [
+     135,
+     170,
+     233
+    ],
+    "vertex_count": 656626
+   }
+  ],
+  "scenarios": [
+   {
+    "site": "LM occlusion",
+    "vessel": "LM",
+    "mass_at_risk_g": 79.0,
+    "percent_of_LV": 53.5
+   },
+   {
+    "site": "proximal LAD (after LM)",
+    "vessel": "LAD",
+    "mass_at_risk_g": 45.7,
+    "percent_of_LV": 31.0
+   },
+   {
+    "site": "mid LAD (after first diagonal, 36 mm)",
+    "vessel": "LAD",
+    "mass_at_risk_g": 43.7,
+    "percent_of_LV": 29.6
+   },
+   {
+    "site": "distal LAD (70 mm)",
+    "vessel": "LAD",
+    "mass_at_risk_g": 29.6,
+    "percent_of_LV": 20.0
+   },
+   {
+    "site": "proximal LCx",
+    "vessel": "LCx",
+    "mass_at_risk_g": 33.3,
+    "percent_of_LV": 22.6
+   },
+   {
+    "site": "proximal RCA",
+    "vessel": "RCA",
+    "mass_at_risk_g": 66.9,
+    "percent_of_LV": 45.3
+   },
+   {
+    "site": "mid RCA (beyond 25 mm)",
+    "vessel": "RCA",
+    "mass_at_risk_g": 66.9,
+    "percent_of_LV": 45.3
+   }
+  ],
+  "honesty": "pale = territory assigned from a groove prior (the vessel was not visible on this CT), saturated = within 25 mm of a segmented vessel"
+ },
  "licence": "Geometry derived from MM-WHS research CT: do not redistribute the meshes or a packaged build containing them. Screenshots, renders and tables may be shared."
 }

@@ -38,6 +38,7 @@ SEGNAME = {1: "basal anterior", 2: "basal anteroseptal", 3: "basal inferoseptal"
            7: "mid anterior", 8: "mid anteroseptal", 9: "mid inferoseptal", 10: "mid inferior", 11: "mid inferolateral", 12: "mid anterolateral",
            13: "apical anterior", 14: "apical septal", 15: "apical inferior", 16: "apical lateral", 17: "apex"}
 COL = {"LAD": (0.85, 0.15, 0.15), "LCx": (0.95, 0.60, 0.10), "RCA": (0.15, 0.40, 0.85), "uncertain": (0.6, 0.6, 0.6)}
+PRIOR_TINT = lambda c: 0.55 * c + 0.45     # pale = this voxel was assigned by a groove prior, not by a visible vessel (export_unreal.py reuses it)
 unit = lambda v: v / (np.linalg.norm(v) + 1e-12)
 
 
@@ -218,7 +219,7 @@ def main():
     # mesh with vertex colours (hires myocardium) -- nearest coronary point per vertex
     myo = trimesh.load(os.path.join(HIRES, "LV_myocardium_CT_hires.stl"), process=False)
     dv, jv = kd.query(myo.vertices); tv = vessel_all[jv].astype(object)
-    cols = np.array([COL[x] for x in tv]); cols[src_all[jv]] = 0.55 * cols[src_all[jv]] + 0.45          # lighter where a prior point decides
+    cols = np.array([COL[x] for x in tv]); cols[src_all[jv]] = PRIOR_TINT(cols[src_all[jv]])            # lighter where a prior point decides
     myo.visual.vertex_colors = np.c_[(cols * 255).astype(np.uint8), np.full(len(cols), 255, np.uint8)]
     myo.export(os.path.join(OUT, "LV_myocardium_territories.ply"))
     _pp = [e for e, _ in prior_sets["right-dominant"] if len(e)]
@@ -272,7 +273,7 @@ def figure():
     bl_proxy = trimesh.load(os.path.join(HIRES, "lv_bloodpool_CT_hires.stl"), process=False).simplify_quadric_decimation(face_count=20000)
     d_bl, _ = cKDTree(bl_proxy.vertices).query(dec.triangles_center); dec.update_faces(d_bl > 3.0); dec.remove_unreferenced_vertices()   # KD-tree on vertices: trimesh closest_point OOMs here
     dvf, jvf = kd.query(dec.triangles_center); tf = vessel_all[jvf].astype(object)
-    fcol = np.array([COL[x] for x in tf]); fcol[src_all[jvf]] = 0.55 * fcol[src_all[jvf]] + 0.45; tube = trimesh.load(os.path.join(COR, "coronary_tree_print_frameA.stl"), process=False).simplify_quadric_decimation(face_count=15000)
+    fcol = np.array([COL[x] for x in tf]); fcol[src_all[jvf]] = PRIOR_TINT(fcol[src_all[jvf]]); tube = trimesh.load(os.path.join(COR, "coronary_tree_print_frameA.stl"), process=False).simplify_quadric_decimation(face_count=15000)
     # the rest of the heart (RV, atria, great vessels) in light grey, so the RCA / LM sit on the chambers they run on
     ctx = trimesh.load(os.path.join(COR, "heart_labels_context_frameA.stl"), process=False).simplify_quadric_decimation(face_count=30000)
     lv_proxy = dec.simplify_quadric_decimation(face_count=12000)

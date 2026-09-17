@@ -132,6 +132,7 @@ python -c "import torch;print(torch.cuda.get_device_name(0))"       # 'NVIDIA Ge
 ```
 - **RX 5700은 CUDA 불가**, Windows ROCm도 Navi10 미지원 → 디스플레이용. `CUDA_VISIBLE_DEVICES`가 3060을 가리키는지만 확인.
 - **형상 파이프라인 파이썬 패키지**: `numpy scipy scikit-image nibabel trimesh networkx manifold3d pymeshfix matplotlib` (필수) + **`triangle`**(선택 — 29단계 절단면 재삼각분할용. 없으면 절단면만 예전 부채꼴 뚜껑으로 남고 나머지는 동일).
+- **Unreal Engine 5.4+ (RTX 3060 PC 전용)**: 교육 앱 `fusion_ready/UNREAL/HeartTeach/`. Visual Studio 2022 C++ 워크로드 필요. 빌드 절차는 `_handover/sync_2026-09-17/UNREAL_TASK.md`, 설계는 `UNREAL/HeartTeach/SPEC.md`. 엔진이 만드는 디렉터리는 `.gitignore`에 있음.
 - **Blender 5.2**(갈래 C 5단계): `fusion_ready/run_blender_pipeline.bat`.
 - **OpenFOAM**: WSL2 Ubuntu + `openfoam2312`; 케이스는 WSL 파일시스템(`~/cases/`)에 복사해서 돌릴 것(OneDrive/NTFS 마운트 위에서 돌리면 느리고 락 문제).
 - **Fusion 360**: `fusion_ready/CAD/`, `PHANTOM/*.stl` 임포트. 로컬 MCP(포트 7654)는 add-in의 POST 전용 API라 표준 MCP 클라이언트로는 안 붙었다(`fusion_ready/MCP_CONNECT.md`).

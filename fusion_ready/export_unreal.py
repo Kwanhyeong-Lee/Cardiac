@@ -58,6 +58,34 @@ def save(m, path):
     m.export(path); return dict(file=os.path.relpath(path, OUT).replace("\\", "/"), faces=int(len(m.faces)), MB=round(os.path.getsize(path) / 1e6, 1))
 
 
+def territory_table():
+    """Perfusion data the app needs: the exact vertex colours of the territory mesh (territory AND confidence
+    are both encoded in them, so the material can select a territory by colour comparison alone) and the
+    mass-at-risk per occlusion site from step 20."""
+    rep_p = os.path.join(P["territories"], "territory_report.json")
+    if not os.path.exists(rep_p): return None
+    rep = json.load(open(rep_p))
+    from ct_perfusion_territories import COL, PRIOR_TINT                                  # same constants the PLY was written with
+    rgb8 = lambda c: [int(np.float64(v) * 255) for v in c]                                # ct_perfusion_territories casts with .astype(uint8) = truncation, not rounding
+    cols = [dict(vessel=k, confidence="measured", rgb8=rgb8(v)) for k, v in COL.items() if k != "uncertain"]
+    cols += [dict(vessel=k, confidence="assigned_by_groove_prior", rgb8=rgb8(PRIOR_TINT(np.asarray(v)))) for k, v in COL.items() if k != "uncertain"]
+    ply = os.path.join(P["territories"], "LV_myocardium_territories.ply")                 # count each colour so the app can grey out "0 vertices" buttons and show measured-vs-assumed honestly
+    if os.path.exists(ply):
+        vc = np.asarray(trimesh.load(ply, process=False).visual.vertex_colors)[:, :3]
+        uq, cnt = np.unique(vc, axis=0, return_counts=True); have = {tuple(a): int(b) for a, b in zip(uq.tolist(), cnt.tolist())}
+        for c in cols: c["vertex_count"] = have.get(tuple(c["rgb8"]), 0)
+        assert not set(have) - {tuple(c["rgb8"]) for c in cols}, f"territory mesh has colours the exporter cannot explain: {set(have) - {tuple(c['rgb8']) for c in cols}}"
+
+    def vessel_of(site):
+        for v in ("LAD", "LCx", "RCA", "LM"):
+            if v in site: return v
+        return "?"
+    rows = [dict(site=s["site"], vessel=vessel_of(s["site"]), mass_at_risk_g=s["mass_at_risk_g"], percent_of_LV=s["percent_of_LV"]) for s in rep.get("scenarios", [])]
+    return dict(lv_mass_g=rep.get("lv_mass_g"), territory_mass_g=rep.get("territory_mass_g"),
+                far_from_visible_percent=rep.get("far_from_visible_percent"), colours=cols, scenarios=rows,
+                honesty="pale = territory assigned from a groove prior (the vessel was not visible on this CT), saturated = within 25 mm of a segmented vessel")
+
+
 def main():
     os.makedirs(PARTS_OUT, exist_ok=True)
     man = json.load(open(os.path.join(SRC, "parts_manifest.json")))
@@ -85,13 +113,14 @@ def main():
     if os.path.exists(terr):
         extra.append(dict(name="perfusion_territories", source="territories/LV_myocardium_territories.ply", **save(to_gltf(trimesh.load(terr, process=False)), os.path.join(OUT, "perfusion_territories.glb"))))
         print(f"  perfusion_territories    {extra[-1]['faces']:>8,} f  {extra[-1]['MB']:>5} MB")
+    terr_rows = territory_table()
     cut = json.load(open(os.path.join(SRC, "cut_v2_info.json")))
     o = (np.array(cut["plane_origin"]) @ R.T) * SCALE; n = np.array(cut["plane_normal"]) @ R.T
     json.dump(dict(case=P["case"], units="metres (glTF); Unreal imports at 1 uu = 1 cm, so the actor is life size",
                    frame=dict(source="patient RAS mm", matrix_ras_to_gltf=R.tolist(), scale=SCALE, handedness="preserved (det +1) -- do NOT add a mirror in Unreal",
                               note="X_gltf = -X_ras, Y_gltf = Z_ras, Z_gltf = Y_ras: anterior faces the camera, superior is up, patient right is on the viewer's left"),
                    four_chamber_plane=dict(origin_m=o.round(5).tolist(), normal=n.round(5).tolist(), note="the plane the printed halves are cut on; use it as the default position of the interactive clip plane"),
-                   provenance_legend={k: v for k, v in PROV_KIND}, parts=entries, assemblies=extra,
+                   provenance_legend={k: v for k, v in PROV_KIND}, parts=entries, assemblies=extra, perfusion=terr_rows,
                    licence="Geometry derived from MM-WHS research CT: do not redistribute the meshes or a packaged build containing them. Screenshots, renders and tables may be shared."),
               open(os.path.join(OUT, "unreal_manifest.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     tot = sum(e["MB"] for e in entries) + sum(e["MB"] for e in extra)

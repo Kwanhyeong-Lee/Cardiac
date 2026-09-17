@@ -84,3 +84,16 @@ Thumbs.db
 *.log
 jbhi-consent_form*.pdf
 *consent*form*.pdf
+
+# Unreal: source, editor python and docs are tracked; nothing the engine generates is.
+# (the exported asset packs are already covered by the global *.glb rule and are regenerable
+#  with export_unreal.py -- they are also non-redistributable MM-WHS geometry)
+fusion_ready/UNREAL/HeartTeach/Binaries/
+fusion_ready/UNREAL/HeartTeach/Build/
+fusion_ready/UNREAL/HeartTeach/DerivedDataCache/
+fusion_ready/UNREAL/HeartTeach/Intermediate/
+fusion_ready/UNREAL/HeartTeach/Saved/
+fusion_ready/UNREAL/HeartTeach/Content/
+*.sln
+*.VC.db
+*.opendb
