@@ -60,6 +60,7 @@
 - `PIPELINE.md`가 16단계 표(입력→출력→검증 기록→실행 환경). `METHODS_DRAFT.md`가 논문용 Methods 골격 + Limitations.
 - 핵심 사실: 원본 메시 16개는 단위(m/mm)와 프레임 4개가 섞여 있었고 **frame A만 일관**; `cardiac_meshes/`는 **좌우 거울상**(X 반사 0.044 mm, 비대칭 랜드마크 검사 3/3 위반); 판막 생성기는 LV 축이 60° 틀어져 있었고 시트는 두께 0; 라벨 500은 유두근·육주를 삼켰음(15–18 mL) → **원본 CT로 재분할해서 회수**(영상→frame A 평행이동만, 0.19 mm).
 - 산출물(재생성 가능, 저장소엔 없음): `BLENDER_OUT/hollow_ventricle_v4_CT.stl`(권장 — 벽·내막·육주·유두근 = 환자; 첨판·판·건삭 경로 = 파라메트릭), 절개 모형 A/B, `PHANTOM/`(lost-core 코어 + 주형 상자, 포트 Ø19/Ø15.8), `PHANTOM/cfd/`(inlet/outlet/LV 패치, m 단위).
+- **2026-09-17 추가**: (1) **관상동맥** — 원본 CT(동맥기 CTA)에서 자체 Frangi + 이중 문턱 + 골격 그래프 가지치기로 LM/LAD/LCx/RCA 근위–중간부 추출 (`ct_coronary_*.py` → `CT/coronary/`, PIPELINE 18단계; 신뢰 구간은 CPR·단면 그림으로 표시). (2) **표면 품질** — 이진 마스크 대신 연속 필드 등위면(`ct_hires_lv.py`, PIPELINE 19단계) → 부품 거칠기 1/3, 노이즈 섬 790개 제거 → **v5** `hollow_ventricle_v5_CT_hires.stl`이 권장 조립. (3) SimVascular 0단계(`SV/*.vtp`, 로드맵), 쇼케이스 렌더, 사업성 모델 `business/`, 친구 공유용 `share/`. (4) **관류 영역 지도**(20단계), **N례 일반화**(`case_paths.py`, `CASE=<id>`; 21단계), **전심장+관상동맥 교육 모형**(22단계), **배치 실행기** `batch_cases.py`(23단계; 1001 검증), **대혈관 CT 연장**(24단계), **속 빈 전심장 + 4방 절개**(25단계) → **리마스터 v2 + 부위별 분할 16종 + 삼첨·폐동맥판 + 관상동맥 누락 점검**(26–28단계, `CT/whole_heart_hollow/`, `parts_manifest.json`, `CT/coronary/coronary_checklist.md`). 교육 키트 목록·말할 문장·1차 범위: `fusion_ready/EDUCATION_PACK.md`.
 - 남은 것: 팬텀 코어를 CT 혈액풀(1.5 mm closing)로 교체, **실물 출력·주형·계측**(아직 아무것도 출력 안 함), 판막은 4D CT 없이는 더 못 감.
 
 ### D. CFD
@@ -130,6 +131,7 @@ pip install -r requirements.txt
 python -c "import torch;print(torch.cuda.get_device_name(0))"       # 'NVIDIA GeForce RTX 3060' 이어야 함
 ```
 - **RX 5700은 CUDA 불가**, Windows ROCm도 Navi10 미지원 → 디스플레이용. `CUDA_VISIBLE_DEVICES`가 3060을 가리키는지만 확인.
+- **형상 파이프라인 파이썬 패키지**: `numpy scipy scikit-image nibabel trimesh networkx manifold3d pymeshfix matplotlib` (필수) + **`triangle`**(선택 — 29단계 절단면 재삼각분할용. 없으면 절단면만 예전 부채꼴 뚜껑으로 남고 나머지는 동일).
 - **Blender 5.2**(갈래 C 5단계): `fusion_ready/run_blender_pipeline.bat`.
 - **OpenFOAM**: WSL2 Ubuntu + `openfoam2312`; 케이스는 WSL 파일시스템(`~/cases/`)에 복사해서 돌릴 것(OneDrive/NTFS 마운트 위에서 돌리면 느리고 락 문제).
 - **Fusion 360**: `fusion_ready/CAD/`, `PHANTOM/*.stl` 임포트. 로컬 MCP(포트 7654)는 add-in의 POST 전용 API라 표준 MCP 클라이언트로는 안 붙었다(`fusion_ready/MCP_CONNECT.md`).
@@ -171,14 +173,18 @@ python pinn_cardiac.py                               # A: UCI csv만으로 도�
 
 ## 7. 다음 단계 (우선순위)
 
+0. **20례 배치** — `cd fusion_ready; set CARDIAC_DATA=…\MM-WHS\ct_train; python batch_cases.py` (케이스당 ~5분) → `CT/cases/SUMMARY.md`. 그다음 ASOCA/ImageCAS로 관상동맥 분할 정확도.
 1. **Paper B 집필** — 재료는 다 있다. `PAPER_B_OUTLINE.md` v2 구조대로, 그림은 `make_figures_v2.py`.
-2. **v4 실물 출력** — `hollow_v4_cutaway_{A,B}_PRINT_ORIENTED.stl`(절단면 아래), 0.2 mm 레이어, 서포트 필요. 출력물 사진과 실측(벽 두께 캘리퍼)을 `fusion_ready/PRINT_LOG.md`로.
+2. **실물 출력** — 우선순위: 속 빈 전심장 4방 절개 v2 `CT/whole_heart_hollow/whole_heart_hollow_v2_4ch_{A,B}_PRINT_ORIENTED.stl`(부위별 색 출력은 `parts/`) → LV 절개 v5 `hollow_v5_cutaway_{A,B}_PRINT_ORIENTED.stl` → 관상동맥 나무 단독(레진)(절단면 아래), 0.2 mm 레이어, 서포트 필요. 출력물 사진과 실측(벽 두께 캘리퍼)을 `fusion_ready/PRINT_LOG.md`로.
 3. **팬텀 코어 CT판** — `make_flow_phantom_mold.py`의 LV 입력을 `CT/lv_bloodpool_CT_smooth.stl`에 1.5 mm closing 적용한 것으로; 캐스팅 가능성(언더컷·기포) 확인 후 PVA 출력.
 4. **CFD를 팬텀 도메인으로** — `PHANTOM/cfd/LV_phantom_m.stl` + 스니펫으로 `lv_cfd_patient`의 topoSet 우회를 제거. 팬텀 계측(펌프·압력·도플러)과 같은 경계에서 비교 → Paper B의 "하류 소비자" 논지의 실험적 보강.
-5. 하드코딩 경로 정리(§3) → `CARDIAC_DATA` 환경변수.
+5. 하드코딩 경로 정리(§3) → `CARDIAC_DATA` 환경변수. (Claude Code가 PC1에서 진행함 — 새 스크립트 `ct_coronary_*.py`, `ct_hires_lv.py`는 이미 `CARDIAC_DATA`/`CARDIAC_REPO`/`CORO_OUT`을 읽음)
 6. (선택) 루트 정리: `paperA/`, `paperB/`(=waveform_pinn), `geometry/`(=fusion_ready), `cfd/`로 이동. 이동 후 `run_all.py`와 상대 경로 재확인.
 
 ## 8. 저장소에 없는 것과 있는 곳
+
+`_handover/sync_2026-09-17/` — 번들 이후 생긴 변경(코드·문서 50 파일 + 형상 산출물 16 파일)의 동기화 패키지. `SYNC_TASK.md`대로 `apply_sync.py`를 PC1 저장소에서 실행하면 PC1에서 바뀐 파일과 3-way 병합한다.
+
 
 `_handover/` 폴더(원본 OneDrive 폴더 안, 저장소 밖)에 세 개를 만들었다:
 - `cardiac-phpinn-workbench.bundle` — 이 저장소 전체(히스토리 포함, 544 파일). `git clone 파일.bundle 폴더명`.

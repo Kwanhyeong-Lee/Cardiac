@@ -1,0 +1,318 @@
+{
+ "case": "1009",
+ "units": "metres (glTF); Unreal imports at 1 uu = 1 cm, so the actor is life size",
+ "frame": {
+  "source": "patient RAS mm",
+  "matrix_ras_to_gltf": [
+   [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0
+   ]
+  ],
+  "scale": 0.001,
+  "handedness": "preserved (det +1) -- do NOT add a mirror in Unreal",
+  "note": "X_gltf = -X_ras, Y_gltf = Z_ras, Z_gltf = Y_ras: anterior faces the camera, superior is up, patient right is on the viewer's left"
+ },
+ "four_chamber_plane": {
+  "origin_m": [
+   -0.01162,
+   0.00047,
+   0.00655
+  ],
+  "normal": [
+   -0.0924,
+   -0.8778,
+   -0.4701
+  ],
+  "note": "the plane the printed halves are cut on; use it as the default position of the interactive clip plane"
+ },
+ "provenance_legend": {
+  "patient": "환자 CT 그대로",
+  "parametric": "파라메트릭 (문헌 비율)",
+  "synthetic": "합성 (두께 가정)"
+ },
+ "parts": [
+  {
+   "name": "RV_wall",
+   "colour_rgb": [
+    0.42,
+    0.5,
+    0.72
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 39.0,
+   "vertex_colours": false,
+   "file": "parts/RV_wall.glb",
+   "faces": 84026,
+   "MB": 5.0
+  },
+  {
+   "name": "LA_wall",
+   "colour_rgb": [
+    0.88,
+    0.58,
+    0.6
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 9.47,
+   "vertex_colours": false,
+   "file": "parts/LA_wall.glb",
+   "faces": 30202,
+   "MB": 1.8
+  },
+  {
+   "name": "RA_wall",
+   "colour_rgb": [
+    0.58,
+    0.7,
+    0.85
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 17.12,
+   "vertex_colours": false,
+   "file": "parts/RA_wall.glb",
+   "faces": 46376,
+   "MB": 2.8
+  },
+  {
+   "name": "aorta_wall",
+   "colour_rgb": [
+    0.88,
+    0.4,
+    0.28
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 7.75,
+   "vertex_colours": false,
+   "file": "parts/aorta_wall.glb",
+   "faces": 30632,
+   "MB": 1.8
+  },
+  {
+   "name": "PA_wall",
+   "colour_rgb": [
+    0.3,
+    0.5,
+    0.8
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 59.72,
+   "vertex_colours": false,
+   "file": "parts/PA_wall.glb",
+   "faces": 200000,
+   "MB": 12.0
+  },
+  {
+   "name": "pulmonary_vein_walls",
+   "colour_rgb": [
+    0.95,
+    0.72,
+    0.72
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 0.8,
+   "vertex_colours": false,
+   "file": "parts/pulmonary_vein_walls.glb",
+   "faces": 3160,
+   "MB": 0.2
+  },
+  {
+   "name": "SVC_wall",
+   "colour_rgb": [
+    0.55,
+    0.78,
+    0.95
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "kind": "synthetic",
+   "volume_mL": 10.56,
+   "vertex_colours": false,
+   "file": "parts/SVC_wall.glb",
+   "faces": 44476,
+   "MB": 2.7
+  },
+  {
+   "name": "LV_myocardium",
+   "colour_rgb": [
+    0.72,
+    0.28,
+    0.26
+   ],
+   "provenance": "patient (CT continuous-field iso-surface); vertex colours: septum = within 6 mm of the RV lumen, papillary = CT PM candidates",
+   "kind": "patient",
+   "volume_mL": 139.65,
+   "vertex_colours": true,
+   "file": "parts/LV_myocardium.glb",
+   "faces": 499942,
+   "MB": 30.0
+  },
+  {
+   "name": "mitral_valve",
+   "colour_rgb": [
+    0.93,
+    0.88,
+    0.72
+   ],
+   "provenance": "parametric leaflets fitted to the patient's annulus, 1.2 mm solid",
+   "kind": "parametric",
+   "volume_mL": 2.63,
+   "vertex_colours": false,
+   "file": "parts/mitral_valve.glb",
+   "faces": 192500,
+   "MB": 11.6
+  },
+  {
+   "name": "aortic_valve",
+   "colour_rgb": [
+    0.9,
+    0.85,
+    0.65
+   ],
+   "provenance": "parametric, 1.2 mm solid",
+   "kind": "parametric",
+   "volume_mL": 3.2,
+   "vertex_colours": false,
+   "file": "parts/aortic_valve.glb",
+   "faces": 245468,
+   "MB": 14.7
+  },
+  {
+   "name": "chordae",
+   "colour_rgb": [
+    0.97,
+    0.95,
+    0.9
+   ],
+   "provenance": "parametric routes from the CT papillary tips",
+   "kind": "parametric",
+   "volume_mL": 0.88,
+   "vertex_colours": false,
+   "file": "parts/chordae.glb",
+   "faces": 960,
+   "MB": 0.1
+  },
+  {
+   "name": "tricuspid_valve",
+   "colour_rgb": [
+    0.88,
+    0.84,
+    0.7
+   ],
+   "provenance": "parametric 3 leaflets on the patient's RV-RA annulus (step 27), 1.0 mm",
+   "kind": "parametric",
+   "volume_mL": 2.95,
+   "vertex_colours": false,
+   "file": "parts/tricuspid_valve.glb",
+   "faces": 14964,
+   "MB": 0.9
+  },
+  {
+   "name": "pulmonary_valve",
+   "colour_rgb": [
+    0.86,
+    0.82,
+    0.66
+   ],
+   "provenance": "parametric 3 cusps on the patient's RV-PA annulus (step 27), 1.0 mm",
+   "kind": "parametric",
+   "volume_mL": 1.59,
+   "vertex_colours": false,
+   "file": "parts/pulmonary_valve.glb",
+   "faces": 14964,
+   "MB": 0.9
+  },
+  {
+   "name": "coronary_LAD_system",
+   "colour_rgb": [
+    0.9,
+    0.1,
+    0.1
+   ],
+   "provenance": "patient centrelines ('LM', 'LAD', 'D'), tubes >= 2 mm for printing",
+   "kind": "patient",
+   "volume_mL": 0.62,
+   "vertex_colours": false,
+   "file": "parts/coronary_LAD_system.glb",
+   "faces": 40048,
+   "MB": 2.4
+  },
+  {
+   "name": "coronary_LCx_system",
+   "colour_rgb": [
+    0.97,
+    0.6,
+    0.1
+   ],
+   "provenance": "patient centrelines ('LCx', 'OM', 'RI'), tubes >= 2 mm for printing",
+   "kind": "patient",
+   "volume_mL": 1.26,
+   "vertex_colours": false,
+   "file": "parts/coronary_LCx_system.glb",
+   "faces": 54464,
+   "MB": 3.3
+  },
+  {
+   "name": "coronary_RCA_system",
+   "colour_rgb": [
+    0.1,
+    0.35,
+    0.9
+   ],
+   "provenance": "patient centrelines ('RCA', 'PDA', 'PLV', 'RV-br'), tubes >= 2 mm for printing",
+   "kind": "patient",
+   "volume_mL": 0.35,
+   "vertex_colours": false,
+   "file": "parts/coronary_RCA_system.glb",
+   "faces": 17764,
+   "MB": 1.1
+  }
+ ],
+ "assemblies": [
+  {
+   "name": "whole_heart",
+   "source": "whole_heart_hollow_v2.stl",
+   "file": "whole_heart.glb",
+   "faces": 1129748,
+   "MB": 54.2
+  },
+  {
+   "name": "half_A",
+   "source": "whole_heart_hollow_v2_4ch_A_anatomy.ply",
+   "file": "half_A.glb",
+   "faces": 452418,
+   "MB": 27.1
+  },
+  {
+   "name": "half_B",
+   "source": "whole_heart_hollow_v2_4ch_B_anatomy.ply",
+   "file": "half_B.glb",
+   "faces": 500000,
+   "MB": 10.1
+  },
+  {
+   "name": "perfusion_territories",
+   "source": "territories/LV_myocardium_territories.ply",
+   "file": "perfusion_territories.glb",
+   "faces": 499942,
+   "MB": 30.0
+  }
+ ],
+ "licence": "Geometry derived from MM-WHS research CT: do not redistribute the meshes or a packaged build containing them. Screenshots, renders and tables may be shared."
+}

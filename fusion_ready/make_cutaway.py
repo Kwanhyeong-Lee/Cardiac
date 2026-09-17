@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 HERE = os.path.dirname(os.path.abspath(__file__)); BO = os.path.join(HERE, "BLENDER_OUT")
 d = json.load(open(os.path.join(HERE, "valve_refit.json")))
 AXIS = np.array(d["lv_geometry"]["axis_base_to_apex"]); MV_C = np.array(d["design"]["mv_centre_mm"]); AV_C = np.array(d["design"]["av_centre_mm"])
-FILES = {"v2": "hollow_ventricle_v2_fixed_valves.stl", "v3": "hollow_ventricle_v3_IDEALISED_subvalvular.stl", "v4": "hollow_ventricle_v4_CT.stl"}
+FILES = {"v2": "hollow_ventricle_v2_fixed_valves.stl", "v3": "hollow_ventricle_v3_IDEALISED_subvalvular.stl", "v4": "hollow_ventricle_v4_CT.stl", "v5": "hollow_ventricle_v5_CT_hires.stl"}
 
 
 def main():

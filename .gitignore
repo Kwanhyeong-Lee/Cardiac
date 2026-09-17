@@ -20,6 +20,9 @@ paediatric-intensive-care-database*
 !heart_failure_clinical_records.csv
 !synth_cardiotox_dataset.csv
 !lv_cfd/mitral_flow_profile.csv
+# business model workbook (no patient data)
+!business/*.xlsx
+!fusion_ready/CT/cases/SUMMARY.csv
 # MM-WHS images are research-licensed, not redistributable
 *.nii
 *.nii.gz
@@ -29,12 +32,18 @@ paediatric-intensive-care-database*
 **/MM-WHS/
 
 # ===== regenerable heavy outputs (fusion_ready/PIPELINE.md) =====
+fusion_ready/CT/coronary/vslabs/
+**/vslabs/
+fusion_ready/CT/cases/*/logs/
 *.stl
 *.glb
 *.obj
 *.ply
 *.vtk
 *.vtu
+*.vtp
+sv/stage*/**/*-procs_case/
+sv/stage*/**/*.vtu
 *.npz
 *.npy
 *.pt

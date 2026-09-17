@@ -1,0 +1,57 @@
+{
+ "tricuspid": {
+  "centre_mm": [
+   51.86,
+   3.38,
+   6.14
+  ],
+  "normal_into_RV": [
+   -0.617,
+   0.7645,
+   -0.1866
+  ],
+  "annulus_r_mm": 22.2,
+  "contact_voxels": 8378,
+  "leaflets": {
+   "septal": {
+    "span_deg": 120,
+    "height_mm": 20.0
+   },
+   "anterior": {
+    "span_deg": 140,
+    "height_mm": 25.5
+   },
+   "posterior": {
+    "span_deg": 100,
+    "height_mm": 20.0
+   }
+  },
+  "faces": 14964,
+  "volume_mL": 2.95,
+  "watertight_leaflets": true
+ },
+ "pulmonary": {
+  "centre_mm": [
+   14.21,
+   -1.61,
+   57.98
+  ],
+  "normal_into_PA": [
+   -0.1477,
+   -0.7263,
+   0.6713
+  ],
+  "annulus_r_mm": 15.2,
+  "contact_voxels": 4037,
+  "cusp_height_mm": 13.7,
+  "faces": 14964,
+  "volume_mL": 1.59,
+  "watertight_leaflets": true
+ },
+ "notes": [
+  "leaflet shapes are literature proportions scaled to the fitted annulus -- not the patient's leaflets",
+  "closed (systolic) pose for the tricuspid, semilunar cusps for the pulmonary",
+  "no chordae / papillary muscles on the right side",
+  "1.0 mm thick solids, attachment ring embedded 1 mm into the wall"
+ ]
+}

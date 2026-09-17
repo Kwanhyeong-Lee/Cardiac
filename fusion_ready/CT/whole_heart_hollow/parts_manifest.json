@@ -1,0 +1,203 @@
+{
+ "case": "1009",
+ "frame": "A",
+ "parts": [
+  {
+   "name": "RV_wall",
+   "file": "parts/RV_wall.stl",
+   "colour_rgb": [
+    0.42,
+    0.5,
+    0.72
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 84026,
+   "volume_mL": 39.0
+  },
+  {
+   "name": "LA_wall",
+   "file": "parts/LA_wall.stl",
+   "colour_rgb": [
+    0.88,
+    0.58,
+    0.6
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 30202,
+   "volume_mL": 9.47
+  },
+  {
+   "name": "RA_wall",
+   "file": "parts/RA_wall.stl",
+   "colour_rgb": [
+    0.58,
+    0.7,
+    0.85
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 46376,
+   "volume_mL": 17.12
+  },
+  {
+   "name": "aorta_wall",
+   "file": "parts/aorta_wall.stl",
+   "colour_rgb": [
+    0.88,
+    0.4,
+    0.28
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 30632,
+   "volume_mL": 7.75
+  },
+  {
+   "name": "PA_wall",
+   "file": "parts/PA_wall.stl",
+   "colour_rgb": [
+    0.3,
+    0.5,
+    0.8
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 200000,
+   "volume_mL": 59.72
+  },
+  {
+   "name": "pulmonary_vein_walls",
+   "file": "parts/pulmonary_vein_walls.stl",
+   "colour_rgb": [
+    0.95,
+    0.72,
+    0.72
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 3160,
+   "volume_mL": 0.8
+  },
+  {
+   "name": "SVC_wall",
+   "file": "parts/SVC_wall.stl",
+   "colour_rgb": [
+    0.55,
+    0.78,
+    0.95
+   ],
+   "provenance": "synthetic wall thickness (uniform) around the patient's lumen",
+   "faces": 44476,
+   "volume_mL": 10.56
+  },
+  {
+   "name": "LV_myocardium",
+   "file": "parts/LV_myocardium.ply",
+   "colour_rgb": [
+    0.72,
+    0.28,
+    0.26
+   ],
+   "provenance": "patient (CT continuous-field iso-surface); vertex colours: septum = within 6 mm of the RV lumen, papillary = CT PM candidates",
+   "faces": 499942,
+   "volume_mL": 139.65
+  },
+  {
+   "name": "mitral_valve",
+   "file": "parts/mitral_valve.stl",
+   "colour_rgb": [
+    0.93,
+    0.88,
+    0.72
+   ],
+   "provenance": "parametric leaflets fitted to the patient's annulus, 1.2 mm solid",
+   "faces": 192500,
+   "volume_mL": 2.63
+  },
+  {
+   "name": "aortic_valve",
+   "file": "parts/aortic_valve.stl",
+   "colour_rgb": [
+    0.9,
+    0.85,
+    0.65
+   ],
+   "provenance": "parametric, 1.2 mm solid",
+   "faces": 245468,
+   "volume_mL": 3.2
+  },
+  {
+   "name": "chordae",
+   "file": "parts/chordae.stl",
+   "colour_rgb": [
+    0.97,
+    0.95,
+    0.9
+   ],
+   "provenance": "parametric routes from the CT papillary tips",
+   "faces": 960,
+   "volume_mL": 0.88
+  },
+  {
+   "name": "tricuspid_valve",
+   "file": "parts/tricuspid_valve.stl",
+   "colour_rgb": [
+    0.88,
+    0.84,
+    0.7
+   ],
+   "provenance": "parametric 3 leaflets on the patient's RV-RA annulus (step 27), 1.0 mm",
+   "faces": 14964,
+   "volume_mL": 2.95
+  },
+  {
+   "name": "pulmonary_valve",
+   "file": "parts/pulmonary_valve.stl",
+   "colour_rgb": [
+    0.86,
+    0.82,
+    0.66
+   ],
+   "provenance": "parametric 3 cusps on the patient's RV-PA annulus (step 27), 1.0 mm",
+   "faces": 14964,
+   "volume_mL": 1.59
+  },
+  {
+   "name": "coronary_LAD_system",
+   "file": "parts/coronary_LAD_system.stl",
+   "colour_rgb": [
+    0.9,
+    0.1,
+    0.1
+   ],
+   "provenance": "patient centrelines ('LM', 'LAD', 'D'), tubes >= 2 mm for printing",
+   "faces": 40048,
+   "volume_mL": 0.62
+  },
+  {
+   "name": "coronary_LCx_system",
+   "file": "parts/coronary_LCx_system.stl",
+   "colour_rgb": [
+    0.97,
+    0.6,
+    0.1
+   ],
+   "provenance": "patient centrelines ('LCx', 'OM', 'RI'), tubes >= 2 mm for printing",
+   "faces": 54464,
+   "volume_mL": 1.26
+  },
+  {
+   "name": "coronary_RCA_system",
+   "file": "parts/coronary_RCA_system.stl",
+   "colour_rgb": [
+    0.1,
+    0.35,
+    0.9
+   ],
+   "provenance": "patient centrelines ('RCA', 'PDA', 'PLV', 'RV-br'), tubes >= 2 mm for printing",
+   "faces": 17764,
+   "volume_mL": 0.35
+  }
+ ],
+ "notes": [
+  "walls other than the LV are synthetic-thickness shells around patient lumens",
+  "tricuspid / pulmonary valves are parametric (annulus fitted, leaflets literature-shaped), no right-sided chordae",
+  "IVC absent when unenhanced; aortic arch absent when outside the FOV"
+ ]
+}

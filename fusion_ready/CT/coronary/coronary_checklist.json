@@ -1,0 +1,313 @@
+{
+ "case": "1009",
+ "dominance": "left-dominant suspected (short RCA, long LCx) -- PDA not resolved",
+ "checklist": [
+  {
+   "segment": "LM",
+   "present": true,
+   "detail": "8.6 mm",
+   "note": ""
+  },
+  {
+   "segment": "LAD proximal (0-35 mm)",
+   "present": true,
+   "detail": "trunk to 101 mm",
+   "note": ""
+  },
+  {
+   "segment": "LAD mid (35-70 mm)",
+   "present": true,
+   "detail": "trunk to 101 mm",
+   "note": ""
+  },
+  {
+   "segment": "LAD distal (>70 mm, to apex)",
+   "present": true,
+   "detail": "trunk to 101 mm",
+   "note": ""
+  },
+  {
+   "segment": "diagonals (D1, D2 ...)",
+   "present": true,
+   "detail": "3 branch(es) >= 8 mm: [40.3, 13.9, 9.4]",
+   "note": ""
+  },
+  {
+   "segment": "septal perforators",
+   "present": false,
+   "detail": "-",
+   "note": "intramyocardial, 1 mm: not resolvable on this CT (expected absence)"
+  },
+  {
+   "segment": "LCx proximal",
+   "present": true,
+   "detail": "trunk to 110 mm",
+   "note": ""
+  },
+  {
+   "segment": "LCx distal (> 40 mm)",
+   "present": true,
+   "detail": "trunk to 110 mm",
+   "note": ""
+  },
+  {
+   "segment": "obtuse marginals (OM1, OM2 ...)",
+   "present": true,
+   "detail": "5 branch(es) >= 8 mm: [16.2, 9.3, 8.6, 8.6]",
+   "note": ""
+  },
+  {
+   "segment": "ramus intermedius",
+   "present": false,
+   "detail": "none",
+   "note": "present in ~20-30 % of people; absence is normal"
+  },
+  {
+   "segment": "RCA proximal (0-35 mm)",
+   "present": true,
+   "detail": "trunk to 49 mm",
+   "note": ""
+  },
+  {
+   "segment": "RCA mid (35-70 mm)",
+   "present": false,
+   "detail": "trunk to 49 mm",
+   "note": ""
+  },
+  {
+   "segment": "RCA distal (> 70 mm, to the crux)",
+   "present": false,
+   "detail": "trunk to 49 mm",
+   "note": ""
+  },
+  {
+   "segment": "conus / RV / acute marginal branches",
+   "present": true,
+   "detail": "1 RV-side branch(es) >= 6 mm: [6.3]",
+   "note": ""
+  },
+  {
+   "segment": "SA-nodal / AV-nodal arteries",
+   "present": false,
+   "detail": "-",
+   "note": "0.5-1 mm: not resolvable (expected absence)"
+  },
+  {
+   "segment": "PDA",
+   "present": false,
+   "detail": "0 mm",
+   "note": ""
+  },
+  {
+   "segment": "PLV",
+   "present": false,
+   "detail": "0 mm",
+   "note": ""
+  }
+ ],
+ "unclaimed_candidates": [
+  {
+   "volume_mL": 0.51,
+   "length_mm": 54.0,
+   "elongation": 19.1,
+   "mean_HU": 413,
+   "nearest_chamber": "LA",
+   "anterior_mm": -83.8,
+   "superior_mm": 14.0,
+   "min_dist_to_tree_mm": 25.5,
+   "centre_frame": [
+    25.4,
+    -70.6,
+    18.0
+   ],
+   "verdict": "possibly missed ARTERY segment"
+  },
+  {
+   "volume_mL": 0.42,
+   "length_mm": 50.9,
+   "elongation": 12.1,
+   "mean_HU": 256,
+   "nearest_chamber": "RA",
+   "anterior_mm": -17.6,
+   "superior_mm": -34.2,
+   "min_dist_to_tree_mm": 54.9,
+   "centre_frame": [
+    28.8,
+    -4.5,
+    -30.2
+   ],
+   "verdict": "probably VEIN (HU below arterial)"
+  },
+  {
+   "volume_mL": 0.37,
+   "length_mm": 33.8,
+   "elongation": 8.6,
+   "mean_HU": 266,
+   "nearest_chamber": "RA",
+   "anterior_mm": -40.6,
+   "superior_mm": -16.8,
+   "min_dist_to_tree_mm": 32.0,
+   "centre_frame": [
+    34.2,
+    -27.5,
+    -12.8
+   ],
+   "verdict": "probably VEIN (HU below arterial)"
+  },
+  {
+   "volume_mL": 0.22,
+   "length_mm": 12.7,
+   "elongation": 2.3,
+   "mean_HU": 266,
+   "nearest_chamber": "PA",
+   "anterior_mm": -75.2,
+   "superior_mm": 82.9,
+   "min_dist_to_tree_mm": 73.7,
+   "centre_frame": [
+    78.6,
+    -62.1,
+    86.9
+   ],
+   "verdict": "probably VEIN (HU below arterial)"
+  },
+  {
+   "volume_mL": 0.21,
+   "length_mm": 49.1,
+   "elongation": 19.1,
+   "mean_HU": 413,
+   "nearest_chamber": "LA",
+   "anterior_mm": -79.0,
+   "superior_mm": 7.2,
+   "min_dist_to_tree_mm": 20.5,
+   "centre_frame": [
+    13.7,
+    -65.8,
+    11.2
+   ],
+   "verdict": "possibly missed ARTERY segment"
+  },
+  {
+   "volume_mL": 0.2,
+   "length_mm": 37.0,
+   "elongation": 18.5,
+   "mean_HU": 424,
+   "nearest_chamber": "PA",
+   "anterior_mm": -94.7,
+   "superior_mm": 58.5,
+   "min_dist_to_tree_mm": 32.7,
+   "centre_frame": [
+    5.5,
+    -81.5,
+    62.5
+   ],
+   "verdict": "possibly missed ARTERY segment"
+  },
+  {
+   "volume_mL": 0.2,
+   "length_mm": 13.6,
+   "elongation": 2.9,
+   "mean_HU": 241,
+   "nearest_chamber": "PA",
+   "anterior_mm": -47.4,
+   "superior_mm": 34.4,
+   "min_dist_to_tree_mm": 48.5,
+   "centre_frame": [
+    95.1,
+    -34.2,
+    38.4
+   ],
+   "verdict": "probably VEIN (HU below arterial)"
+  },
+  {
+   "volume_mL": 0.17,
+   "length_mm": 10.2,
+   "elongation": 1.6,
+   "mean_HU": 233,
+   "nearest_chamber": "PA",
+   "anterior_mm": -95.7,
+   "superior_mm": 41.6,
+   "min_dist_to_tree_mm": 39.3,
+   "centre_frame": [
+    -16.6,
+    -82.5,
+    45.6
+   ],
+   "verdict": "probably VEIN (HU below arterial)"
+  },
+  {
+   "volume_mL": 0.16,
+   "length_mm": 23.4,
+   "elongation": 7.0,
+   "mean_HU": 284,
+   "nearest_chamber": "LV",
+   "anterior_mm": -55.4,
+   "superior_mm": -22.5,
+   "min_dist_to_tree_mm": 24.7,
+   "centre_frame": [
+    4.9,
+    -42.2,
+    -18.6
+   ],
+   "verdict": "probably VEIN (HU below arterial)"
+  }
+ ],
+ "veins_pruned": [
+  {
+   "len_mm": 38.3,
+   "hu": 213,
+   "diam": 1.2
+  },
+  {
+   "len_mm": 28.3,
+   "hu": 195,
+   "diam": 1.0
+  },
+  {
+   "len_mm": 21.2,
+   "hu": 227,
+   "diam": 1.0
+  },
+  {
+   "len_mm": 20.0,
+   "hu": 209,
+   "diam": 2.3
+  },
+  {
+   "len_mm": 16.5,
+   "hu": 212,
+   "diam": 1.9
+  },
+  {
+   "len_mm": 12.7,
+   "hu": 224,
+   "diam": 1.0
+  },
+  {
+   "len_mm": 13.0,
+   "hu": 235,
+   "diam": 1.0
+  },
+  {
+   "len_mm": 10.9,
+   "hu": 218,
+   "diam": 1.0
+  },
+  {
+   "len_mm": 9.9,
+   "hu": 224,
+   "diam": 2.0
+  },
+  {
+   "len_mm": 8.7,
+   "hu": 219,
+   "diam": 1.0
+  }
+ ],
+ "params": {
+  "V_MIN": 0.08,
+  "HU_MIN": 200.0,
+  "D_TREE": 3.0,
+  "MIN_ML": 0.15,
+  "HU_ARTERY": 300.0
+ }
+}

@@ -1,0 +1,2 @@
+case,voxel_mm,aorta_HU,contrast,LV_label_mL,LM,LAD,D,LCx,OM,RCA,PDA,PLV,LAD_tip_mm,LCx_tip_mm,RCA_tip_mm,tree_mL,print_watertight,myo_mL,blood_mL,LV_mass_g,terr_LAD,terr_LCx,terr_RCA,far_from_visible_pct,AHA_agree,AHA_measured,whole_watertight,coronary_outside_shell,status
+1001,0.36x0.36x0.45,551.1,arterial-phase,62.0,11.7,58.5,70.7,58.4,111.6,228.0,71.6,43.2,34.4,60.6,227.1,2.88,,142.84,40.85,150.1,42.5,43.8,63.8,42.1,14/17,10/11,True,0.93,ok

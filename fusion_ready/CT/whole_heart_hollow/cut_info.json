@@ -1,0 +1,43 @@
+{
+ "plane_origin": [
+  11.62,
+  6.55,
+  0.47
+ ],
+ "plane_normal": [
+  0.0924,
+  -0.4701,
+  -0.8778
+ ],
+ "apex": [
+  -29.49,
+  44.06,
+  -23.95
+ ],
+ "mv": [
+  13.23,
+  -29.15,
+  19.76
+ ],
+ "tv": [
+  51.12,
+  4.75,
+  5.59
+ ],
+ "halves": {
+  "A": {
+   "faces": 416416,
+   "volume_mL": 152.4,
+   "watertight": true
+  },
+  "B": {
+   "faces": 686226,
+   "volume_mL": 183.6,
+   "watertight": true
+  }
+ },
+ "volume_check": {
+  "whole": 336.2,
+  "halves_sum": 336.0
+ }
+}

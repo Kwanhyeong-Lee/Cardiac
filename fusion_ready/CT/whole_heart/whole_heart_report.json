@@ -1,0 +1,19 @@
+{
+ "case": "1009",
+ "frame": "A",
+ "synthetic_wall_mm": {
+  "600": 3.0,
+  "420": 2.0,
+  "550": 2.0,
+  "820": 1.5,
+  "850": 1.5
+ },
+ "label_downsample_target_mm": 0.7,
+ "union": {
+  "faces": 479428,
+  "volume_mL": 820.5,
+  "watertight": true,
+  "components": 1,
+  "coronary_volume_outside_shell_frac": 0.89
+ }
+}

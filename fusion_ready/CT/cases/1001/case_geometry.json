@@ -1,0 +1,94 @@
+{
+ "case": "1001",
+ "frame": "world (NIfTI affine, RAS mm)",
+ "voxel_mm": [
+  0.3555,
+  0.3555,
+  0.45
+ ],
+ "shape": [
+  512,
+  512,
+  363
+ ],
+ "labels_present": [
+  "LV",
+  "RV",
+  "LA",
+  "RA",
+  "LV_myo",
+  "aorta",
+  "PA"
+ ],
+ "labels_missing": [],
+ "mv_centre_mm": [
+  -57.44,
+  -139.29,
+  -191.86
+ ],
+ "av_centre_mm": [
+  -48.17,
+  -119.49,
+  -183.44
+ ],
+ "mv_annulus_r_mm": 17.7,
+ "av_annulus_r_mm": 14.1,
+ "mv_contact_voxels": 6640,
+ "av_contact_voxels": 4223,
+ "contact_dilation_vox": [
+  1,
+  1
+ ],
+ "axis_base_to_apex": [
+  -0.68954,
+  0.66884,
+  -0.27781
+ ],
+ "apex_mm": [
+  -111.97,
+  -86.4,
+  -213.83
+ ],
+ "lv_length_mm": 79.1,
+ "otsu_HU": 280.0,
+ "hu_by_label": {
+  "LV": {
+   "mean": 350.1,
+   "sd": 142.5
+  },
+  "RV": {
+   "mean": 122.6,
+   "sd": 51.0
+  },
+  "LA": {
+   "mean": 474.6,
+   "sd": 74.6
+  },
+  "RA": {
+   "mean": 108.2,
+   "sd": 54.7
+  },
+  "LV_myo": {
+   "mean": 126.6,
+   "sd": 64.4
+  },
+  "aorta": {
+   "mean": 551.1,
+   "sd": 85.6
+  },
+  "PA": {
+   "mean": 189.4,
+   "sd": 58.9
+  }
+ },
+ "volume_mL_by_label": {
+  "LV": 62.0,
+  "RV": 124.6,
+  "LA": 130.3,
+  "RA": 132.8,
+  "LV_myo": 122.1,
+  "aorta": 118.1,
+  "PA": 102.7
+ },
+ "contrast_note": "arterial-phase-like (aorta >= 300 HU)"
+}

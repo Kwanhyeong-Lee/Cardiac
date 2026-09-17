@@ -1,0 +1,47 @@
+{
+ "params": {
+  "SIG_L": 1.0,
+  "SIG_H": 0.6,
+  "TARGET_MYO": 800000,
+  "TARGET_BLOOD": 400000,
+  "TAUBIN": 10,
+  "thr_HU": 235.0
+ },
+ "parts": {
+  "myocardium": {
+   "old": {
+    "faces": 316102,
+    "volume_mL": 142.79,
+    "roughness_rms_mm": 0.19
+   },
+   "new": {
+    "faces": 499942,
+    "volume_mL": 139.65,
+    "roughness_rms_mm": 0.061,
+    "watertight": true
+   },
+   "surface_distance_old_to_new_mm": {
+    "mean": 0.111,
+    "p95": 0.395
+   }
+  },
+  "blood": {
+   "old": {
+    "faces": 149430,
+    "volume_mL": 132.94,
+    "roughness_rms_mm": 0.234
+   },
+   "new": {
+    "faces": 300384,
+    "volume_mL": 135.66,
+    "roughness_rms_mm": 0.074,
+    "watertight": true
+   },
+   "surface_distance_old_to_new_mm": {
+    "mean": 0.156,
+    "p95": 0.458
+   }
+  }
+ },
+ "verdict": "OK"
+}

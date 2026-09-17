@@ -1,0 +1,63 @@
+{
+ "units": "cm (SimVascular CGS default); source geometry frame A, mm x 0.1",
+ "models": [
+  {
+   "file": "fluid_phantom_cm.vtp",
+   "faces": 40948,
+   "points": 20472,
+   "watertight": true,
+   "volume_mL": 173.66,
+   "face_ids": {
+    "1": "lumen_wall",
+    "2": "inlet_mitral_port",
+    "3": "outlet_aortic_port"
+   },
+   "face_area_cm2": {
+    "lumen_wall": 204.221,
+    "inlet_mitral_port": 2.833,
+    "outlet_aortic_port": 1.959
+   }
+  },
+  {
+   "file": "fluid_cavity_cm.vtp",
+   "faces": 39992,
+   "points": 19994,
+   "watertight": true,
+   "volume_mL": 149.78,
+   "face_ids": {
+    "1": "endocardium",
+    "2": "mitral",
+    "3": "aortic",
+    "4": "base_wall"
+   },
+   "face_area_cm2": {
+    "endocardium": 133.617,
+    "mitral": 7.461,
+    "aortic": 3.883,
+    "base_wall": 7.25
+   }
+  },
+  {
+   "file": "solid_myocardium_cm.vtp",
+   "faces": 80000,
+   "points": 39982,
+   "watertight": true,
+   "volume_mL": 125.63,
+   "face_ids": {
+    "1": "endocardium",
+    "2": "epicardium",
+    "3": "base"
+   },
+   "face_area_cm2": {
+    "endocardium": 134.257,
+    "epicardium": 192.293,
+    "base": 8.055
+   }
+  }
+ ],
+ "notes": [
+  "fluid_cavity endocardium and solid endocardium are coincident surfaces (label boundary) but different triangulations; svMultiPhysics FSI needs a conforming volume mesh -> stage 2 (pygalmesh multi-domain from the label image)",
+  "mitral/aortic faces of the cavity are the parts of the segmentation's basal cap inside the annulus radii; treat base_wall as rigid",
+  "SimVascular: File > Import Model (VTP) -> faces from ModelFaceID; set face types (wall/cap) before meshing"
+ ]
+}

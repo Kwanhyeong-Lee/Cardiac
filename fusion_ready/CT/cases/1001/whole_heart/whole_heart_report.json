@@ -1,0 +1,71 @@
+{
+ "case": "1001",
+ "frame": "world",
+ "synthetic_wall_mm": {
+  "600": 3.0,
+  "420": 2.0,
+  "550": 2.0,
+  "820": 1.5,
+  "850": 1.5
+ },
+ "label_downsample_target_mm": 0.7,
+ "label_downsample": [
+  2,
+  2,
+  2
+ ],
+ "working_voxel_mm": [
+  0.711,
+  0.711,
+  0.9
+ ],
+ "parts": {
+  "LV_myocardium": {
+   "faces": 122236,
+   "volume_mL": 121.7,
+   "watertight": true
+  },
+  "LV_cavity": {
+   "faces": 48384,
+   "volume_mL": 61.3,
+   "watertight": true
+  },
+  "RV": {
+   "faces": 88532,
+   "volume_mL": 123.7,
+   "watertight": true
+  },
+  "LA": {
+   "faces": 67196,
+   "volume_mL": 129.6,
+   "watertight": true
+  },
+  "RA": {
+   "faces": 80072,
+   "volume_mL": 132.0,
+   "watertight": true
+  },
+  "aorta": {
+   "faces": 69768,
+   "volume_mL": 117.2,
+   "watertight": true
+  },
+  "PA": {
+   "faces": 92368,
+   "volume_mL": 101.1,
+   "watertight": true
+  }
+ },
+ "shell": {
+  "faces": 389028,
+  "volume_mL": 912.6,
+  "watertight": true
+ },
+ "union": {
+  "faces": 575916,
+  "volume_mL": 915.1,
+  "watertight": true,
+  "components": 1,
+  "coronary_volume_outside_shell_frac": 0.93
+ }
+}

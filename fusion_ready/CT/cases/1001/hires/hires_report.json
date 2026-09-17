@@ -1,0 +1,31 @@
+{
+ "case": "1001",
+ "frame": "world",
+ "params": {
+  "SIG_L": 1.0,
+  "SIG_H": 0.6,
+  "TARGET_MYO": 800000,
+  "TARGET_BLOOD": 400000,
+  "TAUBIN": 10,
+  "thr_HU": 280.0
+ },
+ "parts": {
+  "myocardium": {
+   "new": {
+    "faces": 678140,
+    "volume_mL": 142.84,
+    "roughness_rms_mm": 0.048,
+    "watertight": true
+   }
+  },
+  "blood": {
+   "new": {
+    "faces": 372504,
+    "volume_mL": 40.85,
+    "roughness_rms_mm": 0.06,
+    "watertight": true
+   }
+  }
+ },
+ "verdict": "OK"
+}

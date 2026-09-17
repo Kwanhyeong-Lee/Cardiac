@@ -25,6 +25,8 @@ HERE = os.path.dirname(os.path.abspath(__file__)); FA = os.path.join(HERE, "fram
 d = json.load(open(os.path.join(HERE, "valve_refit.json")))
 AXIS = np.array(d["lv_geometry"]["axis_base_to_apex"]); MV_C = np.array(d["design"]["mv_centre_mm"]); AV_C = np.array(d["design"]["av_centre_mm"])
 N_CH, CH_R, CH_SPAN, CH_OVER, FREE_EDGE_MIN = 5, 1.0, 70.0, 1.2, 8.0
+# v5: same assembly on the continuous-field myocardium (ct_hires_lv.py) -- MYO_PATH=CT/hires/LV_myocardium_CT_hires.stl TAG=v5_CT_hires
+MYO_PATH = os.environ.get("MYO_PATH", os.path.join(CT, "LV_myocardium_CT_smooth.stl")); TAG = os.environ.get("TAG", "v4_CT")
 unit = lambda v: v / (np.linalg.norm(v) + 1e-12)
 
 
@@ -37,7 +39,7 @@ def main():
     t0 = time.time()
     g = np.load(os.path.join(CT, "blood_sdf_grid.npz")); SG, ORG, H = g["sdf"], g["origin"], float(g["spacing"])
     sdf = lambda P: map_coordinates(SG, ((np.atleast_2d(P) - ORG) / H).T, order=1, mode="nearest")
-    parts = {n: trimesh.load(p, process=True) for n, p in [("myoCT", os.path.join(CT, "LV_myocardium_CT_smooth.stl")), ("plate", os.path.join(FA, "av_plane_plate.stl")),
+    parts = {n: trimesh.load(p, process=True) for n, p in [("myoCT", MYO_PATH), ("plate", os.path.join(FA, "av_plane_plate.stl")),
                                                           ("mitral", os.path.join(BO, "mitral_valve.stl")), ("aortic", os.path.join(BO, "aortic_valve.stl"))]}
     for n, m in parts.items():
         if not m.is_volume: trimesh.repair.fix_normals(m)
@@ -66,12 +68,12 @@ def main():
                 chordae.append(tube(start, end, CH_R)); kept += 1
                 rows.append(dict(muscle=m["label"], length_mm=round(float(L), 1), target=[round(float(x), 1) for x in tgt]))
         print(f"{m['label']:<14} tip {np.round(tip,1)}  free-edge candidates {len(cand)}  chordae {kept}/{len(pick)}")
-    ch = trimesh.util.concatenate(chordae); ch.export(os.path.join(FA, "chordae_v4_CT.stl"))
+    ch = trimesh.util.concatenate(chordae); ch.export(os.path.join(FA, f"chordae_{TAG}.stl"))
 
     v4 = trimesh.boolean.union(list(parts.values()) + chordae, engine="manifold")
     comps = v4.split(only_watertight=False)
     print(f"union {len(v4.faces):,} f  watertight {v4.is_watertight}  comps {len(comps)}  {abs(v4.volume)/1000:.2f} mL  {time.time()-t0:.0f}s")
-    v4.export(os.path.join(BO, "hollow_ventricle_v4_CT.stl"))
+    v4.export(os.path.join(BO, f"hollow_ventricle_{TAG}.stl"))
 
     # checks on the small parts (never contains() on the union)
     rng = np.random.default_rng(0); cand = rng.uniform(parts["myoCT"].bounds[0], parts["myoCT"].bounds[1], size=(60000, 3)); pts = cand[sdf(cand) > 1.0][:3000]
@@ -84,7 +86,8 @@ def main():
                patient_specific=["wall", "endocardial surface incl. trabeculae", "papillary muscles"], parametric=["leaflets", "AV-plane plate", "chordae routes"])
     rep["verdict"] = "OK" if (v4.is_watertight and len(comps) == 1 and blocked < 0.05 and not rep["mitral_axis_blocked"] and not rep["aortic_axis_blocked"]) else "CHECK"
     print(f"cavity blocked by plate/valves/chordae {100*blocked:.1f}%  mitral axis {rep['mitral_axis_blocked']}  aortic axis {rep['aortic_axis_blocked']}  -> {rep['verdict']}")
-    json.dump(rep, open(os.path.join(BO, "hollow_v4_check.json"), "w"), indent=1)
+    rep["inputs"] = dict(myocardium=os.path.relpath(MYO_PATH, HERE), tag=TAG)
+    json.dump(rep, open(os.path.join(BO, f"hollow_{TAG.split('_')[0]}_check.json"), "w"), indent=1)
 
 
 if __name__ == "__main__":

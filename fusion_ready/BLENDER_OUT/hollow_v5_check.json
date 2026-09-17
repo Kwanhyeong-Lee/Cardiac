@@ -1,0 +1,136 @@
+{
+ "parts": {
+  "myoCT": {
+   "faces": 499942,
+   "volume_mL": 139.65
+  },
+  "plate": {
+   "faces": 2176,
+   "volume_mL": 34.9
+  },
+  "mitral": {
+   "faces": 192500,
+   "volume_mL": 2.63
+  },
+  "aortic": {
+   "faces": 245468,
+   "volume_mL": 3.2
+  }
+ },
+ "chordae": [
+  {
+   "muscle": "anterolateral",
+   "length_mm": 23.8,
+   "target": [
+    -0.4,
+    -22.6,
+    -0.9
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 28.3,
+   "target": [
+    2.5,
+    -25.8,
+    6.0
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 19.7,
+   "target": [
+    -3.9,
+    -20.4,
+    -1.1
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 22.5,
+   "target": [
+    -5.3,
+    -25.0,
+    9.5
+   ]
+  },
+  {
+   "muscle": "anterolateral",
+   "length_mm": 23.7,
+   "target": [
+    -0.3,
+    -22.0,
+    -1.4
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 28.3,
+   "target": [
+    -0.4,
+    -22.6,
+    -0.9
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 38.2,
+   "target": [
+    4.0,
+    -27.4,
+    7.7
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 33.6,
+   "target": [
+    -5.5,
+    -23.3,
+    4.4
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 37.5,
+   "target": [
+    15.2,
+    -22.1,
+    6.8
+   ]
+  },
+  {
+   "muscle": "posteromedial",
+   "length_mm": 27.5,
+   "target": [
+    -0.3,
+    -22.0,
+    -1.4
+   ]
+  }
+ ],
+ "union": {
+  "faces": 891814,
+  "watertight": true,
+  "components": 1,
+  "volume_mL": 178.68
+ },
+ "cavity_blocked_by_added_parts_frac": 0.0243,
+ "mitral_axis_blocked": false,
+ "aortic_axis_blocked": false,
+ "patient_specific": [
+  "wall",
+  "endocardial surface incl. trabeculae",
+  "papillary muscles"
+ ],
+ "parametric": [
+  "leaflets",
+  "AV-plane plate",
+  "chordae routes"
+ ],
+ "verdict": "OK",
+ "inputs": {
+  "myocardium": "CT/hires/LV_myocardium_CT_hires.stl",
+  "tag": "v5_CT_hires"
+ }
+}
