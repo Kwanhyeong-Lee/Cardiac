@@ -7,9 +7,9 @@ Each step is a subprocess; stdout/stderr go to CT/cases/<id>/logs/<step>.log; a 
 batch moves on.  Re-running skips steps whose key output exists (--force to redo).  At the end (or with --summary-only)
 the per-case JSONs are collected into CT/cases/SUMMARY.md / SUMMARY.csv / summary.png.
 
-Usage (PC1, from fusion_ready/):
-  set CARDIAC_DATA=D:\\data\\MM-WHS\\ct_train
-  python batch_cases.py                      # all ct_train_*_image.nii.gz found in CARDIAC_DATA
+Usage (from fusion_ready/; CARDIAC_DATA is the data ROOT, the CT is found in $CARDIAC_DATA/MM-WHS/ct_train):
+  export CARDIAC_DATA=/mnt/d/data            # WSL      (Windows: set CARDIAC_DATA=D:\\data)
+  python batch_cases.py                      # every ct_train_*_image.nii.gz found there
   python batch_cases.py --cases 1001 1002    # subset
   python batch_cases.py --summary-only
 1009 is run in the per-case layout too (CASE_LAYOUT=cases) so all cases are comparable; its frame-A outputs under
@@ -17,7 +17,9 @@ CT/ are untouched.
 """
 import os, sys, json, time, glob, subprocess, argparse, csv
 HERE = os.path.dirname(os.path.abspath(__file__)); CASES_DIR = os.path.join(HERE, "CT", "cases")
-MMWHS = os.environ.get("CARDIAC_DATA", "/sessions/vibrant-youthful-hopper/mnt/MM-WHS/ct_train")
+sys.path.insert(0, HERE)
+from case_paths import resolve_mmwhs                               # one resolver for the whole pipeline (HANDOVER §3 convention)
+MMWHS = resolve_mmwhs()
 PY = sys.executable
 STEPS = [  # (name, script, key output relative to the case dir, extra env)
     ("geometry", "ct_case_geometry.py", "case_geometry.json", {}),

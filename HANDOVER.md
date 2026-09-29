@@ -122,6 +122,8 @@ private 저장소에도 올리지 않는다. `.gitignore`가 막고 있지만 �
 
 ## 4. 새 PC 세팅 (RTX 3060 12 GB / 32 GB RAM / RX 5700)
 
+> **새 컴퓨터는 `tools/setup/SETUP.md`부터** — git pull 하나로 시작해서 WSL 셋업·전송 파일 풀기·GPU 확인·상태 점검까지. 아래 명령들은 참고용.
+
 ```powershell
 git clone <bundle 또는 원격> C:\work\Cardiac      # OneDrive 밖!
 cd C:\work\Cardiac

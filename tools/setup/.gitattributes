@@ -1,0 +1,6 @@
+# Line endings for the setup kit, whatever the git settings of the machine that commits it:
+# the bash scripts run in WSL (a CR breaks them), the PowerShell script runs on Windows.
+*.sh  text eol=lf
+*.py  text eol=lf
+*.md  text eol=lf
+*.ps1 text eol=crlf

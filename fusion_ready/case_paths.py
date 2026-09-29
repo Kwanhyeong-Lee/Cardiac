@@ -10,12 +10,34 @@ Two layouts:
 
 Every CT script does:   from case_paths import paths, geometry ; P = paths() ; G = geometry()
 and uses P["coronary"], P["hires"], ..., G["axis"], G["mv_centre"], G["av_centre"], G["thr_HU"], G["T"].
-Env: CASE (default 1009), CARDIAC_DATA (MM-WHS/ct_train), CASE_LAYOUT=cases to force the per-case layout for 1009.
+Env: CASE (default 1009), CARDIAC_DATA (data ROOT, see resolve_mmwhs), MMWHS_CT (explicit ct_train dir),
+     CASE_LAYOUT=cases to force the per-case layout for 1009.
 """
-import os, json
+import os, json, glob
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
-MMWHS = os.environ.get("CARDIAC_DATA", "/sessions/vibrant-youthful-hopper/mnt/MM-WHS/ct_train")
+SANDBOX_CT = "/sessions/vibrant-youthful-hopper/mnt/MM-WHS/ct_train"          # the Cowork sandbox mount
+
+
+def resolve_mmwhs():
+    """Directory holding ct_train_<id>_{image,label}.nii.gz.
+
+    Repo convention (HANDOVER §3): CARDIAC_DATA is the DATA ROOT -- D:\\data on Windows, /mnt/d/data in WSL -- and the
+    CT lives in $CARDIAC_DATA/MM-WHS/ct_train, next to MIMIC IV/, INSPIRE/, ...  The geometry scripts used to read
+    CARDIAC_DATA as the ct_train folder itself; that spelling is still accepted so old shells keep working.
+    MMWHS_CT, if set, wins over both.  Order: MMWHS_CT > root/MM-WHS/ct_train > root/ct_train > root > sandbox."""
+    if os.environ.get("MMWHS_CT"):
+        return os.environ["MMWHS_CT"]
+    root = os.environ.get("CARDIAC_DATA")
+    if root:
+        for cand in (os.path.join(root, "MM-WHS", "ct_train"), os.path.join(root, "ct_train"), root):
+            if glob.glob(os.path.join(cand, "ct_train_*_image.nii.gz")):
+                return cand
+        return os.path.join(root, "MM-WHS", "ct_train")          # the documented place: error messages then name it
+    return SANDBOX_CT
+
+
+MMWHS = resolve_mmwhs()
 
 
 def case_id():

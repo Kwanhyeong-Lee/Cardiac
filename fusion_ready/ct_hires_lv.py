@@ -23,7 +23,7 @@ of vertices to a heavily smoothed copy (2 mm scale), old vs new; volumes; mean s
 old->new (must stay < 0.4 mm: same anatomy, better surface).
 
 Env (defaults fit the 3 GB sandbox; on the 32 GB PC use TARGET_MYO=1500000 TARGET_BLOOD=800000 TAUBIN=15):
-  CARDIAC_DATA  MM-WHS/ct_train dir      SIG_L, SIG_H (voxels)      TARGET_MYO, TARGET_BLOOD, TAUBIN
+  CARDIAC_DATA  data root (CT in MM-WHS/ct_train)  SIG_L, SIG_H (voxels)      TARGET_MYO, TARGET_BLOOD, TAUBIN
 """
 import os, json, time, warnings
 import numpy as np, nibabel as nib, trimesh
