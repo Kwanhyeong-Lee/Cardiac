@@ -106,6 +106,13 @@ def check_gpu():
 # ------------------------------------------------------------------ repo
 def check_repo(fetch):
     add("repo", "path", "OK" if REPO.startswith("/mnt/") else "WARN", REPO + ("" if REPO.startswith("/mnt/") else "  (Unreal on Windows cannot build a clone that lives only inside WSL)"), ("unreal",))
+    if sh(["git", "-C", REPO, "rev-parse", "--git-dir"])[0] == 0:          # identity and guard do not depend on a remote
+        _, who, _ = sh(["git", "-C", REPO, "config", "user.email"])
+        add("repo", "git identity", "OK" if who else "FAIL", "set" if who else "no user.name/user.email -- every commit will fail", PURPOSES,
+            fix='set your git identity (yours, not Claude\'s): git config --global user.name "<name>" ; git config --global user.email "<email>"')
+        _, hp, _ = sh(["git", "-C", REPO, "config", "core.hooksPath"])
+        if os.path.exists(os.path.join(REPO, "tools/git-hooks/pre-commit")):
+            add("repo", "pre-commit guard", "OK" if hp == "tools/git-hooks" else "WARN", "on" if hp == "tools/git-hooks" else "off -- run: sh tools/git-hooks/install.sh")
     rc, url, _ = sh(["git", "-C", REPO, "remote", "get-url", "origin"])
     if rc != 0:
         add("repo", "git", "FAIL", "not a git clone", PURPOSES, fix="clone the repository to /mnt/c/work/Cardiac (see SETUP.md step C1)"); return

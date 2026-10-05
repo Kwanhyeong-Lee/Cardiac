@@ -1,0 +1,2 @@
+# git runs these directly; a CR after the shebang breaks them ("bad interpreter")
+* text eol=lf

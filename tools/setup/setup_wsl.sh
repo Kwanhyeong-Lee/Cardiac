@@ -31,13 +31,33 @@ if ((${#need[@]})); then
 fi
 ok "apt packages present"
 
-say "2. Python"
-ver=$(python3 -c 'import sys; print("%d.%d" % sys.version_info[:2])')
-case "$ver" in 3.10|3.11|3.12) ok "python $ver";; *) warn "python $ver -- the project is tested on 3.10-3.12";; esac
+say "2. Python (3.10-3.12: the range the pipeline and the PINN results were produced on)"
+# Do not just take the first `python3` on PATH: a conda/miniforge base (3.13, 3.14 ...) usually shadows the system one,
+# and outside 3.10-3.12 some packages have no wheels (triangle then fails to compile) and results drift from the record.
+inrange() { local v; v=$("$1" -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null) || return 1; case "$v" in 3.10|3.11|3.12) return 0;; esac; return 1; }
+PY=""
+for c in ${CARDIAC_PYTHON:-} python3.12 python3.11 python3.10 /usr/bin/python3 python3; do
+  command -v "$c" >/dev/null 2>&1 && inrange "$c" && { PY=$(command -v "$c"); break; }
+done
+if [ -n "$PY" ]; then
+  ok "using $PY ($("$PY" -V 2>&1))"
+  [ "$(command -v python3)" != "$PY" ] && echo "    (python3 on PATH is $(command -v python3), $(python3 -V 2>&1) -- not used on purpose)"
+else
+  PY=$(command -v python3)
+  warn "no Python 3.10-3.12 found; falling back to $PY ($("$PY" -V 2>&1)). Install one (Ubuntu: python3.12 python3.12-venv) or set CARDIAC_PYTHON."
+fi
 
 say "3. venv in the Linux filesystem: $VENV"
 # not under /mnt/c: a venv on NTFS is several times slower and a Windows venv and a Linux venv cannot share a folder
-if [ ! -x "$VENV/bin/python" ]; then python3 -m venv "$VENV" || { warn "venv creation failed"; exit 1; }; fi
+if [ -x "$VENV/bin/python" ] && ! inrange "$VENV/bin/python"; then
+  old="$VENV-py$("$VENV/bin/python" -c 'import sys; print("%d%d" % sys.version_info[:2])')"
+  if [ "${CARDIAC_RECREATE_VENV:-0}" = 1 ]; then
+    mv "$VENV" "$old" && warn "existing venv was $("$old/bin/python" -V 2>&1) -> moved to $old (delete it once the new one works)"
+  else
+    warn "existing venv uses $("$VENV/bin/python" -V 2>&1), outside 3.10-3.12. Rerun with CARDIAC_RECREATE_VENV=1 to move it aside and rebuild."
+  fi
+fi
+if [ ! -x "$VENV/bin/python" ]; then "$PY" -m venv "$VENV" || { warn "venv creation failed (Ubuntu: sudo apt install python3-venv, or python3.X-venv for $PY)"; exit 1; }; fi
 # shellcheck disable=SC1091
 source "$VENV/bin/activate"
 python -m pip install -q -U pip wheel && ok "venv ready: $(python -V)"
@@ -89,6 +109,9 @@ case "$REPO" in
     ok "core.filemode=false, core.autocrlf=input (otherwise WSL sees every file as modified on the Windows drive)";;
   *) ok "clone is in the Linux filesystem -- nothing to change";;
 esac
+if [ -f "$REPO/tools/git-hooks/install.sh" ]; then
+  sh "$REPO/tools/git-hooks/install.sh" >/dev/null && ok "pre-commit guard on (tools/repo_guard.py refuses data files, meshes, build output, secrets)"
+fi
 
 say "8. memory visible to WSL"
 mem=$(awk '/MemTotal/ {printf "%d", $2/1024/1024}' /proc/meminfo)

@@ -1,5 +1,7 @@
 # HANDOVER — cardiac pH-PINN workbench (2026-09-16)
 
+> **Claude Code는 `CLAUDE.md`부터** — 규칙·기계 지도·현재 상태(`docs/STATE.md`)·스킬(`/setup-check` `/guard` `/batch` `/pinn-gpu` `/unreal-m1` `/wrap-up`).
+
 이 문서 하나로 새 컴퓨터(또는 새 사람)가 프로젝트를 이어받을 수 있어야 한다. 무엇이 어디에 있고,
 어디까지 됐고, 무엇이 남았고, 어디를 밟으면 넘어지는지. 코드는 이 저장소에, 데이터는 저장소 밖에.
 

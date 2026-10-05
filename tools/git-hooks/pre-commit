@@ -1,0 +1,7 @@
+#!/bin/sh
+# Refuses commits that would put patient data, MM-WHS-derived meshes, engine build output or secrets into git.
+# Enabled per clone with:  git config core.hooksPath tools/git-hooks   (tools/setup/setup_wsl.sh does it)
+# Never bypass with --no-verify; a real exception goes into the WHITELIST of tools/repo_guard.py in its own commit.
+top=$(git rev-parse --show-toplevel) || exit 1
+PY=$(command -v python3 || command -v python) || { echo "pre-commit: no python3 found -- cannot check staged files, refusing" >&2; exit 1; }
+exec "$PY" "$top/tools/repo_guard.py" --staged --repo "$top"
